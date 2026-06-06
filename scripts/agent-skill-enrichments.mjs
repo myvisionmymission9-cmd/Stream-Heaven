@@ -2001,6 +2001,76 @@ export const AGENT_SKILL_ENRICHMENTS = {
     ],
   },
 
+  'ai-agents/meta/agent-catalog-maintenance-agent.md': {
+    basic: [
+      {
+        title: 'Agent Discovery & Inventory',
+        bullets: [
+          'Scan ai-agents/, apps/**/agents/, and apps/*/*-agent.md for catalog changes',
+          'Use list-agents.mjs --phase --domain --search for filtered discovery',
+          'Compare filesystem agents against AGENT-REGISTRY.md entries',
+          'Classify git changes as catalog vs unrelated before staging',
+        ],
+      },
+      {
+        title: 'Skill Generation & Enrichment',
+        bullets: [
+          'Run generate-agent-skills.mjs --force for new or updated agents',
+          'Run enrich-agent-responsibilities.mjs --force after responsibility template edits',
+          'Apply hand-authored blocks from agent-skill-enrichments.mjs for golden agents',
+          'Ensure basic and advanced SKILL.md paths match agent ## Skills section',
+        ],
+      },
+      {
+        title: 'Validation & Quality Gates',
+        bullets: [
+          'Run validate-agents.mjs — target 0 FAIL, minimize PARTIAL',
+          'Run validate-agent-skills.mjs — all manifest skill files present',
+          'Run validate-all-agent-skills.mjs — advanced competency 500+ chars',
+          'Fix thin skills before commit; never commit broken catalog',
+        ],
+      },
+      {
+        title: 'Git Commit Hygiene',
+        bullets: [
+          'Stage only ai-agents/**, apps/**/agents/**, .cursor/skills/stream-heaven/**',
+          'Include scripts: generate-agent-skills, enrich-agent-responsibilities, templates, validators',
+          'Exclude phase1-runtime-log.txt, apps/mobile/**, unrelated bootstrap .ps1',
+          'Use WHY-focused commit messages; never push unless user requests',
+        ],
+      },
+    ],
+    advanced: [
+      {
+        title: 'Manifest & Registry Sync',
+        bullets: [
+          'Regenerate agent-skill-manifest.mjs with generate-agent-skills.mjs --manifest --force',
+          'Add new meta agents to AGENT-REGISTRY.md Phase 0 section',
+          'Coordinate agent-registry-auditor-agent on orphan and ghost entries',
+          'Update agent-skill-enrichments.mjs when adding golden-batch competency blocks',
+        ],
+      },
+      {
+        title: 'Priority Agent Hand-Authoring',
+        bullets: [
+          'Enrich executive, Phase 1, and cross-app agents beyond generator defaults',
+          'Add domain competency sections: 3+ titled blocks with actionable bullets',
+          'Cross-reference quality bar: teen-patti-agent, auth-service-agent',
+          'Run test-golden-agents.mjs after prompt template changes',
+        ],
+      },
+      {
+        title: 'CI Integration',
+        bullets: [
+          'Ensure .github/workflows/phase1-ci.yml runs validate-agents on agent PRs',
+          'Document validation commands in skill Key paths tables',
+          'Block catalog merges when validate-all-agent-skills exits non-zero',
+          'Escalate repeated validation failures to agent-skill-validator-agent',
+        ],
+      },
+    ],
+  },
+
   'ai-agents/phase-1/phase-1-remediation-agent.md': {
     basic: [
       {

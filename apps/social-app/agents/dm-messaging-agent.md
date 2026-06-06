@@ -25,10 +25,12 @@ Dm Messaging Agent specialist for Stream Heaven's social app domain, ensuring al
 - Test strategy and acceptance criteria
 
 ## Dependencies
-- platform-governance/*
+- ai-agents/core-engineering/realtime/socketio-architect.md
+- ai-agents/apps/social-app/notification-agent.md
+- ai-agents/safety/trust-safety-agent.md
+- ai-agents/orchestration/quality-gate.md
 - packages/shared-contracts
 - packages/shared-types
-- Orchestration agents for task routing
 
 ## Governance References
 - platform-governance/flutter-ui-rules.md

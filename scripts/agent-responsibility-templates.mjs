@@ -336,6 +336,16 @@ export const SLUG_OVERRIDES = {
     'Report catalog health score and top 20 agents needing responsibility or skill enrichment',
     'Escalate registry schema changes to governance-compliance-agent and platform-orchestrator',
   ],
+  'ai-agents/meta/agent-catalog-maintenance-agent.md': [
+    'Run generate-agent-skills.mjs and enrich-agent-responsibilities.mjs after catalog edits',
+    'Hand-enrich priority agents when advanced SKILL.md competency sections fall below 500 chars',
+    'Execute validate-agents, validate-agent-skills, and validate-all-agent-skills before commits',
+    'Stage only catalog paths: ai-agents/, apps/**/agents/, .cursor/skills/stream-heaven/, agent scripts',
+    'Exclude phase1-runtime-log.txt, apps/mobile/**, and unrelated bootstrap .ps1 from commits',
+    'Update agent-skill-enrichments.mjs and agent-responsibility-templates.mjs for golden agents',
+    'Regenerate agent-skill-manifest.mjs via generate-agent-skills.mjs --manifest --force',
+    'Coordinate agent-registry-auditor-agent on registry drift after new agent registration',
+  ],
   'ai-agents/orchestration/senior-code-review-agent.md': [
     'Review PRs for NestJS, Flutter, and shared-contracts changes against platform-governance standards',
     'Block merges with duplicate services, secrets in code, or undocumented API surface changes',

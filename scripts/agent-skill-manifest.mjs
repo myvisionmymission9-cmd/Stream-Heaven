@@ -3303,6 +3303,12 @@ export const AGENT_SKILL_MANIFEST = [
     phase: '20',
   },
   {
+    agent: 'ai-agents/meta/agent-catalog-maintenance-agent.md',
+    domain: 'meta',
+    slug: 'agent-catalog-maintenance-agent',
+    phase: 'Meta (ongoing)',
+  },
+  {
     agent: 'ai-agents/meta/agent-coverage-analyst-agent.md',
     domain: 'meta',
     slug: 'agent-coverage-analyst-agent',

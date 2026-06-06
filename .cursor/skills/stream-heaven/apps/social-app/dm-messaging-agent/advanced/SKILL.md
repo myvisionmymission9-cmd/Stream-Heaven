@@ -41,6 +41,7 @@ Apply:
 - Load test viral creator DM inbox spikes
 - Search integration for message history opt-in
 - Backpressure typing indicators when thread exceeds 10k unread
+- Shard read replicas for creator inbox fan-out during viral events
 
 ## Key paths
 

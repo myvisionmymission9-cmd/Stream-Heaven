@@ -34,6 +34,7 @@ Apply:
 - Failover drill with realtime-systems-agent
 - Elasticache/Redis Cluster vs single-node dev parity
 - Document TTL strategy per key prefix in shared-contracts cache notes
+- Alert on evicted-keys rate spike during livestream peak hours
 
 ### Festival Scale
 Apply:

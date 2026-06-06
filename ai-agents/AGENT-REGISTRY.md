@@ -149,6 +149,7 @@
 | Agent Coverage Analyst | `ai-agents/meta/agent-coverage-analyst-agent.md` | Finds gaps and overlaps across agent domains |
 | Agent Prompt Tester | `ai-agents/meta/agent-prompt-tester-agent.md` | Samples agents for domain-specific prompt quality |
 | Agent Onboarding Agent | `ai-agents/meta/agent-onboarding-agent.md` | Onboards new agents into registry and validation |
+| Agent Catalog Maintenance Agent | `ai-agents/meta/agent-catalog-maintenance-agent.md` | Skills, responsibilities, validation, and scoped catalog commits |
 
 ## Phase 1 — Governance + Foundation
 

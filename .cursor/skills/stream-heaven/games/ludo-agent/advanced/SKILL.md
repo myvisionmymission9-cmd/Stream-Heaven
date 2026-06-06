@@ -34,6 +34,7 @@ Apply:
 - Anti-cheat: reject client-proposed dice values
 - Spectator mode stub for livestream embed
 - Latency budget: sub-200ms move ack on 4G networks
+- Persist match state in PostgreSQL with Redis pub/sub for live updates
 
 ### Economy Integration
 Apply:
