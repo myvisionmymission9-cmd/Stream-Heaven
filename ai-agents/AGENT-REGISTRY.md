@@ -175,6 +175,7 @@
 | Local Dev Bootstrap Agent | `ai-agents/meta/local-dev-bootstrap-agent.md` | Windows Phase 1–2a setup scripts and troubleshooting |
 | GitHub Repo Bootstrap Agent | `ai-agents/meta/github-repo-bootstrap-agent.md` | git/gh verify, init, secret scan, gh repo create, push only on explicit request |
 | GitHub Repo Bootstrap Autonomous Agent | `ai-agents/meta/github-repo-bootstrap-autonomous-agent.md` | Headless token auth, `github-bootstrap-autonomous.ps1`, init/link/push with zero user involvement |
+| GitHub Workflow Completion Agent | `ai-agents/meta/github-workflow-completion-agent.md` | Post-bootstrap hygiene, templates, Dependabot, workflow verify via `github-workflow-complete.ps1` |
 | D-Drive Dev Bootstrap Agent | `ai-agents/meta/d-drive-dev-bootstrap-agent.md` | D-drive Git/gh/repo migration, WORKFLOW.md, Phase 1 from D path |
 | D-Drive Project Bootstrap Agent | `ai-agents/meta/d-drive-project-bootstrap-agent.md` | Copy-only Desktop→D sync, C: space tips, path fixes, never delete source |
 | Daily Dev Start Agent | `ai-agents/meta/daily-dev-start-agent.md` | One-command daily startup via scripts/start-dev-d-drive.ps1 |
