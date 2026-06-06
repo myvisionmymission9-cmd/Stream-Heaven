@@ -62,6 +62,21 @@ function Import-TokenFromEnvLocal {
   }
 }
 
+
+function Import-TokenFromWindowsEnv {
+  if ($env:GH_TOKEN -or $env:GITHUB_TOKEN) { return }
+  foreach ($scope in @("User", "Machine")) {
+    if (-not $env:GH_TOKEN) {
+      $v = [Environment]::GetEnvironmentVariable("GH_TOKEN", $scope)
+      if (-not [string]::IsNullOrWhiteSpace($v)) { $env:GH_TOKEN = $v }
+    }
+    if (-not $env:GITHUB_TOKEN) {
+      $v = [Environment]::GetEnvironmentVariable("GITHUB_TOKEN", $scope)
+      if (-not [string]::IsNullOrWhiteSpace($v)) { $env:GITHUB_TOKEN = $v }
+    }
+  }
+}
+
 function Set-GitCommitIdentity {
   # Uses env vars only — never runs git config (per governance)
   $name = $env:GIT_AUTHOR_NAME
@@ -313,6 +328,7 @@ function Invoke-PushMain {
 
 Add-GhToPath
 Import-TokenFromEnvLocal
+Import-TokenFromWindowsEnv
 
 Write-Step "Verifying git and gh"
 if (-not (Get-Command git -ErrorAction SilentlyContinue)) {

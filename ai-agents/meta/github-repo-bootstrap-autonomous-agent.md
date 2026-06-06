@@ -50,6 +50,10 @@ Token needs `repo` scope (private repos) or equivalent fine-grained PAT with rep
 - CI pointer: `.github/workflows/phase1-ci.yml` (runs on push/PR to main)
 - Single manual follow-up when blocked: set `GH_TOKEN` and re-run script
 
+
+## Auto-run hooks
+- scripts/phase1-autonomous-complete.ps1 invokes scripts/github-bootstrap-autonomous.ps1 at startup (non-blocking when exit code 1).
+- Token sources checked in order: process env, repo .env.local, Windows User/Machine GH_TOKEN/GITHUB_TOKEN, then existing gh keyring session.
 ## Dependencies
 - ai-agents/meta/github-repo-bootstrap-agent.md (interactive counterpart)
 - ai-agents/meta/d-drive-dev-bootstrap-agent.md

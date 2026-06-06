@@ -178,6 +178,9 @@
 | D-Drive Dev Bootstrap Agent | `ai-agents/meta/d-drive-dev-bootstrap-agent.md` | D-drive Git/gh/repo migration, WORKFLOW.md, Phase 1 from D path |
 | D-Drive Project Bootstrap Agent | `ai-agents/meta/d-drive-project-bootstrap-agent.md` | Copy-only Desktop→D sync, C: space tips, path fixes, never delete source |
 | Daily Dev Start Agent | `ai-agents/meta/daily-dev-start-agent.md` | One-command daily startup via scripts/start-dev-d-drive.ps1 |
+| Windows Laptop Diagnostics Agent | `ai-agents/meta/windows-laptop-diagnostics-agent.md` | Event 41/6008, powercfg, battery/RAM/disk on admin Windows laptops |
+| D-Drive Toolstack Bootstrap Agent | `ai-agents/meta/d-drive-toolstack-bootstrap-agent.md` | Autonomous D: dev tool stack install (Git, Node, Docker, CLIs), verify, SaaS checklists |
+| Stream Heaven Toolstack Installer Agent | `ai-agents/meta/stream-heaven-toolstack-installer-agent.md` | Same D: toolstack pipeline; canonical alias — `install-stream-heaven-toolstack-d-drive.ps1`, SaaS checklists |
 | Integration Smoke Test Agent | `ai-agents/testing/integration-smoke-test-agent.md` | OTP → JWT → profile smoke suite |
 
 ## Phase 2a — Flutter Mobile Shell
@@ -190,7 +193,7 @@
 | Riverpod Specialist | `ai-agents/core-engineering/frontend/riverpod-specialist.md` | Riverpod state for mobile features |
 | Routing Specialist | `ai-agents/core-engineering/frontend/routing-specialist.md` | GoRouter navigation |
 
-**Cursor skills (setup):** `.cursor/skills/stream-heaven-phase1-dev/`, `stream-heaven-phase2a-flutter/`, `stream-heaven-agent-golden-test/`  
+**Cursor skills (setup):** `.cursor/skills/stream-heaven-phase1-dev/`, `stream-heaven-phase2a-flutter/`, `stream-heaven-agent-golden-test/`, `d-drive-toolstack-bootstrap/`  
 **Cursor skills (per-agent):** `.cursor/skills/stream-heaven/` — basic + advanced tiers; see `scripts/agent-skill-manifest.mjs`  
 **Guide:** `docs/PHASE-2A-FLUTTER-GUIDE.md`
 

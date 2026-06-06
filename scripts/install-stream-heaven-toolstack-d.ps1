@@ -1,0 +1,423 @@
+# Stream Heaven - install minimum dev tool stack to D: drive (Windows)
+# Usage:
+#   powershell -ExecutionPolicy Bypass -File scripts/install-stream-heaven-toolstack-d.ps1
+#   powershell -ExecutionPolicy Bypass -File scripts/install-stream-heaven-toolstack-d.ps1 -Phase core -SkipAlreadyInstalled
+
+param(
+  [ValidateSet('all', 'prerequisites', 'core', 'infra', 'optional')]
+  [string]$Phase = 'all',
+  [string]$DriveLetter = 'D',
+  [switch]$SkipAlreadyInstalled,
+  [switch]$DryRun
+)
+
+$ErrorActionPreference = 'Stop'
+
+$RepoRoot = Split-Path -Parent (Split-Path -Parent $MyInvocation.MyCommand.Path)
+$InstallRoot = "${DriveLetter}:\StreamHeaven\tools"
+$LogDir = "${DriveLetter}:\StreamHeaven\logs"
+$ConfigDir = "${DriveLetter}:\StreamHeaven\config"
+$LogFile = Join-Path $LogDir 'toolstack-install.log'
+$NpmGlobal = Join-Path $InstallRoot 'npm-global'
+$DevToolsGit = "${DriveLetter}:\Dev\tools\Git\cmd"
+$DevToolsGh = "${DriveLetter}:\Dev\tools\gh"
+
+function Write-Log([string]$Message, [string]$Level = 'INFO') {
+  $ts = Get-Date -Format 'yyyy-MM-dd HH:mm:ss'
+  $line = "[$ts] [$Level] $Message"
+  if (-not (Test-Path $LogDir)) {
+    New-Item -ItemType Directory -Path $LogDir -Force | Out-Null
+  }
+  Add-Content -Path $LogFile -Value $line -Encoding UTF8
+  switch ($Level) {
+    'WARN' { Write-Host $line -ForegroundColor Yellow }
+    'ERROR' { Write-Host $line -ForegroundColor Red }
+    'OK' { Write-Host $line -ForegroundColor Green }
+    default { Write-Host $line }
+  }
+}
+
+function Write-Step([string]$Message) {
+  Write-Log "==> $Message"
+}
+
+function Test-CommandExists([string]$Name) {
+  return [bool](Get-Command $Name -ErrorAction SilentlyContinue)
+}
+
+function Add-ToolPath([string]$PathToAdd) {
+  if ((Test-Path $PathToAdd) -and ($env:PATH -notlike "*$PathToAdd*")) {
+    $env:PATH = "$PathToAdd;$env:PATH"
+    Write-Log "Prepended PATH: $PathToAdd"
+  }
+}
+
+function Test-Phase([string]$Name) {
+  if ($Phase -eq 'all') { return $true }
+  return $Phase -eq $Name
+}
+
+function Invoke-WingetInstall([string]$PackageId, [string]$Label, [scriptblock]$AlreadyInstalled) {
+  if ($DryRun) {
+    Write-Log "[DRY-RUN] winget install $PackageId ($Label)"
+    return
+  }
+  if ($SkipAlreadyInstalled -and (& $AlreadyInstalled)) {
+    Write-Log "$Label already present - skip" 'OK'
+    return
+  }
+  if (-not (Test-CommandExists 'winget')) {
+    Write-Log "winget not found - cannot install $Label" 'WARN'
+    return
+  }
+  Write-Log "Installing $Label via winget ($PackageId)..."
+  $prev = $ErrorActionPreference
+  $ErrorActionPreference = 'Continue'
+  $out = winget install --id $PackageId --accept-package-agreements --accept-source-agreements --scope user --silent 2>&1
+  $code = $LASTEXITCODE
+  $ErrorActionPreference = $prev
+  Add-Content -Path $LogFile -Value ($out | Out-String) -Encoding UTF8
+  if ($code -eq 0 -or $code -eq -1978335189) {
+    Write-Log "$Label install OK (exit $code)" 'OK'
+  }
+  else {
+    Write-Log "$Label winget exit $code - may already be installed or need admin" 'WARN'
+  }
+}
+
+function Ensure-Directories {
+  Write-Step 'Creating D: folder structure'
+  foreach ($dir in @($InstallRoot, $LogDir, $ConfigDir, $NpmGlobal,
+      (Join-Path $InstallRoot 'portable'),
+      (Join-Path $InstallRoot 'vscode-portable'),
+      (Join-Path $InstallRoot 'VSCode'),
+      (Join-Path $InstallRoot 'node'),
+      "${DriveLetter}:\Docker")) {
+    if (-not (Test-Path $dir)) {
+      New-Item -ItemType Directory -Path $dir -Force | Out-Null
+      Write-Log "Created $dir" 'OK'
+    }
+  }
+}
+
+function Set-NpmGlobalPrefix {
+  if (-not (Test-CommandExists 'npm')) {
+    Write-Log 'npm not available - skip global prefix' 'WARN'
+    return
+  }
+  if ($DryRun) {
+    Write-Log "[DRY-RUN] npm config set prefix $NpmGlobal"
+    return
+  }
+  npm config set prefix $NpmGlobal 2>&1 | Out-Null
+  Add-ToolPath $NpmGlobal
+  Write-Log "npm global prefix -> $NpmGlobal" 'OK'
+}
+
+function Install-NpmGlobalTools {
+  if (-not (Test-CommandExists 'npm')) { return }
+  Set-NpmGlobalPrefix
+  $packages = @(
+    @{ Name = 'firebase-tools'; Cmd = 'firebase' },
+    @{ Name = 'wrangler'; Cmd = 'wrangler' },
+    @{ Name = '@sentry/cli'; Cmd = 'sentry-cli' }
+  )
+  foreach ($pkg in $packages) {
+    if ($SkipAlreadyInstalled -and (Test-CommandExists $pkg.Cmd)) {
+      Write-Log "$($pkg.Name) already on PATH - skip" 'OK'
+      continue
+    }
+    if ($DryRun) {
+      Write-Log "[DRY-RUN] npm install -g $($pkg.Name)"
+      continue
+    }
+    Write-Log "npm install -g $($pkg.Name)..."
+    npm install -g $pkg.Name 2>&1 | ForEach-Object { Add-Content -Path $LogFile -Value $_ -Encoding UTF8 }
+    if ($LASTEXITCODE -eq 0) { Write-Log "$($pkg.Name) installed" 'OK' }
+    else { Write-Log "$($pkg.Name) install failed" 'WARN' }
+  }
+}
+
+function Write-SaaSChecklist {
+  $path = Join-Path $ConfigDir 'saas-checklist.md'
+  if ((Test-Path $path) -and $SkipAlreadyInstalled) {
+    Write-Log 'saas-checklist.md exists - skip' 'OK'
+    return
+  }
+  $content = @'
+# Stream Heaven - SaaS and manual setup checklist
+
+Generated by scripts/install-stream-heaven-toolstack-d.ps1. These are NOT installed by script.
+
+## Already local
+- [ ] Cursor IDE - primary editor (already installed)
+- [ ] Git / GitHub - verify: git --version, gh auth status
+
+## SaaS (browser / account)
+- [ ] Jira Cloud - create project; API token at https://id.atlassian.com/manage-profile/security/api-tokens
+- [ ] Notion - workspace + integration token if automating
+- [ ] Mixpanel - project token for analytics (env var only)
+- [ ] GitHub Actions - enabled on repo (no local install)
+- [ ] OpenAI - API key in user env or .env.local (never commit)
+
+## Desktop / optional
+- [ ] Figma - desktop app or browser; custom path D:\StreamHeaven\tools if offered
+- [ ] VS Code portable - optional backup at D:\StreamHeaven\tools\vscode-portable
+- [ ] Postman - winget user install or portable
+- [ ] DBeaver - winget user install
+
+## Realtime / media SDKs (docs only - Agora default per governance)
+- [ ] Agora (default) - https://docs.agora.io/ - project, App ID/Certificate in env
+- [ ] ZEGO (fallback only) - https://docs.zegocloud.com/
+
+## Firebase SaaS console (Auth / FCM)
+- [ ] Firebase Console - https://console.firebase.google.com/ - Auth providers, FCM; config to env
+
+## Observability (optional Docker)
+- [ ] Grafana / Prometheus - see config/docker-observability-compose.yml
+- [ ] Sentry - DSN in env; CLI via npm -g @sentry/cli
+
+## Auth and cloud CLI
+- [ ] AWS CLI - aws configure (keys in env or ~/.aws/credentials)
+- [ ] Cloudflare - wrangler login after npm global install; zone/API token in env
+- [ ] Firebase CLI - firebase login after npm global install (pairs with Firebase Console)
+'@
+  if (-not $DryRun) {
+    Set-Content -Path $path -Value $content -Encoding UTF8
+    Write-Log "Wrote $path" 'OK'
+  }
+}
+
+function Write-EnvTemplate {
+  $path = Join-Path $ConfigDir 'env-template.md'
+  if ((Test-Path $path) -and $SkipAlreadyInstalled) { return }
+  $content = @'
+# Environment variables (user scope - never commit secrets)
+
+Set via Windows Environment Variables or .env.local (gitignored):
+
+- OPENAI_API_KEY - OpenAI API
+- AWS_ACCESS_KEY_ID / AWS_SECRET_ACCESS_KEY - AWS CLI
+- GH_TOKEN or GITHUB_TOKEN - GitHub CLI headless
+- FIREBASE_* - Firebase project (see auth-service .env.example)
+- SENTRY_DSN - Sentry project
+- MIXPANEL_TOKEN - Analytics
+- AGORA_APP_ID / AGORA_APP_CERTIFICATE - Agora realtime (default SDK)
+
+Copy service templates from repo: services/*/.env.example to .env
+'@
+  if (-not $DryRun) {
+    Set-Content -Path $path -Value $content -Encoding UTF8
+    Write-Log "Wrote $path" 'OK'
+  }
+}
+
+function Write-DockerDataRootGuide {
+  $path = Join-Path $ConfigDir 'docker-data-root.md'
+  if ((Test-Path $path) -and $SkipAlreadyInstalled) { return }
+  $content = @'
+# Move Docker Desktop data to D:
+
+Requires: Quit Docker Desktop, admin PowerShell.
+
+1. Docker Desktop Settings -> Resources -> Advanced -> Disk image location -> D:\StreamHeaven\docker-data
+2. WSL2 engine: relocate ext4.vhdx per Docker docs if needed
+
+After move, verify: docker info shows correct data root.
+
+Stream Heaven Phase 1 Postgres/Redis uses repo docker-compose.yml volumes.
+'@
+  if (-not $DryRun) {
+    Set-Content -Path $path -Value $content -Encoding UTF8
+    Write-Log "Wrote $path" 'OK'
+  }
+}
+
+function Write-ObservabilityCompose {
+  $path = Join-Path $ConfigDir 'docker-observability-compose.yml'
+  if ((Test-Path $path) -and $SkipAlreadyInstalled) { return }
+  $content = @"
+# Optional Grafana + Prometheus — run from D:\StreamHeaven\config
+# docker compose -f docker-observability-compose.yml up -d
+
+services:
+  prometheus:
+    image: prom/prometheus:latest
+    ports:
+      - "9090:9090"
+    volumes:
+      - prometheus_data:/prometheus
+
+  grafana:
+    image: grafana/grafana:latest
+    ports:
+      - "3001:3000"
+    volumes:
+      - grafana_data:/var/lib/grafana
+    depends_on:
+      - prometheus
+
+volumes:
+  prometheus_data:
+  grafana_data:
+"@
+  if (-not $DryRun) {
+    Set-Content -Path $path -Value $content -Encoding UTF8
+    Write-Log "Wrote $path" 'OK'
+  }
+}
+
+function Invoke-PhasePrerequisites {
+  if (-not (Test-Phase 'prerequisites') -and -not (Test-Phase 'all')) { return }
+  Write-Step 'Phase: prerequisites'
+  $drive = Get-PSDrive -Name $DriveLetter -ErrorAction SilentlyContinue
+  if (-not $drive) {
+    throw "Drive ${DriveLetter}: not found"
+  }
+  $freeGb = [math]::Round($drive.Free / 1GB, 1)
+  Write-Log "Drive ${DriveLetter}: free ${freeGb} GB"
+  if ($freeGb -lt 10) {
+    Write-Log 'Less than 10 GB free on D: - install may fail' 'WARN'
+  }
+  Ensure-Directories
+  Add-ToolPath $DevToolsGit
+  Add-ToolPath $DevToolsGh
+  Add-ToolPath $NpmGlobal
+  Add-ToolPath (Join-Path $InstallRoot 'node')
+  Write-SaaSChecklist
+  Write-EnvTemplate
+}
+
+function Invoke-PhaseCore {
+  if (-not (Test-Phase 'core') -and -not (Test-Phase 'all')) { return }
+  Write-Step 'Phase: core'
+
+  Invoke-WingetInstall 'OpenJS.NodeJS.LTS' 'Node.js LTS' {
+    param()
+    if (Test-CommandExists 'node') {
+      $v = (node -v 2>$null)
+      return $v -match 'v\d+'
+    }
+    return $false
+  }
+
+  if (-not (Test-CommandExists 'git') -or -not $SkipAlreadyInstalled) {
+    if (Test-Path $DevToolsGit) {
+      Add-ToolPath $DevToolsGit
+      Write-Log 'Using existing Git at D:\Dev\tools\Git' 'OK'
+    }
+    else {
+      Invoke-WingetInstall 'Git.Git' 'Git' { Test-CommandExists 'git' }
+    }
+  }
+
+  if (-not (Test-CommandExists 'gh') -or -not $SkipAlreadyInstalled) {
+    if (Test-Path $DevToolsGh) {
+      Add-ToolPath $DevToolsGh
+      Write-Log 'Using existing gh at D:\Dev\tools\gh' 'OK'
+    }
+    else {
+      Invoke-WingetInstall 'GitHub.cli' 'GitHub CLI' { Test-CommandExists 'gh' }
+    }
+  }
+
+  Invoke-WingetInstall 'Amazon.AWSCLI' 'AWS CLI v2' { Test-CommandExists 'aws' }
+
+  $vscodeDir = Join-Path $InstallRoot 'VSCode'
+  if (-not (Test-Path (Join-Path $vscodeDir 'Code.exe')) -and -not $SkipAlreadyInstalled) {
+    if (Test-CommandExists 'winget' -and -not $DryRun) {
+      Write-Log "Installing VS Code to $vscodeDir via winget override..."
+      $prev = $ErrorActionPreference
+      $ErrorActionPreference = 'Continue'
+      winget install --id Microsoft.VisualStudioCode --accept-package-agreements --accept-source-agreements `
+        --scope user --silent --override "/DIR=$vscodeDir /MERGETASKS=!runcode" 2>&1 | ForEach-Object {
+        Add-Content -Path $LogFile -Value $_ -Encoding UTF8
+      }
+      $ErrorActionPreference = $prev
+      if (Test-Path (Join-Path $vscodeDir 'Code.exe')) {
+        Write-Log "VS Code installed at $vscodeDir" 'OK'
+      }
+      else {
+        Write-Log 'VS Code winget install may have used default location — check PATH for code' 'WARN'
+      }
+    }
+  }
+  elseif (Test-Path (Join-Path $vscodeDir 'Code.exe')) {
+    Write-Log "VS Code already at $vscodeDir" 'OK'
+  }
+
+  Set-NpmGlobalPrefix
+}
+
+function Invoke-PhaseInfra {
+  if (-not (Test-Phase 'infra') -and -not (Test-Phase 'all')) { return }
+  Write-Step 'Phase: infra'
+
+  Write-DockerDataRootGuide
+
+  if (Test-CommandExists 'docker') {
+    $prev = $ErrorActionPreference
+    $ErrorActionPreference = 'Continue'
+    $dockerInfo = docker info 2>&1 | Out-String
+    $ErrorActionPreference = $prev
+    if ($dockerInfo -match 'Server Version') {
+      Write-Log 'Docker daemon reachable' 'OK'
+      if (-not $DryRun -and (Test-Path (Join-Path $RepoRoot 'docker-compose.yml'))) {
+        Write-Log 'Starting Postgres/Redis via repo docker-compose...'
+        Push-Location $RepoRoot
+        $prev2 = $ErrorActionPreference
+        $ErrorActionPreference = 'Continue'
+        docker compose up -d postgres redis 2>&1 | ForEach-Object { Add-Content -Path $LogFile -Value $_ -Encoding UTF8 }
+        $ErrorActionPreference = $prev2
+        Pop-Location
+      }
+    }
+    else {
+      Write-Log 'Docker CLI present but daemon not running - start Docker Desktop' 'WARN'
+    }
+  }
+  else {
+    Write-Log 'Docker not installed - install Docker Desktop manually; Postgres/Redis via compose when ready' 'WARN'
+    Invoke-WingetInstall 'Docker.DockerDesktop' 'Docker Desktop' { Test-CommandExists 'docker' }
+  }
+
+  if (-not (Test-CommandExists 'docker')) {
+    Invoke-WingetInstall 'Memurai.MemuraiDeveloper' 'Memurai (Redis)' {
+      Test-CommandExists 'memurai-cli'
+    }
+  }
+}
+
+function Invoke-PhaseOptional {
+  if (-not (Test-Phase 'optional') -and -not (Test-Phase 'all')) { return }
+  Write-Step 'Phase: optional'
+
+  Invoke-WingetInstall 'dbeaver.dbeaver' 'DBeaver' { Test-CommandExists 'dbeaver' }
+  Invoke-WingetInstall 'Postman.Postman' 'Postman' {
+    Test-Path "${env:LOCALAPPDATA}\Postman\Postman.exe"
+  }
+
+  Install-NpmGlobalTools
+  Write-ObservabilityCompose
+
+  Write-Log 'VS Code portable: download from code.visualstudio.com to D:\StreamHeaven\tools\vscode-portable (manual or future script)' 'INFO'
+  Write-Log 'Figma desktop: use installer custom path D:\StreamHeaven\tools if offered' 'INFO'
+}
+
+# --- Main ---
+Write-Log "Stream Heaven toolstack install started (Phase=$Phase, DryRun=$DryRun)"
+Set-Location $RepoRoot
+
+try {
+  Invoke-PhasePrerequisites
+  Invoke-PhaseCore
+  Invoke-PhaseInfra
+  Invoke-PhaseOptional
+  Write-Log 'Install script completed' 'OK'
+}
+catch {
+  Write-Log $_.Exception.Message 'ERROR'
+  exit 1
+}
+
+exit 0

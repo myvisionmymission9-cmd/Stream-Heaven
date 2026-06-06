@@ -63,6 +63,18 @@ Write-Host "Stream Heaven Phase 1 Autonomous Completion" -ForegroundColor White
 Write-Host ("Repo: " + $RepoRoot)
 Write-Host "Agent: ai-agents/phase-1/phase-1-autonomous-completion-agent.md"
 
+Invoke-Check "github-remote-link" {
+  & powershell -ExecutionPolicy Bypass -File (Join-Path $RepoRoot "scripts/github-bootstrap-autonomous.ps1")
+  $code = $LASTEXITCODE
+  if ($null -eq $code) { $code = 0 }
+  if ($code -eq 1) {
+    Write-Host "GitHub remote skipped: no GH_TOKEN/GITHUB_TOKEN and no gh session." -ForegroundColor DarkGray
+    return 0
+  }
+  return $code
+} | Out-Null
+
+
 if (-not $SkipCodeChecks) {
   Invoke-Check "typecheck" { Invoke-Pnpm "typecheck" } -Critical | Out-Null
   Invoke-Check "build" { Invoke-Pnpm "build" } -Critical | Out-Null
