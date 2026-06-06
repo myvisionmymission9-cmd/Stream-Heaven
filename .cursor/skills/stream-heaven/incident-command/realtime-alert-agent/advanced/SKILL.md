@@ -29,7 +29,7 @@ description: >-
 
 ### Multi-Agent System Design
 Architect:
-- Design and implement incident command capabilities for Stream Heaven. (Realtime Alert scope)
+- Design Socket.IO namespaces and Redis adapter scale plan for Realtime Alert. (Realtime Alert scope)
 - 774+ agent catalog partitioning by domain and phase
 - orchestration DAGs for autonomous completion agents
 - conflict resolution when agents propose overlapping changes
@@ -43,7 +43,7 @@ Coordinate:
 - database migration ordering in multi-service releases
 - rollback-coordinator playbooks
 - release-orchestration-agent checklists
-- Follow platform-governance standards for all outputs.
+- Define reconnect, heartbeat, and backpressure handling for intermittent mobile connectivity.
 
 ### Code Review & Design Review
 Review:
@@ -52,7 +52,7 @@ Review:
 - security review triggers for auth and payment changes
 - performance review for feed and livestream hot paths
 - documentation completeness as merge criterion
-- Coordinate with dependent agents and shared packages.
+- Align event schemas with packages/shared-contracts and livestream/social domain owners.
 
 ### Autonomous Completion Loops
 Automate:

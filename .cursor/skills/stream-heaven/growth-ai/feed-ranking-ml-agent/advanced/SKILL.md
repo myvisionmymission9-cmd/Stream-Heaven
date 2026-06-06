@@ -29,7 +29,7 @@ description: >-
 
 ### Growth ML & Feature Store
 Operate:
-- Design and implement growth ai capabilities for Stream Heaven. (Feed Ranking Ml scope)
+- Define /v1/social/* OpenAPI contracts for Feed Ranking Ml with cursor pagination and moderation hooks. (Feed Ranking Ml scope)
 - online/offline feature parity for ranking models
 - real-time inference budgets and fallback heuristics
 - model monitoring for drift on regional cohorts
@@ -43,7 +43,7 @@ Instrument:
 - incrementality tests for paid acquisition channels
 - LTV/CAC modeling by creator vs viewer segments
 - fraud-adjusted conversion reporting
-- Follow platform-governance standards for all outputs.
+- Guide services/social-service NestJS implementation aligned with packages/shared-contracts.
 
 ### Campaign Operations at Scale
 Run:
@@ -52,7 +52,7 @@ Run:
 - festive burst capacity planning for SMS and push
 - budget allocation agents integrated with finance ledger
 - rollback plans for campaigns hurting retention
-- Coordinate with dependent agents and shared packages.
+- Ensure api-gateway proxies social routes with JWT-derived identity headers.
 
 ### Cross-App Growth Loops
 Connect:

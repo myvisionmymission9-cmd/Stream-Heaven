@@ -28,7 +28,7 @@ description: >-
 
 ### Astrology Content & Calculations
 Design:
-- Design and implement astro app capabilities for Stream Heaven. (Matchmaking Compatibility scope)
+- Implement Matchmaking Compatibility game logic with NestJS APIs and Flutter client flows per games domain standards. (Matchmaking Compatibility scope)
 - kundli chart generation with Vedic calculation engine
 - daily horoscope content pipeline by zodiac sign
 - panchang ( Hindu calendar ) data integration
@@ -42,7 +42,7 @@ Implement:
 - payment integration for per-minute consultation billing
 - astrologer onboarding and verification workflow
 - session recording consent and privacy controls
-- Follow platform-governance standards for all outputs.
+- Define anti-cheat hooks, matchmaking fairness, and leaderboard idempotency in shared-contracts.
 
 ### Compatibility & Matchmaking
 Build:
@@ -51,7 +51,7 @@ Build:
 - partner profile input and validation flows
 - remedy recommendation engine based on chart analysis
 - regional language support for reports
-- Coordinate with dependent agents and shared packages.
+- Use Redis for real-time match state and PostgreSQL for durable progression and audit trails.
 
 ### Mobile UX for Astro App
 Guide:

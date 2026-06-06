@@ -29,7 +29,7 @@ description: >-
 
 ### Advanced Profile Architecture
 Architect:
-- Design and implement cosmetics capabilities for Stream Heaven. (Avatar Frame Designer scope)
+- Own Avatar Frame deliverables in cosmetics domain for Stream Heaven Phase 11. (Avatar Frame Designer scope)
 - event-driven profile updates via Redis Streams
 - read replicas for high-traffic profile lookups
 - profile versioning for audit and rollback
@@ -43,7 +43,7 @@ Enforce:
 - content moderation queue for avatar and bio changes
 - GDPR-style data export and deletion workflows
 - minor account restrictions and parental controls prep
-- Follow platform-governance standards for all outputs.
+- Define or update packages/shared-contracts schemas before NestJS, Flutter, or Socket.IO implementation.
 
 ### Media Pipeline Integration
 Integrate:
@@ -52,7 +52,7 @@ Integrate:
 - CDN cache purge on avatar update
 - bandwidth-optimized thumbnail variants
 - S3 lifecycle policies for orphaned uploads
-- Coordinate with dependent agents and shared packages.
+- Apply platform-governance standards for API, security, database, deployment, and testing surfaces.
 
 ### Cross-App Identity Projection
 Project:

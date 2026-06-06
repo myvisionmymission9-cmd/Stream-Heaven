@@ -28,7 +28,7 @@ description: >-
 
 ### ML Pipeline Fundamentals
 Design:
-- Design and implement ml platform capabilities for Stream Heaven. (Training Pipeline scope)
+- Orchestrate Training workflows across ai-agents/ with explicit task ownership and phase gates. (Training Pipeline scope)
 - training data collection and labeling workflows
 - feature store schema for reusable ML features
 - model training pipeline with experiment tracking
@@ -42,7 +42,7 @@ Build:
 - temporal features for session and retention prediction
 - feature freshness SLAs and backfill procedures
 - PII-safe feature design with anonymization
-- Follow platform-governance standards for all outputs.
+- Route tasks via AGENT-REGISTRY.md; block duplicate agent assignments and governance violations.
 
 ### Model Serving
 Deploy:
@@ -51,7 +51,7 @@ Deploy:
 - fallback to heuristic ranking when model unavailable
 - batch inference for nightly recommendation updates
 - GPU vs CPU inference cost trade-off analysis
-- Coordinate with dependent agents and shared packages.
+- Run quality-gate checks before handoff-manager merges deliverables into the monorepo.
 
 ### Vector Search Integration
 Wire:

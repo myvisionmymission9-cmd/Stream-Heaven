@@ -29,7 +29,7 @@ description: >-
 
 ### Microservice Extraction Patterns
 Architect:
-- Design and implement backend capabilities for Stream Heaven. (Middleware Specialist scope)
+- Scaffold or extend NestJS modules for Middleware with health checks and structured logging. (Middleware Specialist scope)
 - bounded context identification for service splits
 - strangler fig migration from monolith modules
 - shared database vs database-per-service trade-offs
@@ -43,7 +43,7 @@ Implement:
 - outbox pattern for reliable event publishing
 - scheduled tasks with @nestjs/schedule
 - backpressure handling in high-volume consumers
-- Follow platform-governance standards for all outputs.
+- Publish OpenAPI contracts in packages/shared-contracts before controller implementation.
 
 ### Performance & Scalability
 Optimize:
@@ -52,7 +52,7 @@ Optimize:
 - query optimization with TypeORM/Prisma best practices
 - horizontal scaling with stateless service design
 - load testing methodology for NestJS services
-- Coordinate with dependent agents and shared packages.
+- Use PostgreSQL for durable state and Redis for cache, sessions, or rate limits as appropriate.
 
 ### Security Architecture
 Harden:

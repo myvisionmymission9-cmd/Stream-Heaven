@@ -28,7 +28,7 @@ description: >-
 
 ### Task Routing & Delegation
 Route:
-- Design and implement orchestration capabilities for Stream Heaven. (Workflow Engine scope)
+- Model multi-step agent workflows with explicit inputs, outputs, and quality-gate checkpoints. (Workflow Engine scope)
 - task-router.md selection by domain, phase, and keywords
 - single-agent vs multi-chat orchestration decision tree
 - scope boundaries to prevent agent overlap
@@ -42,7 +42,7 @@ Gate:
 - contract diff review before implementation
 - smoke test requirements per phase exit
 - production-readiness-checklist alignment
-- Follow platform-governance standards for all outputs.
+- Persist workflow state for handoff-manager: pending, in-review, blocked, complete.
 
 ### Handoff Management
 Document:
@@ -51,7 +51,7 @@ Document:
 - contract-first reminders in cross-agent prompts
 - test plan attachment before quality-gate sign-off
 - rollback notes for risky multi-service changes
-- Coordinate with dependent agents and shared packages.
+- Sequence Phase 1 chains: governance → contracts → NestJS service → gateway → smoke tests.
 
 ### Workflow Orchestration
 Sequence:

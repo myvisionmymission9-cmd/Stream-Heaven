@@ -28,7 +28,7 @@ description: >-
 
 ### Wallet Ledger Design
 Design:
-- Design and implement economy capabilities for Stream Heaven. (Dynamic Pricing scope)
+- Own Dynamic Pricing deliverables in economy domain for Stream Heaven Phase 13. (Dynamic Pricing scope)
 - double-entry ledger with immutable transaction log
 - idempotent debit/credit APIs with client request IDs
 - balance snapshots vs event-sourced reconstruction
@@ -42,7 +42,7 @@ Integrate:
 - webhook signature verification and replay protection
 - payment status state machine: initiated → captured → settled
 - no secrets in repo — gateway keys via Secrets Manager
-- Follow platform-governance standards for all outputs.
+- Define or update packages/shared-contracts schemas before NestJS, Flutter, or Socket.IO implementation.
 
 ### Payouts & Creator Earnings
 Process:
@@ -51,7 +51,7 @@ Process:
 - payout batch scheduling with failure retry queues
 - creator earnings statements and dispute windows
 - reconciliation with platform-finance reporting
-- Coordinate with dependent agents and shared packages.
+- Apply platform-governance standards for API, security, database, deployment, and testing surfaces.
 
 ### Fraud & Risk Controls
 Enforce:

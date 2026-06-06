@@ -29,7 +29,7 @@ description: >-
 
 ### Distributed Systems Skills
 Understand:
-- Design and implement founder war room capabilities for Stream Heaven. (Metrics Pulse scope)
+- Define RED metrics, structured logs, and distributed traces for Metrics Pulse across NestJS and Flutter. (Metrics Pulse scope)
 - CAP theorem trade-offs in multi-region deployment
 - eventual consistency patterns for social feeds and wallets
 - distributed locking with Redis for critical sections
@@ -43,7 +43,7 @@ Design:
 - service mesh considerations for internal communication
 - database-per-service vs shared schema decisions
 - strangler fig migration for legacy module extraction
-- Follow platform-governance standards for all outputs.
+- Build dashboards and alerts aligned with SLO targets in scaling-playbook and incident-severity-rules.md.
 
 ### Event Streaming Skills
 Architect:
@@ -52,7 +52,7 @@ Architect:
 - CQRS patterns for read-heavy social and livestream surfaces
 - dead letter queues for failed event processing
 - event replay for analytics and audit pipelines
-- Coordinate with dependent agents and shared packages.
+- Instrument api-gateway, auth, realtime Socket.IO, and PostgreSQL slow-query paths.
 
 ### Scalability Skills
 Plan:

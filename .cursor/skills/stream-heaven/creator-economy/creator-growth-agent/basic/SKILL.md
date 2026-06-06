@@ -28,7 +28,7 @@ description: >-
 
 ### Wallet Ledger Design
 Design:
-- Design and implement creator economy capabilities for Stream Heaven. (Creator Growth scope)
+- Design Creator Growth growth loops: referrals, campaigns, store ASO, and share incentives with measurable KPIs. (Creator Growth scope)
 - double-entry ledger with immutable transaction log
 - idempotent debit/credit APIs with client request IDs
 - balance snapshots vs event-sourced reconstruction
@@ -42,7 +42,7 @@ Integrate:
 - webhook signature verification and replay protection
 - payment status state machine: initiated → captured → settled
 - no secrets in repo — gateway keys via Secrets Manager
-- Follow platform-governance standards for all outputs.
+- Implement NestJS growth APIs and Flutter surfaces optimized for low-data first launches.
 
 ### Payouts & Creator Earnings
 Process:
@@ -51,7 +51,7 @@ Process:
 - payout batch scheduling with failure retry queues
 - creator earnings statements and dispute windows
 - reconciliation with platform-finance reporting
-- Coordinate with dependent agents and shared packages.
+- Track funnel events into analytics pipelines without PII leakage per security-rules.md.
 
 ### Fraud & Risk Controls
 Enforce:

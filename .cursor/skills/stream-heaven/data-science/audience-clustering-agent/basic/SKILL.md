@@ -28,7 +28,7 @@ description: >-
 
 ### ML Pipeline Fundamentals
 Design:
-- Design and implement data science capabilities for Stream Heaven. (Audience Clustering scope)
+- Own Audience Clustering deliverables in data-science domain for Stream Heaven Phase 14. (Audience Clustering scope)
 - training data collection and labeling workflows
 - feature store schema for reusable ML features
 - model training pipeline with experiment tracking
@@ -42,7 +42,7 @@ Build:
 - temporal features for session and retention prediction
 - feature freshness SLAs and backfill procedures
 - PII-safe feature design with anonymization
-- Follow platform-governance standards for all outputs.
+- Define or update packages/shared-contracts schemas before NestJS, Flutter, or Socket.IO implementation.
 
 ### Model Serving
 Deploy:
@@ -51,7 +51,7 @@ Deploy:
 - fallback to heuristic ranking when model unavailable
 - batch inference for nightly recommendation updates
 - GPU vs CPU inference cost trade-off analysis
-- Coordinate with dependent agents and shared packages.
+- Apply platform-governance standards for API, security, database, deployment, and testing surfaces.
 
 ### Vector Search Integration
 Wire:

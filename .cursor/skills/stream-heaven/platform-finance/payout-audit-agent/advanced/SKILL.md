@@ -29,7 +29,7 @@ description: >-
 
 ### Financial Integrity at Scale
 Scale:
-- Design and implement platform finance capabilities for Stream Heaven. (Payout Audit scope)
+- Design Payout Audit flows with idempotent ledger entries and PostgreSQL transactional integrity. (Payout Audit scope)
 - sharded ledger partitions by user ID ranges
 - saga patterns for cross-service payment flows
 - exactly-once settlement with outbox pattern
@@ -43,7 +43,7 @@ Manage:
 - proration rules for plan upgrades
 - family sharing and regional pricing tiers
 - entitlement sync across four apps
-- Follow platform-governance standards for all outputs.
+- Define wallet, payout, and billing contracts in packages/shared-contracts with audit trails.
 
 ### Cross-App Wallet Federation
 Federate:
@@ -52,7 +52,7 @@ Federate:
 - promotional credit scopes per app surface
 - identity-platform session binding for wallet ops
 - deep link flows for low-balance top-up
-- Coordinate with dependent agents and shared packages.
+- Integrate payment provider webhooks via NestJS with secrets in AWS Secrets Manager only.
 
 ### Compliance & Tax
 Comply:

@@ -29,7 +29,7 @@ description: >-
 
 ### Large-Scale Training Infrastructure
 Architect:
-- Design and implement data science capabilities for Stream Heaven. (Recommendation Engine scope)
+- Design Recommendation ML pipelines: feature store, training jobs, inference endpoints, and fallbacks. (Recommendation Engine scope)
 - distributed training on GPU clusters
 - data pipeline orchestration with Airflow/Prefect
 - training job scheduling and priority queues
@@ -43,7 +43,7 @@ Optimize:
 - caching frequent prediction requests in Redis
 - autoscaling inference pods based on QPS
 - latency profiling and bottleneck identification
-- Follow platform-governance standards for all outputs.
+- Define event ingestion from PostgreSQL and Redis streams into embedding and ranking services.
 
 ### Recommendation System Architecture
 Build:
@@ -52,7 +52,7 @@ Build:
 - exploration/exploitation balance (multi-armed bandit)
 - cold-start handling for new users and content
 - real-time feature updates from event streams
-- Coordinate with dependent agents and shared packages.
+- Set inference cost budgets, caching, and model distillation per cost-control-rules.md.
 
 ### MLOps & Model Lifecycle
 Operate:

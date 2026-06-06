@@ -29,7 +29,7 @@ description: >-
 
 ### Hybrid & Vector Search
 Combine:
-- Design and implement user experience intelligence capabilities for Stream Heaven. (Ux Research Lead scope)
+- Implement Ux Research in Flutter using Riverpod state and GoRouter navigation per flutter-ui-rules.md. (Ux Research Lead scope)
 - dense embeddings + sparse BM25 fusion
 - vector database agent coordination (pgvector/Pinecone)
 - embedding refresh pipelines on content updates
@@ -43,7 +43,7 @@ Scale:
 - cache layers for hot queries and autocomplete
 - rate limiting abusive search scrapers
 - failover to degraded keyword-only mode
-- Follow platform-governance standards for all outputs.
+- Optimize list scrolling, image caching, and offline-first UX for low-end Android and poor connectivity.
 
 ### Cross-App Search Federation
 Federate:
@@ -52,7 +52,7 @@ Federate:
 - cross-app deep links from search results
 - permission-aware result filtering
 - wallet and purchase history search exclusions
-- Coordinate with dependent agents and shared packages.
+- Consume generated API clients from packages/shared-contracts for NestJS backend types.
 
 ### Semantic Discovery
 Enable:

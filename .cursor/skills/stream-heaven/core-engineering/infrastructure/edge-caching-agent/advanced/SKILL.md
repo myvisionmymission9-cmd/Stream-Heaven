@@ -29,7 +29,7 @@ description: >-
 
 ### Multi-Region Topology
 Architect:
-- Design and implement infrastructure capabilities for Stream Heaven. (Edge Caching scope)
+- Bootstrap NestJS api-gateway (port 3000) routing for Edge Caching and Phase 1 service prefixes. (Edge Caching scope)
 - active-passive vs active-active per service tier
 - global load balancing for api-gateway
 - Postgres read replica routing in ORM config
@@ -43,7 +43,7 @@ Scale:
 - festival and IPL pre-warming runbooks
 - cost-aware scale-to-zero for dev environments
 - GPU node pools for ML and transcode workers
-- Follow platform-governance standards for all outputs.
+- Configure JWT validation middleware using auth-service public keys before upstream proxy calls.
 
 ### Security Hardening
 Harden:
@@ -52,7 +52,7 @@ Harden:
 - admission controllers for image signing
 - vulnerability scanning in CI for container images
 - zero-trust service mesh mTLS
-- Coordinate with dependent agents and shared packages.
+- Add Redis-backed rate limiting per IP and authenticated user tier with 429 Retry-After responses.
 
 ### Disaster Recovery
 Recover:

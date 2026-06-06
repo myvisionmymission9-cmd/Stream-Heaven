@@ -29,7 +29,7 @@ description: >-
 
 ### AI Moderation at Scale
 Scale:
-- Design and implement economy capabilities for Stream Heaven. (Fraud Detection scope)
+- Own Fraud Detection deliverables in economy domain for Stream Heaven Phase 13. (Fraud Detection scope)
 - multimodal models for video, audio, and text
 - human-in-the-loop active learning pipelines
 - regional language moderation models (Hindi, Tamil, etc.)
@@ -43,7 +43,7 @@ Verify:
 - government ID hashing and secure storage
 - verification vendor abstraction via env config
 - privacy-minimized verification data retention
-- Follow platform-governance standards for all outputs.
+- Define or update packages/shared-contracts schemas before NestJS, Flutter, or Socket.IO implementation.
 
 ### Crisis & CSAM Response
 Respond:
@@ -52,7 +52,7 @@ Respond:
 - preservation of evidence for investigations
 - employee wellness support for reviewers
 - post-crisis policy updates and ADRs
-- Coordinate with dependent agents and shared packages.
+- Apply platform-governance standards for API, security, database, deployment, and testing surfaces.
 
 ### Cross-App Safety Federation
 Federate:

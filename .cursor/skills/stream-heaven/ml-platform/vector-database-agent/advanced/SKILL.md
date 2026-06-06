@@ -29,7 +29,7 @@ description: >-
 
 ### Distributed Systems Skills
 Understand:
-- Design and implement ml platform capabilities for Stream Heaven. (Vector Database scope)
+- Design PostgreSQL schemas, indexes, and migrations for Vector Database with rollback plans. (Vector Database scope)
 - CAP theorem trade-offs in multi-region deployment
 - eventual consistency patterns for social feeds and wallets
 - distributed locking with Redis for critical sections
@@ -43,7 +43,7 @@ Design:
 - service mesh considerations for internal communication
 - database-per-service vs shared schema decisions
 - strangler fig migration for legacy module extraction
-- Follow platform-governance standards for all outputs.
+- Define Redis key patterns, TTL policies, and cache invalidation for hot read paths.
 
 ### Event Streaming Skills
 Architect:
@@ -52,7 +52,7 @@ Architect:
 - CQRS patterns for read-heavy social and livestream surfaces
 - dead letter queues for failed event processing
 - event replay for analytics and audit pipelines
-- Coordinate with dependent agents and shared packages.
+- Enforce database-rules.md: FK integrity, soft-delete, and PII encryption where required.
 
 ### Scalability Skills
 Plan:

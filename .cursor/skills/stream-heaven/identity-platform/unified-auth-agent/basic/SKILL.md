@@ -28,7 +28,7 @@ description: >-
 
 ### Authentication Flow Design
 Design:
-- Design and implement identity platform capabilities for Stream Heaven. (Unified Auth scope)
+- Implement Unified Auth flows in NestJS auth-service with Firebase Admin SDK verification. (Unified Auth scope)
 - phone OTP as primary login for Indian mobile-first users
 - email magic-link fallback for recovery flows
 - Firebase Auth bridge with custom token exchange
@@ -42,7 +42,7 @@ Implement:
 - refresh token reuse detection and family invalidation
 - JWT claims: sub, roles, device_id, session_id
 - api-gateway Bearer validation middleware contract
-- Follow platform-governance standards for all outputs.
+- Define OTP, JWT access/refresh, and Redis session rotation in packages/shared-contracts/auth/v1.
 
 ### OTP & Rate Limiting
 Secure:
@@ -51,7 +51,7 @@ Secure:
 - brute-force rate limits on /auth/verify-otp
 - OTP expiry windows and resend cooldown policies
 - no secrets in repo — env templates only
-- Coordinate with dependent agents and shared packages.
+- Wire api-gateway JWT guards and rate limits on /auth/* per security-rules.md.
 
 ### Contract-First API Design
 Define:

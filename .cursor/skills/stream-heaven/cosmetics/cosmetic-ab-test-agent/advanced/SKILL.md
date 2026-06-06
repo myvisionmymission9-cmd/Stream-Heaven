@@ -29,7 +29,7 @@ description: >-
 
 ### GPU & Shader Architecture
 Architect:
-- Design and implement cosmetics capabilities for Stream Heaven. (Cosmetic Ab Test scope)
+- Define automated tests for Cosmetic Ab Test: unit, integration, contract, and smoke layers. (Cosmetic Ab Test scope)
 - Metal/Vulkan/OpenGL ES fallback matrix for Flutter
 - custom shader hot-reload pipeline for artists
 - GPU memory pools shared across concurrent effects
@@ -43,7 +43,7 @@ Scale:
 - CDN edge caching for popular Lottie assets
 - regional effect servers for IPL and festival peaks
 - chaos tests for gift queue backlog recovery
-- Follow platform-governance standards for all outputs.
+- Maintain scripts/ test entry points with CI-friendly exit codes and structured failure output.
 
 ### Economy & Fraud Controls
 Protect:
@@ -52,7 +52,7 @@ Protect:
 - chargeback handling integrated with wallet ledger
 - promotional gift credit expiration policies
 - tax and payout reporting for creator earnings
-- Coordinate with dependent agents and shared packages.
+- Validate NestJS, Flutter, PostgreSQL, and Redis behavior against acceptance criteria.
 
 ### Cross-Platform Effect Parity
 Align:

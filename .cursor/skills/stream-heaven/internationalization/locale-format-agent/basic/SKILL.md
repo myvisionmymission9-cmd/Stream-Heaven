@@ -28,7 +28,7 @@ description: >-
 
 ### User Research & Insights
 Research:
-- Design and implement internationalization capabilities for Stream Heaven. (Locale Format scope)
+- Own Locale Format deliverables in internationalization domain for Stream Heaven Phase 20. (Locale Format scope)
 - qualitative interviews with tier-2/3 Indian users
 - session replay analysis for drop-off points
 - jobs-to-be-done framing per app surface
@@ -42,7 +42,7 @@ Design:
 - interest picker cold-start for feed personalization
 - creator vs viewer path branching
 - low-bandwidth onboarding asset budgets
-- Follow platform-governance standards for all outputs.
+- Define or update packages/shared-contracts schemas before NestJS, Flutter, or Socket.IO implementation.
 
 ### Engagement Loop Design
 Craft:
@@ -51,7 +51,7 @@ Craft:
 - notification entry points back to core loops
 - micro-reward feedback (haptics, confetti, badges)
 - session depth metrics tied to UX changes
-- Coordinate with dependent agents and shared packages.
+- Apply platform-governance standards for API, security, database, deployment, and testing surfaces.
 
 ### Regional & Low-Bandwidth UX
 Adapt:

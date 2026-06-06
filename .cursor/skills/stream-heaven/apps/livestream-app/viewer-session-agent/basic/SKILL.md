@@ -28,7 +28,7 @@ description: >-
 
 ### Live Room Lifecycle
 Own:
-- Design and implement core capabilities for Stream Heaven. (Viewer Session scope)
+- Implement Viewer Session flows in NestJS auth-service with Firebase Admin SDK verification. (Viewer Session scope)
 - room create, start, join, leave, and end state machine
 - deterministic transitions with idempotent API calls
 - viewer count safety guards against race conditions
@@ -42,7 +42,7 @@ Integrate:
 - token TTL aligned with expected session duration
 - publisher vs subscriber role token differentiation
 - provider failover prep for Zego as alternate
-- Follow platform-governance standards for all outputs.
+- Define OTP, JWT access/refresh, and Redis session rotation in packages/shared-contracts/auth/v1.
 
 ### Livestream API Contracts
 Define:
@@ -51,7 +51,7 @@ Define:
 - viewer count and room metadata in responses
 - api-gateway proxy with JWT X-User-Id propagation
 - backward-compatible contract evolution for Phase 3 features
-- Coordinate with dependent agents and shared packages.
+- Wire api-gateway JWT guards and rate limits on /auth/* per security-rules.md.
 
 ### Realtime Events
 Emit:

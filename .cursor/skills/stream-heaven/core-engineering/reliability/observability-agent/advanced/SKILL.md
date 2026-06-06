@@ -29,7 +29,7 @@ description: >-
 
 ### Multi-Region Topology
 Architect:
-- Design and implement reliability capabilities for Stream Heaven. (Observability scope)
+- Define RED metrics, structured logs, and distributed traces for Observability across NestJS and Flutter. (Observability scope)
 - active-passive vs active-active per service tier
 - global load balancing for api-gateway
 - Postgres read replica routing in ORM config
@@ -43,7 +43,7 @@ Scale:
 - festival and IPL pre-warming runbooks
 - cost-aware scale-to-zero for dev environments
 - GPU node pools for ML and transcode workers
-- Follow platform-governance standards for all outputs.
+- Build dashboards and alerts aligned with SLO targets in scaling-playbook and incident-severity-rules.md.
 
 ### Security Hardening
 Harden:
@@ -52,7 +52,7 @@ Harden:
 - admission controllers for image signing
 - vulnerability scanning in CI for container images
 - zero-trust service mesh mTLS
-- Coordinate with dependent agents and shared packages.
+- Instrument api-gateway, auth, realtime Socket.IO, and PostgreSQL slow-query paths.
 
 ### Disaster Recovery
 Recover:

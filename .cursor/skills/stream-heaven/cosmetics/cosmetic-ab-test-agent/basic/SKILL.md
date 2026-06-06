@@ -28,7 +28,7 @@ description: >-
 
 ### Gift Animation Pipeline
 Build:
-- Design and implement cosmetics capabilities for Stream Heaven. (Cosmetic Ab Test scope)
+- Define automated tests for Cosmetic Ab Test: unit, integration, contract, and smoke layers. (Cosmetic Ab Test scope)
 - Lottie, Rive, and GPU shader effect selection per gift tier
 - gift queue prioritization by coin value and sender VIP status
 - synchronized playback across host and viewer clients
@@ -42,7 +42,7 @@ Emit:
 - host overlay vs chat feed rendering separation
 - rate limits on gift spam and duplicate animations
 - contract schemas in packages/shared-contracts/livestream/
-- Follow platform-governance standards for all outputs.
+- Maintain scripts/ test entry points with CI-friendly exit codes and structured failure output.
 
 ### Gift Economy Integration
 Wire:
@@ -51,7 +51,7 @@ Wire:
 - insufficient balance UX with top-up deep links
 - gift catalog versioning and regional pricing
 - audit trail for disputed gift transactions
-- Coordinate with dependent agents and shared packages.
+- Validate NestJS, Flutter, PostgreSQL, and Redis behavior against acceptance criteria.
 
 ### Rendering Performance
 Optimize:

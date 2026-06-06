@@ -28,7 +28,7 @@ description: >-
 
 ### Growth Experimentation
 Design:
-- Design and implement growth ai capabilities for Stream Heaven. (Data Pipeline scope)
+- Orchestrate Data workflows across ai-agents/ with explicit task ownership and phase gates. (Data Pipeline scope)
 - hypothesis-driven A/B tests with clear primary metrics
 - cohort segmentation by region, device tier, and acquisition channel
 - experiment guardrails to protect core retention and revenue
@@ -42,7 +42,7 @@ Build:
 - share-to-earn flows for WhatsApp and Instagram Stories
 - viral loop instrumentation: K-factor, cycle time, activation
 - regional campaign hooks for festivals and IPL seasons
-- Follow platform-governance standards for all outputs.
+- Route tasks via AGENT-REGISTRY.md; block duplicate agent assignments and governance violations.
 
 ### Retention & Engagement Analytics
 Measure:
@@ -51,7 +51,7 @@ Measure:
 - churn prediction features in growth feature store
 - notification fatigue monitoring and send caps
 - real-time dashboards for experiment readouts
-- Coordinate with dependent agents and shared packages.
+- Run quality-gate checks before handoff-manager merges deliverables into the monorepo.
 
 ### Personalization & Discovery
 Tune:

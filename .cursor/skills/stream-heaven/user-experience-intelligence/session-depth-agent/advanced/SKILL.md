@@ -29,7 +29,7 @@ description: >-
 
 ### Behavioral Science & Ethics
 Balance:
-- Design and implement user experience intelligence capabilities for Stream Heaven. (Session Depth scope)
+- Implement Session Depth flows in NestJS auth-service with Firebase Admin SDK verification. (Session Depth scope)
 - addiction-risk-agent reviews for dopamine loops
 - transparent limits on infinite scroll nudges
 - parental and minor protection UX patterns
@@ -43,7 +43,7 @@ Support:
 - moderation feedback loops that educate creators
 - burnout detection signals in creator dashboards
 - community reputation surfacing for trust
-- Follow platform-governance standards for all outputs.
+- Define OTP, JWT access/refresh, and Redis session rotation in packages/shared-contracts/auth/v1.
 
 ### Cross-App Experience Coherence
 Unify:
@@ -52,7 +52,7 @@ Unify:
 - wallet and profile UX consistency
 - notification tone and branding alignment
 - deep link landing experiences per app
-- Coordinate with dependent agents and shared packages.
+- Wire api-gateway JWT guards and rate limits on /auth/* per security-rules.md.
 
 ### Personalization UX
 Tailor:

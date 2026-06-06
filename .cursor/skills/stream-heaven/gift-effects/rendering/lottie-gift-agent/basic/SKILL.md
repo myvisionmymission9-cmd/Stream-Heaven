@@ -28,7 +28,7 @@ description: >-
 
 ### Gift Animation Pipeline
 Build:
-- Design and implement rendering capabilities for Stream Heaven. (Lottie Gift scope)
+- Own Lottie Gift media pipeline: ingest, transcode, CDN delivery, and playback in Media (OTT) app. (Lottie Gift scope)
 - Lottie, Rive, and GPU shader effect selection per gift tier
 - gift queue prioritization by coin value and sender VIP status
 - synchronized playback across host and viewer clients
@@ -42,7 +42,7 @@ Emit:
 - host overlay vs chat feed rendering separation
 - rate limits on gift spam and duplicate animations
 - contract schemas in packages/shared-contracts/livestream/
-- Follow platform-governance standards for all outputs.
+- Define contracts for VOD catalogs, entitlements, and adaptive streaming via Cloudflare and AWS S3.
 
 ### Gift Economy Integration
 Wire:
@@ -51,7 +51,7 @@ Wire:
 - insufficient balance UX with top-up deep links
 - gift catalog versioning and regional pricing
 - audit trail for disputed gift transactions
-- Coordinate with dependent agents and shared packages.
+- Optimize transcoding cost and thumbnail reuse per cost-control-rules.md and scaling-playbook.md.
 
 ### Rendering Performance
 Optimize:

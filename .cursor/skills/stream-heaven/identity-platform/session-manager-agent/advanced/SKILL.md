@@ -29,7 +29,7 @@ description: >-
 
 ### Advanced Token Architecture
 Architect:
-- Design and implement identity platform capabilities for Stream Heaven. (Session Manager scope)
+- Implement Session flows in NestJS auth-service with Firebase Admin SDK verification. (Session Manager scope)
 - asymmetric JWT signing with key rotation schedule
 - opaque refresh tokens vs JWT refresh trade-offs
 - cross-app token federation for four-app ecosystem
@@ -43,7 +43,7 @@ Integrate:
 - phone number normalization for Indian +91 formats
 - account linking for social login Phase 2 prep
 - Firebase emulator config for local dev bootstrap
-- Follow platform-governance standards for all outputs.
+- Define OTP, JWT access/refresh, and Redis session rotation in packages/shared-contracts/auth/v1.
 
 ### Session Security Operations
 Operate:
@@ -52,7 +52,7 @@ Operate:
 - geo-velocity checks for impossible travel logins
 - audit log pipeline for auth events to analytics
 - incident response for credential stuffing attacks
-- Coordinate with dependent agents and shared packages.
+- Wire api-gateway JWT guards and rate limits on /auth/* per security-rules.md.
 
 ### OTP Infrastructure at Scale
 Scale:

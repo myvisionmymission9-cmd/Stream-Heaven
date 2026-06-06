@@ -28,7 +28,7 @@ description: >-
 
 ### Flutter App Architecture
 Define:
-- Design and implement design system capabilities for Stream Heaven. (Design Qa Reviewer scope)
+- Define automated tests for Design Qa: unit, integration, contract, and smoke layers. (Design Qa Reviewer scope)
 - Riverpod provider hierarchy for state management
 - GoRouter navigation with deep link support
 - feature-first folder structure in apps/mobile
@@ -42,7 +42,7 @@ Optimize:
 - widget rebuild minimization with const constructors
 - RepaintBoundary for complex list items
 - memory profiling for leak detection
-- Follow platform-governance standards for all outputs.
+- Maintain scripts/ test entry points with CI-friendly exit codes and structured failure output.
 
 ### Networking & API Integration
 Implement:
@@ -51,7 +51,7 @@ Implement:
 - offline-aware retry with exponential backoff
 - request cancellation on widget dispose
 - API error mapping to user-friendly i18n strings
-- Coordinate with dependent agents and shared packages.
+- Validate NestJS, Flutter, PostgreSQL, and Redis behavior against acceptance criteria.
 
 ### UI & Design System
 Apply:

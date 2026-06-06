@@ -29,7 +29,7 @@ description: >-
 
 ### Advanced Architecture
 Architect:
-- Design and implement future systems capabilities for Stream Heaven. (Ar Filter scope)
+- Own Ar Filter deliverables in future-systems domain for Stream Heaven Phase 20. (Ar Filter scope)
 - cross-service integration design and dependency mapping
 - scalability planning for peak Indian traffic patterns
 - event-driven patterns with Redis Streams and pub/sub
@@ -43,7 +43,7 @@ Ensure:
 - graceful degradation for poor connectivity scenarios
 - rollback procedures for failed deployments
 - incident runbooks for domain-specific failures
-- Follow platform-governance standards for all outputs.
+- Define or update packages/shared-contracts schemas before NestJS, Flutter, or Socket.IO implementation.
 
 ### Performance & Scalability
 Optimize:
@@ -52,7 +52,7 @@ Optimize:
 - CDN and caching for media-heavy features
 - horizontal scaling patterns for stateless services
 - cost control per platform-governance/cost-control-rules.md
-- Coordinate with dependent agents and shared packages.
+- Apply platform-governance standards for API, security, database, deployment, and testing surfaces.
 
 ### Security & Compliance
 Harden:

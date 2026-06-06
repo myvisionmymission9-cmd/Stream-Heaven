@@ -29,7 +29,7 @@ description: >-
 
 ### GPU & Shader Architecture
 Architect:
-- Design and implement audio capabilities for Stream Heaven. (Haptic Feedback scope)
+- Define /v1/social/* OpenAPI contracts for Haptic Feedback with cursor pagination and moderation hooks. (Haptic Feedback scope)
 - Metal/Vulkan/OpenGL ES fallback matrix for Flutter
 - custom shader hot-reload pipeline for artists
 - GPU memory pools shared across concurrent effects
@@ -43,7 +43,7 @@ Scale:
 - CDN edge caching for popular Lottie assets
 - regional effect servers for IPL and festival peaks
 - chaos tests for gift queue backlog recovery
-- Follow platform-governance standards for all outputs.
+- Guide services/social-service NestJS implementation aligned with packages/shared-contracts.
 
 ### Economy & Fraud Controls
 Protect:
@@ -52,7 +52,7 @@ Protect:
 - chargeback handling integrated with wallet ledger
 - promotional gift credit expiration policies
 - tax and payout reporting for creator earnings
-- Coordinate with dependent agents and shared packages.
+- Ensure api-gateway proxies social routes with JWT-derived identity headers.
 
 ### Cross-Platform Effect Parity
 Align:

@@ -29,7 +29,7 @@ description: >-
 
 ### Distributed Systems Skills
 Understand:
-- Design and implement search infrastructure capabilities for Stream Heaven. (Vector Search scope)
+- Design Vector Search ML pipelines: feature store, training jobs, inference endpoints, and fallbacks. (Vector Search scope)
 - CAP theorem trade-offs in multi-region deployment
 - eventual consistency patterns for social feeds and wallets
 - distributed locking with Redis for critical sections
@@ -43,7 +43,7 @@ Design:
 - service mesh considerations for internal communication
 - database-per-service vs shared schema decisions
 - strangler fig migration for legacy module extraction
-- Follow platform-governance standards for all outputs.
+- Define event ingestion from PostgreSQL and Redis streams into embedding and ranking services.
 
 ### Event Streaming Skills
 Architect:
@@ -52,7 +52,7 @@ Architect:
 - CQRS patterns for read-heavy social and livestream surfaces
 - dead letter queues for failed event processing
 - event replay for analytics and audit pipelines
-- Coordinate with dependent agents and shared packages.
+- Set inference cost budgets, caching, and model distillation per cost-control-rules.md.
 
 ### Scalability Skills
 Plan:

@@ -28,7 +28,7 @@ description: >-
 
 ### Wallet Ledger Design
 Design:
-- Design and implement creator economy capabilities for Stream Heaven. (Creator Dashboard scope)
+- Provide executive guidance for Creator Dashboard across Social, Livestream, Astro, and Media strategic priorities. (Creator Dashboard scope)
 - double-entry ledger with immutable transaction log
 - idempotent debit/credit APIs with client request IDs
 - balance snapshots vs event-sourced reconstruction
@@ -42,7 +42,7 @@ Integrate:
 - webhook signature verification and replay protection
 - payment status state machine: initiated → captured → settled
 - no secrets in repo — gateway keys via Secrets Manager
-- Follow platform-governance standards for all outputs.
+- Review phase gates, resource allocation, and OKR alignment before major platform investments.
 
 ### Payouts & Creator Earnings
 Process:
@@ -51,7 +51,7 @@ Process:
 - payout batch scheduling with failure retry queues
 - creator earnings statements and dispute windows
 - reconciliation with platform-finance reporting
-- Coordinate with dependent agents and shared packages.
+- Arbitrate cross-functional tradeoffs: velocity, cost, safety, and Indian market reach.
 
 ### Fraud & Risk Controls
 Enforce:

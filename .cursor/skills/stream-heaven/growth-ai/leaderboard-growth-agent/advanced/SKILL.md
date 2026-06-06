@@ -29,7 +29,7 @@ description: >-
 
 ### Growth ML & Feature Store
 Operate:
-- Design and implement growth ai capabilities for Stream Heaven. (Leaderboard Growth scope)
+- Implement Leaderboard Growth game logic with NestJS APIs and Flutter client flows per games domain standards. (Leaderboard Growth scope)
 - online/offline feature parity for ranking models
 - real-time inference budgets and fallback heuristics
 - model monitoring for drift on regional cohorts
@@ -43,7 +43,7 @@ Instrument:
 - incrementality tests for paid acquisition channels
 - LTV/CAC modeling by creator vs viewer segments
 - fraud-adjusted conversion reporting
-- Follow platform-governance standards for all outputs.
+- Define anti-cheat hooks, matchmaking fairness, and leaderboard idempotency in shared-contracts.
 
 ### Campaign Operations at Scale
 Run:
@@ -52,7 +52,7 @@ Run:
 - festive burst capacity planning for SMS and push
 - budget allocation agents integrated with finance ledger
 - rollback plans for campaigns hurting retention
-- Coordinate with dependent agents and shared packages.
+- Use Redis for real-time match state and PostgreSQL for durable progression and audit trails.
 
 ### Cross-App Growth Loops
 Connect:

@@ -29,7 +29,7 @@ description: >-
 
 ### Financial Integrity at Scale
 Scale:
-- Design and implement cross platform capabilities for Stream Heaven. (Shared Wallet scope)
+- Define /v1/social/* OpenAPI contracts for Shared Wallet with cursor pagination and moderation hooks. (Shared Wallet scope)
 - sharded ledger partitions by user ID ranges
 - saga patterns for cross-service payment flows
 - exactly-once settlement with outbox pattern
@@ -43,7 +43,7 @@ Manage:
 - proration rules for plan upgrades
 - family sharing and regional pricing tiers
 - entitlement sync across four apps
-- Follow platform-governance standards for all outputs.
+- Guide services/social-service NestJS implementation aligned with packages/shared-contracts.
 
 ### Cross-App Wallet Federation
 Federate:
@@ -52,7 +52,7 @@ Federate:
 - promotional credit scopes per app surface
 - identity-platform session binding for wallet ops
 - deep link flows for low-balance top-up
-- Coordinate with dependent agents and shared packages.
+- Ensure api-gateway proxies social routes with JWT-derived identity headers.
 
 ### Compliance & Tax
 Comply:

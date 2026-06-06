@@ -28,7 +28,7 @@ description: >-
 
 ### Security Fundamentals
 Apply:
-- Design and implement enterprise security capabilities for Stream Heaven. (Pen Test Coordinator scope)
+- Define automated tests for Pen Test: unit, integration, contract, and smoke layers. (Pen Test Coordinator scope)
 - platform-governance/security-rules.md as baseline
 - defense in depth across network, app, and data layers
 - least privilege access for services and agents
@@ -42,7 +42,7 @@ Harden:
 - API key rotation and scope limitation
 - multi-factor authentication for admin surfaces
 - session fixation and CSRF prevention
-- Follow platform-governance standards for all outputs.
+- Maintain scripts/ test entry points with CI-friendly exit codes and structured failure output.
 
 ### Network & API Security
 Protect:
@@ -51,7 +51,7 @@ Protect:
 - input validation and output encoding standards
 - CORS and CSP header configuration
 - TLS 1.3 enforcement and certificate management
-- Coordinate with dependent agents and shared packages.
+- Validate NestJS, Flutter, PostgreSQL, and Redis behavior against acceptance criteria.
 
 ### Data Protection
 Encrypt:

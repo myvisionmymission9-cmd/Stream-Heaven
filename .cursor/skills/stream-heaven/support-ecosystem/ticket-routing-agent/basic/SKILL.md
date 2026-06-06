@@ -28,7 +28,7 @@ description: >-
 
 ### Local Development Bootstrap
 Setup:
-- Design and implement support ecosystem capabilities for Stream Heaven. (Ticket Routing scope)
+- Bootstrap NestJS api-gateway (port 3000) routing for Ticket Routing and Phase 1 service prefixes. (Ticket Routing scope)
 - Docker Desktop verification and container health
 - Node.js and npm workspace dependency installation
 - PostgreSQL and Redis container startup scripts
@@ -42,7 +42,7 @@ Run:
 - git branch hygiene and PR preparation
 - validate-agents.mjs before agent catalog edits
 - smoke test after infrastructure changes
-- Follow platform-governance standards for all outputs.
+- Configure JWT validation middleware using auth-service public keys before upstream proxy calls.
 
 ### Agent Catalog Management
 Maintain:
@@ -51,7 +51,7 @@ Maintain:
 - skill file generation and validation workflows
 - golden agent test suite maintenance
 - agent onboarding documentation updates
-- Coordinate with dependent agents and shared packages.
+- Add Redis-backed rate limiting per IP and authenticated user tier with 429 Retry-After responses.
 
 ### Validation & Quality
 Execute:

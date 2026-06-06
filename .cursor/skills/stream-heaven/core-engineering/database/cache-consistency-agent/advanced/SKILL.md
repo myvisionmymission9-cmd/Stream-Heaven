@@ -29,7 +29,7 @@ description: >-
 
 ### Redis Cluster Architecture
 Architect:
-- Design and implement database capabilities for Stream Heaven. (Cache Consistency scope)
+- Design PostgreSQL schemas, indexes, and migrations for Cache Consistency with rollback plans. (Cache Consistency scope)
 - hash slot planning for even key distribution
 - read replica routing for session reads
 - cluster failover drills and split-brain prevention
@@ -43,7 +43,7 @@ Tune:
 - connection pooling sizing per NestJS service
 - large key detection and structural refactoring
 - slowlog analysis and hot key resharding
-- Follow platform-governance standards for all outputs.
+- Define Redis key patterns, TTL policies, and cache invalidation for hot read paths.
 
 ### Streams & Event Backbones
 Leverage:
@@ -52,7 +52,7 @@ Leverage:
 - stream trimming policies for retention compliance
 - cross-service event catalog alignment
 - migration path to Kafka for analytics fan-out
-- Coordinate with dependent agents and shared packages.
+- Enforce database-rules.md: FK integrity, soft-delete, and PII encryption where required.
 
 ### Distributed Locks & Coordination
 Coordinate:

@@ -29,7 +29,7 @@ description: >-
 
 ### GPU & Shader Architecture
 Architect:
-- Design and implement cosmetics capabilities for Stream Heaven. (Cosmetic Store scope)
+- Design Cosmetic Store growth loops: referrals, campaigns, store ASO, and share incentives with measurable KPIs. (Cosmetic Store scope)
 - Metal/Vulkan/OpenGL ES fallback matrix for Flutter
 - custom shader hot-reload pipeline for artists
 - GPU memory pools shared across concurrent effects
@@ -43,7 +43,7 @@ Scale:
 - CDN edge caching for popular Lottie assets
 - regional effect servers for IPL and festival peaks
 - chaos tests for gift queue backlog recovery
-- Follow platform-governance standards for all outputs.
+- Implement NestJS growth APIs and Flutter surfaces optimized for low-data first launches.
 
 ### Economy & Fraud Controls
 Protect:
@@ -52,7 +52,7 @@ Protect:
 - chargeback handling integrated with wallet ledger
 - promotional gift credit expiration policies
 - tax and payout reporting for creator earnings
-- Coordinate with dependent agents and shared packages.
+- Track funnel events into analytics pipelines without PII leakage per security-rules.md.
 
 ### Cross-Platform Effect Parity
 Align:

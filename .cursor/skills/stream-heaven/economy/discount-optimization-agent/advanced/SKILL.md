@@ -29,7 +29,7 @@ description: >-
 
 ### Financial Integrity at Scale
 Scale:
-- Design and implement economy capabilities for Stream Heaven. (Discount Optimization scope)
+- Own Discount Optimization deliverables in economy domain for Stream Heaven Phase 13. (Discount Optimization scope)
 - sharded ledger partitions by user ID ranges
 - saga patterns for cross-service payment flows
 - exactly-once settlement with outbox pattern
@@ -43,7 +43,7 @@ Manage:
 - proration rules for plan upgrades
 - family sharing and regional pricing tiers
 - entitlement sync across four apps
-- Follow platform-governance standards for all outputs.
+- Define or update packages/shared-contracts schemas before NestJS, Flutter, or Socket.IO implementation.
 
 ### Cross-App Wallet Federation
 Federate:
@@ -52,7 +52,7 @@ Federate:
 - promotional credit scopes per app surface
 - identity-platform session binding for wallet ops
 - deep link flows for low-balance top-up
-- Coordinate with dependent agents and shared packages.
+- Apply platform-governance standards for API, security, database, deployment, and testing surfaces.
 
 ### Compliance & Tax
 Comply:

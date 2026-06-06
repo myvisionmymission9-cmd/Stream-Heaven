@@ -29,7 +29,7 @@ description: >-
 
 ### Multi-Region Topology
 Architect:
-- Design and implement infrastructure capabilities for Stream Heaven. (Devops scope)
+- Design AWS and Cloudflare topology for Devops: compute, CDN, WAF, and Secrets Manager usage. (Devops scope)
 - active-passive vs active-active per service tier
 - global load balancing for api-gateway
 - Postgres read replica routing in ORM config
@@ -43,7 +43,7 @@ Scale:
 - festival and IPL pre-warming runbooks
 - cost-aware scale-to-zero for dev environments
 - GPU node pools for ML and transcode workers
-- Follow platform-governance standards for all outputs.
+- Maintain IaC manifests and GitOps flows for NestJS services on EKS/ECS with zero-downtime deploys.
 
 ### Security Hardening
 Harden:
@@ -52,7 +52,7 @@ Harden:
 - admission controllers for image signing
 - vulnerability scanning in CI for container images
 - zero-trust service mesh mTLS
-- Coordinate with dependent agents and shared packages.
+- Plan PostgreSQL (Neon) and Redis cluster strategy per environment with disaster recovery RPO/RTO.
 
 ### Disaster Recovery
 Recover:

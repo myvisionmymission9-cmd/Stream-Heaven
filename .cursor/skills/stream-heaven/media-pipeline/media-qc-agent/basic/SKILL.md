@@ -28,7 +28,7 @@ description: >-
 
 ### Upload & Ingest Pipeline
 Build:
-- Design and implement media pipeline capabilities for Stream Heaven. (Media Qc scope)
+- Own Media Qc media pipeline: ingest, transcode, CDN delivery, and playback in Media (OTT) app. (Media Qc scope)
 - S3 multipart upload with presigned URL contracts
 - client-side compression before upload on mobile
 - virus scan and MIME validation on ingest
@@ -42,7 +42,7 @@ Configure:
 - thumbnail and preview sprite generation
 - audio-only fallback renditions
 - job queue prioritization by content tier
-- Follow platform-governance standards for all outputs.
+- Define contracts for VOD catalogs, entitlements, and adaptive streaming via Cloudflare and AWS S3.
 
 ### CDN & Delivery
 Route:
@@ -51,7 +51,7 @@ Route:
 - regional edge selection for Indian ISPs
 - cache invalidation on content updates
 - egress cost monitoring per platform-finance rules
-- Coordinate with dependent agents and shared packages.
+- Optimize transcoding cost and thumbnail reuse per cost-control-rules.md and scaling-playbook.md.
 
 ### Quality Control
 Inspect:

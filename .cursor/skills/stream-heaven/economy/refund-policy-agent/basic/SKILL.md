@@ -28,7 +28,7 @@ description: >-
 
 ### Wallet Ledger Design
 Design:
-- Design and implement economy capabilities for Stream Heaven. (Refund Policy scope)
+- Audit Refund Policy work against platform-governance/ docs before implementation or merge approval. (Refund Policy scope)
 - double-entry ledger with immutable transaction log
 - idempotent debit/credit APIs with client request IDs
 - balance snapshots vs event-sourced reconstruction
@@ -42,7 +42,7 @@ Integrate:
 - webhook signature verification and replay protection
 - payment status state machine: initiated → captured → settled
 - no secrets in repo — gateway keys via Secrets Manager
-- Follow platform-governance standards for all outputs.
+- Produce compliance matrices mapping tasks to security, API, database, deployment, and AI usage rules.
 
 ### Payouts & Creator Earnings
 Process:
@@ -51,7 +51,7 @@ Process:
 - payout batch scheduling with failure retry queues
 - creator earnings statements and dispute windows
 - reconciliation with platform-finance reporting
-- Coordinate with dependent agents and shared packages.
+- Block duplicate services, missing shared-contracts updates, and secrets committed to the repo.
 
 ### Fraud & Risk Controls
 Enforce:

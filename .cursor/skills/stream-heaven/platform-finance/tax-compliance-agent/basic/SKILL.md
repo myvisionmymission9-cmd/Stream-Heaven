@@ -28,7 +28,7 @@ description: >-
 
 ### Platform Governance Compliance
 Follow:
-- Design and implement platform finance capabilities for Stream Heaven. (Tax Compliance scope)
+- Audit Tax Compliance work against platform-governance/ docs before implementation or merge approval. (Tax Compliance scope)
 - MASTER-AI-OPERATING-SYSTEM.md as primary authority
 - 22 platform-governance documents by domain relevance
 - feature-approval-rules.md gates before new capabilities
@@ -42,7 +42,7 @@ Require:
 - shared-contracts versioning and changelog discipline
 - mobile client codegen sync after contract updates
 - no undocumented public API surfaces
-- Follow platform-governance standards for all outputs.
+- Produce compliance matrices mapping tasks to security, API, database, deployment, and AI usage rules.
 
 ### Agent Catalog Integrity
 Maintain:
@@ -51,7 +51,7 @@ Maintain:
 - boilerplate responsibility detection and enrichment
 - skill pair completeness via validate-agent-skills.mjs
 - golden agent tests for structural regression
-- Coordinate with dependent agents and shared packages.
+- Block duplicate services, missing shared-contracts updates, and secrets committed to the repo.
 
 ### ADR & Architecture Forks
 Document:

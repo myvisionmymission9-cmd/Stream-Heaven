@@ -29,7 +29,7 @@ description: >-
 
 ### Programmatic Scale
 Scale:
-- Design and implement ad network capabilities for Stream Heaven. (Ad Ranking scope)
+- Design Ad Ranking ML pipelines: feature store, training jobs, inference endpoints, and fallbacks. (Ad Ranking scope)
 - OpenRTB adapter integration with header bidding
 - edge caching of ad creatives via Cloudflare
 - QPS autoscaling for auction service pods
@@ -43,7 +43,7 @@ Detect:
 - publisher-side invalid traffic scoring
 - refund workflows for verified fraud clusters
 - coordination with trust-safety-agent on bad actors
-- Follow platform-governance standards for all outputs.
+- Define event ingestion from PostgreSQL and Redis streams into embedding and ranking services.
 
 ### Revenue Optimization
 Optimize:
@@ -52,7 +52,7 @@ Optimize:
 - ad load experiments balanced against retention
 - sponsored content blending with feed ranking
 - revenue reconciliation with platform-finance agents
-- Coordinate with dependent agents and shared packages.
+- Set inference cost budgets, caching, and model distillation per cost-control-rules.md.
 
 ### Live & Video Ad Formats
 Deliver:

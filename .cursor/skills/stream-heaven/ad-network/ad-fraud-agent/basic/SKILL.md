@@ -28,7 +28,7 @@ description: >-
 
 ### Content Moderation Pipeline
 Build:
-- Design and implement ad network capabilities for Stream Heaven. (Ad Fraud scope)
+- Implement Ad Fraud ad insertion, targeting, and measurement with NestJS ad-network services. (Ad Fraud scope)
 - AI pre-filter + human review queue for UGC
 - real-time live stream moderation hooks
 - CSAM and illegal content zero-tolerance workflows
@@ -42,7 +42,7 @@ Enforce:
 - harassment and hate speech detection thresholds
 - creator verification for monetization eligibility
 - regional legal compliance for Indian jurisdictions
-- Follow platform-governance standards for all outputs.
+- Define ad slot contracts for social feed, livestream overlays, and media pre-roll in shared-contracts.
 
 ### Fraud & Abuse Detection
 Detect:
@@ -51,7 +51,7 @@ Detect:
 - gift and wallet wash trading patterns
 - deepfake detection on profile media
 - rate limits coordinated with auth-service
-- Coordinate with dependent agents and shared packages.
+- Enforce brand safety, frequency caps, and child-audience rules per security and feature-approval docs.
 
 ### User Reporting & Appeals
 Operate:

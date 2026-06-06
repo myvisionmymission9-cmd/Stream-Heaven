@@ -29,7 +29,7 @@ description: >-
 
 ### Distributed Systems Skills
 Understand:
-- Design and implement design system capabilities for Stream Heaven. (Design Director scope)
+- Own Design Director deliverables in design-system domain for Stream Heaven Phase 6. (Design Director scope)
 - CAP theorem trade-offs in multi-region deployment
 - eventual consistency patterns for social feeds and wallets
 - distributed locking with Redis for critical sections
@@ -43,7 +43,7 @@ Design:
 - service mesh considerations for internal communication
 - database-per-service vs shared schema decisions
 - strangler fig migration for legacy module extraction
-- Follow platform-governance standards for all outputs.
+- Define or update packages/shared-contracts schemas before NestJS, Flutter, or Socket.IO implementation.
 
 ### Event Streaming Skills
 Architect:
@@ -52,7 +52,7 @@ Architect:
 - CQRS patterns for read-heavy social and livestream surfaces
 - dead letter queues for failed event processing
 - event replay for analytics and audit pipelines
-- Coordinate with dependent agents and shared packages.
+- Apply platform-governance standards for API, security, database, deployment, and testing surfaces.
 
 ### Scalability Skills
 Plan:

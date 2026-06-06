@@ -28,7 +28,7 @@ description: >-
 
 ### Feed Composition & Pagination
 Design:
-- Design and implement social app capabilities for Stream Heaven. (Presence scope)
+- Design Socket.IO namespaces and Redis adapter scale plan for Presence. (Presence scope)
 - following feed vs For You algorithmic feed separation
 - cursor-based pagination for infinite scroll
 - low-bandwidth feed payloads for 2G/3G networks
@@ -42,7 +42,7 @@ Define:
 - api-gateway JWT-derived X-User-Id header propagation
 - request-id propagation for distributed tracing
 - moderation hook endpoints for trust-safety integration
-- Follow platform-governance standards for all outputs.
+- Define reconnect, heartbeat, and backpressure handling for intermittent mobile connectivity.
 
 ### Post & Engagement Flows
 Implement:
@@ -51,7 +51,7 @@ Implement:
 - follow/unfollow mutation with fan-out considerations
 - like and share event emission for analytics
 - report and block pathways to moderation pipeline
-- Coordinate with dependent agents and shared packages.
+- Align event schemas with packages/shared-contracts and livestream/social domain owners.
 
 ### Feed Ranking Integration
 Coordinate:

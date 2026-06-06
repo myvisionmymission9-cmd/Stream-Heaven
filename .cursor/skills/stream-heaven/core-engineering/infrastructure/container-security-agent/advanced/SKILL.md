@@ -29,7 +29,7 @@ description: >-
 
 ### Multi-Region Topology
 Architect:
-- Design and implement infrastructure capabilities for Stream Heaven. (Container Security scope)
+- Threat-model Container Security attack surfaces across NestJS APIs, Flutter clients, and Socket.IO channels. (Container Security scope)
 - active-passive vs active-active per service tier
 - global load balancing for api-gateway
 - Postgres read replica routing in ORM config
@@ -43,7 +43,7 @@ Scale:
 - festival and IPL pre-warming runbooks
 - cost-aware scale-to-zero for dev environments
 - GPU node pools for ML and transcode workers
-- Follow platform-governance standards for all outputs.
+- Define WAF, rate limit, and zero-trust policies coordinated with api-gateway and auth-service.
 
 ### Security Hardening
 Harden:
@@ -52,7 +52,7 @@ Harden:
 - admission controllers for image signing
 - vulnerability scanning in CI for container images
 - zero-trust service mesh mTLS
-- Coordinate with dependent agents and shared packages.
+- Mandate dependency scanning, SBOM, and penetration-test gates before wallet or payout GA.
 
 ### Disaster Recovery
 Recover:

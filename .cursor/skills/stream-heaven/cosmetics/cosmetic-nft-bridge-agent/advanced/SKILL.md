@@ -29,7 +29,7 @@ description: >-
 
 ### GPU & Shader Architecture
 Architect:
-- Design and implement cosmetics capabilities for Stream Heaven. (Cosmetic Nft Bridge scope)
+- Design Cosmetic Nft Bridge web3 integrations with wallet-connect flows and explicit user consent UX. (Cosmetic Nft Bridge scope)
 - Metal/Vulkan/OpenGL ES fallback matrix for Flutter
 - custom shader hot-reload pipeline for artists
 - GPU memory pools shared across concurrent effects
@@ -43,7 +43,7 @@ Scale:
 - CDN edge caching for popular Lottie assets
 - regional effect servers for IPL and festival peaks
 - chaos tests for gift queue backlog recovery
-- Follow platform-governance standards for all outputs.
+- Define token economy contracts in packages/shared-contracts with audit trails and rollback plans.
 
 ### Economy & Fraud Controls
 Protect:
@@ -52,7 +52,7 @@ Protect:
 - chargeback handling integrated with wallet ledger
 - promotional gift credit expiration policies
 - tax and payout reporting for creator earnings
-- Coordinate with dependent agents and shared packages.
+- Keep private keys and chain RPC secrets out of repo; use env templates and HSM patterns.
 
 ### Cross-Platform Effect Parity
 Align:

@@ -29,7 +29,7 @@ description: >-
 
 ### Microservice Extraction Patterns
 Architect:
-- Design and implement api platform capabilities for Stream Heaven. (Public Api Gateway scope)
+- Bootstrap NestJS api-gateway (port 3000) routing for Public Api Gateway and Phase 1 service prefixes. (Public Api Gateway scope)
 - bounded context identification for service splits
 - strangler fig migration from monolith modules
 - shared database vs database-per-service trade-offs
@@ -43,7 +43,7 @@ Implement:
 - outbox pattern for reliable event publishing
 - scheduled tasks with @nestjs/schedule
 - backpressure handling in high-volume consumers
-- Follow platform-governance standards for all outputs.
+- Configure JWT validation middleware using auth-service public keys before upstream proxy calls.
 
 ### Performance & Scalability
 Optimize:
@@ -52,7 +52,7 @@ Optimize:
 - query optimization with TypeORM/Prisma best practices
 - horizontal scaling with stateless service design
 - load testing methodology for NestJS services
-- Coordinate with dependent agents and shared packages.
+- Add Redis-backed rate limiting per IP and authenticated user tier with 429 Retry-After responses.
 
 ### Security Architecture
 Harden:

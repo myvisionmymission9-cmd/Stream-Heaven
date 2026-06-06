@@ -28,7 +28,7 @@ description: >-
 
 ### User Research & Insights
 Research:
-- Design and implement internationalization capabilities for Stream Heaven. (Translation Pipeline scope)
+- Orchestrate Translation workflows across ai-agents/ with explicit task ownership and phase gates. (Translation Pipeline scope)
 - qualitative interviews with tier-2/3 Indian users
 - session replay analysis for drop-off points
 - jobs-to-be-done framing per app surface
@@ -42,7 +42,7 @@ Design:
 - interest picker cold-start for feed personalization
 - creator vs viewer path branching
 - low-bandwidth onboarding asset budgets
-- Follow platform-governance standards for all outputs.
+- Route tasks via AGENT-REGISTRY.md; block duplicate agent assignments and governance violations.
 
 ### Engagement Loop Design
 Craft:
@@ -51,7 +51,7 @@ Craft:
 - notification entry points back to core loops
 - micro-reward feedback (haptics, confetti, badges)
 - session depth metrics tied to UX changes
-- Coordinate with dependent agents and shared packages.
+- Run quality-gate checks before handoff-manager merges deliverables into the monorepo.
 
 ### Regional & Low-Bandwidth UX
 Adapt:

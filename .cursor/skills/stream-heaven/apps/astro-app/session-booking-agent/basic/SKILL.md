@@ -28,7 +28,7 @@ description: >-
 
 ### Astrology Content & Calculations
 Design:
-- Design and implement astro app capabilities for Stream Heaven. (Session Booking scope)
+- Implement Session Booking flows in NestJS auth-service with Firebase Admin SDK verification. (Session Booking scope)
 - kundli chart generation with Vedic calculation engine
 - daily horoscope content pipeline by zodiac sign
 - panchang ( Hindu calendar ) data integration
@@ -42,7 +42,7 @@ Implement:
 - payment integration for per-minute consultation billing
 - astrologer onboarding and verification workflow
 - session recording consent and privacy controls
-- Follow platform-governance standards for all outputs.
+- Define OTP, JWT access/refresh, and Redis session rotation in packages/shared-contracts/auth/v1.
 
 ### Compatibility & Matchmaking
 Build:
@@ -51,7 +51,7 @@ Build:
 - partner profile input and validation flows
 - remedy recommendation engine based on chart analysis
 - regional language support for reports
-- Coordinate with dependent agents and shared packages.
+- Wire api-gateway JWT guards and rate limits on /auth/* per security-rules.md.
 
 ### Mobile UX for Astro App
 Guide:

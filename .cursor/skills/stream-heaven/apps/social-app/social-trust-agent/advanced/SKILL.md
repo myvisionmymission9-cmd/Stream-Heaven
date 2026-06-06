@@ -29,7 +29,7 @@ description: >-
 
 ### AI Moderation at Scale
 Scale:
-- Design and implement social app capabilities for Stream Heaven. (Social Trust scope)
+- Define /v1/social/* OpenAPI contracts for Social Trust with cursor pagination and moderation hooks. (Social Trust scope)
 - multimodal models for video, audio, and text
 - human-in-the-loop active learning pipelines
 - regional language moderation models (Hindi, Tamil, etc.)
@@ -43,7 +43,7 @@ Verify:
 - government ID hashing and secure storage
 - verification vendor abstraction via env config
 - privacy-minimized verification data retention
-- Follow platform-governance standards for all outputs.
+- Guide services/social-service NestJS implementation aligned with packages/shared-contracts.
 
 ### Crisis & CSAM Response
 Respond:
@@ -52,7 +52,7 @@ Respond:
 - preservation of evidence for investigations
 - employee wellness support for reviewers
 - post-crisis policy updates and ADRs
-- Coordinate with dependent agents and shared packages.
+- Ensure api-gateway proxies social routes with JWT-derived identity headers.
 
 ### Cross-App Safety Federation
 Federate:

@@ -28,7 +28,7 @@ description: >-
 
 ### Socket.IO Architecture
 Design:
-- Design and implement event system capabilities for Stream Heaven. (Event Schema Guardian scope)
+- Own Event Schema deliverables in event-system domain for Stream Heaven Phase 18. (Event Schema Guardian scope)
 - namespace and room topology for four-app ecosystem
 - Redis adapter for multi-instance Socket.IO scaling
 - authentication handshake with JWT validation
@@ -42,7 +42,7 @@ Define:
 - broadcast vs unicast vs room-scoped delivery
 - event ordering guarantees per room/channel
 - backpressure handling for slow clients
-- Follow platform-governance standards for all outputs.
+- Define or update packages/shared-contracts schemas before NestJS, Flutter, or Socket.IO implementation.
 
 ### Presence & State Sync
 Implement:
@@ -51,7 +51,7 @@ Implement:
 - state snapshot and delta sync patterns
 - reconnect state recovery from server cache
 - presence fan-out cost optimization
-- Coordinate with dependent agents and shared packages.
+- Apply platform-governance standards for API, security, database, deployment, and testing surfaces.
 
 ### Performance for Mobile India
 Optimize:

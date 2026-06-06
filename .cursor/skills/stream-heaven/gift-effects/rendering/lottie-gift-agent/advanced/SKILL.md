@@ -29,7 +29,7 @@ description: >-
 
 ### GPU & Shader Architecture
 Architect:
-- Design and implement rendering capabilities for Stream Heaven. (Lottie Gift scope)
+- Own Lottie Gift media pipeline: ingest, transcode, CDN delivery, and playback in Media (OTT) app. (Lottie Gift scope)
 - Metal/Vulkan/OpenGL ES fallback matrix for Flutter
 - custom shader hot-reload pipeline for artists
 - GPU memory pools shared across concurrent effects
@@ -43,7 +43,7 @@ Scale:
 - CDN edge caching for popular Lottie assets
 - regional effect servers for IPL and festival peaks
 - chaos tests for gift queue backlog recovery
-- Follow platform-governance standards for all outputs.
+- Define contracts for VOD catalogs, entitlements, and adaptive streaming via Cloudflare and AWS S3.
 
 ### Economy & Fraud Controls
 Protect:
@@ -52,7 +52,7 @@ Protect:
 - chargeback handling integrated with wallet ledger
 - promotional gift credit expiration policies
 - tax and payout reporting for creator earnings
-- Coordinate with dependent agents and shared packages.
+- Optimize transcoding cost and thumbnail reuse per cost-control-rules.md and scaling-playbook.md.
 
 ### Cross-Platform Effect Parity
 Align:

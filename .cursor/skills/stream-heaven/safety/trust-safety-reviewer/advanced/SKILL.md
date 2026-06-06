@@ -29,7 +29,7 @@ description: >-
 
 ### AI Moderation at Scale
 Scale:
-- Design and implement safety capabilities for Stream Heaven. (Trust Safety Reviewer scope)
+- Define moderation policies and enforcement hooks for Trust Safety across social and livestream surfaces. (Trust Safety Reviewer scope)
 - multimodal models for video, audio, and text
 - human-in-the-loop active learning pipelines
 - regional language moderation models (Hindi, Tamil, etc.)
@@ -43,7 +43,7 @@ Verify:
 - government ID hashing and secure storage
 - verification vendor abstraction via env config
 - privacy-minimized verification data retention
-- Follow platform-governance standards for all outputs.
+- Implement report, block, and trust-score pathways in NestJS with PostgreSQL audit logs.
 
 ### Crisis & CSAM Response
 Respond:
@@ -52,7 +52,7 @@ Respond:
 - preservation of evidence for investigations
 - employee wellness support for reviewers
 - post-crisis policy updates and ADRs
-- Coordinate with dependent agents and shared packages.
+- Coordinate ML moderation agents with human-in-the-loop review queues per ai-usage-rules.md.
 
 ### Cross-App Safety Federation
 Federate:

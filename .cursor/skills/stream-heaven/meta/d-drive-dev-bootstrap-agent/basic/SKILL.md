@@ -15,7 +15,7 @@ description: >-
 ## Agent
 
 - **Path:** `ai-agents/meta/d-drive-dev-bootstrap-agent.md`
-- **Role:** Own Windows-only migration and bootstrap of Stream Heaven on the D: drive: portable Git/GitHub CLI, repo layout under `D:\Dev\repos`, robocopy from Desktop, PATH/session setup, `WORKFLOW.md`, git init, and Phase 1 verification from the D path.
+- **Role:** Own Windows-only migration and bootstrap of Stream Heaven on the D: drive: portable Git/GitHub CLI, repo layout under `D:\Dev\repos`, robocopy from Desktop, PATH/session setup, `WORKFLOW.md`, git init, and **fully autonomous Phase 1 runtime** from the D path without user involvement unless Docker Desktop cannot be started.
 
 ## Scope (basic)
 

@@ -29,7 +29,7 @@ description: >-
 
 ### Autonomous Bootstrap Orchestration
 Orchestrate:
-- Design and implement agent memory capabilities for Stream Heaven. (Context Store scope)
+- Design Context Store growth loops: referrals, campaigns, store ASO, and share incentives with measurable KPIs. (Context Store scope)
 - full environment bootstrap with fix-and-retry loops
 - multi-phase validation (Phase 1 → 2a → 2) sequencing
 - dependency conflict resolution across workspaces
@@ -43,7 +43,7 @@ Govern:
 - boilerplate detection and enrichment workflows
 - agent coverage analysis across platform domains
 - registry sync after bulk agent generation
-- Follow platform-governance standards for all outputs.
+- Implement NestJS growth APIs and Flutter surfaces optimized for low-data first launches.
 
 ### CI/CD Pipeline Alignment
 Align:
@@ -52,7 +52,7 @@ Align:
 - pre-commit hook configuration and testing
 - validation script performance optimization
 - CI failure triage and remediation playbooks
-- Coordinate with dependent agents and shared packages.
+- Track funnel events into analytics pipelines without PII leakage per security-rules.md.
 
 ### Developer Experience Optimization
 Improve:

@@ -28,7 +28,7 @@ description: >-
 
 ### User Profile Schema Design
 Design:
-- Design and implement cosmetics capabilities for Stream Heaven. (Avatar Frame Designer scope)
+- Own Avatar Frame deliverables in cosmetics domain for Stream Heaven Phase 11. (Avatar Frame Designer scope)
 - PostgreSQL users and profiles table separation
 - handle uniqueness with case-insensitive index
 - display name, bio, avatar URL fields
@@ -42,7 +42,7 @@ Implement:
 - JWT sub claim linkage from auth-service
 - input validation for handles, bios, and display names
 - soft-delete and account deactivation flows
-- Follow platform-governance standards for all outputs.
+- Define or update packages/shared-contracts schemas before NestJS, Flutter, or Socket.IO implementation.
 
 ### Avatar & Media Upload
 Wire:
@@ -51,7 +51,7 @@ Wire:
 - image size and format validation (WebP preferred)
 - moderation escalation to content-safety-agent
 - default avatar fallbacks for new users
-- Coordinate with dependent agents and shared packages.
+- Apply platform-governance standards for API, security, database, deployment, and testing surfaces.
 
 ### Caching & Performance
 Optimize:

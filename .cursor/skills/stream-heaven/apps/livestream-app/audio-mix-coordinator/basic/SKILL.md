@@ -28,7 +28,7 @@ description: >-
 
 ### Live Room Lifecycle
 Own:
-- Design and implement multi guest capabilities for Stream Heaven. (Audio Mix Coordinator scope)
+- Own livestream domain contracts and NestJS livestream-service behavior for Audio Mix. (Audio Mix Coordinator scope)
 - room create, start, join, leave, and end state machine
 - deterministic transitions with idempotent API calls
 - viewer count safety guards against race conditions
@@ -42,7 +42,7 @@ Integrate:
 - token TTL aligned with expected session duration
 - publisher vs subscriber role token differentiation
 - provider failover prep for Zego as alternate
-- Follow platform-governance standards for all outputs.
+- Manage room lifecycle, viewer counts, and Agora/Zego token bootstrap via env templates only.
 
 ### Livestream API Contracts
 Define:
@@ -51,7 +51,7 @@ Define:
 - viewer count and room metadata in responses
 - api-gateway proxy with JWT X-User-Id propagation
 - backward-compatible contract evolution for Phase 3 features
-- Coordinate with dependent agents and shared packages.
+- Configure api-gateway /v1/livestream/* proxy routes with JWT header propagation.
 
 ### Realtime Events
 Emit:

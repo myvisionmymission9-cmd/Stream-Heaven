@@ -28,7 +28,7 @@ description: >-
 
 ### Gift Animation Pipeline
 Build:
-- Design and implement cosmetics capabilities for Stream Heaven. (Cosmetic Trade scope)
+- Own Cosmetic Trade deliverables in cosmetics domain for Stream Heaven Phase 11. (Cosmetic Trade scope)
 - Lottie, Rive, and GPU shader effect selection per gift tier
 - gift queue prioritization by coin value and sender VIP status
 - synchronized playback across host and viewer clients
@@ -42,7 +42,7 @@ Emit:
 - host overlay vs chat feed rendering separation
 - rate limits on gift spam and duplicate animations
 - contract schemas in packages/shared-contracts/livestream/
-- Follow platform-governance standards for all outputs.
+- Define or update packages/shared-contracts schemas before NestJS, Flutter, or Socket.IO implementation.
 
 ### Gift Economy Integration
 Wire:
@@ -51,7 +51,7 @@ Wire:
 - insufficient balance UX with top-up deep links
 - gift catalog versioning and regional pricing
 - audit trail for disputed gift transactions
-- Coordinate with dependent agents and shared packages.
+- Apply platform-governance standards for API, security, database, deployment, and testing surfaces.
 
 ### Rendering Performance
 Optimize:

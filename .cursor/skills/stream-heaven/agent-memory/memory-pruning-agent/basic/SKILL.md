@@ -28,7 +28,7 @@ description: >-
 
 ### Local Development Bootstrap
 Setup:
-- Design and implement agent memory capabilities for Stream Heaven. (Memory Pruning scope)
+- Own Memory Pruning deliverables in agent-memory domain for Stream Heaven Phase 18. (Memory Pruning scope)
 - Docker Desktop verification and container health
 - Node.js and npm workspace dependency installation
 - PostgreSQL and Redis container startup scripts
@@ -42,7 +42,7 @@ Run:
 - git branch hygiene and PR preparation
 - validate-agents.mjs before agent catalog edits
 - smoke test after infrastructure changes
-- Follow platform-governance standards for all outputs.
+- Define or update packages/shared-contracts schemas before NestJS, Flutter, or Socket.IO implementation.
 
 ### Agent Catalog Management
 Maintain:
@@ -51,7 +51,7 @@ Maintain:
 - skill file generation and validation workflows
 - golden agent test suite maintenance
 - agent onboarding documentation updates
-- Coordinate with dependent agents and shared packages.
+- Apply platform-governance standards for API, security, database, deployment, and testing surfaces.
 
 ### Validation & Quality
 Execute:

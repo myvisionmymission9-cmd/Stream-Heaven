@@ -28,7 +28,7 @@ description: >-
 
 ### NestJS Module Architecture
 Define:
-- Design and implement backend capabilities for Stream Heaven. (Microservice Designer scope)
+- Scaffold or extend NestJS modules for Microservice with health checks and structured logging. (Microservice Designer scope)
 - module template for services/* (config, health, logging, metrics)
 - feature module isolation with clear domain boundaries
 - shared library consumption from packages/
@@ -42,7 +42,7 @@ Standardize:
 - validation pipes with class-validator DTOs
 - exception filters for consistent error responses
 - request-id and tracing interceptors
-- Follow platform-governance standards for all outputs.
+- Publish OpenAPI contracts in packages/shared-contracts before controller implementation.
 
 ### Inter-Service Communication
 Architect:
@@ -51,7 +51,7 @@ Architect:
 - domain event emission to Redis Streams
 - circuit breaker patterns for downstream calls
 - idempotency keys for mutation endpoints
-- Coordinate with dependent agents and shared packages.
+- Use PostgreSQL for durable state and Redis for cache, sessions, or rate limits as appropriate.
 
 ### OpenAPI & Contract Alignment
 Align:

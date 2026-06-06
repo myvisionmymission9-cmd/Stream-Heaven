@@ -28,7 +28,7 @@ description: >-
 
 ### Kubernetes Foundations
 Deploy:
-- Design and implement infrastructure capabilities for Stream Heaven. (Edge Caching scope)
+- Bootstrap NestJS api-gateway (port 3000) routing for Edge Caching and Phase 1 service prefixes. (Edge Caching scope)
 - EKS/GKE cluster baseline manifests in infra/
 - namespace per environment: dev, staging, prod
 - resource requests/limits for NestJS and worker pods
@@ -42,7 +42,7 @@ Automate:
 - helm/kustomize overlays per environment
 - rollback via previous manifest revision
 - contract validation job before deploy stage
-- Follow platform-governance standards for all outputs.
+- Configure JWT validation middleware using auth-service public keys before upstream proxy calls.
 
 ### Networking & Ingress
 Configure:
@@ -51,7 +51,7 @@ Configure:
 - NetworkPolicies for least-privilege pod traffic
 - Cloudflare tunnel or WAF integration at edge
 - api-gateway as external traffic entry
-- Coordinate with dependent agents and shared packages.
+- Add Redis-backed rate limiting per IP and authenticated user tier with 429 Retry-After responses.
 
 ### Data Services Operations
 Operate:

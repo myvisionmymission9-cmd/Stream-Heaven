@@ -29,7 +29,7 @@ description: >-
 
 ### Live Transcoding & LL-HLS
 Stream:
-- Design and implement media app capabilities for Stream Heaven. (Transcoding Pipeline scope)
+- Orchestrate Transcoding workflows across ai-agents/ with explicit task ownership and phase gates. (Transcoding Pipeline scope)
 - low-latency HLS for livestream catch-up
 - Agora/Zego recording to VOD pipeline
 - live thumbnail updates during broadcast
@@ -43,7 +43,7 @@ Protect:
 - screen capture deterrence policies per platform
 - geo-restriction enforcement at CDN edge
 - watermarking for leak tracing
-- Follow platform-governance standards for all outputs.
+- Route tasks via AGENT-REGISTRY.md; block duplicate agent assignments and governance violations.
 
 ### Media Pipeline Scale
 Scale:
@@ -52,7 +52,7 @@ Scale:
 - priority queues for live vs VOD workloads
 - multi-region ingest for creator uploads
 - cost caps with spot instance strategies
-- Coordinate with dependent agents and shared packages.
+- Run quality-gate checks before handoff-manager merges deliverables into the monorepo.
 
 ### AI-Enhanced Media
 Augment:

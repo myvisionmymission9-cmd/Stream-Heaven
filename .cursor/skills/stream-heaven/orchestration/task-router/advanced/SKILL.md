@@ -29,7 +29,7 @@ description: >-
 
 ### Multi-Agent System Design
 Architect:
-- Design and implement orchestration capabilities for Stream Heaven. (Task Router scope)
+- Route incoming tasks to the correct domain agent using ai-agents/AGENT-REGISTRY.md ownership map. (Task Router scope)
 - 774+ agent catalog partitioning by domain and phase
 - orchestration DAGs for autonomous completion agents
 - conflict resolution when agents propose overlapping changes
@@ -43,7 +43,7 @@ Coordinate:
 - database migration ordering in multi-service releases
 - rollback-coordinator playbooks
 - release-orchestration-agent checklists
-- Follow platform-governance standards for all outputs.
+- Detect duplicate agent assignments and merge parallel work into a single owner agent.
 
 ### Code Review & Design Review
 Review:
@@ -52,7 +52,7 @@ Review:
 - security review triggers for auth and payment changes
 - performance review for feed and livestream hot paths
 - documentation completeness as merge criterion
-- Coordinate with dependent agents and shared packages.
+- Inject governance-compliance-agent gate for tasks touching services/ or shared-contracts/.
 
 ### Autonomous Completion Loops
 Automate:

@@ -29,7 +29,7 @@ description: >-
 
 ### Live Transcoding & LL-HLS
 Stream:
-- Design and implement infrastructure capabilities for Stream Heaven. (Cloudflare Cdn Specialist scope)
+- Own Cloudflare Cdn media pipeline: ingest, transcode, CDN delivery, and playback in Media (OTT) app. (Cloudflare Cdn Specialist scope)
 - low-latency HLS for livestream catch-up
 - Agora/Zego recording to VOD pipeline
 - live thumbnail updates during broadcast
@@ -43,7 +43,7 @@ Protect:
 - screen capture deterrence policies per platform
 - geo-restriction enforcement at CDN edge
 - watermarking for leak tracing
-- Follow platform-governance standards for all outputs.
+- Define contracts for VOD catalogs, entitlements, and adaptive streaming via Cloudflare and AWS S3.
 
 ### Media Pipeline Scale
 Scale:
@@ -52,7 +52,7 @@ Scale:
 - priority queues for live vs VOD workloads
 - multi-region ingest for creator uploads
 - cost caps with spot instance strategies
-- Coordinate with dependent agents and shared packages.
+- Optimize transcoding cost and thumbnail reuse per cost-control-rules.md and scaling-playbook.md.
 
 ### AI-Enhanced Media
 Augment:

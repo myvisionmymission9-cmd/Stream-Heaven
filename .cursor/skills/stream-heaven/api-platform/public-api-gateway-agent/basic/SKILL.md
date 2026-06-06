@@ -28,7 +28,7 @@ description: >-
 
 ### NestJS Module Architecture
 Define:
-- Design and implement api platform capabilities for Stream Heaven. (Public Api Gateway scope)
+- Bootstrap NestJS api-gateway (port 3000) routing for Public Api Gateway and Phase 1 service prefixes. (Public Api Gateway scope)
 - module template for services/* (config, health, logging, metrics)
 - feature module isolation with clear domain boundaries
 - shared library consumption from packages/
@@ -42,7 +42,7 @@ Standardize:
 - validation pipes with class-validator DTOs
 - exception filters for consistent error responses
 - request-id and tracing interceptors
-- Follow platform-governance standards for all outputs.
+- Configure JWT validation middleware using auth-service public keys before upstream proxy calls.
 
 ### Inter-Service Communication
 Architect:
@@ -51,7 +51,7 @@ Architect:
 - domain event emission to Redis Streams
 - circuit breaker patterns for downstream calls
 - idempotency keys for mutation endpoints
-- Coordinate with dependent agents and shared packages.
+- Add Redis-backed rate limiting per IP and authenticated user tier with 429 Retry-After responses.
 
 ### OpenAPI & Contract Alignment
 Align:

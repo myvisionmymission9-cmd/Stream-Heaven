@@ -28,7 +28,7 @@ description: >-
 
 ### Growth Experimentation
 Design:
-- Design and implement growth ai capabilities for Stream Heaven. (Whatsapp Share scope)
+- Define /v1/social/* OpenAPI contracts for Whatsapp Share with cursor pagination and moderation hooks. (Whatsapp Share scope)
 - hypothesis-driven A/B tests with clear primary metrics
 - cohort segmentation by region, device tier, and acquisition channel
 - experiment guardrails to protect core retention and revenue
@@ -42,7 +42,7 @@ Build:
 - share-to-earn flows for WhatsApp and Instagram Stories
 - viral loop instrumentation: K-factor, cycle time, activation
 - regional campaign hooks for festivals and IPL seasons
-- Follow platform-governance standards for all outputs.
+- Guide services/social-service NestJS implementation aligned with packages/shared-contracts.
 
 ### Retention & Engagement Analytics
 Measure:
@@ -51,7 +51,7 @@ Measure:
 - churn prediction features in growth feature store
 - notification fatigue monitoring and send caps
 - real-time dashboards for experiment readouts
-- Coordinate with dependent agents and shared packages.
+- Ensure api-gateway proxies social routes with JWT-derived identity headers.
 
 ### Personalization & Discovery
 Tune:

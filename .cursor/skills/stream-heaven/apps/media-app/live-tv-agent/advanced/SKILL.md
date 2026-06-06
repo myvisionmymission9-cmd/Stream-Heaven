@@ -29,7 +29,7 @@ description: >-
 
 ### OTT Scaling Architecture
 Scale:
-- Design and implement media app capabilities for Stream Heaven. (Live Tv scope)
+- Own livestream domain contracts and NestJS livestream-service behavior for Live Tv. (Live Tv scope)
 - CDN edge caching strategy for viral content spikes
 - origin shield configuration for S3 egress cost control
 - concurrent stream limit enforcement per subscription
@@ -43,7 +43,7 @@ Protect:
 - watermarking for premium content anti-piracy
 - license renewal and offline playback expiry
 - compliance with studio content protection requirements
-- Follow platform-governance standards for all outputs.
+- Manage room lifecycle, viewer counts, and Agora/Zego token bootstrap via env templates only.
 
 ### Media Pipeline Operations
 Operate:
@@ -52,7 +52,7 @@ Operate:
 - subtitle synchronization and format conversion
 - content expiry and takedown workflows
 - media asset cost tracking per title
-- Coordinate with dependent agents and shared packages.
+- Configure api-gateway /v1/livestream/* proxy routes with JWT header propagation.
 
 ### Analytics & Engagement
 Track:

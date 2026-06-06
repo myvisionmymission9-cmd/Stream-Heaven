@@ -29,7 +29,7 @@ description: >-
 
 ### Multi-Agent System Design
 Architect:
-- Design and implement orchestration capabilities for Stream Heaven. (Workflow Engine scope)
+- Model multi-step agent workflows with explicit inputs, outputs, and quality-gate checkpoints. (Workflow Engine scope)
 - 774+ agent catalog partitioning by domain and phase
 - orchestration DAGs for autonomous completion agents
 - conflict resolution when agents propose overlapping changes
@@ -43,7 +43,7 @@ Coordinate:
 - database migration ordering in multi-service releases
 - rollback-coordinator playbooks
 - release-orchestration-agent checklists
-- Follow platform-governance standards for all outputs.
+- Persist workflow state for handoff-manager: pending, in-review, blocked, complete.
 
 ### Code Review & Design Review
 Review:
@@ -52,7 +52,7 @@ Review:
 - security review triggers for auth and payment changes
 - performance review for feed and livestream hot paths
 - documentation completeness as merge criterion
-- Coordinate with dependent agents and shared packages.
+- Sequence Phase 1 chains: governance → contracts → NestJS service → gateway → smoke tests.
 
 ### Autonomous Completion Loops
 Automate:

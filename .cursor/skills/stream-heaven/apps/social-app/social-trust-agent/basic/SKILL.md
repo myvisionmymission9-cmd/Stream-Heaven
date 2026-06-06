@@ -28,7 +28,7 @@ description: >-
 
 ### Content Moderation Pipeline
 Build:
-- Design and implement social app capabilities for Stream Heaven. (Social Trust scope)
+- Define /v1/social/* OpenAPI contracts for Social Trust with cursor pagination and moderation hooks. (Social Trust scope)
 - AI pre-filter + human review queue for UGC
 - real-time live stream moderation hooks
 - CSAM and illegal content zero-tolerance workflows
@@ -42,7 +42,7 @@ Enforce:
 - harassment and hate speech detection thresholds
 - creator verification for monetization eligibility
 - regional legal compliance for Indian jurisdictions
-- Follow platform-governance standards for all outputs.
+- Guide services/social-service NestJS implementation aligned with packages/shared-contracts.
 
 ### Fraud & Abuse Detection
 Detect:
@@ -51,7 +51,7 @@ Detect:
 - gift and wallet wash trading patterns
 - deepfake detection on profile media
 - rate limits coordinated with auth-service
-- Coordinate with dependent agents and shared packages.
+- Ensure api-gateway proxies social routes with JWT-derived identity headers.
 
 ### User Reporting & Appeals
 Operate:

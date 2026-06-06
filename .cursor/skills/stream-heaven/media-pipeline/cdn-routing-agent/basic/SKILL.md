@@ -28,7 +28,7 @@ description: >-
 
 ### Upload & Ingest Pipeline
 Build:
-- Design and implement media pipeline capabilities for Stream Heaven. (Cdn Routing scope)
+- Bootstrap NestJS api-gateway (port 3000) routing for Cdn Routing and Phase 1 service prefixes. (Cdn Routing scope)
 - S3 multipart upload with presigned URL contracts
 - client-side compression before upload on mobile
 - virus scan and MIME validation on ingest
@@ -42,7 +42,7 @@ Configure:
 - thumbnail and preview sprite generation
 - audio-only fallback renditions
 - job queue prioritization by content tier
-- Follow platform-governance standards for all outputs.
+- Configure JWT validation middleware using auth-service public keys before upstream proxy calls.
 
 ### CDN & Delivery
 Route:
@@ -51,7 +51,7 @@ Route:
 - regional edge selection for Indian ISPs
 - cache invalidation on content updates
 - egress cost monitoring per platform-finance rules
-- Coordinate with dependent agents and shared packages.
+- Add Redis-backed rate limiting per IP and authenticated user tier with 429 Retry-After responses.
 
 ### Quality Control
 Inspect:

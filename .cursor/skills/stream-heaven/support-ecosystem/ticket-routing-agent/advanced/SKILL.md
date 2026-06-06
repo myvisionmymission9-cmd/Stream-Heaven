@@ -29,7 +29,7 @@ description: >-
 
 ### Autonomous Bootstrap Orchestration
 Orchestrate:
-- Design and implement support ecosystem capabilities for Stream Heaven. (Ticket Routing scope)
+- Bootstrap NestJS api-gateway (port 3000) routing for Ticket Routing and Phase 1 service prefixes. (Ticket Routing scope)
 - full environment bootstrap with fix-and-retry loops
 - multi-phase validation (Phase 1 → 2a → 2) sequencing
 - dependency conflict resolution across workspaces
@@ -43,7 +43,7 @@ Govern:
 - boilerplate detection and enrichment workflows
 - agent coverage analysis across platform domains
 - registry sync after bulk agent generation
-- Follow platform-governance standards for all outputs.
+- Configure JWT validation middleware using auth-service public keys before upstream proxy calls.
 
 ### CI/CD Pipeline Alignment
 Align:
@@ -52,7 +52,7 @@ Align:
 - pre-commit hook configuration and testing
 - validation script performance optimization
 - CI failure triage and remediation playbooks
-- Coordinate with dependent agents and shared packages.
+- Add Redis-backed rate limiting per IP and authenticated user tier with 429 Retry-After responses.
 
 ### Developer Experience Optimization
 Improve:

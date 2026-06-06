@@ -29,7 +29,7 @@ description: >-
 
 ### Astrology Engine Architecture
 Architect:
-- Design and implement astro app capabilities for Stream Heaven. (Live Consultation scope)
+- Own livestream domain contracts and NestJS livestream-service behavior for Live Consultation. (Live Consultation scope)
 - ephemeris data pipeline for accurate planetary positions
 - calculation caching in Redis for repeated kundli requests
 - A/B testing different calculation tradition variants
@@ -43,7 +43,7 @@ Scale:
 - concurrent session limits per astrologer tier
 - quality monitoring for consultation completion rates
 - peak demand handling during festival periods
-- Follow platform-governance standards for all outputs.
+- Manage room lifecycle, viewer counts, and Agora/Zego token bootstrap via env templates only.
 
 ### AI-Enhanced Astrology Features
 Leverage:
@@ -52,7 +52,7 @@ Leverage:
 - chatbot triage before live astrologer handoff
 - AI cost control for per-consultation LLM usage
 - human review queue for AI-generated content
-- Coordinate with dependent agents and shared packages.
+- Configure api-gateway /v1/livestream/* proxy routes with JWT header propagation.
 
 ### Monetization & Payments
 Optimize:

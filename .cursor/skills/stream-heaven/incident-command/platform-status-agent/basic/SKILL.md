@@ -28,7 +28,7 @@ description: >-
 
 ### Task Routing & Delegation
 Route:
-- Design and implement incident command capabilities for Stream Heaven. (Platform Status scope)
+- Own Platform Status deliverables in incident-command domain for Stream Heaven Phase 20. (Platform Status scope)
 - task-router.md selection by domain, phase, and keywords
 - single-agent vs multi-chat orchestration decision tree
 - scope boundaries to prevent agent overlap
@@ -42,7 +42,7 @@ Gate:
 - contract diff review before implementation
 - smoke test requirements per phase exit
 - production-readiness-checklist alignment
-- Follow platform-governance standards for all outputs.
+- Define or update packages/shared-contracts schemas before NestJS, Flutter, or Socket.IO implementation.
 
 ### Handoff Management
 Document:
@@ -51,7 +51,7 @@ Document:
 - contract-first reminders in cross-agent prompts
 - test plan attachment before quality-gate sign-off
 - rollback notes for risky multi-service changes
-- Coordinate with dependent agents and shared packages.
+- Apply platform-governance standards for API, security, database, deployment, and testing surfaces.
 
 ### Workflow Orchestration
 Sequence:

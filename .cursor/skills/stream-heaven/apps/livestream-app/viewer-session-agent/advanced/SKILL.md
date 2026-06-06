@@ -29,7 +29,7 @@ description: >-
 
 ### Livestream Scaling Architecture
 Scale:
-- Design and implement core capabilities for Stream Heaven. (Viewer Session scope)
+- Implement Viewer Session flows in NestJS auth-service with Firebase Admin SDK verification. (Viewer Session scope)
 - horizontal scaling of livestream-service instances
 - Redis-backed room state with sticky Socket.IO sessions
 - viewer count aggregation via Redis INCR with debounce
@@ -43,7 +43,7 @@ Support:
 - audio mixing coordination with multi-guest agents
 - bandwidth-adaptive layouts for viewer devices
 - host control delegation and moderation tools
-- Follow platform-governance standards for all outputs.
+- Define OTP, JWT access/refresh, and Redis session rotation in packages/shared-contracts/auth/v1.
 
 ### Monetization Handoff Architecture
 Prepare:
@@ -52,7 +52,7 @@ Prepare:
 - wallet ledger integration stubs for tipping
 - creator revenue share event emission
 - Phase 3 agent handoff documentation
-- Coordinate with dependent agents and shared packages.
+- Wire api-gateway JWT guards and rate limits on /auth/* per security-rules.md.
 
 ### Moderation & Safety Integration
 Wire:

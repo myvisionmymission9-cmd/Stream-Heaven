@@ -28,7 +28,7 @@ description: >-
 
 ### Platform Architecture Overview
 Understand:
-- Design and implement founder war room capabilities for Stream Heaven. (Competitive War scope)
+- Own Competitive War deliverables in founder-war-room domain for Stream Heaven Phase 20. (Competitive War scope)
 - four-app ecosystem: Social, Livestream, Astro, Media (OTT)
 - Phase-gated delivery: auth → contracts → realtime → profiles
 - monorepo layout: apps/, services/, packages/, ai-agents/
@@ -42,7 +42,7 @@ Know:
 - Socket.IO for realtime; Agora/Zego for live streaming
 - AWS S3 + Cloudflare CDN for media delivery
 - Firebase Auth for identity; AWS Secrets Manager for secrets
-- Follow platform-governance standards for all outputs.
+- Define or update packages/shared-contracts schemas before NestJS, Flutter, or Socket.IO implementation.
 
 ### Engineering Principles
 Apply:
@@ -51,7 +51,7 @@ Apply:
 - ADR required for architecture forks (docs/adr/)
 - optimize for Indian market: low-end Android, poor connectivity
 - smallest correct diff; phase-by-phase delivery
-- Coordinate with dependent agents and shared packages.
+- Apply platform-governance standards for API, security, database, deployment, and testing surfaces.
 
 ### Ecosystem Coordination
 Coordinate:

@@ -28,6 +28,7 @@ description: >-
 
 ### Phase 1 Foundation Setup
 Bootstrap:
+- Kill stale processes on ports 3000, 3001, 3002, 3009 before starting Phase 1 NestJS dev services. (Phase 1 Service Bootstrap scope)
 - Docker Postgres and Redis via setup-phase1.ps1
 - NestJS service scaffolds in services/
 - api-gateway on port 3000 as single entry point
@@ -41,6 +42,7 @@ Define:
 - breaking change detection in CI validation
 - api-contract-author review for new endpoints
 - gateway proxy rules aligned with contract paths
+- Start Docker postgres/redis via docker compose or honor -SkipDocker when containers already healthy.
 
 ### Auth & Identity Foundation
 Implement:
@@ -49,6 +51,7 @@ Implement:
 - api-gateway JWT validation middleware
 - user profile linkage via JWT sub claim
 - rate limiting on authentication endpoints
+- Copy .env.example to .env for auth, user, gateway, and realtime services when files are missing.
 
 ### Local Dev & Validation
 Run:

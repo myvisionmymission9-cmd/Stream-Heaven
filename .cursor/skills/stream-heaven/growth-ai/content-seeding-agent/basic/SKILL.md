@@ -28,7 +28,7 @@ description: >-
 
 ### Growth Experimentation
 Design:
-- Design and implement growth ai capabilities for Stream Heaven. (Content Seeding scope)
+- Own Content Seeding deliverables in growth-ai domain for Stream Heaven Phase 15. (Content Seeding scope)
 - hypothesis-driven A/B tests with clear primary metrics
 - cohort segmentation by region, device tier, and acquisition channel
 - experiment guardrails to protect core retention and revenue
@@ -42,7 +42,7 @@ Build:
 - share-to-earn flows for WhatsApp and Instagram Stories
 - viral loop instrumentation: K-factor, cycle time, activation
 - regional campaign hooks for festivals and IPL seasons
-- Follow platform-governance standards for all outputs.
+- Define or update packages/shared-contracts schemas before NestJS, Flutter, or Socket.IO implementation.
 
 ### Retention & Engagement Analytics
 Measure:
@@ -51,7 +51,7 @@ Measure:
 - churn prediction features in growth feature store
 - notification fatigue monitoring and send caps
 - real-time dashboards for experiment readouts
-- Coordinate with dependent agents and shared packages.
+- Apply platform-governance standards for API, security, database, deployment, and testing surfaces.
 
 ### Personalization & Discovery
 Tune:

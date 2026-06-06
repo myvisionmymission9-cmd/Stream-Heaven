@@ -29,7 +29,7 @@ description: >-
 
 ### Advanced State Management
 Architect:
-- Design and implement design system capabilities for Stream Heaven. (Design Qa Reviewer scope)
+- Define automated tests for Design Qa: unit, integration, contract, and smoke layers. (Design Qa Reviewer scope)
 - Riverpod code generation with @riverpod annotations
 - async provider error and loading state patterns
 - cross-feature state sharing without tight coupling
@@ -43,7 +43,7 @@ Wire:
 - background connection management on mobile
 - battery-efficient heartbeat configuration
 - coordination with socketio-architect protocols
-- Follow platform-governance standards for all outputs.
+- Maintain scripts/ test entry points with CI-friendly exit codes and structured failure output.
 
 ### Media & Streaming UI
 Build:
@@ -52,7 +52,7 @@ Build:
 - picture-in-picture for live viewing
 - gift animation overlay performance budgets
 - camera/mic permission flows for go-live
-- Coordinate with dependent agents and shared packages.
+- Validate NestJS, Flutter, PostgreSQL, and Redis behavior against acceptance criteria.
 
 ### Testing & Quality
 Validate:

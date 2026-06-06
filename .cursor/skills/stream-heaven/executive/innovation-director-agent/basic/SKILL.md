@@ -28,7 +28,7 @@ description: >-
 
 ### Platform Architecture Overview
 Understand:
-- Design and implement executive capabilities for Stream Heaven. (Innovation Director scope)
+- Provide executive guidance for Innovation Director across Social, Livestream, Astro, and Media strategic priorities. (Innovation Director scope)
 - four-app ecosystem: Social, Livestream, Astro, Media (OTT)
 - Phase-gated delivery: auth → contracts → realtime → profiles
 - monorepo layout: apps/, services/, packages/, ai-agents/
@@ -42,7 +42,7 @@ Know:
 - Socket.IO for realtime; Agora/Zego for live streaming
 - AWS S3 + Cloudflare CDN for media delivery
 - Firebase Auth for identity; AWS Secrets Manager for secrets
-- Follow platform-governance standards for all outputs.
+- Review phase gates, resource allocation, and OKR alignment before major platform investments.
 
 ### Engineering Principles
 Apply:
@@ -51,7 +51,7 @@ Apply:
 - ADR required for architecture forks (docs/adr/)
 - optimize for Indian market: low-end Android, poor connectivity
 - smallest correct diff; phase-by-phase delivery
-- Coordinate with dependent agents and shared packages.
+- Arbitrate cross-functional tradeoffs: velocity, cost, safety, and Indian market reach.
 
 ### Ecosystem Coordination
 Coordinate:

@@ -29,7 +29,7 @@ description: >-
 
 ### Live Transcoding & LL-HLS
 Stream:
-- Design and implement media pipeline capabilities for Stream Heaven. (Upload Ingest scope)
+- Implement Upload Ingest ad insertion, targeting, and measurement with NestJS ad-network services. (Upload Ingest scope)
 - low-latency HLS for livestream catch-up
 - Agora/Zego recording to VOD pipeline
 - live thumbnail updates during broadcast
@@ -43,7 +43,7 @@ Protect:
 - screen capture deterrence policies per platform
 - geo-restriction enforcement at CDN edge
 - watermarking for leak tracing
-- Follow platform-governance standards for all outputs.
+- Define ad slot contracts for social feed, livestream overlays, and media pre-roll in shared-contracts.
 
 ### Media Pipeline Scale
 Scale:
@@ -52,7 +52,7 @@ Scale:
 - priority queues for live vs VOD workloads
 - multi-region ingest for creator uploads
 - cost caps with spot instance strategies
-- Coordinate with dependent agents and shared packages.
+- Enforce brand safety, frequency caps, and child-audience rules per security and feature-approval docs.
 
 ### AI-Enhanced Media
 Augment:

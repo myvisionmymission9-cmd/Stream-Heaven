@@ -28,7 +28,7 @@ description: >-
 
 ### Platform Architecture Overview
 Understand:
-- Design and implement search infrastructure capabilities for Stream Heaven. (Vector Search scope)
+- Design Vector Search ML pipelines: feature store, training jobs, inference endpoints, and fallbacks. (Vector Search scope)
 - four-app ecosystem: Social, Livestream, Astro, Media (OTT)
 - Phase-gated delivery: auth → contracts → realtime → profiles
 - monorepo layout: apps/, services/, packages/, ai-agents/
@@ -42,7 +42,7 @@ Know:
 - Socket.IO for realtime; Agora/Zego for live streaming
 - AWS S3 + Cloudflare CDN for media delivery
 - Firebase Auth for identity; AWS Secrets Manager for secrets
-- Follow platform-governance standards for all outputs.
+- Define event ingestion from PostgreSQL and Redis streams into embedding and ranking services.
 
 ### Engineering Principles
 Apply:
@@ -51,7 +51,7 @@ Apply:
 - ADR required for architecture forks (docs/adr/)
 - optimize for Indian market: low-end Android, poor connectivity
 - smallest correct diff; phase-by-phase delivery
-- Coordinate with dependent agents and shared packages.
+- Set inference cost budgets, caching, and model distillation per cost-control-rules.md.
 
 ### Ecosystem Coordination
 Coordinate:

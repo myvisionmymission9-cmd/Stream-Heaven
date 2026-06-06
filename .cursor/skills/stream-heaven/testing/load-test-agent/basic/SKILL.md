@@ -28,7 +28,7 @@ description: >-
 
 ### Test Strategy Design
 Plan:
-- Design and implement testing capabilities for Stream Heaven. (Load Test scope)
+- Define automated tests for Load Test: unit, integration, contract, and smoke layers. (Load Test scope)
 - test pyramid: unit → integration → E2E per service
 - risk-based prioritization for auth, wallet, and live paths
 - contract tests against OpenAPI in shared-contracts
@@ -42,7 +42,7 @@ Validate:
 - negative test cases for auth and rate limits
 - idempotency replay tests for wallet endpoints
 - gateway proxy integration tests
-- Follow platform-governance standards for all outputs.
+- Maintain scripts/ test entry points with CI-friendly exit codes and structured failure output.
 
 ### Flutter & Mobile Testing
 Test:
@@ -51,7 +51,7 @@ Test:
 - integration tests with mock API servers
 - low-end device manual test matrix
 - offline sync and retry behavior validation
-- Coordinate with dependent agents and shared packages.
+- Validate NestJS, Flutter, PostgreSQL, and Redis behavior against acceptance criteria.
 
 ### Performance & Load Testing
 Benchmark:

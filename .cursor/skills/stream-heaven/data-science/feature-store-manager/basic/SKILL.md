@@ -28,7 +28,7 @@ description: >-
 
 ### ML Pipeline Fundamentals
 Design:
-- Design and implement data science capabilities for Stream Heaven. (Feature Store Manager scope)
+- Design Feature Store growth loops: referrals, campaigns, store ASO, and share incentives with measurable KPIs. (Feature Store Manager scope)
 - training data collection and labeling workflows
 - feature store schema for reusable ML features
 - model training pipeline with experiment tracking
@@ -42,7 +42,7 @@ Build:
 - temporal features for session and retention prediction
 - feature freshness SLAs and backfill procedures
 - PII-safe feature design with anonymization
-- Follow platform-governance standards for all outputs.
+- Implement NestJS growth APIs and Flutter surfaces optimized for low-data first launches.
 
 ### Model Serving
 Deploy:
@@ -51,7 +51,7 @@ Deploy:
 - fallback to heuristic ranking when model unavailable
 - batch inference for nightly recommendation updates
 - GPU vs CPU inference cost trade-off analysis
-- Coordinate with dependent agents and shared packages.
+- Track funnel events into analytics pipelines without PII leakage per security-rules.md.
 
 ### Vector Search Integration
 Wire:

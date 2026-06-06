@@ -29,7 +29,7 @@ description: >-
 
 ### Advanced Architecture
 Architect:
-- Design and implement cross platform capabilities for Stream Heaven. (Desktop Strategy scope)
+- Provide executive guidance for Desktop Strategy across Social, Livestream, Astro, and Media strategic priorities. (Desktop Strategy scope)
 - cross-service integration design and dependency mapping
 - scalability planning for peak Indian traffic patterns
 - event-driven patterns with Redis Streams and pub/sub
@@ -43,7 +43,7 @@ Ensure:
 - graceful degradation for poor connectivity scenarios
 - rollback procedures for failed deployments
 - incident runbooks for domain-specific failures
-- Follow platform-governance standards for all outputs.
+- Review phase gates, resource allocation, and OKR alignment before major platform investments.
 
 ### Performance & Scalability
 Optimize:
@@ -52,7 +52,7 @@ Optimize:
 - CDN and caching for media-heavy features
 - horizontal scaling patterns for stateless services
 - cost control per platform-governance/cost-control-rules.md
-- Coordinate with dependent agents and shared packages.
+- Arbitrate cross-functional tradeoffs: velocity, cost, safety, and Indian market reach.
 
 ### Security & Compliance
 Harden:

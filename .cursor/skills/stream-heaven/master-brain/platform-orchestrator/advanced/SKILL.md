@@ -29,7 +29,7 @@ description: >-
 
 ### Multi-Agent System Design
 Architect:
-- Design and implement master brain capabilities for Stream Heaven. (Platform Orchestrator scope)
+- Decompose founder/CTO intents into phased agent task graphs across ai-agents/ domains. (Platform Orchestrator scope)
 - 774+ agent catalog partitioning by domain and phase
 - orchestration DAGs for autonomous completion agents
 - conflict resolution when agents propose overlapping changes
@@ -43,7 +43,7 @@ Coordinate:
 - database migration ordering in multi-service releases
 - rollback-coordinator playbooks
 - release-orchestration-agent checklists
-- Follow platform-governance standards for all outputs.
+- Prioritize Phase 1 foundation work before feature agents in social, livestream, or games domains.
 
 ### Code Review & Design Review
 Review:
@@ -52,7 +52,7 @@ Review:
 - security review triggers for auth and payment changes
 - performance review for feed and livestream hot paths
 - documentation completeness as merge criterion
-- Coordinate with dependent agents and shared packages.
+- Synthesize context from AGENT-REGISTRY.md, governance docs, and active phase roadmaps.
 
 ### Autonomous Completion Loops
 Automate:

@@ -28,7 +28,7 @@ description: >-
 
 ### Astrology Content & Calculations
 Design:
-- Design and implement astro app capabilities for Stream Heaven. (Live Consultation scope)
+- Own livestream domain contracts and NestJS livestream-service behavior for Live Consultation. (Live Consultation scope)
 - kundli chart generation with Vedic calculation engine
 - daily horoscope content pipeline by zodiac sign
 - panchang ( Hindu calendar ) data integration
@@ -42,7 +42,7 @@ Implement:
 - payment integration for per-minute consultation billing
 - astrologer onboarding and verification workflow
 - session recording consent and privacy controls
-- Follow platform-governance standards for all outputs.
+- Manage room lifecycle, viewer counts, and Agora/Zego token bootstrap via env templates only.
 
 ### Compatibility & Matchmaking
 Build:
@@ -51,7 +51,7 @@ Build:
 - partner profile input and validation flows
 - remedy recommendation engine based on chart analysis
 - regional language support for reports
-- Coordinate with dependent agents and shared packages.
+- Configure api-gateway /v1/livestream/* proxy routes with JWT header propagation.
 
 ### Mobile UX for Astro App
 Guide:

@@ -28,7 +28,7 @@ description: >-
 
 ### Gift Animation Pipeline
 Build:
-- Design and implement audio capabilities for Stream Heaven. (Haptic Feedback scope)
+- Define /v1/social/* OpenAPI contracts for Haptic Feedback with cursor pagination and moderation hooks. (Haptic Feedback scope)
 - Lottie, Rive, and GPU shader effect selection per gift tier
 - gift queue prioritization by coin value and sender VIP status
 - synchronized playback across host and viewer clients
@@ -42,7 +42,7 @@ Emit:
 - host overlay vs chat feed rendering separation
 - rate limits on gift spam and duplicate animations
 - contract schemas in packages/shared-contracts/livestream/
-- Follow platform-governance standards for all outputs.
+- Guide services/social-service NestJS implementation aligned with packages/shared-contracts.
 
 ### Gift Economy Integration
 Wire:
@@ -51,7 +51,7 @@ Wire:
 - insufficient balance UX with top-up deep links
 - gift catalog versioning and regional pricing
 - audit trail for disputed gift transactions
-- Coordinate with dependent agents and shared packages.
+- Ensure api-gateway proxies social routes with JWT-derived identity headers.
 
 ### Rendering Performance
 Optimize:

@@ -29,6 +29,7 @@ description: >-
 
 ### Phase 1 Autonomous Completion
 Orchestrate:
+- Kill stale processes on ports 3000, 3001, 3002, 3009 before starting Phase 1 NestJS dev services. (Phase 1 Service Bootstrap scope)
 - full phase1:complete validation loop with fix-and-retry
 - Docker ensure scripts for Postgres/Redis health
 - multi-service smoke test orchestration
@@ -42,6 +43,7 @@ Architect:
 - request-id propagation and distributed tracing headers
 - rate limiting tiers by route sensitivity
 - health check aggregation for kubernetes readiness
+- Start Docker postgres/redis via docker compose or honor -SkipDocker when containers already healthy.
 
 ### Service Bootstrap Patterns
 Standardize:
@@ -50,6 +52,7 @@ Standardize:
 - database migration workflow with TypeORM/Prisma
 - Redis connection pooling and retry configuration
 - inter-service communication matrix documentation
+- Copy .env.example to .env for auth, user, gateway, and realtime services when files are missing.
 
 ### Remediation & Recovery
 Remediate:

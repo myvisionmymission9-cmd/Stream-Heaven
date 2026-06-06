@@ -28,7 +28,7 @@ description: >-
 
 ### Wallet Ledger Design
 Design:
-- Design and implement platform finance capabilities for Stream Heaven. (Payout Audit scope)
+- Design Payout Audit flows with idempotent ledger entries and PostgreSQL transactional integrity. (Payout Audit scope)
 - double-entry ledger with immutable transaction log
 - idempotent debit/credit APIs with client request IDs
 - balance snapshots vs event-sourced reconstruction
@@ -42,7 +42,7 @@ Integrate:
 - webhook signature verification and replay protection
 - payment status state machine: initiated → captured → settled
 - no secrets in repo — gateway keys via Secrets Manager
-- Follow platform-governance standards for all outputs.
+- Define wallet, payout, and billing contracts in packages/shared-contracts with audit trails.
 
 ### Payouts & Creator Earnings
 Process:
@@ -51,7 +51,7 @@ Process:
 - payout batch scheduling with failure retry queues
 - creator earnings statements and dispute windows
 - reconciliation with platform-finance reporting
-- Coordinate with dependent agents and shared packages.
+- Integrate payment provider webhooks via NestJS with secrets in AWS Secrets Manager only.
 
 ### Fraud & Risk Controls
 Enforce:

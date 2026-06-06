@@ -28,7 +28,7 @@ description: >-
 
 ### Gift Animation Pipeline
 Build:
-- Design and implement cosmetics capabilities for Stream Heaven. (Cosmetic Nft Bridge scope)
+- Design Cosmetic Nft Bridge web3 integrations with wallet-connect flows and explicit user consent UX. (Cosmetic Nft Bridge scope)
 - Lottie, Rive, and GPU shader effect selection per gift tier
 - gift queue prioritization by coin value and sender VIP status
 - synchronized playback across host and viewer clients
@@ -42,7 +42,7 @@ Emit:
 - host overlay vs chat feed rendering separation
 - rate limits on gift spam and duplicate animations
 - contract schemas in packages/shared-contracts/livestream/
-- Follow platform-governance standards for all outputs.
+- Define token economy contracts in packages/shared-contracts with audit trails and rollback plans.
 
 ### Gift Economy Integration
 Wire:
@@ -51,7 +51,7 @@ Wire:
 - insufficient balance UX with top-up deep links
 - gift catalog versioning and regional pricing
 - audit trail for disputed gift transactions
-- Coordinate with dependent agents and shared packages.
+- Keep private keys and chain RPC secrets out of repo; use env templates and HSM patterns.
 
 ### Rendering Performance
 Optimize:

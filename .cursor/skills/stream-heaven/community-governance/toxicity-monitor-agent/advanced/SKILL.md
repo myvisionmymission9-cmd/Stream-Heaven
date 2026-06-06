@@ -29,7 +29,7 @@ description: >-
 
 ### Ecosystem Policy Design
 Design:
-- Design and implement community governance capabilities for Stream Heaven. (Toxicity Monitor scope)
+- Define RED metrics, structured logs, and distributed traces for Toxicity Monitor across NestJS and Flutter. (Toxicity Monitor scope)
 - cross-app policy harmonization (safety, payments, AI)
 - cost-control-rules.md enforcement automation
 - ai-usage-rules.md for LLM feature governance
@@ -43,7 +43,7 @@ Automate:
 - policy-as-code for security and rate limits
 - contract drift scanners in nightly jobs
 - audit trail exports for external reviews
-- Follow platform-governance standards for all outputs.
+- Build dashboards and alerts aligned with SLO targets in scaling-playbook and incident-severity-rules.md.
 
 ### Community Governance
 Moderate:
@@ -52,7 +52,7 @@ Moderate:
 - transparency reporting standards
 - appeals process governance
 - regional legal variant tracking
-- Coordinate with dependent agents and shared packages.
+- Instrument api-gateway, auth, realtime Socket.IO, and PostgreSQL slow-query paths.
 
 ### Multi-Chat & AI Operations
 Govern:

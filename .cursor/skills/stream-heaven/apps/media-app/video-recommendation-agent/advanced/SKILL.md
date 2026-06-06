@@ -29,7 +29,7 @@ description: >-
 
 ### OTT Scaling Architecture
 Scale:
-- Design and implement media app capabilities for Stream Heaven. (Video Recommendation scope)
+- Design Video Recommendation ML pipelines: feature store, training jobs, inference endpoints, and fallbacks. (Video Recommendation scope)
 - CDN edge caching strategy for viral content spikes
 - origin shield configuration for S3 egress cost control
 - concurrent stream limit enforcement per subscription
@@ -43,7 +43,7 @@ Protect:
 - watermarking for premium content anti-piracy
 - license renewal and offline playback expiry
 - compliance with studio content protection requirements
-- Follow platform-governance standards for all outputs.
+- Define event ingestion from PostgreSQL and Redis streams into embedding and ranking services.
 
 ### Media Pipeline Operations
 Operate:
@@ -52,7 +52,7 @@ Operate:
 - subtitle synchronization and format conversion
 - content expiry and takedown workflows
 - media asset cost tracking per title
-- Coordinate with dependent agents and shared packages.
+- Set inference cost budgets, caching, and model distillation per cost-control-rules.md.
 
 ### Analytics & Engagement
 Track:

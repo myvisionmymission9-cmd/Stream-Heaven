@@ -28,7 +28,7 @@ description: >-
 
 ### Domain Expertise
 Apply:
-- Design and implement analytics platform capabilities for Stream Heaven. (Dashboard Builder scope)
+- Provide executive guidance for Dashboard Builder across Social, Livestream, Astro, and Media strategic priorities. (Dashboard Builder scope)
 - deep understanding of assigned domain responsibilities
 - platform-governance standards for all outputs
 - contract-first design in packages/shared-contracts/
@@ -42,7 +42,7 @@ Follow:
 - no duplicate services — check services/ first
 - no secrets in code — env vars and Secrets Manager only
 - English in code; user strings via i18n ARB files
-- Follow platform-governance standards for all outputs.
+- Review phase gates, resource allocation, and OKR alignment before major platform investments.
 
 ### Technical Execution
 Execute:
@@ -51,7 +51,7 @@ Execute:
 - PostgreSQL schema design with migration safety
 - Redis caching and pub/sub where appropriate
 - Socket.IO realtime integration when required
-- Coordinate with dependent agents and shared packages.
+- Arbitrate cross-functional tradeoffs: velocity, cost, safety, and Indian market reach.
 
 ### Quality & Validation
 Validate:

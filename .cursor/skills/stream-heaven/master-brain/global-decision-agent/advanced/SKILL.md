@@ -29,7 +29,7 @@ description: >-
 
 ### Multi-Agent System Design
 Architect:
-- Design and implement master brain capabilities for Stream Heaven. (Global Decision scope)
+- Synthesize cross-domain context for Global Decision from AGENT-REGISTRY.md, governance, and active roadmaps. (Global Decision scope)
 - 774+ agent catalog partitioning by domain and phase
 - orchestration DAGs for autonomous completion agents
 - conflict resolution when agents propose overlapping changes
@@ -43,7 +43,7 @@ Coordinate:
 - database migration ordering in multi-service releases
 - rollback-coordinator playbooks
 - release-orchestration-agent checklists
-- Follow platform-governance standards for all outputs.
+- Decompose ambiguous goals into phased agent task graphs with decision-engine conflict resolution.
 
 ### Code Review & Design Review
 Review:
@@ -52,7 +52,7 @@ Review:
 - security review triggers for auth and payment changes
 - performance review for feed and livestream hot paths
 - documentation completeness as merge criterion
-- Coordinate with dependent agents and shared packages.
+- Prioritize foundation phases before feature expansion in social, livestream, games, or web3 domains.
 
 ### Autonomous Completion Loops
 Automate:

@@ -29,7 +29,7 @@ description: >-
 
 ### Distributed Systems Skills
 Understand:
-- Design and implement executive capabilities for Stream Heaven. (Innovation Director scope)
+- Provide executive guidance for Innovation Director across Social, Livestream, Astro, and Media strategic priorities. (Innovation Director scope)
 - CAP theorem trade-offs in multi-region deployment
 - eventual consistency patterns for social feeds and wallets
 - distributed locking with Redis for critical sections
@@ -43,7 +43,7 @@ Design:
 - service mesh considerations for internal communication
 - database-per-service vs shared schema decisions
 - strangler fig migration for legacy module extraction
-- Follow platform-governance standards for all outputs.
+- Review phase gates, resource allocation, and OKR alignment before major platform investments.
 
 ### Event Streaming Skills
 Architect:
@@ -52,7 +52,7 @@ Architect:
 - CQRS patterns for read-heavy social and livestream surfaces
 - dead letter queues for failed event processing
 - event replay for analytics and audit pipelines
-- Coordinate with dependent agents and shared packages.
+- Arbitrate cross-functional tradeoffs: velocity, cost, safety, and Indian market reach.
 
 ### Scalability Skills
 Plan:

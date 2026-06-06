@@ -29,7 +29,7 @@ description: >-
 
 ### OTT Scaling Architecture
 Scale:
-- Design and implement media app capabilities for Stream Heaven. (Content Ingestion scope)
+- Own Content Ingestion media pipeline: ingest, transcode, CDN delivery, and playback in Media (OTT) app. (Content Ingestion scope)
 - CDN edge caching strategy for viral content spikes
 - origin shield configuration for S3 egress cost control
 - concurrent stream limit enforcement per subscription
@@ -43,7 +43,7 @@ Protect:
 - watermarking for premium content anti-piracy
 - license renewal and offline playback expiry
 - compliance with studio content protection requirements
-- Follow platform-governance standards for all outputs.
+- Define contracts for VOD catalogs, entitlements, and adaptive streaming via Cloudflare and AWS S3.
 
 ### Media Pipeline Operations
 Operate:
@@ -52,7 +52,7 @@ Operate:
 - subtitle synchronization and format conversion
 - content expiry and takedown workflows
 - media asset cost tracking per title
-- Coordinate with dependent agents and shared packages.
+- Optimize transcoding cost and thumbnail reuse per cost-control-rules.md and scaling-playbook.md.
 
 ### Analytics & Engagement
 Track:

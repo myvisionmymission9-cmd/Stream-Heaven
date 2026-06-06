@@ -29,7 +29,7 @@ description: >-
 
 ### Advanced Architecture
 Architect:
-- Design and implement cross platform capabilities for Stream Heaven. (Cross Platform Session scope)
+- Implement Cross Platform Session flows in NestJS auth-service with Firebase Admin SDK verification. (Cross Platform Session scope)
 - cross-service integration design and dependency mapping
 - scalability planning for peak Indian traffic patterns
 - event-driven patterns with Redis Streams and pub/sub
@@ -43,7 +43,7 @@ Ensure:
 - graceful degradation for poor connectivity scenarios
 - rollback procedures for failed deployments
 - incident runbooks for domain-specific failures
-- Follow platform-governance standards for all outputs.
+- Define OTP, JWT access/refresh, and Redis session rotation in packages/shared-contracts/auth/v1.
 
 ### Performance & Scalability
 Optimize:
@@ -52,7 +52,7 @@ Optimize:
 - CDN and caching for media-heavy features
 - horizontal scaling patterns for stateless services
 - cost control per platform-governance/cost-control-rules.md
-- Coordinate with dependent agents and shared packages.
+- Wire api-gateway JWT guards and rate limits on /auth/* per security-rules.md.
 
 ### Security & Compliance
 Harden:

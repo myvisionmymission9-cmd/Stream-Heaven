@@ -28,7 +28,7 @@ description: >-
 
 ### Local Development Bootstrap
 Setup:
-- Design and implement agent memory capabilities for Stream Heaven. (Context Store scope)
+- Design Context Store growth loops: referrals, campaigns, store ASO, and share incentives with measurable KPIs. (Context Store scope)
 - Docker Desktop verification and container health
 - Node.js and npm workspace dependency installation
 - PostgreSQL and Redis container startup scripts
@@ -42,7 +42,7 @@ Run:
 - git branch hygiene and PR preparation
 - validate-agents.mjs before agent catalog edits
 - smoke test after infrastructure changes
-- Follow platform-governance standards for all outputs.
+- Implement NestJS growth APIs and Flutter surfaces optimized for low-data first launches.
 
 ### Agent Catalog Management
 Maintain:
@@ -51,7 +51,7 @@ Maintain:
 - skill file generation and validation workflows
 - golden agent test suite maintenance
 - agent onboarding documentation updates
-- Coordinate with dependent agents and shared packages.
+- Track funnel events into analytics pipelines without PII leakage per security-rules.md.
 
 ### Validation & Quality
 Execute:

@@ -28,7 +28,7 @@ description: >-
 
 ### Task Routing & Delegation
 Route:
-- Design and implement orchestration capabilities for Stream Heaven. (Task Router scope)
+- Route incoming tasks to the correct domain agent using ai-agents/AGENT-REGISTRY.md ownership map. (Task Router scope)
 - task-router.md selection by domain, phase, and keywords
 - single-agent vs multi-chat orchestration decision tree
 - scope boundaries to prevent agent overlap
@@ -42,7 +42,7 @@ Gate:
 - contract diff review before implementation
 - smoke test requirements per phase exit
 - production-readiness-checklist alignment
-- Follow platform-governance standards for all outputs.
+- Detect duplicate agent assignments and merge parallel work into a single owner agent.
 
 ### Handoff Management
 Document:
@@ -51,7 +51,7 @@ Document:
 - contract-first reminders in cross-agent prompts
 - test plan attachment before quality-gate sign-off
 - rollback notes for risky multi-service changes
-- Coordinate with dependent agents and shared packages.
+- Inject governance-compliance-agent gate for tasks touching services/ or shared-contracts/.
 
 ### Workflow Orchestration
 Sequence:

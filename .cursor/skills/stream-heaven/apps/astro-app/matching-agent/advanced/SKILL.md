@@ -29,7 +29,7 @@ description: >-
 
 ### Astrology Engine Architecture
 Architect:
-- Design and implement astro app capabilities for Stream Heaven. (Matching scope)
+- Implement Matching features in Flutter astro-app with regional language chart copy and UX. (Matching scope)
 - ephemeris data pipeline for accurate planetary positions
 - calculation caching in Redis for repeated kundli requests
 - A/B testing different calculation tradition variants
@@ -43,7 +43,7 @@ Scale:
 - concurrent session limits per astrologer tier
 - quality monitoring for consultation completion rates
 - peak demand handling during festival periods
-- Follow platform-governance standards for all outputs.
+- Define NestJS astro APIs and packages/shared-contracts schemas for horoscope, chart, and panchang data.
 
 ### AI-Enhanced Astrology Features
 Leverage:
@@ -52,7 +52,7 @@ Leverage:
 - chatbot triage before live astrologer handoff
 - AI cost control for per-consultation LLM usage
 - human review queue for AI-generated content
-- Coordinate with dependent agents and shared packages.
+- Cache computed chart outputs in Redis; store user preferences in PostgreSQL with privacy controls.
 
 ### Monetization & Payments
 Optimize:

@@ -28,7 +28,7 @@ description: >-
 
 ### Task Routing & Delegation
 Route:
-- Design and implement master brain capabilities for Stream Heaven. (Platform Orchestrator scope)
+- Decompose founder/CTO intents into phased agent task graphs across ai-agents/ domains. (Platform Orchestrator scope)
 - task-router.md selection by domain, phase, and keywords
 - single-agent vs multi-chat orchestration decision tree
 - scope boundaries to prevent agent overlap
@@ -42,7 +42,7 @@ Gate:
 - contract diff review before implementation
 - smoke test requirements per phase exit
 - production-readiness-checklist alignment
-- Follow platform-governance standards for all outputs.
+- Prioritize Phase 1 foundation work before feature agents in social, livestream, or games domains.
 
 ### Handoff Management
 Document:
@@ -51,7 +51,7 @@ Document:
 - contract-first reminders in cross-agent prompts
 - test plan attachment before quality-gate sign-off
 - rollback notes for risky multi-service changes
-- Coordinate with dependent agents and shared packages.
+- Synthesize context from AGENT-REGISTRY.md, governance docs, and active phase roadmaps.
 
 ### Workflow Orchestration
 Sequence:

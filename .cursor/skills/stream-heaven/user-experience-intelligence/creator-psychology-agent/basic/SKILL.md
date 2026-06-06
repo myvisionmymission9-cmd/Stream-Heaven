@@ -28,7 +28,7 @@ description: >-
 
 ### User Research & Insights
 Research:
-- Design and implement user experience intelligence capabilities for Stream Heaven. (Creator Psychology scope)
+- Define RED metrics, structured logs, and distributed traces for Creator Psychology across NestJS and Flutter. (Creator Psychology scope)
 - qualitative interviews with tier-2/3 Indian users
 - session replay analysis for drop-off points
 - jobs-to-be-done framing per app surface
@@ -42,7 +42,7 @@ Design:
 - interest picker cold-start for feed personalization
 - creator vs viewer path branching
 - low-bandwidth onboarding asset budgets
-- Follow platform-governance standards for all outputs.
+- Build dashboards and alerts aligned with SLO targets in scaling-playbook and incident-severity-rules.md.
 
 ### Engagement Loop Design
 Craft:
@@ -51,7 +51,7 @@ Craft:
 - notification entry points back to core loops
 - micro-reward feedback (haptics, confetti, badges)
 - session depth metrics tied to UX changes
-- Coordinate with dependent agents and shared packages.
+- Instrument api-gateway, auth, realtime Socket.IO, and PostgreSQL slow-query paths.
 
 ### Regional & Low-Bandwidth UX
 Adapt:

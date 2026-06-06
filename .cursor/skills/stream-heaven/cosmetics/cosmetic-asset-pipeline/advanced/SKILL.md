@@ -29,7 +29,7 @@ description: >-
 
 ### GPU & Shader Architecture
 Architect:
-- Design and implement cosmetics capabilities for Stream Heaven. (Cosmetic Asset Pipeline scope)
+- Orchestrate Cosmetic Asset workflows across ai-agents/ with explicit task ownership and phase gates. (Cosmetic Asset Pipeline scope)
 - Metal/Vulkan/OpenGL ES fallback matrix for Flutter
 - custom shader hot-reload pipeline for artists
 - GPU memory pools shared across concurrent effects
@@ -43,7 +43,7 @@ Scale:
 - CDN edge caching for popular Lottie assets
 - regional effect servers for IPL and festival peaks
 - chaos tests for gift queue backlog recovery
-- Follow platform-governance standards for all outputs.
+- Route tasks via AGENT-REGISTRY.md; block duplicate agent assignments and governance violations.
 
 ### Economy & Fraud Controls
 Protect:
@@ -52,7 +52,7 @@ Protect:
 - chargeback handling integrated with wallet ledger
 - promotional gift credit expiration policies
 - tax and payout reporting for creator earnings
-- Coordinate with dependent agents and shared packages.
+- Run quality-gate checks before handoff-manager merges deliverables into the monorepo.
 
 ### Cross-Platform Effect Parity
 Align:

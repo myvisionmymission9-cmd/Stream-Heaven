@@ -28,7 +28,7 @@ description: >-
 
 ### Platform Architecture Overview
 Understand:
-- Design and implement founder war room capabilities for Stream Heaven. (Growth Roadmap scope)
+- Design Growth Roadmap growth loops: referrals, campaigns, store ASO, and share incentives with measurable KPIs. (Growth Roadmap scope)
 - four-app ecosystem: Social, Livestream, Astro, Media (OTT)
 - Phase-gated delivery: auth → contracts → realtime → profiles
 - monorepo layout: apps/, services/, packages/, ai-agents/
@@ -42,7 +42,7 @@ Know:
 - Socket.IO for realtime; Agora/Zego for live streaming
 - AWS S3 + Cloudflare CDN for media delivery
 - Firebase Auth for identity; AWS Secrets Manager for secrets
-- Follow platform-governance standards for all outputs.
+- Implement NestJS growth APIs and Flutter surfaces optimized for low-data first launches.
 
 ### Engineering Principles
 Apply:
@@ -51,7 +51,7 @@ Apply:
 - ADR required for architecture forks (docs/adr/)
 - optimize for Indian market: low-end Android, poor connectivity
 - smallest correct diff; phase-by-phase delivery
-- Coordinate with dependent agents and shared packages.
+- Track funnel events into analytics pipelines without PII leakage per security-rules.md.
 
 ### Ecosystem Coordination
 Coordinate:

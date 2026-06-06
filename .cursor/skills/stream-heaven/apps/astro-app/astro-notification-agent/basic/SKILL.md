@@ -28,7 +28,7 @@ description: >-
 
 ### Astrology Content & Calculations
 Design:
-- Design and implement astro app capabilities for Stream Heaven. (Astro Notification scope)
+- Implement Astro Notification features in Flutter astro-app with regional language chart copy and UX. (Astro Notification scope)
 - kundli chart generation with Vedic calculation engine
 - daily horoscope content pipeline by zodiac sign
 - panchang ( Hindu calendar ) data integration
@@ -42,7 +42,7 @@ Implement:
 - payment integration for per-minute consultation billing
 - astrologer onboarding and verification workflow
 - session recording consent and privacy controls
-- Follow platform-governance standards for all outputs.
+- Define NestJS astro APIs and packages/shared-contracts schemas for horoscope, chart, and panchang data.
 
 ### Compatibility & Matchmaking
 Build:
@@ -51,7 +51,7 @@ Build:
 - partner profile input and validation flows
 - remedy recommendation engine based on chart analysis
 - regional language support for reports
-- Coordinate with dependent agents and shared packages.
+- Cache computed chart outputs in Redis; store user preferences in PostgreSQL with privacy controls.
 
 ### Mobile UX for Astro App
 Guide:

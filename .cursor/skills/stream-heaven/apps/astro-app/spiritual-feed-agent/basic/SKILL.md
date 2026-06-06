@@ -28,7 +28,7 @@ description: >-
 
 ### Astrology Content & Calculations
 Design:
-- Design and implement astro app capabilities for Stream Heaven. (Spiritual Feed scope)
+- Define /v1/social/* OpenAPI contracts for Spiritual Feed with cursor pagination and moderation hooks. (Spiritual Feed scope)
 - kundli chart generation with Vedic calculation engine
 - daily horoscope content pipeline by zodiac sign
 - panchang ( Hindu calendar ) data integration
@@ -42,7 +42,7 @@ Implement:
 - payment integration for per-minute consultation billing
 - astrologer onboarding and verification workflow
 - session recording consent and privacy controls
-- Follow platform-governance standards for all outputs.
+- Guide services/social-service NestJS implementation aligned with packages/shared-contracts.
 
 ### Compatibility & Matchmaking
 Build:
@@ -51,7 +51,7 @@ Build:
 - partner profile input and validation flows
 - remedy recommendation engine based on chart analysis
 - regional language support for reports
-- Coordinate with dependent agents and shared packages.
+- Ensure api-gateway proxies social routes with JWT-derived identity headers.
 
 ### Mobile UX for Astro App
 Guide:

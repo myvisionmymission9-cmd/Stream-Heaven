@@ -28,6 +28,7 @@ description: >-
 
 ### Phase 1 Foundation Setup
 Bootstrap:
+- Bootstrap NestJS api-gateway (port 3000) routing for Phase 2a Autonomous Bootstrap and Phase 1 service prefixes. (Phase 2a Autonomous Bootstrap scope)
 - Docker Postgres and Redis via setup-phase1.ps1
 - NestJS service scaffolds in services/
 - api-gateway on port 3000 as single entry point
@@ -41,6 +42,7 @@ Define:
 - breaking change detection in CI validation
 - api-contract-author review for new endpoints
 - gateway proxy rules aligned with contract paths
+- Configure JWT validation middleware using auth-service public keys before upstream proxy calls.
 
 ### Auth & Identity Foundation
 Implement:
@@ -49,6 +51,7 @@ Implement:
 - api-gateway JWT validation middleware
 - user profile linkage via JWT sub claim
 - rate limiting on authentication endpoints
+- Add Redis-backed rate limiting per IP and authenticated user tier with 429 Retry-After responses.
 
 ### Local Dev & Validation
 Run:

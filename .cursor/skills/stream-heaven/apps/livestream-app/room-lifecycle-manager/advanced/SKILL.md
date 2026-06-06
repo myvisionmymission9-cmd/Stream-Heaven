@@ -29,7 +29,7 @@ description: >-
 
 ### Livestream Scaling Architecture
 Scale:
-- Design and implement core capabilities for Stream Heaven. (Room Lifecycle Manager scope)
+- Own livestream domain contracts and NestJS livestream-service behavior for Room Lifecycle. (Room Lifecycle Manager scope)
 - horizontal scaling of livestream-service instances
 - Redis-backed room state with sticky Socket.IO sessions
 - viewer count aggregation via Redis INCR with debounce
@@ -43,7 +43,7 @@ Support:
 - audio mixing coordination with multi-guest agents
 - bandwidth-adaptive layouts for viewer devices
 - host control delegation and moderation tools
-- Follow platform-governance standards for all outputs.
+- Manage room lifecycle, viewer counts, and Agora/Zego token bootstrap via env templates only.
 
 ### Monetization Handoff Architecture
 Prepare:
@@ -52,7 +52,7 @@ Prepare:
 - wallet ledger integration stubs for tipping
 - creator revenue share event emission
 - Phase 3 agent handoff documentation
-- Coordinate with dependent agents and shared packages.
+- Configure api-gateway /v1/livestream/* proxy routes with JWT header propagation.
 
 ### Moderation & Safety Integration
 Wire:

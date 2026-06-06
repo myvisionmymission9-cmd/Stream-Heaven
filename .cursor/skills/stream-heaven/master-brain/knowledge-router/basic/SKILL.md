@@ -28,7 +28,7 @@ description: >-
 
 ### Task Routing & Delegation
 Route:
-- Design and implement master brain capabilities for Stream Heaven. (Knowledge Router scope)
+- Bootstrap NestJS api-gateway (port 3000) routing for Knowledge and Phase 1 service prefixes. (Knowledge Router scope)
 - task-router.md selection by domain, phase, and keywords
 - single-agent vs multi-chat orchestration decision tree
 - scope boundaries to prevent agent overlap
@@ -42,7 +42,7 @@ Gate:
 - contract diff review before implementation
 - smoke test requirements per phase exit
 - production-readiness-checklist alignment
-- Follow platform-governance standards for all outputs.
+- Configure JWT validation middleware using auth-service public keys before upstream proxy calls.
 
 ### Handoff Management
 Document:
@@ -51,7 +51,7 @@ Document:
 - contract-first reminders in cross-agent prompts
 - test plan attachment before quality-gate sign-off
 - rollback notes for risky multi-service changes
-- Coordinate with dependent agents and shared packages.
+- Add Redis-backed rate limiting per IP and authenticated user tier with 429 Retry-After responses.
 
 ### Workflow Orchestration
 Sequence:

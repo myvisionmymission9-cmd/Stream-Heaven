@@ -28,7 +28,7 @@ description: >-
 
 ### Kubernetes Foundations
 Deploy:
-- Design and implement infrastructure capabilities for Stream Heaven. (Container Security scope)
+- Threat-model Container Security attack surfaces across NestJS APIs, Flutter clients, and Socket.IO channels. (Container Security scope)
 - EKS/GKE cluster baseline manifests in infra/
 - namespace per environment: dev, staging, prod
 - resource requests/limits for NestJS and worker pods
@@ -42,7 +42,7 @@ Automate:
 - helm/kustomize overlays per environment
 - rollback via previous manifest revision
 - contract validation job before deploy stage
-- Follow platform-governance standards for all outputs.
+- Define WAF, rate limit, and zero-trust policies coordinated with api-gateway and auth-service.
 
 ### Networking & Ingress
 Configure:
@@ -51,7 +51,7 @@ Configure:
 - NetworkPolicies for least-privilege pod traffic
 - Cloudflare tunnel or WAF integration at edge
 - api-gateway as external traffic entry
-- Coordinate with dependent agents and shared packages.
+- Mandate dependency scanning, SBOM, and penetration-test gates before wallet or payout GA.
 
 ### Data Services Operations
 Operate:

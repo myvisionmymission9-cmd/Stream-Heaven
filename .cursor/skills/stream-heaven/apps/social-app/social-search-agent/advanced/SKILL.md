@@ -29,7 +29,7 @@ description: >-
 
 ### Hybrid & Vector Search
 Combine:
-- Design and implement social app capabilities for Stream Heaven. (Social Search scope)
+- Define /v1/social/* OpenAPI contracts for Social Search with cursor pagination and moderation hooks. (Social Search scope)
 - dense embeddings + sparse BM25 fusion
 - vector database agent coordination (pgvector/Pinecone)
 - embedding refresh pipelines on content updates
@@ -43,7 +43,7 @@ Scale:
 - cache layers for hot queries and autocomplete
 - rate limiting abusive search scrapers
 - failover to degraded keyword-only mode
-- Follow platform-governance standards for all outputs.
+- Guide services/social-service NestJS implementation aligned with packages/shared-contracts.
 
 ### Cross-App Search Federation
 Federate:
@@ -52,7 +52,7 @@ Federate:
 - cross-app deep links from search results
 - permission-aware result filtering
 - wallet and purchase history search exclusions
-- Coordinate with dependent agents and shared packages.
+- Ensure api-gateway proxies social routes with JWT-derived identity headers.
 
 ### Semantic Discovery
 Enable:

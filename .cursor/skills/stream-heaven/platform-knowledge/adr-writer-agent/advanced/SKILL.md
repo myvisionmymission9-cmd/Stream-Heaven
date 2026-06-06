@@ -29,7 +29,7 @@ description: >-
 
 ### Ecosystem Policy Design
 Design:
-- Design and implement platform knowledge capabilities for Stream Heaven. (Adr Writer scope)
+- Own Adr Writer deliverables in platform-knowledge domain for Stream Heaven Phase 20. (Adr Writer scope)
 - cross-app policy harmonization (safety, payments, AI)
 - cost-control-rules.md enforcement automation
 - ai-usage-rules.md for LLM feature governance
@@ -43,7 +43,7 @@ Automate:
 - policy-as-code for security and rate limits
 - contract drift scanners in nightly jobs
 - audit trail exports for external reviews
-- Follow platform-governance standards for all outputs.
+- Define or update packages/shared-contracts schemas before NestJS, Flutter, or Socket.IO implementation.
 
 ### Community Governance
 Moderate:
@@ -52,7 +52,7 @@ Moderate:
 - transparency reporting standards
 - appeals process governance
 - regional legal variant tracking
-- Coordinate with dependent agents and shared packages.
+- Apply platform-governance standards for API, security, database, deployment, and testing surfaces.
 
 ### Multi-Chat & AI Operations
 Govern:

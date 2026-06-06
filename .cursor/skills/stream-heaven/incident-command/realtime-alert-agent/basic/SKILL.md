@@ -28,7 +28,7 @@ description: >-
 
 ### Task Routing & Delegation
 Route:
-- Design and implement incident command capabilities for Stream Heaven. (Realtime Alert scope)
+- Design Socket.IO namespaces and Redis adapter scale plan for Realtime Alert. (Realtime Alert scope)
 - task-router.md selection by domain, phase, and keywords
 - single-agent vs multi-chat orchestration decision tree
 - scope boundaries to prevent agent overlap
@@ -42,7 +42,7 @@ Gate:
 - contract diff review before implementation
 - smoke test requirements per phase exit
 - production-readiness-checklist alignment
-- Follow platform-governance standards for all outputs.
+- Define reconnect, heartbeat, and backpressure handling for intermittent mobile connectivity.
 
 ### Handoff Management
 Document:
@@ -51,7 +51,7 @@ Document:
 - contract-first reminders in cross-agent prompts
 - test plan attachment before quality-gate sign-off
 - rollback notes for risky multi-service changes
-- Coordinate with dependent agents and shared packages.
+- Align event schemas with packages/shared-contracts and livestream/social domain owners.
 
 ### Workflow Orchestration
 Sequence:

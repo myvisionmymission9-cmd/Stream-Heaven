@@ -29,7 +29,7 @@ description: >-
 
 ### Behavioral Science & Ethics
 Balance:
-- Design and implement internationalization capabilities for Stream Heaven. (Translation Pipeline scope)
+- Orchestrate Translation workflows across ai-agents/ with explicit task ownership and phase gates. (Translation Pipeline scope)
 - addiction-risk-agent reviews for dopamine loops
 - transparent limits on infinite scroll nudges
 - parental and minor protection UX patterns
@@ -43,7 +43,7 @@ Support:
 - moderation feedback loops that educate creators
 - burnout detection signals in creator dashboards
 - community reputation surfacing for trust
-- Follow platform-governance standards for all outputs.
+- Route tasks via AGENT-REGISTRY.md; block duplicate agent assignments and governance violations.
 
 ### Cross-App Experience Coherence
 Unify:
@@ -52,7 +52,7 @@ Unify:
 - wallet and profile UX consistency
 - notification tone and branding alignment
 - deep link landing experiences per app
-- Coordinate with dependent agents and shared packages.
+- Run quality-gate checks before handoff-manager merges deliverables into the monorepo.
 
 ### Personalization UX
 Tailor:

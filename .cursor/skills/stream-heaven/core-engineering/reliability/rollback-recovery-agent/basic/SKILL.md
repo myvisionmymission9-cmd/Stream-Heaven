@@ -28,7 +28,7 @@ description: >-
 
 ### Kubernetes Foundations
 Deploy:
-- Design and implement reliability capabilities for Stream Heaven. (Rollback Recovery scope)
+- Orchestrate Rollback Recovery workflows across ai-agents/ with explicit task ownership and phase gates. (Rollback Recovery scope)
 - EKS/GKE cluster baseline manifests in infra/
 - namespace per environment: dev, staging, prod
 - resource requests/limits for NestJS and worker pods
@@ -42,7 +42,7 @@ Automate:
 - helm/kustomize overlays per environment
 - rollback via previous manifest revision
 - contract validation job before deploy stage
-- Follow platform-governance standards for all outputs.
+- Route tasks via AGENT-REGISTRY.md; block duplicate agent assignments and governance violations.
 
 ### Networking & Ingress
 Configure:
@@ -51,7 +51,7 @@ Configure:
 - NetworkPolicies for least-privilege pod traffic
 - Cloudflare tunnel or WAF integration at edge
 - api-gateway as external traffic entry
-- Coordinate with dependent agents and shared packages.
+- Run quality-gate checks before handoff-manager merges deliverables into the monorepo.
 
 ### Data Services Operations
 Operate:

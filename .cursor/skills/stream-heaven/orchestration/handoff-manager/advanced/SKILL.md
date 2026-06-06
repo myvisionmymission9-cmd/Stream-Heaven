@@ -29,7 +29,7 @@ description: >-
 
 ### Multi-Agent System Design
 Architect:
-- Design and implement orchestration capabilities for Stream Heaven. (Handoff Manager scope)
+- Track agent-to-agent handoff state: artifacts produced, blockers, and quality-gate sign-off status. (Handoff Manager scope)
 - 774+ agent catalog partitioning by domain and phase
 - orchestration DAGs for autonomous completion agents
 - conflict resolution when agents propose overlapping changes
@@ -43,7 +43,7 @@ Coordinate:
 - database migration ordering in multi-service releases
 - rollback-coordinator playbooks
 - release-orchestration-agent checklists
-- Follow platform-governance standards for all outputs.
+- Validate handoff packages include governance references, tests, and shared-contracts diffs when applicable.
 
 ### Code Review & Design Review
 Review:
@@ -52,7 +52,7 @@ Review:
 - security review triggers for auth and payment changes
 - performance review for feed and livestream hot paths
 - documentation completeness as merge criterion
-- Coordinate with dependent agents and shared packages.
+- Block merges when downstream agent prerequisites are missing from Dependencies section paths.
 
 ### Autonomous Completion Loops
 Automate:

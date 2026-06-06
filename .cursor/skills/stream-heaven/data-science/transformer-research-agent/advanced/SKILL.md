@@ -29,7 +29,7 @@ description: >-
 
 ### Hybrid & Vector Search
 Combine:
-- Design and implement data science capabilities for Stream Heaven. (Transformer Research scope)
+- Own Transformer Research deliverables in data-science domain for Stream Heaven Phase 14. (Transformer Research scope)
 - dense embeddings + sparse BM25 fusion
 - vector database agent coordination (pgvector/Pinecone)
 - embedding refresh pipelines on content updates
@@ -43,7 +43,7 @@ Scale:
 - cache layers for hot queries and autocomplete
 - rate limiting abusive search scrapers
 - failover to degraded keyword-only mode
-- Follow platform-governance standards for all outputs.
+- Define or update packages/shared-contracts schemas before NestJS, Flutter, or Socket.IO implementation.
 
 ### Cross-App Search Federation
 Federate:
@@ -52,7 +52,7 @@ Federate:
 - cross-app deep links from search results
 - permission-aware result filtering
 - wallet and purchase history search exclusions
-- Coordinate with dependent agents and shared packages.
+- Apply platform-governance standards for API, security, database, deployment, and testing surfaces.
 
 ### Semantic Discovery
 Enable:

@@ -28,7 +28,7 @@ description: >-
 
 ### Upload & Ingest Pipeline
 Build:
-- Design and implement media pipeline capabilities for Stream Heaven. (Audio Processing scope)
+- Own Audio Processing deliverables in media-pipeline domain for Stream Heaven Phase 20. (Audio Processing scope)
 - S3 multipart upload with presigned URL contracts
 - client-side compression before upload on mobile
 - virus scan and MIME validation on ingest
@@ -42,7 +42,7 @@ Configure:
 - thumbnail and preview sprite generation
 - audio-only fallback renditions
 - job queue prioritization by content tier
-- Follow platform-governance standards for all outputs.
+- Define or update packages/shared-contracts schemas before NestJS, Flutter, or Socket.IO implementation.
 
 ### CDN & Delivery
 Route:
@@ -51,7 +51,7 @@ Route:
 - regional edge selection for Indian ISPs
 - cache invalidation on content updates
 - egress cost monitoring per platform-finance rules
-- Coordinate with dependent agents and shared packages.
+- Apply platform-governance standards for API, security, database, deployment, and testing surfaces.
 
 ### Quality Control
 Inspect:

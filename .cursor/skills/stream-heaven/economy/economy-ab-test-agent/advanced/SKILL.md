@@ -29,7 +29,7 @@ description: >-
 
 ### Financial Integrity at Scale
 Scale:
-- Design and implement economy capabilities for Stream Heaven. (Economy Ab Test scope)
+- Define automated tests for Economy Ab Test: unit, integration, contract, and smoke layers. (Economy Ab Test scope)
 - sharded ledger partitions by user ID ranges
 - saga patterns for cross-service payment flows
 - exactly-once settlement with outbox pattern
@@ -43,7 +43,7 @@ Manage:
 - proration rules for plan upgrades
 - family sharing and regional pricing tiers
 - entitlement sync across four apps
-- Follow platform-governance standards for all outputs.
+- Maintain scripts/ test entry points with CI-friendly exit codes and structured failure output.
 
 ### Cross-App Wallet Federation
 Federate:
@@ -52,7 +52,7 @@ Federate:
 - promotional credit scopes per app surface
 - identity-platform session binding for wallet ops
 - deep link flows for low-balance top-up
-- Coordinate with dependent agents and shared packages.
+- Validate NestJS, Flutter, PostgreSQL, and Redis behavior against acceptance criteria.
 
 ### Compliance & Tax
 Comply:

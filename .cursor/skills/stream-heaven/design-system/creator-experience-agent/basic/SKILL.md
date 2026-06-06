@@ -28,7 +28,7 @@ description: >-
 
 ### Flutter App Architecture
 Define:
-- Design and implement design system capabilities for Stream Heaven. (Creator Experience scope)
+- Own Creator Experience deliverables in design-system domain for Stream Heaven Phase 6. (Creator Experience scope)
 - Riverpod provider hierarchy for state management
 - GoRouter navigation with deep link support
 - feature-first folder structure in apps/mobile
@@ -42,7 +42,7 @@ Optimize:
 - widget rebuild minimization with const constructors
 - RepaintBoundary for complex list items
 - memory profiling for leak detection
-- Follow platform-governance standards for all outputs.
+- Define or update packages/shared-contracts schemas before NestJS, Flutter, or Socket.IO implementation.
 
 ### Networking & API Integration
 Implement:
@@ -51,7 +51,7 @@ Implement:
 - offline-aware retry with exponential backoff
 - request cancellation on widget dispose
 - API error mapping to user-friendly i18n strings
-- Coordinate with dependent agents and shared packages.
+- Apply platform-governance standards for API, security, database, deployment, and testing surfaces.
 
 ### UI & Design System
 Apply:

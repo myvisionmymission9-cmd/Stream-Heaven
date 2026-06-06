@@ -26,48 +26,26 @@ description: >-
 
 ## Role-specific skills
 
-### Task Routing & Delegation
-Route:
-- Design and implement orchestration capabilities for Stream Heaven. (Senior Code Review scope)
-- task-router.md selection by domain, phase, and keywords
-- single-agent vs multi-chat orchestration decision tree
-- scope boundaries to prevent agent overlap
-- dependency-ordered execution for cross-service work
-- escalation paths when no agent matches
-
-### Quality Gate Enforcement
-Gate:
-- validate-agents.mjs before catalog merges
-- validate-agent-skills.mjs for skill pair integrity
-- contract diff review before implementation
-- smoke test requirements per phase exit
-- production-readiness-checklist alignment
-- Follow platform-governance standards for all outputs.
-
-### Handoff Management
-Document:
-- structured handoff artifacts: context, decisions, blockers
-- agent ## Dependencies paths in every delegation
-- contract-first reminders in cross-agent prompts
-- test plan attachment before quality-gate sign-off
-- rollback notes for risky multi-service changes
-- Coordinate with dependent agents and shared packages.
-
-### Workflow Orchestration
-Sequence:
-- Phase 1→2→2a→8→9 dependency ordering
-- parallel vs serial agent activation rules
-- chat-coordinator for multi-window Cursor sessions
-- agent-scheduler for long-running validation loops
-- pipeline-builder for CI-aligned local workflows
-
-### Governance Prefix
+### Code Review
 Apply:
-- MASTER-AI-OPERATING-SYSTEM.md load on every orchestration start
-- no duplicate services — services/ catalog check
-- ADR requirement for architecture forks
-- smallest correct diff principle across delegations
-- English in code; i18n ARB for user strings
+- NestJS: guards, DTO validation, no business logic in controllers
+- Flutter: Riverpod patterns, no API calls in build methods
+- Reject secrets, console.log of PII, and commented-out dead code
+- Smallest correct diff — challenge unrelated refactors
+
+### Contract Review
+Apply:
+- Require shared-contracts update before API implementation
+- Check breaking change policy and version bumps
+- Verify OpenAPI matches controller decorators
+- Block undocumented query params and response fields
+
+### Test & Quality
+Apply:
+- Meaningful tests on auth, wallet, realtime critical paths
+- npm test / flutter test green in CI
+- Quality-gate checklist items addressed in PR description
+- ADR link present for architecture changes
 
 ## Key paths
 

@@ -29,7 +29,7 @@ description: >-
 
 ### Behavioral Science & Ethics
 Balance:
-- Design and implement user experience intelligence capabilities for Stream Heaven. (Attention Economy scope)
+- Implement Attention Economy in Flutter using Riverpod state and GoRouter navigation per flutter-ui-rules.md. (Attention Economy scope)
 - addiction-risk-agent reviews for dopamine loops
 - transparent limits on infinite scroll nudges
 - parental and minor protection UX patterns
@@ -43,7 +43,7 @@ Support:
 - moderation feedback loops that educate creators
 - burnout detection signals in creator dashboards
 - community reputation surfacing for trust
-- Follow platform-governance standards for all outputs.
+- Optimize list scrolling, image caching, and offline-first UX for low-end Android and poor connectivity.
 
 ### Cross-App Experience Coherence
 Unify:
@@ -52,7 +52,7 @@ Unify:
 - wallet and profile UX consistency
 - notification tone and branding alignment
 - deep link landing experiences per app
-- Coordinate with dependent agents and shared packages.
+- Consume generated API clients from packages/shared-contracts for NestJS backend types.
 
 ### Personalization UX
 Tailor:

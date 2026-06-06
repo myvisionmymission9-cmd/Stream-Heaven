@@ -29,7 +29,7 @@ description: >-
 
 ### Multi-Agent System Design
 Architect:
-- Design and implement reliability capabilities for Stream Heaven. (Incident Response scope)
+- Define RED metrics, structured logs, and distributed traces for Incident Response across NestJS and Flutter. (Incident Response scope)
 - 774+ agent catalog partitioning by domain and phase
 - orchestration DAGs for autonomous completion agents
 - conflict resolution when agents propose overlapping changes
@@ -43,7 +43,7 @@ Coordinate:
 - database migration ordering in multi-service releases
 - rollback-coordinator playbooks
 - release-orchestration-agent checklists
-- Follow platform-governance standards for all outputs.
+- Build dashboards and alerts aligned with SLO targets in scaling-playbook and incident-severity-rules.md.
 
 ### Code Review & Design Review
 Review:
@@ -52,7 +52,7 @@ Review:
 - security review triggers for auth and payment changes
 - performance review for feed and livestream hot paths
 - documentation completeness as merge criterion
-- Coordinate with dependent agents and shared packages.
+- Instrument api-gateway, auth, realtime Socket.IO, and PostgreSQL slow-query paths.
 
 ### Autonomous Completion Loops
 Automate:

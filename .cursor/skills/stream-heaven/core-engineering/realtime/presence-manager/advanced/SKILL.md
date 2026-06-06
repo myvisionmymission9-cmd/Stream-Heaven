@@ -29,7 +29,7 @@ description: >-
 
 ### Realtime Scaling Architecture
 Scale:
-- Design and implement realtime capabilities for Stream Heaven. (Presence Manager scope)
+- Design Socket.IO namespaces and Redis adapter scale plan for Presence. (Presence Manager scope)
 - Redis cluster for Socket.IO adapter pub/sub
 - sticky session load balancing at gateway layer
 - horizontal pod autoscaling on connection count metrics
@@ -43,7 +43,7 @@ Integrate:
 - event replay for late-joining clients
 - dead letter handling for failed event delivery
 - coordination with event-system agents
-- Follow platform-governance standards for all outputs.
+- Define reconnect, heartbeat, and backpressure handling for intermittent mobile connectivity.
 
 ### Livestream & Games Realtime
 Support:
@@ -52,7 +52,7 @@ Support:
 - gift animation event fan-out at scale
 - PK battle score update broadcast optimization
 - latency SLA targets per use case
-- Coordinate with dependent agents and shared packages.
+- Align event schemas with packages/shared-contracts and livestream/social domain owners.
 
 ### Chaos & Reliability Engineering
 Test:

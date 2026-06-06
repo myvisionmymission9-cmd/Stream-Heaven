@@ -29,7 +29,7 @@ description: >-
 
 ### Realtime Scaling Architecture
 Scale:
-- Design and implement event system capabilities for Stream Heaven. (Event Audit scope)
+- Own Event Audit deliverables in event-system domain for Stream Heaven Phase 18. (Event Audit scope)
 - Redis cluster for Socket.IO adapter pub/sub
 - sticky session load balancing at gateway layer
 - horizontal pod autoscaling on connection count metrics
@@ -43,7 +43,7 @@ Integrate:
 - event replay for late-joining clients
 - dead letter handling for failed event delivery
 - coordination with event-system agents
-- Follow platform-governance standards for all outputs.
+- Define or update packages/shared-contracts schemas before NestJS, Flutter, or Socket.IO implementation.
 
 ### Livestream & Games Realtime
 Support:
@@ -52,7 +52,7 @@ Support:
 - gift animation event fan-out at scale
 - PK battle score update broadcast optimization
 - latency SLA targets per use case
-- Coordinate with dependent agents and shared packages.
+- Apply platform-governance standards for API, security, database, deployment, and testing surfaces.
 
 ### Chaos & Reliability Engineering
 Test:

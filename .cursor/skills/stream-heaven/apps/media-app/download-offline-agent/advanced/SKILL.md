@@ -29,7 +29,7 @@ description: >-
 
 ### OTT Scaling Architecture
 Scale:
-- Design and implement media app capabilities for Stream Heaven. (Download Offline scope)
+- Implement Download Offline ad insertion, targeting, and measurement with NestJS ad-network services. (Download Offline scope)
 - CDN edge caching strategy for viral content spikes
 - origin shield configuration for S3 egress cost control
 - concurrent stream limit enforcement per subscription
@@ -43,7 +43,7 @@ Protect:
 - watermarking for premium content anti-piracy
 - license renewal and offline playback expiry
 - compliance with studio content protection requirements
-- Follow platform-governance standards for all outputs.
+- Define ad slot contracts for social feed, livestream overlays, and media pre-roll in shared-contracts.
 
 ### Media Pipeline Operations
 Operate:
@@ -52,7 +52,7 @@ Operate:
 - subtitle synchronization and format conversion
 - content expiry and takedown workflows
 - media asset cost tracking per title
-- Coordinate with dependent agents and shared packages.
+- Enforce brand safety, frequency caps, and child-audience rules per security and feature-approval docs.
 
 ### Analytics & Engagement
 Track:

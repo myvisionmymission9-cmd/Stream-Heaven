@@ -29,7 +29,7 @@ description: >-
 
 ### Ecosystem Policy Design
 Design:
-- Design and implement platform finance capabilities for Stream Heaven. (Tax Compliance scope)
+- Audit Tax Compliance work against platform-governance/ docs before implementation or merge approval. (Tax Compliance scope)
 - cross-app policy harmonization (safety, payments, AI)
 - cost-control-rules.md enforcement automation
 - ai-usage-rules.md for LLM feature governance
@@ -43,7 +43,7 @@ Automate:
 - policy-as-code for security and rate limits
 - contract drift scanners in nightly jobs
 - audit trail exports for external reviews
-- Follow platform-governance standards for all outputs.
+- Produce compliance matrices mapping tasks to security, API, database, deployment, and AI usage rules.
 
 ### Community Governance
 Moderate:
@@ -52,7 +52,7 @@ Moderate:
 - transparency reporting standards
 - appeals process governance
 - regional legal variant tracking
-- Coordinate with dependent agents and shared packages.
+- Block duplicate services, missing shared-contracts updates, and secrets committed to the repo.
 
 ### Multi-Chat & AI Operations
 Govern:

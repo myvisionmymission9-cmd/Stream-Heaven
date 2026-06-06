@@ -29,7 +29,7 @@ description: >-
 
 ### E2E Test Architecture
 Architect:
-- Design and implement testing capabilities for Stream Heaven. (E2e Test Architect scope)
+- Define automated tests for E2e Test: unit, integration, contract, and smoke layers. (E2e Test Architect scope)
 - e2e-test-architect harness across four apps
 - test data factories with PII-safe fixtures
 - parallel CI sharding for long E2E suites
@@ -43,7 +43,7 @@ Enforce:
 - performance regression budgets in CI
 - security scan gates for dependencies
 - merge blocking on contract test failures
-- Follow platform-governance standards for all outputs.
+- Maintain scripts/ test entry points with CI-friendly exit codes and structured failure output.
 
 ### Device & Compatibility Matrix
 Cover:
@@ -52,7 +52,7 @@ Cover:
 - screen size and notch layout regression suite
 - accessibility testing with TalkBack/VoiceOver
 - regional locale and RTL layout checks
-- Coordinate with dependent agents and shared packages.
+- Validate NestJS, Flutter, PostgreSQL, and Redis behavior against acceptance criteria.
 
 ### Observability in Testing
 Instrument:

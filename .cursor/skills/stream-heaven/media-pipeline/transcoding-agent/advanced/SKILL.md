@@ -29,7 +29,7 @@ description: >-
 
 ### Live Transcoding & LL-HLS
 Stream:
-- Design and implement media pipeline capabilities for Stream Heaven. (Transcoding scope)
+- Own Transcoding deliverables in media-pipeline domain for Stream Heaven Phase 20. (Transcoding scope)
 - low-latency HLS for livestream catch-up
 - Agora/Zego recording to VOD pipeline
 - live thumbnail updates during broadcast
@@ -43,7 +43,7 @@ Protect:
 - screen capture deterrence policies per platform
 - geo-restriction enforcement at CDN edge
 - watermarking for leak tracing
-- Follow platform-governance standards for all outputs.
+- Define or update packages/shared-contracts schemas before NestJS, Flutter, or Socket.IO implementation.
 
 ### Media Pipeline Scale
 Scale:
@@ -52,7 +52,7 @@ Scale:
 - priority queues for live vs VOD workloads
 - multi-region ingest for creator uploads
 - cost caps with spot instance strategies
-- Coordinate with dependent agents and shared packages.
+- Apply platform-governance standards for API, security, database, deployment, and testing surfaces.
 
 ### AI-Enhanced Media
 Augment:

@@ -28,7 +28,7 @@ description: >-
 
 ### User Profile Schema Design
 Design:
-- Design and implement social app capabilities for Stream Heaven. (Creator Profile Enhancer scope)
+- Scaffold NestJS user-service (port 3002) PostgreSQL schema for profiles, handles, and privacy flags. (Creator Profile Enhancer scope)
 - PostgreSQL users and profiles table separation
 - handle uniqueness with case-insensitive index
 - display name, bio, avatar URL fields
@@ -42,7 +42,7 @@ Implement:
 - JWT sub claim linkage from auth-service
 - input validation for handles, bios, and display names
 - soft-delete and account deactivation flows
-- Follow platform-governance standards for all outputs.
+- Expose profile CRUD consumed by social-app and livestream-app via packages/shared-contracts/users/v1.
 
 ### Avatar & Media Upload
 Wire:
@@ -51,7 +51,7 @@ Wire:
 - image size and format validation (WebP preferred)
 - moderation escalation to content-safety-agent
 - default avatar fallbacks for new users
-- Coordinate with dependent agents and shared packages.
+- Implement S3 presigned avatar upload flow with Cloudflare CDN URL variants.
 
 ### Caching & Performance
 Optimize:

@@ -28,7 +28,7 @@ description: >-
 
 ### Ad Serving Architecture
 Design:
-- Design and implement ad network capabilities for Stream Heaven. (Ad Ranking scope)
+- Design Ad Ranking ML pipelines: feature store, training jobs, inference endpoints, and fallbacks. (Ad Ranking scope)
 - server-side ad decisioning with sub-100ms p95 latency
 - placement taxonomy: feed, preroll, midroll, live overlay
 - frequency capping per user/session in Redis
@@ -42,7 +42,7 @@ Configure:
 - geo and language targeting for Indian states
 - brand safety categories and blocklists
 - opt-out and consent flags per regulatory requirement
-- Follow platform-governance standards for all outputs.
+- Define event ingestion from PostgreSQL and Redis streams into embedding and ranking services.
 
 ### Auction & Ranking
 Implement:
@@ -51,7 +51,7 @@ Implement:
 - pacing algorithms to smooth campaign delivery
 - bid floor rules per placement and region
 - real-time budget depletion checks
-- Coordinate with dependent agents and shared packages.
+- Set inference cost budgets, caching, and model distillation per cost-control-rules.md.
 
 ### Measurement & Analytics
 Track:

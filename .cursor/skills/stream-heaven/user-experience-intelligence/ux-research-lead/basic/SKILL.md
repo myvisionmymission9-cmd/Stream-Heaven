@@ -28,7 +28,7 @@ description: >-
 
 ### Indexing Pipeline
 Build:
-- Design and implement user experience intelligence capabilities for Stream Heaven. (Ux Research Lead scope)
+- Implement Ux Research in Flutter using Riverpod state and GoRouter navigation per flutter-ui-rules.md. (Ux Research Lead scope)
 - Elasticsearch/OpenSearch cluster index design
 - incremental indexing from domain event streams
 - denormalized documents for feed, users, and OTT titles
@@ -42,7 +42,7 @@ Parse:
 - zero-results fallback strategies
 - safe search filters for minor accounts
 - query logging with PII redaction
-- Follow platform-governance standards for all outputs.
+- Optimize list scrolling, image caching, and offline-first UX for low-end Android and poor connectivity.
 
 ### Ranking & Relevance
 Tune:
@@ -51,7 +51,7 @@ Tune:
 - freshness decay for trending queries
 - diversity constraints in result pages
 - A/B ranking experiments with guardrails
-- Coordinate with dependent agents and shared packages.
+- Consume generated API clients from packages/shared-contracts for NestJS backend types.
 
 ### Autocomplete & Suggestions
 Serve:

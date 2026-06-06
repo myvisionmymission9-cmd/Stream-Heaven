@@ -29,7 +29,7 @@ description: >-
 
 ### Programmatic Scale
 Scale:
-- Design and implement ad network capabilities for Stream Heaven. (Campaign Auction scope)
+- Design Campaign Auction growth loops: referrals, campaigns, store ASO, and share incentives with measurable KPIs. (Campaign Auction scope)
 - OpenRTB adapter integration with header bidding
 - edge caching of ad creatives via Cloudflare
 - QPS autoscaling for auction service pods
@@ -43,7 +43,7 @@ Detect:
 - publisher-side invalid traffic scoring
 - refund workflows for verified fraud clusters
 - coordination with trust-safety-agent on bad actors
-- Follow platform-governance standards for all outputs.
+- Implement NestJS growth APIs and Flutter surfaces optimized for low-data first launches.
 
 ### Revenue Optimization
 Optimize:
@@ -52,7 +52,7 @@ Optimize:
 - ad load experiments balanced against retention
 - sponsored content blending with feed ranking
 - revenue reconciliation with platform-finance agents
-- Coordinate with dependent agents and shared packages.
+- Track funnel events into analytics pipelines without PII leakage per security-rules.md.
 
 ### Live & Video Ad Formats
 Deliver:

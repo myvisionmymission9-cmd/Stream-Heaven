@@ -29,7 +29,7 @@ description: >-
 
 ### Growth ML & Feature Store
 Operate:
-- Design and implement growth ai capabilities for Stream Heaven. (User Onboarding scope)
+- Own User Onboarding deliverables in growth-ai domain for Stream Heaven Phase 15. (User Onboarding scope)
 - online/offline feature parity for ranking models
 - real-time inference budgets and fallback heuristics
 - model monitoring for drift on regional cohorts
@@ -43,7 +43,7 @@ Instrument:
 - incrementality tests for paid acquisition channels
 - LTV/CAC modeling by creator vs viewer segments
 - fraud-adjusted conversion reporting
-- Follow platform-governance standards for all outputs.
+- Define or update packages/shared-contracts schemas before NestJS, Flutter, or Socket.IO implementation.
 
 ### Campaign Operations at Scale
 Run:
@@ -52,7 +52,7 @@ Run:
 - festive burst capacity planning for SMS and push
 - budget allocation agents integrated with finance ledger
 - rollback plans for campaigns hurting retention
-- Coordinate with dependent agents and shared packages.
+- Apply platform-governance standards for API, security, database, deployment, and testing surfaces.
 
 ### Cross-App Growth Loops
 Connect:

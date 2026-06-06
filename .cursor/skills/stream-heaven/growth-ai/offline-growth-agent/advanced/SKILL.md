@@ -29,7 +29,7 @@ description: >-
 
 ### Growth ML & Feature Store
 Operate:
-- Design and implement growth ai capabilities for Stream Heaven. (Offline Growth scope)
+- Design Offline Growth growth loops: referrals, campaigns, store ASO, and share incentives with measurable KPIs. (Offline Growth scope)
 - online/offline feature parity for ranking models
 - real-time inference budgets and fallback heuristics
 - model monitoring for drift on regional cohorts
@@ -43,7 +43,7 @@ Instrument:
 - incrementality tests for paid acquisition channels
 - LTV/CAC modeling by creator vs viewer segments
 - fraud-adjusted conversion reporting
-- Follow platform-governance standards for all outputs.
+- Implement NestJS growth APIs and Flutter surfaces optimized for low-data first launches.
 
 ### Campaign Operations at Scale
 Run:
@@ -52,7 +52,7 @@ Run:
 - festive burst capacity planning for SMS and push
 - budget allocation agents integrated with finance ledger
 - rollback plans for campaigns hurting retention
-- Coordinate with dependent agents and shared packages.
+- Track funnel events into analytics pipelines without PII leakage per security-rules.md.
 
 ### Cross-App Growth Loops
 Connect:

@@ -29,7 +29,7 @@ description: >-
 
 ### Redis Cluster Architecture
 Architect:
-- Design and implement database capabilities for Stream Heaven. (Data Modeling Specialist scope)
+- Design Data Modeling ML pipelines: feature store, training jobs, inference endpoints, and fallbacks. (Data Modeling Specialist scope)
 - hash slot planning for even key distribution
 - read replica routing for session reads
 - cluster failover drills and split-brain prevention
@@ -43,7 +43,7 @@ Tune:
 - connection pooling sizing per NestJS service
 - large key detection and structural refactoring
 - slowlog analysis and hot key resharding
-- Follow platform-governance standards for all outputs.
+- Define event ingestion from PostgreSQL and Redis streams into embedding and ranking services.
 
 ### Streams & Event Backbones
 Leverage:
@@ -52,7 +52,7 @@ Leverage:
 - stream trimming policies for retention compliance
 - cross-service event catalog alignment
 - migration path to Kafka for analytics fan-out
-- Coordinate with dependent agents and shared packages.
+- Set inference cost budgets, caching, and model distillation per cost-control-rules.md.
 
 ### Distributed Locks & Coordination
 Coordinate:

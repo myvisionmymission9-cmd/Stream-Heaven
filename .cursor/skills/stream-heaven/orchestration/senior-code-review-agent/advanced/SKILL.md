@@ -27,72 +27,19 @@ description: >-
 
 ## Role-specific skills (advanced)
 
-### Multi-Agent System Design
-Architect:
-- Design and implement orchestration capabilities for Stream Heaven. (Senior Code Review scope)
-- 774+ agent catalog partitioning by domain and phase
-- orchestration DAGs for autonomous completion agents
-- conflict resolution when agents propose overlapping changes
-- platform-orchestrator vs task-router responsibility split
-- ecosystem-memory-agent for cross-chat context
+### System Design Review
+Apply:
+- Coordinate system-design-reviewer-agent on cross-service PRs
+- Challenge N+1 queries, missing indexes, unbounded fan-out
+- Review idempotency on wallet and gift mutations
+- Scale implications for livestream and feed hot paths
 
-### Release Orchestration
-Coordinate:
-- blue/green deploy sequencing across gateway and services
-- feature flag coordination across four mobile apps
-- database migration ordering in multi-service releases
-- rollback-coordinator playbooks
-- release-orchestration-agent checklists
-- Follow platform-governance standards for all outputs.
-
-### Code Review & Design Review
-Review:
-- senior-code-review-agent standards for NestJS and Flutter
-- system-design-reviewer-agent for cross-cutting ADRs
-- security review triggers for auth and payment changes
-- performance review for feed and livestream hot paths
-- documentation completeness as merge criterion
-- Coordinate with dependent agents and shared packages.
-
-### Autonomous Completion Loops
-Automate:
-- phase-1-autonomous-completion-agent fix-and-retry patterns
-- phase-2-autonomous-completion-agent contract alignment
-- golden test failure triage and assignment
-- CI red-to-green orchestration with bounded retries
-- status reporting for founder-war-room visibility
-
-### Cross-Team Coordination
-Align:
-- mobile ↔ backend contract sync meetings as agent handoffs
-- design-system token updates propagated to all apps
-- shared-contracts versioning communication
-- dependency-management-agent for npm/Dart upgrades
-- incident-commander-agent escalation during outages
-
-### Production Validation
-Validate:
-- end-to-end orchestration dry runs in staging
-- agent prompt regression via test-golden-agents.mjs
-- handoff artifact quality sampling
-- orchestration latency metrics for task routing
-- post-release retrospectives with action items
-
-### Master Brain Integration
-Integrate:
-- decision-engine for priority conflicts
-- global-orchestration-agent for ecosystem-wide initiatives
-- knowledge-router for governance doc retrieval
-- cross-domain-coordinator for four-app features
-- ADR tracking in docs/adr/
-
-### Founder & Executive Communication
-Report:
-- weekly phase status with blockers and confidence
-- risk registers for multi-agent initiatives
-- option matrices for build-vs-buy decisions
-- cto-agent and chief-architect alignment on forks
-- investor-ready milestone mapping
+### Governance Enforcement
+Apply:
+- platform-governance/ compliance per governance-compliance-agent matrix
+- No duplicate services in services/
+- Phase ordering: no Phase 8 feature without Phase 1 auth path
+- Escalate repeat offenders to rollback-coordinator
 
 ## Key paths
 

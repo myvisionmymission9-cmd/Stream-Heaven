@@ -29,7 +29,7 @@ description: >-
 
 ### Zero Trust Architecture
 Implement:
-- Design and implement enterprise security capabilities for Stream Heaven. (Penetration Testing scope)
+- Define automated tests for Penetration Testing: unit, integration, contract, and smoke layers. (Penetration Testing scope)
 - micro-segmentation for service-to-service communication
 - mTLS between internal microservices
 - identity-aware proxy for admin and internal tools
@@ -43,7 +43,7 @@ Defend:
 - API abuse pattern recognition and auto-blocking
 - supply chain security for npm/Dart dependencies
 - red team exercise scope and remediation tracking
-- Follow platform-governance standards for all outputs.
+- Maintain scripts/ test entry points with CI-friendly exit codes and structured failure output.
 
 ### Penetration Testing & Auditing
 Audit:
@@ -52,7 +52,7 @@ Audit:
 - security code review checklist for PRs
 - bug bounty program structure and triage
 - compliance audit preparation (SOC 2, ISO 27001 prep)
-- Coordinate with dependent agents and shared packages.
+- Validate NestJS, Flutter, PostgreSQL, and Redis behavior against acceptance criteria.
 
 ### Encryption & Key Management
 Manage:

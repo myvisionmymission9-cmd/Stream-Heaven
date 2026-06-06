@@ -29,7 +29,7 @@ description: >-
 
 ### Advanced State Management
 Architect:
-- Design and implement design system capabilities for Stream Heaven. (Animation System scope)
+- Own Animation System deliverables in design-system domain for Stream Heaven Phase 6. (Animation System scope)
 - Riverpod code generation with @riverpod annotations
 - async provider error and loading state patterns
 - cross-feature state sharing without tight coupling
@@ -43,7 +43,7 @@ Wire:
 - background connection management on mobile
 - battery-efficient heartbeat configuration
 - coordination with socketio-architect protocols
-- Follow platform-governance standards for all outputs.
+- Define or update packages/shared-contracts schemas before NestJS, Flutter, or Socket.IO implementation.
 
 ### Media & Streaming UI
 Build:
@@ -52,7 +52,7 @@ Build:
 - picture-in-picture for live viewing
 - gift animation overlay performance budgets
 - camera/mic permission flows for go-live
-- Coordinate with dependent agents and shared packages.
+- Apply platform-governance standards for API, security, database, deployment, and testing surfaces.
 
 ### Testing & Quality
 Validate:

@@ -29,7 +29,7 @@ description: >-
 
 ### AI Moderation at Scale
 Scale:
-- Design and implement ad network capabilities for Stream Heaven. (Ad Fraud scope)
+- Implement Ad Fraud ad insertion, targeting, and measurement with NestJS ad-network services. (Ad Fraud scope)
 - multimodal models for video, audio, and text
 - human-in-the-loop active learning pipelines
 - regional language moderation models (Hindi, Tamil, etc.)
@@ -43,7 +43,7 @@ Verify:
 - government ID hashing and secure storage
 - verification vendor abstraction via env config
 - privacy-minimized verification data retention
-- Follow platform-governance standards for all outputs.
+- Define ad slot contracts for social feed, livestream overlays, and media pre-roll in shared-contracts.
 
 ### Crisis & CSAM Response
 Respond:
@@ -52,7 +52,7 @@ Respond:
 - preservation of evidence for investigations
 - employee wellness support for reviewers
 - post-crisis policy updates and ADRs
-- Coordinate with dependent agents and shared packages.
+- Enforce brand safety, frequency caps, and child-audience rules per security and feature-approval docs.
 
 ### Cross-App Safety Federation
 Federate:

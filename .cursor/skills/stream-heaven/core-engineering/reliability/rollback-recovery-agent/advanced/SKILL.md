@@ -29,7 +29,7 @@ description: >-
 
 ### Multi-Region Topology
 Architect:
-- Design and implement reliability capabilities for Stream Heaven. (Rollback Recovery scope)
+- Orchestrate Rollback Recovery workflows across ai-agents/ with explicit task ownership and phase gates. (Rollback Recovery scope)
 - active-passive vs active-active per service tier
 - global load balancing for api-gateway
 - Postgres read replica routing in ORM config
@@ -43,7 +43,7 @@ Scale:
 - festival and IPL pre-warming runbooks
 - cost-aware scale-to-zero for dev environments
 - GPU node pools for ML and transcode workers
-- Follow platform-governance standards for all outputs.
+- Route tasks via AGENT-REGISTRY.md; block duplicate agent assignments and governance violations.
 
 ### Security Hardening
 Harden:
@@ -52,7 +52,7 @@ Harden:
 - admission controllers for image signing
 - vulnerability scanning in CI for container images
 - zero-trust service mesh mTLS
-- Coordinate with dependent agents and shared packages.
+- Run quality-gate checks before handoff-manager merges deliverables into the monorepo.
 
 ### Disaster Recovery
 Recover:

@@ -29,7 +29,7 @@ description: >-
 
 ### Astrology Engine Architecture
 Architect:
-- Design and implement astro app capabilities for Stream Heaven. (Astrologer Ranking scope)
+- Design Astrologer Ranking ML pipelines: feature store, training jobs, inference endpoints, and fallbacks. (Astrologer Ranking scope)
 - ephemeris data pipeline for accurate planetary positions
 - calculation caching in Redis for repeated kundli requests
 - A/B testing different calculation tradition variants
@@ -43,7 +43,7 @@ Scale:
 - concurrent session limits per astrologer tier
 - quality monitoring for consultation completion rates
 - peak demand handling during festival periods
-- Follow platform-governance standards for all outputs.
+- Define event ingestion from PostgreSQL and Redis streams into embedding and ranking services.
 
 ### AI-Enhanced Astrology Features
 Leverage:
@@ -52,7 +52,7 @@ Leverage:
 - chatbot triage before live astrologer handoff
 - AI cost control for per-consultation LLM usage
 - human review queue for AI-generated content
-- Coordinate with dependent agents and shared packages.
+- Set inference cost budgets, caching, and model distillation per cost-control-rules.md.
 
 ### Monetization & Payments
 Optimize:

@@ -28,7 +28,7 @@ description: >-
 
 ### Indexing Pipeline
 Build:
-- Design and implement platform knowledge capabilities for Stream Heaven. (Industry Research scope)
+- Own Industry Research deliverables in platform-knowledge domain for Stream Heaven Phase 20. (Industry Research scope)
 - Elasticsearch/OpenSearch cluster index design
 - incremental indexing from domain event streams
 - denormalized documents for feed, users, and OTT titles
@@ -42,7 +42,7 @@ Parse:
 - zero-results fallback strategies
 - safe search filters for minor accounts
 - query logging with PII redaction
-- Follow platform-governance standards for all outputs.
+- Define or update packages/shared-contracts schemas before NestJS, Flutter, or Socket.IO implementation.
 
 ### Ranking & Relevance
 Tune:
@@ -51,7 +51,7 @@ Tune:
 - freshness decay for trending queries
 - diversity constraints in result pages
 - A/B ranking experiments with guardrails
-- Coordinate with dependent agents and shared packages.
+- Apply platform-governance standards for API, security, database, deployment, and testing surfaces.
 
 ### Autocomplete & Suggestions
 Serve:

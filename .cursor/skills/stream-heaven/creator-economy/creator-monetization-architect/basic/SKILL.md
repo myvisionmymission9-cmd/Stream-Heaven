@@ -28,7 +28,7 @@ description: >-
 
 ### Wallet Ledger Design
 Design:
-- Design and implement creator economy capabilities for Stream Heaven. (Creator Monetization Architect scope)
+- Implement Creator Monetization ad insertion, targeting, and measurement with NestJS ad-network services. (Creator Monetization Architect scope)
 - double-entry ledger with immutable transaction log
 - idempotent debit/credit APIs with client request IDs
 - balance snapshots vs event-sourced reconstruction
@@ -42,7 +42,7 @@ Integrate:
 - webhook signature verification and replay protection
 - payment status state machine: initiated → captured → settled
 - no secrets in repo — gateway keys via Secrets Manager
-- Follow platform-governance standards for all outputs.
+- Define ad slot contracts for social feed, livestream overlays, and media pre-roll in shared-contracts.
 
 ### Payouts & Creator Earnings
 Process:
@@ -51,7 +51,7 @@ Process:
 - payout batch scheduling with failure retry queues
 - creator earnings statements and dispute windows
 - reconciliation with platform-finance reporting
-- Coordinate with dependent agents and shared packages.
+- Enforce brand safety, frequency caps, and child-audience rules per security and feature-approval docs.
 
 ### Fraud & Risk Controls
 Enforce:

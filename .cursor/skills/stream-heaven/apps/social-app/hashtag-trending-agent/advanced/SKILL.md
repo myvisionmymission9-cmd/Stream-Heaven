@@ -29,7 +29,7 @@ description: >-
 
 ### Feed Architecture at Scale
 Architect:
-- Design and implement social app capabilities for Stream Heaven. (Hashtag Trending scope)
+- Define /v1/social/* OpenAPI contracts for Hashtag Trending with cursor pagination and moderation hooks. (Hashtag Trending scope)
 - fan-out on write vs fan-out on read trade-off analysis
 - Redis-backed feed cache with TTL and invalidation
 - hot creator feed pre-computation for viral posts
@@ -43,7 +43,7 @@ Integrate:
 - automated shadow-ban and visibility reduction
 - appeal workflow for moderated content
 - coordination with trust-safety-agent policies
-- Follow platform-governance standards for all outputs.
+- Guide services/social-service NestJS implementation aligned with packages/shared-contracts.
 
 ### Media & CDN Integration
 Optimize:
@@ -52,7 +52,7 @@ Optimize:
 - WebP/AVIF transcoding for bandwidth savings
 - video thumbnail generation for feed previews
 - media pipeline cost tracking per post type
-- Coordinate with dependent agents and shared packages.
+- Ensure api-gateway proxies social routes with JWT-derived identity headers.
 
 ### Engagement Analytics
 Track:

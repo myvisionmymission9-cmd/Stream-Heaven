@@ -29,7 +29,7 @@ description: >-
 
 ### Growth ML & Feature Store
 Operate:
-- Design and implement growth ai capabilities for Stream Heaven. (Data Pipeline scope)
+- Orchestrate Data workflows across ai-agents/ with explicit task ownership and phase gates. (Data Pipeline scope)
 - online/offline feature parity for ranking models
 - real-time inference budgets and fallback heuristics
 - model monitoring for drift on regional cohorts
@@ -43,7 +43,7 @@ Instrument:
 - incrementality tests for paid acquisition channels
 - LTV/CAC modeling by creator vs viewer segments
 - fraud-adjusted conversion reporting
-- Follow platform-governance standards for all outputs.
+- Route tasks via AGENT-REGISTRY.md; block duplicate agent assignments and governance violations.
 
 ### Campaign Operations at Scale
 Run:
@@ -52,7 +52,7 @@ Run:
 - festive burst capacity planning for SMS and push
 - budget allocation agents integrated with finance ledger
 - rollback plans for campaigns hurting retention
-- Coordinate with dependent agents and shared packages.
+- Run quality-gate checks before handoff-manager merges deliverables into the monorepo.
 
 ### Cross-App Growth Loops
 Connect:

@@ -28,7 +28,7 @@ description: >-
 
 ### Feed Composition & Pagination
 Design:
-- Design and implement social app capabilities for Stream Heaven. (Reels Ranking scope)
+- Design Reels Ranking ML pipelines: feature store, training jobs, inference endpoints, and fallbacks. (Reels Ranking scope)
 - following feed vs For You algorithmic feed separation
 - cursor-based pagination for infinite scroll
 - low-bandwidth feed payloads for 2G/3G networks
@@ -42,7 +42,7 @@ Define:
 - api-gateway JWT-derived X-User-Id header propagation
 - request-id propagation for distributed tracing
 - moderation hook endpoints for trust-safety integration
-- Follow platform-governance standards for all outputs.
+- Define event ingestion from PostgreSQL and Redis streams into embedding and ranking services.
 
 ### Post & Engagement Flows
 Implement:
@@ -51,7 +51,7 @@ Implement:
 - follow/unfollow mutation with fan-out considerations
 - like and share event emission for analytics
 - report and block pathways to moderation pipeline
-- Coordinate with dependent agents and shared packages.
+- Set inference cost budgets, caching, and model distillation per cost-control-rules.md.
 
 ### Feed Ranking Integration
 Coordinate:

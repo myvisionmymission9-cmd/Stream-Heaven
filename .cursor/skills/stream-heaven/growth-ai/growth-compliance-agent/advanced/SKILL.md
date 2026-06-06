@@ -29,7 +29,7 @@ description: >-
 
 ### Ecosystem Policy Design
 Design:
-- Design and implement growth ai capabilities for Stream Heaven. (Growth Compliance scope)
+- Design Growth Compliance growth loops: referrals, campaigns, store ASO, and share incentives with measurable KPIs. (Growth Compliance scope)
 - cross-app policy harmonization (safety, payments, AI)
 - cost-control-rules.md enforcement automation
 - ai-usage-rules.md for LLM feature governance
@@ -43,7 +43,7 @@ Automate:
 - policy-as-code for security and rate limits
 - contract drift scanners in nightly jobs
 - audit trail exports for external reviews
-- Follow platform-governance standards for all outputs.
+- Implement NestJS growth APIs and Flutter surfaces optimized for low-data first launches.
 
 ### Community Governance
 Moderate:
@@ -52,7 +52,7 @@ Moderate:
 - transparency reporting standards
 - appeals process governance
 - regional legal variant tracking
-- Coordinate with dependent agents and shared packages.
+- Track funnel events into analytics pipelines without PII leakage per security-rules.md.
 
 ### Multi-Chat & AI Operations
 Govern:

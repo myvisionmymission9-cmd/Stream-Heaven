@@ -28,7 +28,7 @@ description: >-
 
 ### Growth Experimentation
 Design:
-- Design and implement growth ai capabilities for Stream Heaven. (Leaderboard Growth scope)
+- Implement Leaderboard Growth game logic with NestJS APIs and Flutter client flows per games domain standards. (Leaderboard Growth scope)
 - hypothesis-driven A/B tests with clear primary metrics
 - cohort segmentation by region, device tier, and acquisition channel
 - experiment guardrails to protect core retention and revenue
@@ -42,7 +42,7 @@ Build:
 - share-to-earn flows for WhatsApp and Instagram Stories
 - viral loop instrumentation: K-factor, cycle time, activation
 - regional campaign hooks for festivals and IPL seasons
-- Follow platform-governance standards for all outputs.
+- Define anti-cheat hooks, matchmaking fairness, and leaderboard idempotency in shared-contracts.
 
 ### Retention & Engagement Analytics
 Measure:
@@ -51,7 +51,7 @@ Measure:
 - churn prediction features in growth feature store
 - notification fatigue monitoring and send caps
 - real-time dashboards for experiment readouts
-- Coordinate with dependent agents and shared packages.
+- Use Redis for real-time match state and PostgreSQL for durable progression and audit trails.
 
 ### Personalization & Discovery
 Tune:

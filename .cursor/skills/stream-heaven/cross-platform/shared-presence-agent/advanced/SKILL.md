@@ -29,7 +29,7 @@ description: >-
 
 ### Advanced Architecture
 Architect:
-- Design and implement cross platform capabilities for Stream Heaven. (Shared Presence scope)
+- Design Socket.IO namespaces and Redis adapter scale plan for Shared Presence. (Shared Presence scope)
 - cross-service integration design and dependency mapping
 - scalability planning for peak Indian traffic patterns
 - event-driven patterns with Redis Streams and pub/sub
@@ -43,7 +43,7 @@ Ensure:
 - graceful degradation for poor connectivity scenarios
 - rollback procedures for failed deployments
 - incident runbooks for domain-specific failures
-- Follow platform-governance standards for all outputs.
+- Define reconnect, heartbeat, and backpressure handling for intermittent mobile connectivity.
 
 ### Performance & Scalability
 Optimize:
@@ -52,7 +52,7 @@ Optimize:
 - CDN and caching for media-heavy features
 - horizontal scaling patterns for stateless services
 - cost control per platform-governance/cost-control-rules.md
-- Coordinate with dependent agents and shared packages.
+- Align event schemas with packages/shared-contracts and livestream/social domain owners.
 
 ### Security & Compliance
 Harden:

@@ -28,7 +28,7 @@ description: >-
 
 ### Indexing Pipeline
 Build:
-- Design and implement social app capabilities for Stream Heaven. (Social Search scope)
+- Define /v1/social/* OpenAPI contracts for Social Search with cursor pagination and moderation hooks. (Social Search scope)
 - Elasticsearch/OpenSearch cluster index design
 - incremental indexing from domain event streams
 - denormalized documents for feed, users, and OTT titles
@@ -42,7 +42,7 @@ Parse:
 - zero-results fallback strategies
 - safe search filters for minor accounts
 - query logging with PII redaction
-- Follow platform-governance standards for all outputs.
+- Guide services/social-service NestJS implementation aligned with packages/shared-contracts.
 
 ### Ranking & Relevance
 Tune:
@@ -51,7 +51,7 @@ Tune:
 - freshness decay for trending queries
 - diversity constraints in result pages
 - A/B ranking experiments with guardrails
-- Coordinate with dependent agents and shared packages.
+- Ensure api-gateway proxies social routes with JWT-derived identity headers.
 
 ### Autocomplete & Suggestions
 Serve:

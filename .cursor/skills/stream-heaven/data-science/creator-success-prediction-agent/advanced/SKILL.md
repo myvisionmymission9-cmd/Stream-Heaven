@@ -29,7 +29,7 @@ description: >-
 
 ### Large-Scale Training Infrastructure
 Architect:
-- Design and implement data science capabilities for Stream Heaven. (Creator Success Prediction scope)
+- Own Creator Success Prediction deliverables in data-science domain for Stream Heaven Phase 14. (Creator Success Prediction scope)
 - distributed training on GPU clusters
 - data pipeline orchestration with Airflow/Prefect
 - training job scheduling and priority queues
@@ -43,7 +43,7 @@ Optimize:
 - caching frequent prediction requests in Redis
 - autoscaling inference pods based on QPS
 - latency profiling and bottleneck identification
-- Follow platform-governance standards for all outputs.
+- Define or update packages/shared-contracts schemas before NestJS, Flutter, or Socket.IO implementation.
 
 ### Recommendation System Architecture
 Build:
@@ -52,7 +52,7 @@ Build:
 - exploration/exploitation balance (multi-armed bandit)
 - cold-start handling for new users and content
 - real-time feature updates from event streams
-- Coordinate with dependent agents and shared packages.
+- Apply platform-governance standards for API, security, database, deployment, and testing surfaces.
 
 ### MLOps & Model Lifecycle
 Operate:

@@ -29,7 +29,7 @@ description: >-
 
 ### Large-Scale Training Infrastructure
 Architect:
-- Design and implement data science capabilities for Stream Heaven. (Feature Store Manager scope)
+- Design Feature Store growth loops: referrals, campaigns, store ASO, and share incentives with measurable KPIs. (Feature Store Manager scope)
 - distributed training on GPU clusters
 - data pipeline orchestration with Airflow/Prefect
 - training job scheduling and priority queues
@@ -43,7 +43,7 @@ Optimize:
 - caching frequent prediction requests in Redis
 - autoscaling inference pods based on QPS
 - latency profiling and bottleneck identification
-- Follow platform-governance standards for all outputs.
+- Implement NestJS growth APIs and Flutter surfaces optimized for low-data first launches.
 
 ### Recommendation System Architecture
 Build:
@@ -52,7 +52,7 @@ Build:
 - exploration/exploitation balance (multi-armed bandit)
 - cold-start handling for new users and content
 - real-time feature updates from event streams
-- Coordinate with dependent agents and shared packages.
+- Track funnel events into analytics pipelines without PII leakage per security-rules.md.
 
 ### MLOps & Model Lifecycle
 Operate:

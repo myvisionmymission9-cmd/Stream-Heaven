@@ -29,7 +29,7 @@ description: >-
 
 ### Autonomous Bootstrap Orchestration
 Orchestrate:
-- Design and implement platform knowledge capabilities for Stream Heaven. (Feature Comparison scope)
+- Own Feature Comparison deliverables in platform-knowledge domain for Stream Heaven Phase 20. (Feature Comparison scope)
 - full environment bootstrap with fix-and-retry loops
 - multi-phase validation (Phase 1 → 2a → 2) sequencing
 - dependency conflict resolution across workspaces
@@ -43,7 +43,7 @@ Govern:
 - boilerplate detection and enrichment workflows
 - agent coverage analysis across platform domains
 - registry sync after bulk agent generation
-- Follow platform-governance standards for all outputs.
+- Define or update packages/shared-contracts schemas before NestJS, Flutter, or Socket.IO implementation.
 
 ### CI/CD Pipeline Alignment
 Align:
@@ -52,7 +52,7 @@ Align:
 - pre-commit hook configuration and testing
 - validation script performance optimization
 - CI failure triage and remediation playbooks
-- Coordinate with dependent agents and shared packages.
+- Apply platform-governance standards for API, security, database, deployment, and testing surfaces.
 
 ### Developer Experience Optimization
 Improve:

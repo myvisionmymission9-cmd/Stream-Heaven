@@ -29,7 +29,7 @@ description: >-
 
 ### Hybrid & Vector Search
 Combine:
-- Design and implement growth ai capabilities for Stream Heaven. (Search Ranking scope)
+- Design Search Ranking ML pipelines: feature store, training jobs, inference endpoints, and fallbacks. (Search Ranking scope)
 - dense embeddings + sparse BM25 fusion
 - vector database agent coordination (pgvector/Pinecone)
 - embedding refresh pipelines on content updates
@@ -43,7 +43,7 @@ Scale:
 - cache layers for hot queries and autocomplete
 - rate limiting abusive search scrapers
 - failover to degraded keyword-only mode
-- Follow platform-governance standards for all outputs.
+- Define event ingestion from PostgreSQL and Redis streams into embedding and ranking services.
 
 ### Cross-App Search Federation
 Federate:
@@ -52,7 +52,7 @@ Federate:
 - cross-app deep links from search results
 - permission-aware result filtering
 - wallet and purchase history search exclusions
-- Coordinate with dependent agents and shared packages.
+- Set inference cost budgets, caching, and model distillation per cost-control-rules.md.
 
 ### Semantic Discovery
 Enable:

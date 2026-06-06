@@ -28,7 +28,7 @@ description: >-
 
 ### Platform Governance Compliance
 Follow:
-- Design and implement growth ai capabilities for Stream Heaven. (Growth Compliance scope)
+- Design Growth Compliance growth loops: referrals, campaigns, store ASO, and share incentives with measurable KPIs. (Growth Compliance scope)
 - MASTER-AI-OPERATING-SYSTEM.md as primary authority
 - 22 platform-governance documents by domain relevance
 - feature-approval-rules.md gates before new capabilities
@@ -42,7 +42,7 @@ Require:
 - shared-contracts versioning and changelog discipline
 - mobile client codegen sync after contract updates
 - no undocumented public API surfaces
-- Follow platform-governance standards for all outputs.
+- Implement NestJS growth APIs and Flutter surfaces optimized for low-data first launches.
 
 ### Agent Catalog Integrity
 Maintain:
@@ -51,7 +51,7 @@ Maintain:
 - boilerplate responsibility detection and enrichment
 - skill pair completeness via validate-agent-skills.mjs
 - golden agent tests for structural regression
-- Coordinate with dependent agents and shared packages.
+- Track funnel events into analytics pipelines without PII leakage per security-rules.md.
 
 ### ADR & Architecture Forks
 Document:

@@ -29,7 +29,7 @@ description: >-
 
 ### Behavioral Science & Ethics
 Balance:
-- Design and implement internationalization capabilities for Stream Heaven. (Regional Content scope)
+- Own Regional Content deliverables in internationalization domain for Stream Heaven Phase 20. (Regional Content scope)
 - addiction-risk-agent reviews for dopamine loops
 - transparent limits on infinite scroll nudges
 - parental and minor protection UX patterns
@@ -43,7 +43,7 @@ Support:
 - moderation feedback loops that educate creators
 - burnout detection signals in creator dashboards
 - community reputation surfacing for trust
-- Follow platform-governance standards for all outputs.
+- Define or update packages/shared-contracts schemas before NestJS, Flutter, or Socket.IO implementation.
 
 ### Cross-App Experience Coherence
 Unify:
@@ -52,7 +52,7 @@ Unify:
 - wallet and profile UX consistency
 - notification tone and branding alignment
 - deep link landing experiences per app
-- Coordinate with dependent agents and shared packages.
+- Apply platform-governance standards for API, security, database, deployment, and testing surfaces.
 
 ### Personalization UX
 Tailor:

@@ -29,7 +29,7 @@ description: >-
 
 ### Financial Integrity at Scale
 Scale:
-- Design and implement economy capabilities for Stream Heaven. (Refund Policy scope)
+- Audit Refund Policy work against platform-governance/ docs before implementation or merge approval. (Refund Policy scope)
 - sharded ledger partitions by user ID ranges
 - saga patterns for cross-service payment flows
 - exactly-once settlement with outbox pattern
@@ -43,7 +43,7 @@ Manage:
 - proration rules for plan upgrades
 - family sharing and regional pricing tiers
 - entitlement sync across four apps
-- Follow platform-governance standards for all outputs.
+- Produce compliance matrices mapping tasks to security, API, database, deployment, and AI usage rules.
 
 ### Cross-App Wallet Federation
 Federate:
@@ -52,7 +52,7 @@ Federate:
 - promotional credit scopes per app surface
 - identity-platform session binding for wallet ops
 - deep link flows for low-balance top-up
-- Coordinate with dependent agents and shared packages.
+- Block duplicate services, missing shared-contracts updates, and secrets committed to the repo.
 
 ### Compliance & Tax
 Comply:

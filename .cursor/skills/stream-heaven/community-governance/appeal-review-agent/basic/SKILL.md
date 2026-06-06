@@ -28,7 +28,7 @@ description: >-
 
 ### Platform Governance Compliance
 Follow:
-- Design and implement community governance capabilities for Stream Heaven. (Appeal Review scope)
+- Own Appeal Review deliverables in community-governance domain for Stream Heaven Phase 20. (Appeal Review scope)
 - MASTER-AI-OPERATING-SYSTEM.md as primary authority
 - 22 platform-governance documents by domain relevance
 - feature-approval-rules.md gates before new capabilities
@@ -42,7 +42,7 @@ Require:
 - shared-contracts versioning and changelog discipline
 - mobile client codegen sync after contract updates
 - no undocumented public API surfaces
-- Follow platform-governance standards for all outputs.
+- Define or update packages/shared-contracts schemas before NestJS, Flutter, or Socket.IO implementation.
 
 ### Agent Catalog Integrity
 Maintain:
@@ -51,7 +51,7 @@ Maintain:
 - boilerplate responsibility detection and enrichment
 - skill pair completeness via validate-agent-skills.mjs
 - golden agent tests for structural regression
-- Coordinate with dependent agents and shared packages.
+- Apply platform-governance standards for API, security, database, deployment, and testing surfaces.
 
 ### ADR & Architecture Forks
 Document:

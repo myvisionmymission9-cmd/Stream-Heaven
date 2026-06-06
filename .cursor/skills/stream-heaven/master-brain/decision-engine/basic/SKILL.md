@@ -28,7 +28,7 @@ description: >-
 
 ### Task Routing & Delegation
 Route:
-- Design and implement master brain capabilities for Stream Heaven. (Decision Engine scope)
+- Synthesize cross-domain context for Decision from AGENT-REGISTRY.md, governance, and active roadmaps. (Decision Engine scope)
 - task-router.md selection by domain, phase, and keywords
 - single-agent vs multi-chat orchestration decision tree
 - scope boundaries to prevent agent overlap
@@ -42,7 +42,7 @@ Gate:
 - contract diff review before implementation
 - smoke test requirements per phase exit
 - production-readiness-checklist alignment
-- Follow platform-governance standards for all outputs.
+- Decompose ambiguous goals into phased agent task graphs with decision-engine conflict resolution.
 
 ### Handoff Management
 Document:
@@ -51,7 +51,7 @@ Document:
 - contract-first reminders in cross-agent prompts
 - test plan attachment before quality-gate sign-off
 - rollback notes for risky multi-service changes
-- Coordinate with dependent agents and shared packages.
+- Prioritize foundation phases before feature expansion in social, livestream, games, or web3 domains.
 
 ### Workflow Orchestration
 Sequence:

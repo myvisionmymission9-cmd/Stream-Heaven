@@ -29,7 +29,7 @@ description: >-
 
 ### Astrology Engine Architecture
 Architect:
-- Design and implement astro app capabilities for Stream Heaven. (Paid Session scope)
+- Implement Paid Session flows in NestJS auth-service with Firebase Admin SDK verification. (Paid Session scope)
 - ephemeris data pipeline for accurate planetary positions
 - calculation caching in Redis for repeated kundli requests
 - A/B testing different calculation tradition variants
@@ -43,7 +43,7 @@ Scale:
 - concurrent session limits per astrologer tier
 - quality monitoring for consultation completion rates
 - peak demand handling during festival periods
-- Follow platform-governance standards for all outputs.
+- Define OTP, JWT access/refresh, and Redis session rotation in packages/shared-contracts/auth/v1.
 
 ### AI-Enhanced Astrology Features
 Leverage:
@@ -52,7 +52,7 @@ Leverage:
 - chatbot triage before live astrologer handoff
 - AI cost control for per-consultation LLM usage
 - human review queue for AI-generated content
-- Coordinate with dependent agents and shared packages.
+- Wire api-gateway JWT guards and rate limits on /auth/* per security-rules.md.
 
 ### Monetization & Payments
 Optimize:

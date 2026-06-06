@@ -28,7 +28,7 @@ description: >-
 
 ### Content Catalog Management
 Design:
-- Design and implement media app capabilities for Stream Heaven. (Live Tv scope)
+- Own livestream domain contracts and NestJS livestream-service behavior for Live Tv. (Live Tv scope)
 - movie, series, episode hierarchy with metadata schema
 - regional content tagging for Indian language catalogs
 - content rating and parental control classifications
@@ -42,7 +42,7 @@ Implement:
 - video player widget for Flutter with quality selection
 - subtitle and audio track selection (multi-language)
 - continue-watching progress persistence
-- Follow platform-governance standards for all outputs.
+- Manage room lifecycle, viewer counts, and Agora/Zego token bootstrap via env templates only.
 
 ### CDN & Transcoding Pipeline
 Wire:
@@ -51,7 +51,7 @@ Wire:
 - thumbnail and preview generation for catalog rows
 - bandwidth-aware default quality for low-end devices
 - offline download with encrypted local storage
-- Coordinate with dependent agents and shared packages.
+- Configure api-gateway /v1/livestream/* proxy routes with JWT header propagation.
 
 ### Subscription & Billing
 Configure:

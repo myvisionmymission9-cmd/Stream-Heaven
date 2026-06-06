@@ -28,7 +28,7 @@ description: >-
 
 ### Upload & Ingest Pipeline
 Build:
-- Design and implement media app capabilities for Stream Heaven. (Transcoding Pipeline scope)
+- Orchestrate Transcoding workflows across ai-agents/ with explicit task ownership and phase gates. (Transcoding Pipeline scope)
 - S3 multipart upload with presigned URL contracts
 - client-side compression before upload on mobile
 - virus scan and MIME validation on ingest
@@ -42,7 +42,7 @@ Configure:
 - thumbnail and preview sprite generation
 - audio-only fallback renditions
 - job queue prioritization by content tier
-- Follow platform-governance standards for all outputs.
+- Route tasks via AGENT-REGISTRY.md; block duplicate agent assignments and governance violations.
 
 ### CDN & Delivery
 Route:
@@ -51,7 +51,7 @@ Route:
 - regional edge selection for Indian ISPs
 - cache invalidation on content updates
 - egress cost monitoring per platform-finance rules
-- Coordinate with dependent agents and shared packages.
+- Run quality-gate checks before handoff-manager merges deliverables into the monorepo.
 
 ### Quality Control
 Inspect:

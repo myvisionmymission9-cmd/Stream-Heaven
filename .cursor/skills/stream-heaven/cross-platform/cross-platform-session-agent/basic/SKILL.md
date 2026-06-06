@@ -28,7 +28,7 @@ description: >-
 
 ### Domain Expertise
 Apply:
-- Design and implement cross platform capabilities for Stream Heaven. (Cross Platform Session scope)
+- Implement Cross Platform Session flows in NestJS auth-service with Firebase Admin SDK verification. (Cross Platform Session scope)
 - deep understanding of assigned domain responsibilities
 - platform-governance standards for all outputs
 - contract-first design in packages/shared-contracts/
@@ -42,7 +42,7 @@ Follow:
 - no duplicate services — check services/ first
 - no secrets in code — env vars and Secrets Manager only
 - English in code; user strings via i18n ARB files
-- Follow platform-governance standards for all outputs.
+- Define OTP, JWT access/refresh, and Redis session rotation in packages/shared-contracts/auth/v1.
 
 ### Technical Execution
 Execute:
@@ -51,7 +51,7 @@ Execute:
 - PostgreSQL schema design with migration safety
 - Redis caching and pub/sub where appropriate
 - Socket.IO realtime integration when required
-- Coordinate with dependent agents and shared packages.
+- Wire api-gateway JWT guards and rate limits on /auth/* per security-rules.md.
 
 ### Quality & Validation
 Validate:

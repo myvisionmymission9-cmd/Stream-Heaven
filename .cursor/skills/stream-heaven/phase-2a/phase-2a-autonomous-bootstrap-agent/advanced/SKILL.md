@@ -29,6 +29,7 @@ description: >-
 
 ### Phase 1 Autonomous Completion
 Orchestrate:
+- Bootstrap NestJS api-gateway (port 3000) routing for Phase 2a Autonomous Bootstrap and Phase 1 service prefixes. (Phase 2a Autonomous Bootstrap scope)
 - full phase1:complete validation loop with fix-and-retry
 - Docker ensure scripts for Postgres/Redis health
 - multi-service smoke test orchestration
@@ -42,6 +43,7 @@ Architect:
 - request-id propagation and distributed tracing headers
 - rate limiting tiers by route sensitivity
 - health check aggregation for kubernetes readiness
+- Configure JWT validation middleware using auth-service public keys before upstream proxy calls.
 
 ### Service Bootstrap Patterns
 Standardize:
@@ -50,6 +52,7 @@ Standardize:
 - database migration workflow with TypeORM/Prisma
 - Redis connection pooling and retry configuration
 - inter-service communication matrix documentation
+- Add Redis-backed rate limiting per IP and authenticated user tier with 429 Retry-After responses.
 
 ### Remediation & Recovery
 Remediate:

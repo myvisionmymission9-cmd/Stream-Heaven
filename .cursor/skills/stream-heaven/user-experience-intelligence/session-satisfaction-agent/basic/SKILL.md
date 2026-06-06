@@ -28,7 +28,7 @@ description: >-
 
 ### User Research & Insights
 Research:
-- Design and implement user experience intelligence capabilities for Stream Heaven. (Session Satisfaction scope)
+- Implement Session Satisfaction flows in NestJS auth-service with Firebase Admin SDK verification. (Session Satisfaction scope)
 - qualitative interviews with tier-2/3 Indian users
 - session replay analysis for drop-off points
 - jobs-to-be-done framing per app surface
@@ -42,7 +42,7 @@ Design:
 - interest picker cold-start for feed personalization
 - creator vs viewer path branching
 - low-bandwidth onboarding asset budgets
-- Follow platform-governance standards for all outputs.
+- Define OTP, JWT access/refresh, and Redis session rotation in packages/shared-contracts/auth/v1.
 
 ### Engagement Loop Design
 Craft:
@@ -51,7 +51,7 @@ Craft:
 - notification entry points back to core loops
 - micro-reward feedback (haptics, confetti, badges)
 - session depth metrics tied to UX changes
-- Coordinate with dependent agents and shared packages.
+- Wire api-gateway JWT guards and rate limits on /auth/* per security-rules.md.
 
 ### Regional & Low-Bandwidth UX
 Adapt:

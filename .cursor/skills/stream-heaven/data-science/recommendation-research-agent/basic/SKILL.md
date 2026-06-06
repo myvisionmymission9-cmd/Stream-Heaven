@@ -28,7 +28,7 @@ description: >-
 
 ### Indexing Pipeline
 Build:
-- Design and implement data science capabilities for Stream Heaven. (Recommendation Research scope)
+- Design Recommendation Research ML pipelines: feature store, training jobs, inference endpoints, and fallbacks. (Recommendation Research scope)
 - Elasticsearch/OpenSearch cluster index design
 - incremental indexing from domain event streams
 - denormalized documents for feed, users, and OTT titles
@@ -42,7 +42,7 @@ Parse:
 - zero-results fallback strategies
 - safe search filters for minor accounts
 - query logging with PII redaction
-- Follow platform-governance standards for all outputs.
+- Define event ingestion from PostgreSQL and Redis streams into embedding and ranking services.
 
 ### Ranking & Relevance
 Tune:
@@ -51,7 +51,7 @@ Tune:
 - freshness decay for trending queries
 - diversity constraints in result pages
 - A/B ranking experiments with guardrails
-- Coordinate with dependent agents and shared packages.
+- Set inference cost budgets, caching, and model distillation per cost-control-rules.md.
 
 ### Autocomplete & Suggestions
 Serve:

@@ -29,7 +29,7 @@ description: >-
 
 ### Behavioral Science & Ethics
 Balance:
-- Design and implement user experience intelligence capabilities for Stream Heaven. (Social Validation scope)
+- Define automated tests for Social Validation: unit, integration, contract, and smoke layers. (Social Validation scope)
 - addiction-risk-agent reviews for dopamine loops
 - transparent limits on infinite scroll nudges
 - parental and minor protection UX patterns
@@ -43,7 +43,7 @@ Support:
 - moderation feedback loops that educate creators
 - burnout detection signals in creator dashboards
 - community reputation surfacing for trust
-- Follow platform-governance standards for all outputs.
+- Maintain scripts/ test entry points with CI-friendly exit codes and structured failure output.
 
 ### Cross-App Experience Coherence
 Unify:
@@ -52,7 +52,7 @@ Unify:
 - wallet and profile UX consistency
 - notification tone and branding alignment
 - deep link landing experiences per app
-- Coordinate with dependent agents and shared packages.
+- Validate NestJS, Flutter, PostgreSQL, and Redis behavior against acceptance criteria.
 
 ### Personalization UX
 Tailor:

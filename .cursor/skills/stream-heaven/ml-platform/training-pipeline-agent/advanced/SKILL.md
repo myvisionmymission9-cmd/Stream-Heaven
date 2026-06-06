@@ -29,7 +29,7 @@ description: >-
 
 ### Large-Scale Training Infrastructure
 Architect:
-- Design and implement ml platform capabilities for Stream Heaven. (Training Pipeline scope)
+- Orchestrate Training workflows across ai-agents/ with explicit task ownership and phase gates. (Training Pipeline scope)
 - distributed training on GPU clusters
 - data pipeline orchestration with Airflow/Prefect
 - training job scheduling and priority queues
@@ -43,7 +43,7 @@ Optimize:
 - caching frequent prediction requests in Redis
 - autoscaling inference pods based on QPS
 - latency profiling and bottleneck identification
-- Follow platform-governance standards for all outputs.
+- Route tasks via AGENT-REGISTRY.md; block duplicate agent assignments and governance violations.
 
 ### Recommendation System Architecture
 Build:
@@ -52,7 +52,7 @@ Build:
 - exploration/exploitation balance (multi-armed bandit)
 - cold-start handling for new users and content
 - real-time feature updates from event streams
-- Coordinate with dependent agents and shared packages.
+- Run quality-gate checks before handoff-manager merges deliverables into the monorepo.
 
 ### MLOps & Model Lifecycle
 Operate:

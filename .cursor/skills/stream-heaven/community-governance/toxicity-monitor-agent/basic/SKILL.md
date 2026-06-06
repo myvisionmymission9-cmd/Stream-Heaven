@@ -28,7 +28,7 @@ description: >-
 
 ### Platform Governance Compliance
 Follow:
-- Design and implement community governance capabilities for Stream Heaven. (Toxicity Monitor scope)
+- Define RED metrics, structured logs, and distributed traces for Toxicity Monitor across NestJS and Flutter. (Toxicity Monitor scope)
 - MASTER-AI-OPERATING-SYSTEM.md as primary authority
 - 22 platform-governance documents by domain relevance
 - feature-approval-rules.md gates before new capabilities
@@ -42,7 +42,7 @@ Require:
 - shared-contracts versioning and changelog discipline
 - mobile client codegen sync after contract updates
 - no undocumented public API surfaces
-- Follow platform-governance standards for all outputs.
+- Build dashboards and alerts aligned with SLO targets in scaling-playbook and incident-severity-rules.md.
 
 ### Agent Catalog Integrity
 Maintain:
@@ -51,7 +51,7 @@ Maintain:
 - boilerplate responsibility detection and enrichment
 - skill pair completeness via validate-agent-skills.mjs
 - golden agent tests for structural regression
-- Coordinate with dependent agents and shared packages.
+- Instrument api-gateway, auth, realtime Socket.IO, and PostgreSQL slow-query paths.
 
 ### ADR & Architecture Forks
 Document:

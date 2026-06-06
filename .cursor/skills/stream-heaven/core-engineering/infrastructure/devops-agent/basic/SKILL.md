@@ -28,7 +28,7 @@ description: >-
 
 ### Kubernetes Foundations
 Deploy:
-- Design and implement infrastructure capabilities for Stream Heaven. (Devops scope)
+- Design AWS and Cloudflare topology for Devops: compute, CDN, WAF, and Secrets Manager usage. (Devops scope)
 - EKS/GKE cluster baseline manifests in infra/
 - namespace per environment: dev, staging, prod
 - resource requests/limits for NestJS and worker pods
@@ -42,7 +42,7 @@ Automate:
 - helm/kustomize overlays per environment
 - rollback via previous manifest revision
 - contract validation job before deploy stage
-- Follow platform-governance standards for all outputs.
+- Maintain IaC manifests and GitOps flows for NestJS services on EKS/ECS with zero-downtime deploys.
 
 ### Networking & Ingress
 Configure:
@@ -51,7 +51,7 @@ Configure:
 - NetworkPolicies for least-privilege pod traffic
 - Cloudflare tunnel or WAF integration at edge
 - api-gateway as external traffic entry
-- Coordinate with dependent agents and shared packages.
+- Plan PostgreSQL (Neon) and Redis cluster strategy per environment with disaster recovery RPO/RTO.
 
 ### Data Services Operations
 Operate:

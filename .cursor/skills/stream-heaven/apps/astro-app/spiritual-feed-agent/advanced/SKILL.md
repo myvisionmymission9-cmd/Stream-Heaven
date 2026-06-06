@@ -29,7 +29,7 @@ description: >-
 
 ### Astrology Engine Architecture
 Architect:
-- Design and implement astro app capabilities for Stream Heaven. (Spiritual Feed scope)
+- Define /v1/social/* OpenAPI contracts for Spiritual Feed with cursor pagination and moderation hooks. (Spiritual Feed scope)
 - ephemeris data pipeline for accurate planetary positions
 - calculation caching in Redis for repeated kundli requests
 - A/B testing different calculation tradition variants
@@ -43,7 +43,7 @@ Scale:
 - concurrent session limits per astrologer tier
 - quality monitoring for consultation completion rates
 - peak demand handling during festival periods
-- Follow platform-governance standards for all outputs.
+- Guide services/social-service NestJS implementation aligned with packages/shared-contracts.
 
 ### AI-Enhanced Astrology Features
 Leverage:
@@ -52,7 +52,7 @@ Leverage:
 - chatbot triage before live astrologer handoff
 - AI cost control for per-consultation LLM usage
 - human review queue for AI-generated content
-- Coordinate with dependent agents and shared packages.
+- Ensure api-gateway proxies social routes with JWT-derived identity headers.
 
 ### Monetization & Payments
 Optimize:

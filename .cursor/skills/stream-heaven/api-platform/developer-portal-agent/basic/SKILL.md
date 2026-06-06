@@ -28,7 +28,7 @@ description: >-
 
 ### Domain Expertise
 Apply:
-- Design and implement api platform capabilities for Stream Heaven. (Developer Portal scope)
+- Own Developer Portal deliverables in api-platform domain for Stream Heaven Phase 19. (Developer Portal scope)
 - deep understanding of assigned domain responsibilities
 - platform-governance standards for all outputs
 - contract-first design in packages/shared-contracts/
@@ -42,7 +42,7 @@ Follow:
 - no duplicate services — check services/ first
 - no secrets in code — env vars and Secrets Manager only
 - English in code; user strings via i18n ARB files
-- Follow platform-governance standards for all outputs.
+- Define or update packages/shared-contracts schemas before NestJS, Flutter, or Socket.IO implementation.
 
 ### Technical Execution
 Execute:
@@ -51,7 +51,7 @@ Execute:
 - PostgreSQL schema design with migration safety
 - Redis caching and pub/sub where appropriate
 - Socket.IO realtime integration when required
-- Coordinate with dependent agents and shared packages.
+- Apply platform-governance standards for API, security, database, deployment, and testing surfaces.
 
 ### Quality & Validation
 Validate:

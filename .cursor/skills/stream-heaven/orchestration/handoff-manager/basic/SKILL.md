@@ -28,7 +28,7 @@ description: >-
 
 ### Task Routing & Delegation
 Route:
-- Design and implement orchestration capabilities for Stream Heaven. (Handoff Manager scope)
+- Track agent-to-agent handoff state: artifacts produced, blockers, and quality-gate sign-off status. (Handoff Manager scope)
 - task-router.md selection by domain, phase, and keywords
 - single-agent vs multi-chat orchestration decision tree
 - scope boundaries to prevent agent overlap
@@ -42,7 +42,7 @@ Gate:
 - contract diff review before implementation
 - smoke test requirements per phase exit
 - production-readiness-checklist alignment
-- Follow platform-governance standards for all outputs.
+- Validate handoff packages include governance references, tests, and shared-contracts diffs when applicable.
 
 ### Handoff Management
 Document:
@@ -51,7 +51,7 @@ Document:
 - contract-first reminders in cross-agent prompts
 - test plan attachment before quality-gate sign-off
 - rollback notes for risky multi-service changes
-- Coordinate with dependent agents and shared packages.
+- Block merges when downstream agent prerequisites are missing from Dependencies section paths.
 
 ### Workflow Orchestration
 Sequence:

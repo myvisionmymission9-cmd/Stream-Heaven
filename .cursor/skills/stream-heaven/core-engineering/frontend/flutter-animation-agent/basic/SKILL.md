@@ -28,7 +28,7 @@ description: >-
 
 ### Flutter App Architecture
 Define:
-- Design and implement frontend capabilities for Stream Heaven. (Flutter Animation scope)
+- Implement Flutter Animation in Flutter using Riverpod state and GoRouter navigation per flutter-ui-rules.md. (Flutter Animation scope)
 - Riverpod provider hierarchy for state management
 - GoRouter navigation with deep link support
 - feature-first folder structure in apps/mobile
@@ -42,7 +42,7 @@ Optimize:
 - widget rebuild minimization with const constructors
 - RepaintBoundary for complex list items
 - memory profiling for leak detection
-- Follow platform-governance standards for all outputs.
+- Optimize list scrolling, image caching, and offline-first UX for low-end Android and poor connectivity.
 
 ### Networking & API Integration
 Implement:
@@ -51,7 +51,7 @@ Implement:
 - offline-aware retry with exponential backoff
 - request cancellation on widget dispose
 - API error mapping to user-friendly i18n strings
-- Coordinate with dependent agents and shared packages.
+- Consume generated API clients from packages/shared-contracts for NestJS backend types.
 
 ### UI & Design System
 Apply:

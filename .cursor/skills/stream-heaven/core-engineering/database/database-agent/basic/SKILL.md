@@ -28,7 +28,7 @@ description: >-
 
 ### Cache Key Design
 Design:
-- Design and implement database capabilities for Stream Heaven. (Database scope)
+- Design PostgreSQL schemas, indexes, and migrations for Database with rollback plans. (Database scope)
 - namespaced keys: `{service}:{entity}:{id}` convention
 - TTL policies per data volatility class
 - cache-aside vs write-through selection per endpoint
@@ -42,7 +42,7 @@ Implement:
 - partial invalidation for feed fan-out subgraphs
 - stale-while-revalidate for profile and catalog reads
 - invalidation audit logs for debugging ghost data
-- Follow platform-governance standards for all outputs.
+- Define Redis key patterns, TTL policies, and cache invalidation for hot read paths.
 
 ### Session & Rate Limiting
 Configure:
@@ -51,7 +51,7 @@ Configure:
 - OTP attempt counters with lockout windows
 - API gateway Redis-backed throttle middleware
 - session enumeration protection patterns
-- Coordinate with dependent agents and shared packages.
+- Enforce database-rules.md: FK integrity, soft-delete, and PII encryption where required.
 
 ### Pub/Sub & Realtime Fan-out
 Wire:

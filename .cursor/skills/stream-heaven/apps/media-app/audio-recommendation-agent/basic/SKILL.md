@@ -28,7 +28,7 @@ description: >-
 
 ### Content Catalog Management
 Design:
-- Design and implement media app capabilities for Stream Heaven. (Audio Recommendation scope)
+- Design Audio Recommendation ML pipelines: feature store, training jobs, inference endpoints, and fallbacks. (Audio Recommendation scope)
 - movie, series, episode hierarchy with metadata schema
 - regional content tagging for Indian language catalogs
 - content rating and parental control classifications
@@ -42,7 +42,7 @@ Implement:
 - video player widget for Flutter with quality selection
 - subtitle and audio track selection (multi-language)
 - continue-watching progress persistence
-- Follow platform-governance standards for all outputs.
+- Define event ingestion from PostgreSQL and Redis streams into embedding and ranking services.
 
 ### CDN & Transcoding Pipeline
 Wire:
@@ -51,7 +51,7 @@ Wire:
 - thumbnail and preview generation for catalog rows
 - bandwidth-aware default quality for low-end devices
 - offline download with encrypted local storage
-- Coordinate with dependent agents and shared packages.
+- Set inference cost budgets, caching, and model distillation per cost-control-rules.md.
 
 ### Subscription & Billing
 Configure:

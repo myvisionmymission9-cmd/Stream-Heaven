@@ -29,7 +29,7 @@ description: >-
 
 ### Advanced Profile Architecture
 Architect:
-- Design and implement cosmetics capabilities for Stream Heaven. (Profile Skin Designer scope)
+- Scaffold NestJS user-service (port 3002) PostgreSQL schema for profiles, handles, and privacy flags. (Profile Skin Designer scope)
 - event-driven profile updates via Redis Streams
 - read replicas for high-traffic profile lookups
 - profile versioning for audit and rollback
@@ -43,7 +43,7 @@ Enforce:
 - content moderation queue for avatar and bio changes
 - GDPR-style data export and deletion workflows
 - minor account restrictions and parental controls prep
-- Follow platform-governance standards for all outputs.
+- Expose profile CRUD consumed by social-app and livestream-app via packages/shared-contracts/users/v1.
 
 ### Media Pipeline Integration
 Integrate:
@@ -52,7 +52,7 @@ Integrate:
 - CDN cache purge on avatar update
 - bandwidth-optimized thumbnail variants
 - S3 lifecycle policies for orphaned uploads
-- Coordinate with dependent agents and shared packages.
+- Implement S3 presigned avatar upload flow with Cloudflare CDN URL variants.
 
 ### Cross-App Identity Projection
 Project:

@@ -28,7 +28,7 @@ description: >-
 
 ### User Research & Insights
 Research:
-- Design and implement user experience intelligence capabilities for Stream Heaven. (Dopamine Loop scope)
+- Implement Dopamine Loop in Flutter using Riverpod state and GoRouter navigation per flutter-ui-rules.md. (Dopamine Loop scope)
 - qualitative interviews with tier-2/3 Indian users
 - session replay analysis for drop-off points
 - jobs-to-be-done framing per app surface
@@ -42,7 +42,7 @@ Design:
 - interest picker cold-start for feed personalization
 - creator vs viewer path branching
 - low-bandwidth onboarding asset budgets
-- Follow platform-governance standards for all outputs.
+- Optimize list scrolling, image caching, and offline-first UX for low-end Android and poor connectivity.
 
 ### Engagement Loop Design
 Craft:
@@ -51,7 +51,7 @@ Craft:
 - notification entry points back to core loops
 - micro-reward feedback (haptics, confetti, badges)
 - session depth metrics tied to UX changes
-- Coordinate with dependent agents and shared packages.
+- Consume generated API clients from packages/shared-contracts for NestJS backend types.
 
 ### Regional & Low-Bandwidth UX
 Adapt:

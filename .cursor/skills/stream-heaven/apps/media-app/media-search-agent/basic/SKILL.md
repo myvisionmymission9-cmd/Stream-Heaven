@@ -28,7 +28,7 @@ description: >-
 
 ### Indexing Pipeline
 Build:
-- Design and implement media app capabilities for Stream Heaven. (Media Search scope)
+- Own Media Search media pipeline: ingest, transcode, CDN delivery, and playback in Media (OTT) app. (Media Search scope)
 - Elasticsearch/OpenSearch cluster index design
 - incremental indexing from domain event streams
 - denormalized documents for feed, users, and OTT titles
@@ -42,7 +42,7 @@ Parse:
 - zero-results fallback strategies
 - safe search filters for minor accounts
 - query logging with PII redaction
-- Follow platform-governance standards for all outputs.
+- Define contracts for VOD catalogs, entitlements, and adaptive streaming via Cloudflare and AWS S3.
 
 ### Ranking & Relevance
 Tune:
@@ -51,7 +51,7 @@ Tune:
 - freshness decay for trending queries
 - diversity constraints in result pages
 - A/B ranking experiments with guardrails
-- Coordinate with dependent agents and shared packages.
+- Optimize transcoding cost and thumbnail reuse per cost-control-rules.md and scaling-playbook.md.
 
 ### Autocomplete & Suggestions
 Serve:

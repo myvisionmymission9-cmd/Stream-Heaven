@@ -29,7 +29,7 @@ description: >-
 
 ### Programmatic Scale
 Scale:
-- Design and implement ad network capabilities for Stream Heaven. (Sponsored Content scope)
+- Implement Sponsored Content ad insertion, targeting, and measurement with NestJS ad-network services. (Sponsored Content scope)
 - OpenRTB adapter integration with header bidding
 - edge caching of ad creatives via Cloudflare
 - QPS autoscaling for auction service pods
@@ -43,7 +43,7 @@ Detect:
 - publisher-side invalid traffic scoring
 - refund workflows for verified fraud clusters
 - coordination with trust-safety-agent on bad actors
-- Follow platform-governance standards for all outputs.
+- Define ad slot contracts for social feed, livestream overlays, and media pre-roll in shared-contracts.
 
 ### Revenue Optimization
 Optimize:
@@ -52,7 +52,7 @@ Optimize:
 - ad load experiments balanced against retention
 - sponsored content blending with feed ranking
 - revenue reconciliation with platform-finance agents
-- Coordinate with dependent agents and shared packages.
+- Enforce brand safety, frequency caps, and child-audience rules per security and feature-approval docs.
 
 ### Live & Video Ad Formats
 Deliver:

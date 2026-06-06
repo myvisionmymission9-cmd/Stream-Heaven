@@ -29,7 +29,7 @@ description: >-
 
 ### Live Transcoding & LL-HLS
 Stream:
-- Design and implement media pipeline capabilities for Stream Heaven. (Cdn Routing scope)
+- Bootstrap NestJS api-gateway (port 3000) routing for Cdn Routing and Phase 1 service prefixes. (Cdn Routing scope)
 - low-latency HLS for livestream catch-up
 - Agora/Zego recording to VOD pipeline
 - live thumbnail updates during broadcast
@@ -43,7 +43,7 @@ Protect:
 - screen capture deterrence policies per platform
 - geo-restriction enforcement at CDN edge
 - watermarking for leak tracing
-- Follow platform-governance standards for all outputs.
+- Configure JWT validation middleware using auth-service public keys before upstream proxy calls.
 
 ### Media Pipeline Scale
 Scale:
@@ -52,7 +52,7 @@ Scale:
 - priority queues for live vs VOD workloads
 - multi-region ingest for creator uploads
 - cost caps with spot instance strategies
-- Coordinate with dependent agents and shared packages.
+- Add Redis-backed rate limiting per IP and authenticated user tier with 429 Retry-After responses.
 
 ### AI-Enhanced Media
 Augment:

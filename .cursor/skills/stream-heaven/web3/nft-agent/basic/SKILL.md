@@ -28,7 +28,7 @@ description: >-
 
 ### Wallet Ledger Design
 Design:
-- Design and implement web3 capabilities for Stream Heaven. (Nft scope)
+- Design Nft web3 integrations with wallet-connect flows and explicit user consent UX. (Nft scope)
 - double-entry ledger with immutable transaction log
 - idempotent debit/credit APIs with client request IDs
 - balance snapshots vs event-sourced reconstruction
@@ -42,7 +42,7 @@ Integrate:
 - webhook signature verification and replay protection
 - payment status state machine: initiated → captured → settled
 - no secrets in repo — gateway keys via Secrets Manager
-- Follow platform-governance standards for all outputs.
+- Define token economy contracts in packages/shared-contracts with audit trails and rollback plans.
 
 ### Payouts & Creator Earnings
 Process:
@@ -51,7 +51,7 @@ Process:
 - payout batch scheduling with failure retry queues
 - creator earnings statements and dispute windows
 - reconciliation with platform-finance reporting
-- Coordinate with dependent agents and shared packages.
+- Keep private keys and chain RPC secrets out of repo; use env templates and HSM patterns.
 
 ### Fraud & Risk Controls
 Enforce:

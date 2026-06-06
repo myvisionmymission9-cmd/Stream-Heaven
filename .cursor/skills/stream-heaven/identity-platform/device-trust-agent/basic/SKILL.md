@@ -28,7 +28,7 @@ description: >-
 
 ### Content Moderation Pipeline
 Build:
-- Design and implement identity platform capabilities for Stream Heaven. (Device Trust scope)
+- Define moderation policies and enforcement hooks for Device Trust across social and livestream surfaces. (Device Trust scope)
 - AI pre-filter + human review queue for UGC
 - real-time live stream moderation hooks
 - CSAM and illegal content zero-tolerance workflows
@@ -42,7 +42,7 @@ Enforce:
 - harassment and hate speech detection thresholds
 - creator verification for monetization eligibility
 - regional legal compliance for Indian jurisdictions
-- Follow platform-governance standards for all outputs.
+- Implement report, block, and trust-score pathways in NestJS with PostgreSQL audit logs.
 
 ### Fraud & Abuse Detection
 Detect:
@@ -51,7 +51,7 @@ Detect:
 - gift and wallet wash trading patterns
 - deepfake detection on profile media
 - rate limits coordinated with auth-service
-- Coordinate with dependent agents and shared packages.
+- Coordinate ML moderation agents with human-in-the-loop review queues per ai-usage-rules.md.
 
 ### User Reporting & Appeals
 Operate:
