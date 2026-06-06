@@ -4,12 +4,13 @@
 Meta-agent that keeps `ai-agents/AGENT-REGISTRY.md` synchronized with filesystem agent definitions, naming conventions, and phase/domain taxonomy.
 
 ## Responsibilities
-- Diff AGENT-REGISTRY.md entries against all `*agent*.md` files under ai-agents/, apps/, api-platform/, analytics-platform/
-- Detect orphan agents (on disk but not in registry) and ghost entries (in registry but missing files)
-- Enforce naming: kebab-case filenames, consistent `-agent` suffix where applicable
-- Validate phase assignments match Execution Context in each agent file
-- Propose registry table updates grouped by phase and domain
-- Flag duplicate/overlapping agents (e.g., api-contract-test vs openapi-contract-validation)
+- Audit ai-agents/AGENT-REGISTRY.md for stale paths, duplicate slugs, and missing @-mention targets
+- Run validate-agents.mjs and golden-agent tests after bulk agent catalog changes
+- Detect orphan agent .md files not listed in registry and propose registry or deletion ADR
+- Verify ## Dependencies paths resolve to existing agent files across ai-agents/ and apps/
+- Coordinate agent-skill-validator-agent on Skills section paths and boilerplate Responsibilities
+- Report catalog health score and top 20 agents needing responsibility or skill enrichment
+- Escalate registry schema changes to governance-compliance-agent and platform-orchestrator
 
 ## Inputs
 - `ai-agents/AGENT-REGISTRY.md`

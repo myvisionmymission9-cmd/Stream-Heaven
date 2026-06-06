@@ -26,48 +26,26 @@ description: >-
 
 ## Role-specific skills
 
-### Cache Key Design
-Design:
-- Design and implement database capabilities for Stream Heaven. (Postgres Architect scope)
-- namespaced keys: `{service}:{entity}:{id}` convention
-- TTL policies per data volatility class
-- cache-aside vs write-through selection per endpoint
-- negative caching for miss storms
-- key cardinality monitoring to prevent hot keys
+### Schema Design
+Apply:
+- One schema owner per NestJS service — no cross-service FKs
+- UUID primary keys; timestamptz for all audit columns
+- Soft delete with deleted_at where GDPR export requires
+- Index strategy: composite indexes for feed and wallet hot queries
 
-### Invalidation Strategies
-Implement:
-- event-driven invalidation via pub/sub channels
-- versioned cache keys for atomic busting
-- partial invalidation for feed fan-out subgraphs
-- stale-while-revalidate for profile and catalog reads
-- invalidation audit logs for debugging ghost data
-- Follow platform-governance standards for all outputs.
+### Migration
+Apply:
+- Reversible migrations via migration-manager conventions
+- Expand-contract pattern for zero-downtime column changes
+- Migration ordering in CI before deploy
+- Never destructive migration without ADR and backup plan
 
-### Session & Rate Limiting
-Configure:
-- auth session storage with sliding TTL
-- token bucket rate limiters per IP and user
-- OTP attempt counters with lockout windows
-- API gateway Redis-backed throttle middleware
-- session enumeration protection patterns
-- Coordinate with dependent agents and shared packages.
-
-### Pub/Sub & Realtime Fan-out
-Wire:
-- Socket.IO Redis adapter channel design
-- room-scoped pub/sub for livestream events
-- backpressure handling on subscriber lag
-- message schema versioning in shared-contracts
-- dead connection cleanup and heartbeat alignment
-
-### Operational Safety
-Operate:
-- memory eviction policy selection (volatile-lru vs allkeys-lru)
-- maxmemory alerts before OOM kills
-- RDB/AOF backup strategy per environment
-- no secrets in repo — REDIS_URL via env only
-- local Docker Redis via setup-phase1.ps1
+### Performance
+Apply:
+- Connection pool tuning per service and PgBouncer when needed
+- EXPLAIN ANALYZE on p99 offenders with query-optimization-agent
+- Partition large tables: messages, wallet_ledger, analytics events
+- Read replica routing for read-heavy profile and feed queries
 
 ## Key paths
 

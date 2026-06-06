@@ -26,45 +26,26 @@ description: >-
 
 ## Role-specific skills
 
-### Phase 1 Foundation Setup
-Bootstrap:
-- Docker Postgres and Redis via setup-phase1.ps1
-- NestJS service scaffolds in services/
-- api-gateway on port 3000 as single entry point
-- auth-service (3001) and user-service (3002) boot order
-- environment templates without secrets in repo
+### Phase 1 Orchestration
+Apply:
+- Run full bootstrap: Docker Postgres/Redis, four NestJS services, smoke suite
+- Collect evidence: health JSON, OTP log snippet, smoke PASS output
+- Sequence validate-agents → validate-agent-skills → golden tests
+- Update docs/FINAL-READINESS-REPORT.md with dated PASS/FAIL summary
 
-### Contract-First Development
-Define:
-- OpenAPI specs in packages/shared-contracts before code
-- shared-types generation from contract schemas
-- breaking change detection in CI validation
-- api-contract-author review for new endpoints
-- gateway proxy rules aligned with contract paths
+### Exit Criteria
+Apply:
+- Gateway /health aggregates auth, profile, realtime upstream status
+- Auth OTP register → verify → JWT → profile CRUD chain works
+- Realtime socket ping/pong or room join smoke passes
+- No secrets committed; .env.example documents all required vars
 
-### Auth & Identity Foundation
-Implement:
-- Firebase Auth bridge with OTP login flow
-- JWT issuance and Redis session management
-- api-gateway JWT validation middleware
-- user profile linkage via JWT sub claim
-- rate limiting on authentication endpoints
-
-### Local Dev & Validation
-Run:
-- setup-phase1.ps1 for Windows Docker bootstrap
-- smoke tests for gateway health and auth flow
-- validate-agents.mjs after agent catalog changes
-- phase1:complete npm script for full validation gate
-- handoff documentation for Phase 2 agents
-
-### Governance Compliance
-Follow:
-- MASTER-AI-OPERATING-SYSTEM.md as primary context
-- platform-governance/engineering-rules.md standards
-- no duplicate services — check services/ first
-- ADR for any Phase 1 architecture deviations
-- smallest correct diff for all Phase 1 changes
+### Remediation Routing
+Apply:
+- Route compile errors to phase-1-remediation-agent and nestjs-architect
+- Route contract mismatches to openapi-contract-validation-agent
+- Route Docker issues to local-dev-bootstrap-agent
+- Block Phase 2a until two consecutive green Phase 1 runs
 
 ## Key paths
 

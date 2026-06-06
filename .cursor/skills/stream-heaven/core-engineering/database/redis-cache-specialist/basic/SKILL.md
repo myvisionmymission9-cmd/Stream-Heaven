@@ -26,48 +26,26 @@ description: >-
 
 ## Role-specific skills
 
-### Cache Key Design
-Design:
-- Design and implement database capabilities for Stream Heaven. (Redis Cache Specialist scope)
-- namespaced keys: `{service}:{entity}:{id}` convention
-- TTL policies per data volatility class
-- cache-aside vs write-through selection per endpoint
-- negative caching for miss storms
-- key cardinality monitoring to prevent hot keys
+### Key Design
+Apply:
+- Prefix convention: auth:session:, social:feed:, live:presence:, ratelimit:
+- Hash tags for cluster multi-key ops: {userId} session families
+- TTL on all cache keys — no immortal keys without ADR
+- Document key catalog in platform-governance/database-rules.md
 
-### Invalidation Strategies
-Implement:
-- event-driven invalidation via pub/sub channels
-- versioned cache keys for atomic busting
-- partial invalidation for feed fan-out subgraphs
-- stale-while-revalidate for profile and catalog reads
-- invalidation audit logs for debugging ghost data
-- Follow platform-governance standards for all outputs.
+### Session & Auth Cache
+Apply:
+- Refresh token rotation families with reuse detection
+- OTP attempt counters and cooldown keys per phone hash
+- Session invalidation on password change and admin lock
+- Coordinate auth-service-agent on schema changes
 
-### Session & Rate Limiting
-Configure:
-- auth session storage with sliding TTL
-- token bucket rate limiters per IP and user
-- OTP attempt counters with lockout windows
-- API gateway Redis-backed throttle middleware
-- session enumeration protection patterns
-- Coordinate with dependent agents and shared packages.
-
-### Pub/Sub & Realtime Fan-out
-Wire:
-- Socket.IO Redis adapter channel design
-- room-scoped pub/sub for livestream events
-- backpressure handling on subscriber lag
-- message schema versioning in shared-contracts
-- dead connection cleanup and heartbeat alignment
-
-### Operational Safety
-Operate:
-- memory eviction policy selection (volatile-lru vs allkeys-lru)
-- maxmemory alerts before OOM kills
-- RDB/AOF backup strategy per environment
-- no secrets in repo — REDIS_URL via env only
-- local Docker Redis via setup-phase1.ps1
+### Cache Pattern
+Apply:
+- Cache-aside for profiles and feed slices
+- Rate limit sliding windows with INCR + EXPIRE
+- Probabilistic early expiration against stampede
+- Socket.IO Redis adapter memory and channel planning
 
 ## Key paths
 

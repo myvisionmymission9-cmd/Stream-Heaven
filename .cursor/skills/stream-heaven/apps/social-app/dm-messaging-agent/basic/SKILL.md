@@ -26,48 +26,26 @@ description: >-
 
 ## Role-specific skills
 
-### Feed Composition & Pagination
-Design:
-- Design and implement social app capabilities for Stream Heaven. (Dm Messaging scope)
-- following feed vs For You algorithmic feed separation
-- cursor-based pagination for infinite scroll
-- low-bandwidth feed payloads for 2G/3G networks
-- ad insertion slots without disrupting scroll UX
-- feed refresh and pull-to-refresh debouncing
+### DM API
+Apply:
+- /v1/social/dm/threads, messages, read, delete contracts
+- Cursor pagination on messages with stable (created_at, id) sort
+- Media attachments via S3 presigned upload refs only
+- Block graph check on every send — return 403 without leak
 
-### Social API Contracts
-Define:
-- /v1/social/* OpenAPI in packages/shared-contracts
-- posts CRUD, comments, follows, and report/block stubs
-- api-gateway JWT-derived X-User-Id header propagation
-- request-id propagation for distributed tracing
-- moderation hook endpoints for trust-safety integration
-- Follow platform-governance standards for all outputs.
+### Realtime DM
+Apply:
+- Socket namespace /social/dm per thread room
+- Typing indicators with debounced emit rate
+- Delivery and read receipt events with idempotency
+- Offline queue sync on reconnect
 
-### Post & Engagement Flows
-Implement:
-- CRUD-lite post creation with media upload hooks
-- comment threading with depth limits
-- follow/unfollow mutation with fan-out considerations
-- like and share event emission for analytics
-- report and block pathways to moderation pipeline
-- Coordinate with dependent agents and shared packages.
-
-### Feed Ranking Integration
-Coordinate:
-- feed-ranking-agent ordering input contracts
-- feed-architect composition layer boundaries
-- cold-start feed for new users without follows
-- regional content boosting for Indian languages
-- A/B test hooks for ranking algorithm variants
-
-### Mobile Feed UX
-Guide:
-- Flutter feed in apps/mobile with Riverpod state
-- image lazy loading and placeholder skeletons
-- video autoplay policy for low-end devices
-- offline draft posts with sync on reconnect
-- accessibility for screen reader feed navigation
+### Flutter DM UI
+Apply:
+- Thread list with unread badges and mute support
+- Message composer with attachment picker and low-data mode
+- Optimistic send with rollback on failure
+- i18n for all user-visible strings via ARB files
 
 ## Key paths
 

@@ -27,72 +27,19 @@ description: >-
 
 ## Role-specific skills (advanced)
 
-### Autonomous Bootstrap Orchestration
-Orchestrate:
-- Diff AGENT-REGISTRY.md entries against all `*agent*.md` files under ai-agents/, apps/, api-platform/, analytics-platform/. (Agent Registry Auditor scope)
-- full environment bootstrap with fix-and-retry loops
-- multi-phase validation (Phase 1 → 2a → 2) sequencing
-- dependency conflict resolution across workspaces
-- Docker resource allocation optimization for Windows
-- bootstrap failure diagnosis and automated remediation
+### Catalog Health
+Apply:
+- Publish top 20 agents needing skill enrichment
+- Track manifest drift in agent-skills-manifest.json
+- Propose registry schema ADR for new domains
+- Coordinate agent-coverage-analyst-agent on gap analysis
 
-### Agent Ecosystem Governance
-Govern:
-- 774+ agent catalog integrity audits
-- agent-skill-validator-agent quality gate enforcement
-- boilerplate detection and enrichment workflows
-- agent coverage analysis across platform domains
-- registry sync after bulk agent generation
-- Detect orphan agents (on disk but not in registry) and ghost entries (in registry but missing files).
-
-### CI/CD Pipeline Alignment
-Align:
-- local validation script parity with CI checks
-- GitHub Actions workflow debugging and fixes
-- pre-commit hook configuration and testing
-- validation script performance optimization
-- CI failure triage and remediation playbooks
-- Enforce naming: kebab-case filenames, consistent `-agent` suffix where applicable.
-
-### Developer Experience Optimization
-Improve:
-- setup script idempotency and re-run safety
-- error message clarity for common bootstrap failures
-- documentation sync after script changes
-- onboarding time measurement and reduction
-- developer feedback collection and prioritization
-
-### Multi-Agent Orchestration
-Coordinate:
-- phase-1-autonomous-completion-agent handoffs
-- local-dev-bootstrap-agent environment prerequisites
-- agent-registry-auditor-agent catalog health checks
-- quality-gate validation before feature work
-- ADR for dev tooling architecture changes
-
-### Production Validation
-Validate:
-- bootstrap script E2E tests on clean Windows VM
-- validation script regression test suite
-- golden agent test coverage for meta agents
-- CI pipeline green status verification
-- documentation accuracy audits
-
-### Monitoring & Diagnostics
-Monitor:
-- bootstrap success rate tracking across team
-- common failure pattern analysis and fixes
-- Docker resource usage monitoring on dev machines
-- validation script execution time profiling
-- runbooks for dev environment recovery
-
-### Security & Compliance
-Ensure:
-- no secrets in setup scripts or .env.example
-- Docker image vulnerability scanning
-- dependency audit automation in CI
-- dev environment isolation from production credentials
-- secure defaults in all bootstrap configurations
+### CI Integration
+Apply:
+- GitHub Actions gate on validate-agents for agent PRs
+- Pre-commit hook recommendation via create-hook skill
+- Bulk update playbooks for agent-skill-validator-agent
+- Escalate catalog breakage to platform-orchestrator
 
 ## Key paths
 

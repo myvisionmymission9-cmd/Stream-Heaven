@@ -26,48 +26,26 @@ description: >-
 
 ## Role-specific skills
 
-### Domain Expertise
+### Gate Checklist
 Apply:
-- Define quality gate checklist per artifact type (NestJS service, Flutter feature, OpenAPI change, agent .md). (Quality Gate scope)
-- deep understanding of assigned domain responsibilities
-- platform-governance standards for all outputs
-- contract-first design in packages/shared-contracts/
-- coordination with dependent agents listed in agent file
-- optimization for Indian market constraints
+- NestJS PR gate: health endpoints, guards, OpenAPI sync, npm test green
+- Flutter PR gate: analyze clean, widget tests on auth/profile paths
+- Agent .md gate: governance refs, Dependencies resolve, Skills paths exist
+- Contract gate: shared-contracts diff reviewed before implementation merge
 
-### Implementation Standards
-Follow:
-- smallest correct diff for all changes
-- existing codebase conventions in apps/, services/, packages/
-- no duplicate services — check services/ first
-- no secrets in code — env vars and Secrets Manager only
-- English in code; user strings via i18n ARB files
-- Block handoffs missing governance references, tests, or shared-contracts updates.
+### Validation Script
+Apply:
+- Run node scripts/validate-agents.mjs on ai-agents/ and apps/ agent changes
+- Run validate-agent-skills.mjs and validate-all-agent-skills.mjs on skill updates
+- Trigger test-golden-agents.mjs when agent prompt templates change
+- Block merge on non-zero exit codes without documented waiver ADR
 
-### Technical Execution
-Execute:
-- NestJS backend patterns for service implementations
-- Flutter/Riverpod patterns for mobile UI work
-- PostgreSQL schema design with migration safety
-- Redis caching and pub/sub where appropriate
-- Socket.IO realtime integration when required
-- Run validate-agents.mjs on new/changed agent files in PR scope.
-
-### Quality & Validation
-Validate:
-- node scripts/validate-agents.mjs after agent edits
-- contract validation against OpenAPI specs
-- integration tests for critical paths
-- low-end Android performance verification
-- documentation of decisions and handoff artifacts
-
-### Governance & Handoff
-Document:
-- MASTER-AI-OPERATING-SYSTEM.md as primary context
-- governance references listed in agent file
-- integration notes for downstream agents
-- test strategy and acceptance criteria
-- escalation paths for out-of-scope decisions
+### Handoff Review
+Apply:
+- Verify handoff-manager package: artifacts, tests, governance checklist
+- Confirm task-router assigned correct owner agent
+- Check openapi-contract-validation-agent sign-off on API changes
+- Require smoke test PASS for Phase 1 service modifications
 
 ## Key paths
 
@@ -78,11 +56,13 @@ Document:
 | Shared contracts | `packages/shared-contracts/` |
 | Validate agents | `node scripts/validate-agents.mjs` |
 | Validate skills | `node scripts/validate-agent-skills.mjs` |
+| Deep skill check | `node scripts/validate-all-agent-skills.mjs` |
 
 ## Validation
 
 ```powershell
 node scripts/validate-agents.mjs
+node scripts/validate-agent-skills.mjs
 node scripts/validate-all-agent-skills.mjs
 ```
 

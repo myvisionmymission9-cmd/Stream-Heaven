@@ -27,72 +27,19 @@ description: >-
 
 ## Role-specific skills (advanced)
 
-### AI Moderation at Scale
-Scale:
-- trust-safety-agent with human appeals via appeal-review-agent. (Trust Safety scope)
-- multimodal models for video, audio, and text
-- human-in-the-loop active learning pipelines
-- regional language moderation models (Hindi, Tamil, etc.)
-- latency budgets for live moderation decisions
-- false positive/negative monitoring dashboards
+### Threat Response
+Apply:
+- CSAM zero-tolerance pipeline with csam-detection-agent
+- Deepfake detection on livestream frames and uploads
+- Coordinated inauthentic behavior detection
+- Law enforcement escalation playbook with chief-safety-officer
 
-### Identity Verification
-Verify:
-- KYC document verification for creators and withdrawals
-- liveness checks for high-risk account recovery
-- government ID hashing and secure storage
-- verification vendor abstraction via env config
-- privacy-minimized verification data retention
-- Audit IDs; minimal biometric retention.
-
-### Crisis & CSAM Response
-Respond:
-- immediate content takedown automation
-- NCMEC/regulatory reporting workflows
-- preservation of evidence for investigations
-- employee wellness support for reviewers
-- post-crisis policy updates and ADRs
-- Escalate to csam-detection-agent when required.
-
-### Cross-App Safety Federation
-Federate:
-- unified ban list across four apps
-- cross-app report history for repeat offenders
-- shared threat intelligence feeds
-- wallet freeze coordination on fraud rings
-- identity-merge-agent alignment on duplicates
-
-### Live Safety Operations
-Protect:
-- emergency stream termination controls
-- moderator raid tools for high-traffic rooms
-- minor safety mode in live recommendations
-- dangerous challenge content proactive detection
-- coordination with incident-command during crises
-
-### Production Validation
-Validate:
-- red team tests for moderation bypass attempts
-- synthetic harmful content in staging classifiers
-- appeal SLA compliance monitoring
-- reviewer throughput and accuracy QA sampling
-- golden tests for policy edge cases
-
-### Multi-Agent Orchestration
-Coordinate:
-- ai-moderation-agent model deployment
-- legal-compliance-agent for policy updates
-- trust-safety-reviewer for high-severity cases
-- enterprise-security-agent for platform hardening
-- ADR for moderation architecture changes
-
-### Transparency & Governance
-Report:
-- transparency reports on removals and appeals
-- bias audits on moderation models
-- creator education on policy violations
-- founder-war-room safety KPI reviews
-- platform-governance feature-approval for safety tools
+### Trust Score
+Apply:
+- Host and creator reputation metrics
+- High-risk action friction: withdraw, go-live, mass DM
+- Coordinate trust-score-agent on feature gating
+- Transparency reports for executive agents quarterly
 
 ## Key paths
 

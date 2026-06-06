@@ -27,69 +27,12 @@ description: >-
 
 ## Role-specific skills (advanced)
 
-### Phase 1 Autonomous Completion
-Orchestrate:
-- full phase1:complete validation loop with fix-and-retry
-- Docker ensure scripts for Postgres/Redis health
-- multi-service smoke test orchestration
-- lint and test gap remediation across services
-- documentation sync after autonomous completion
-
-### Gateway Architecture
-Architect:
-- reverse proxy routing to auth, user, and future services
-- JWT validation cache with JWKS rotation support
-- request-id propagation and distributed tracing headers
-- rate limiting tiers by route sensitivity
-- health check aggregation for kubernetes readiness
-
-### Service Bootstrap Patterns
-Standardize:
-- NestJS module template from nestjs-architect
-- shared health, logging, and metrics modules
-- database migration workflow with TypeORM/Prisma
-- Redis connection pooling and retry configuration
-- inter-service communication matrix documentation
-
-### Remediation & Recovery
-Remediate:
-- systematic diagnosis of Phase 1 validation failures
-- Windows-safe PowerShell scripts for all fix operations
-- CI alignment after local fix verification
-- rollback procedures for failed migrations
-- escalation paths for blockers requiring ADR
-
-### Multi-Agent Orchestration
-Coordinate:
-- auth-service-agent and profile-service-agent handoffs
-- api-gateway-bootstrap-agent route registration
-- nestjs-architect module template alignment
-- local-dev-bootstrap-agent environment setup
-- quality-gate validation before Phase 2 entry
-
-### Production Readiness Prep
-Prepare:
-- production-readiness-checklist gap analysis
-- secrets management migration plan from env to AWS
-- monitoring and alerting stub configuration
-- database backup and recovery procedure documentation
-- Phase 2 entry criteria verification
-
-### Testing & Quality Gates
-Validate:
-- integration smoke tests for auth → profile flow
-- contract validation against OpenAPI specs
-- golden agent tests for Phase 1 agents
-- CI pipeline alignment with local validation scripts
-- test coverage thresholds for critical paths
-
-### Documentation & Handoff
-Document:
-- Phase 1 completion report with PASS/FAIL status
-- service port and endpoint reference card
-- environment variable documentation (templates only)
-- Phase 2 agent activation checklist
-- known limitations and technical debt register
+### Autonomous Validation
+Apply:
+- Retry flaky smoke up to 3x with structured failure classification
+- Parallel agent validation in CI alongside integration smoke
+- Produce executive summary for cto-agent and platform-orchestrator
+- Handoff checklist for phase-2a-autonomous-bootstrap-agent
 
 ## Key paths
 

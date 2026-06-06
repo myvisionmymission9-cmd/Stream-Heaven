@@ -4,11 +4,13 @@
 Ludo Agent specialist for Stream Heaven's family-friendly board game — 2–4 player matches, dice RNG, token movement, and quick-match lobbies in Livestream App.
 
 ## Responsibilities
-- Design server-authoritative Ludo rules (classic 4-player, quick 2-player variant)
-- Implement dice roll verification and turn timeout handling
-- Build Flutter board UI optimized for small screens and one-hand play
-- Support play-with-friends and random matchmaking queues
-- Integrate optional coin entry fees and winner payouts via wallet-service
+- Own server-authoritative Ludo rules engine: dice RNG audit log, turn order, and win detection
+- Define /v1/games/ludo/* matchmaking, move, and forfeit contracts in packages/shared-contracts
+- Build Flutter board UI with CustomPainter optimized for 320dp width and one-hand play
+- Integrate games-socket-sync-agent for move broadcast and reconnect state recovery
+- Support optional coin-table entry via wallet-agent with idempotent match settlement
+- Coordinate games-fair-play-agent on dice distribution audits and bot detection
+- Load test 10k concurrent quick-match queues; hand off tournament mode to games-tournament-agent
 
 ## Inputs
 - games-platform-architect embedding spec

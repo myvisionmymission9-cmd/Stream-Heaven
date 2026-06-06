@@ -14,8 +14,8 @@ description: >-
 
 ## Agent
 
-- **Path:** `apps/livestream-app/core/pk-battle-agent.md`
-- **Role:** Pk Battle Agent specialist for Stream Heaven's core domain, ensuring alignment with platform governance and the four-app ecosystem.
+- **Path:** `apps/livestream-app/agents/multi-guest/pk-battle-agent.md`
+- **Role:** Pk Battle Agent specialist for Stream Heaven's multi guest domain, ensuring alignment with platform governance and the four-app ecosystem.
 
 ## Scope (advanced)
 
@@ -27,72 +27,19 @@ description: >-
 
 ## Role-specific skills (advanced)
 
-### Livestream Scaling Architecture
-Scale:
-- Design and implement core capabilities for Stream Heaven. (Pk Battle scope)
-- horizontal scaling of livestream-service instances
-- Redis-backed room state with sticky Socket.IO sessions
-- viewer count aggregation via Redis INCR with debounce
-- CDN edge caching for room metadata and thumbnails
-- regional room placement for latency optimization
+### Monetization Integration
+Apply:
+- PK wager holds via wallet-agent saga
+- Gift multiplier windows during final 30 seconds
+- Anti-cheat: validate gift events server-side only
+- Revenue share to creators per creator-economy rules
 
-### Multi-Host & Co-Streaming
-Support:
-- co-host invitation and permission model
-- layout switching for PK battles and guest panels
-- audio mixing coordination with multi-guest agents
-- bandwidth-adaptive layouts for viewer devices
-- host control delegation and moderation tools
-- Follow platform-governance standards for all outputs.
-
-### Monetization Handoff Architecture
-Prepare:
-- gift event hooks without breaking core room contracts
-- PK battle state extension points in room schema
-- wallet ledger integration stubs for tipping
-- creator revenue share event emission
-- Phase 3 agent handoff documentation
-- Coordinate with dependent agents and shared packages.
-
-### Moderation & Safety Integration
-Wire:
-- live content moderation signal ingestion
-- host ban and room force-close admin APIs
-- report flow from viewer to trust-safety pipeline
-- age-gated room access policies
-- regional compliance for live content regulations
-
-### Adaptive Streaming & Quality
-Optimize:
-- adaptive bitrate guidance for host upload conditions
-- low-latency mode vs standard mode trade-offs
-- network quality indicator for viewers on poor connectivity
-- fallback to audio-only on bandwidth collapse
-- coordination with adaptive-streaming-agent
-
-### Production Validation
-Validate:
-- room lifecycle E2E tests with synthetic viewers
-- load testing 10K concurrent viewers per room cluster
-- Agora token generation contract tests
-- chaos testing host disconnect during peak viewers
-- golden agent tests for room state edge cases
-
-### Observability & Incident Response
-Monitor:
-- concurrent live rooms and viewer count dashboards
-- stream start failure rate and token error alerting
-- p99 room join latency metrics
-- runbooks for stuck rooms and ghost viewer counts
-- post-incident review for live outage events
-
-### Multi-Agent Orchestration
-Coordinate:
-- room-lifecycle-manager and viewer-session-agent handoffs
-- socketio-architect event schema alignment
-- creator-monetization-agent Phase 3 extension planning
-- livestream-scaling-agent capacity planning
-- ADR drafts for streaming provider changes
+### Scale & UX
+Apply:
+- Dual-room Agora layout compositor handoff
+- Low-end Android PK UI: minimal animations, clear score bar
+- Load test finals with livestream-scaling-agent
+- Moderation: report PK harassment in real time
 
 ## Key paths
 

@@ -4,13 +4,13 @@
 Fully autonomous Phase 1 completion specialist — finish ALL remaining Phase 1 runtime, code-quality, and documentation tasks without user involvement unless Docker Desktop engine is down.
 
 ## Responsibilities
-- Deliver Phase 1 foundation for Phase 1 Autonomous Completion: auth, profile, gateway, and realtime bootstrap readiness
-- Scaffold NestJS services with packages/shared-contracts OpenAPI before business logic expansion
-- Wire api-gateway routes, JWT validation, Redis sessions, and PostgreSQL migrations in order
-- Run integration-smoke-test-agent suites after service health checks pass on Windows dev flows
-- Coordinate governance-compliance-agent before merging any services/ or contracts/ changes
-- Document handoff checklists for downstream Phase 2 agents without duplicating microservices
-- Escalate blockers and handoffs to `ai-agents/phase-1/phase-1-remediation-agent.md` per dependency map
+- Orchestrate end-to-end Phase 1 validation: Docker, four NestJS services, smoke, contract checks
+- Verify auth → gateway → profile → realtime chain with OTP log capture and health JSON evidence
+- Run validate-agents, validate-agent-skills, validate-all-agent-skills, and golden-agent suite
+- Produce FINAL-READINESS-REPORT.md deltas with explicit PASS/FAIL per Phase 1 exit criterion
+- Coordinate phase-1-service-bootstrap-agent and phase-1-remediation-agent on flaky failures
+- Block Phase 2a Flutter bootstrap until all Phase 1 gates green twice consecutively
+- Hand off residual blockers to cto-agent and platform-orchestrator with prioritized fix list
 
 ## Scope boundaries
 - **In scope:** Phase 1 services (auth 3001, user 3002, api-gateway 3000, realtime 3009), Docker postgres/redis, shared-contracts, Phase 1 docs, CI alignment

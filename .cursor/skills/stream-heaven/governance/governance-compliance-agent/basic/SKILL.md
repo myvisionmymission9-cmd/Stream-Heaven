@@ -26,48 +26,26 @@ description: >-
 
 ## Role-specific skills
 
-### Platform Governance Compliance
-Follow:
-- Map each task to required governance docs (security, API, database, deployment, testing, AI usage). (Governance Compliance scope)
-- MASTER-AI-OPERATING-SYSTEM.md as primary authority
-- 22 platform-governance documents by domain relevance
-- feature-approval-rules.md gates before new capabilities
-- engineering-rules.md and security-rules.md on every change
-- production-readiness-checklist before launch
+### Governance Mapping
+Apply:
+- Map tasks to 22 platform-governance/ files with required vs optional compliance
+- Produce per-PR compliance matrix: security, API, database, deployment, testing
+- Block secrets in code, duplicate services, and gateway bypass patterns
+- Enforce Phase 1 before Phase 8 ordering in agent task routing
+
+### Agent Catalog Compliance
+Apply:
+- Validate agent .md has Role, Responsibilities, Dependencies, Governance References
+- Coordinate agent-skill-validator-agent on Skills section health
+- Flag boilerplate Responsibilities for enrich-agent-responsibilities.mjs
+- Require ADR reference when agent proposes new service in services/
 
 ### Contract-First Enforcement
-Require:
-- OpenAPI definitions before NestJS implementation
-- breaking change review with api-contract-author
-- shared-contracts versioning and changelog discipline
-- mobile client codegen sync after contract updates
-- no undocumented public API surfaces
-- Block work that duplicates services, bypasses api-gateway, or violates contract-first rules in `packages/shared-contracts/`.
-
-### Agent Catalog Integrity
-Maintain:
-- AGENT-REGISTRY.md accuracy after agent changes
-- validate-agents.mjs PASS/FAIL on catalog edits
-- boilerplate responsibility detection and enrichment
-- skill pair completeness via validate-agent-skills.mjs
-- golden agent tests for structural regression
-- Produce a compliance checklist with pass/fail per governance file before merge.
-
-### ADR & Architecture Forks
-Document:
-- docs/adr/SH-000-template.md for all architecture forks
-- no duplicate services — services/ catalog audit
-- chief-architect and cto-agent review for major forks
-- phase gate criteria before advancing roadmap
-- rollback plans attached to ADR proposals
-
-### Audit & Reporting
-Report:
-- governance compliance checklists per deliverable
-- non-compliance escalation to quality-gate
-- periodic audits of secrets and dependency risks
-- documentation drift detection vs implementation
-- founder-war-room governance status summaries
+Apply:
+- No NestJS controller without packages/shared-contracts OpenAPI entry
+- Version breaking API changes with deprecation window
+- Coordinate api-contract-author on schema ownership
+- Block Flutter client work on undocumented endpoints
 
 ## Key paths
 

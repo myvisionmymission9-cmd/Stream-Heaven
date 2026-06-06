@@ -27,72 +27,19 @@ description: >-
 
 ## Role-specific skills (advanced)
 
-### OTT Scaling Architecture
-Scale:
-- Design and implement media app capabilities for Stream Heaven. (Ott Streaming scope)
-- CDN edge caching strategy for viral content spikes
-- origin shield configuration for S3 egress cost control
-- concurrent stream limit enforcement per subscription
-- regional catalog replication for latency
-- peak traffic planning for festival movie releases
+### Pipeline Integration
+Apply:
+- Transcode job status webhooks from transcoding-pipeline-agent
+- DRM stub with drm-protection-agent before premium GA
+- Live-to-VOD replay from livestream recording agents
+- Catalog sync with ott-catalog-agent
 
-### Advanced DRM & Content Protection
-Protect:
-- multi-DRM license server integration
-- screen recording detection and blocking
-- watermarking for premium content anti-piracy
-- license renewal and offline playback expiry
-- compliance with studio content protection requirements
-- Follow platform-governance standards for all outputs.
-
-### Media Pipeline Operations
-Operate:
-- automated transcoding queue with priority tiers
-- quality assurance checks on transcoded outputs
-- subtitle synchronization and format conversion
-- content expiry and takedown workflows
-- media asset cost tracking per title
-- Coordinate with dependent agents and shared packages.
-
-### Analytics & Engagement
-Track:
-- watch time, completion rate, and drop-off analytics
-- real-time trending computation for homepage rows
-- churn prediction signals from viewing patterns
-- A/B test result aggregation for UX experiments
-- privacy-compliant viewing history for recommendations
-
-### Accessibility & Compliance
-Ensure:
-- closed captions and audio descriptions for all content
-- parental control PIN and age-gate enforcement
-- regional content compliance (CBFC ratings)
-- data localization for Indian user viewing history
-- accessibility audit for video player controls
-
-### Production Validation
-Validate:
-- playback E2E tests across device matrix
-- DRM license flow integration tests
-- CDN cache hit ratio monitoring thresholds
-- subscription entitlement enforcement tests
-- golden agent tests for catalog edge cases
-
-### Multi-Agent Orchestration
-Coordinate:
-- transcoding-pipeline-agent for media processing
-- recommendation-row-agent for homepage composition
-- drm-protection-agent for content security
-- media-billing-agent for subscription flows
-- ADR for streaming protocol or DRM provider changes
-
-### Cost & Performance Optimization
-Optimize:
-- CDN egress cost dashboards and alerting
-- transcoding cost per minute of content
-- adaptive quality defaults to reduce bandwidth spend
-- cold storage tiering for archival content
-- right-sizing transcoding worker pools
+### Scale & Cost
+Apply:
+- Concurrent stream start load tests for campaign launches
+- Bitrate cap policies for free tier users
+- S3 lifecycle for expired offline downloads
+- Cost dashboard per watch hour with cto-agent review
 
 ## Key paths
 

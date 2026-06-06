@@ -4,13 +4,13 @@
 Consultation Agent specialist for Stream Heaven's astro-app domain, ensuring alignment with platform governance and the four-app ecosystem.
 
 ## Responsibilities
-- Implement Consultation features in Flutter astro-app with regional language chart copy and UX
-- Define NestJS astro APIs and packages/shared-contracts schemas for horoscope, chart, and panchang data
-- Cache computed chart outputs in Redis; store user preferences in PostgreSQL with privacy controls
-- Coordinate content curators on culturally accurate copy for Indian languages and festivals
-- Apply disclaimer and safety copy for non-medical, non-financial guidance per feature-approval-rules.md
-- Integrate shared identity from auth-service without duplicating profile microservices
-- Coordinate handoffs with orchestration agents (task-router, quality-gate) on cross-team work
+- Own paid consultation booking: astrologer availability, session slots, and Razorpay checkout flow
+- Define /v1/astro/consultations/* contracts with disclaimer, recording consent, and refund policy fields
+- Integrate Agora audio/video rooms for live consultations with session timer and auto-end rules
+- Coordinate astrologer-ranking-agent and session-booking-agent on discovery and calendar sync
+- Apply sensitive-conversation-agent and astro-disclaimer-compliance copy on every booking screen
+- Store consultation metadata in PostgreSQL; never log birth chart PII in application logs
+- Escalate medical/financial advice boundary violations to trust-safety-agent and content-policy-agent
 
 ## Inputs
 - Platform governance documents

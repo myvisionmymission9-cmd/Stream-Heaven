@@ -27,72 +27,19 @@ description: >-
 
 ## Role-specific skills (advanced)
 
-### Advanced Game Architecture
-Architect:
-- Design server-authoritative Ludo rules (classic 4-player, quick 2-player variant). (Ludo scope)
-- NestJS game module isolation per title with shared platform SDK
-- hot-swappable rules engines for A/B rule variants
-- cross-game session federation for unified player identity
-- game-specific ADRs when diverging from platform defaults
-- load testing match throughput at peak Indian evening hours
+### Realtime Sync
+Apply:
+- games-socket-sync-agent broadcast on move and turn change
+- Reconnect: resync full board state from server snapshot
+- Anti-cheat: reject client-proposed dice values
+- Spectator mode stub for livestream embed
 
-### Realtime Sync at Scale
-Scale:
-- Redis cluster sharding for match state keys
-- sticky sessions and Socket.IO adapter scaling
-- cross-region match migration for failover
-- compression of state payloads for 2G networks
-- chaos testing disconnect storms during live events
-- Implement dice roll verification and turn timeout handling.
-
-### Matchmaking Intelligence
-Optimize:
-- ELO/Glicko-style skill rating per game mode
-- party matchmaking with size-aware queue merging
-- toxic-player shadow pools and report-weighted matching
-- dynamic queue expansion when wait times exceed SLA
-- analytics on match quality and churn correlation
-- Build Flutter board UI optimized for small screens and one-hand play.
-
-### Anti-Cheat & Fair Play Operations
-Operate:
-- collusion detection across shared IP and device fingerprints
-- automated flagging for statistically impossible win rates
-- manual review tooling for tournament integrity
-- refund and ban workflows integrated with trust-safety
-- provably fair RNG audit trails for compliance
-
-### Leaderboards & Tournaments
-Run:
-- seasonal leaderboard resets with archival snapshots
-- bracket tournament scheduling and bye handling
-- prize pool distribution with wallet ledger reconciliation
-- live tournament spectator channels
-- regional leaderboard partitions for latency fairness
-
-### Flutter Game UI Performance
-Optimize:
-- CustomPainter vs Flame engine selection per game
-- 60fps targets on 2GB RAM Android devices
-- asset bundle size budgets and lazy loading
-- one-hand play layouts for portrait mobile
-- accessibility for color-blind and low-vision players
-
-### Production Validation & Observability
-Validate:
-- match lifecycle metrics (created, completed, abandoned)
-- p99 turn latency and reconnect success rate dashboards
-- synthetic bot matches in staging before release
-- golden agent tests for game rule edge cases
-- incident runbooks for stuck matches and payout failures
-
-### Multi-Agent Orchestration
-Coordinate:
-- handoffs to games-platform-architect for embedding specs
-- games-matchmaking-agent queue contract alignment
-- games-socket-sync-agent protocol versioning
-- wallet-service integration for economy features
-- ADR drafts via docs/adr/SH-000-template.md for rule forks
+### Economy Integration
+Apply:
+- Optional coin-table entry via wallet-agent hold/release
+- Winner payout idempotency key per match
+- games-fair-play-agent dice distribution audits
+- Tournament handoff to games-tournament-agent
 
 ## Key paths
 

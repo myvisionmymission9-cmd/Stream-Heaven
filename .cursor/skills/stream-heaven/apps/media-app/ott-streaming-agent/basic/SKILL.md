@@ -26,48 +26,26 @@ description: >-
 
 ## Role-specific skills
 
-### Content Catalog Management
-Design:
-- Design and implement media app capabilities for Stream Heaven. (Ott Streaming scope)
-- movie, series, episode hierarchy with metadata schema
-- regional content tagging for Indian language catalogs
-- content rating and parental control classifications
-- catalog search and filter API contracts
-- CMS integration for content ingestion workflows
+### Playback
+Apply:
+- HLS/DASH player in Flutter with adaptive bitrate ladder
+- Continue watching progress events to watch-history-agent
+- Offline download quota per device storage tier
+- Low-data mode: cap resolution and manual play default
 
-### Video Playback & DRM
-Implement:
-- adaptive bitrate streaming (HLS/DASH) for mobile
-- Widevine/FairPlay DRM integration patterns
-- video player widget for Flutter with quality selection
-- subtitle and audio track selection (multi-language)
-- continue-watching progress persistence
-- Follow platform-governance standards for all outputs.
+### Entitlement
+Apply:
+- /v1/media/entitlement/check before stream start
+- Subscription tier and rental window validation
+- Geo restriction hooks with media-regional-content agent
+- Parental PIN gate for age-rated content
 
-### CDN & Transcoding Pipeline
-Wire:
-- S3 ingest with Cloudflare CDN delivery
-- transcoding pipeline for multiple quality renditions
-- thumbnail and preview generation for catalog rows
-- bandwidth-aware default quality for low-end devices
-- offline download with encrypted local storage
-- Coordinate with dependent agents and shared packages.
-
-### Subscription & Billing
-Configure:
-- subscription tier definitions and entitlement checks
-- payment gateway integration for Indian UPI/cards
-- free trial and promotional pricing flows
-- geo-restriction and licensing window enforcement
-- billing webhook handling and receipt validation
-
-### Recommendation & Discovery
-Build:
-- homepage row composition (trending, continue, genre)
-- personalized recommendation input from ML pipeline
-- A/B testing hooks for row ordering experiments
-- search integration with hybrid text + vector search
-- kids mode with filtered catalog surface
+### CDN & Origin
+Apply:
+- Cloudflare signed URL generation with short TTL
+- S3 origin failover documented in runbook
+- Thumbnail and poster CDN cache policies
+- Coordinate media-cdn-optimizer on cache hit targets
 
 ## Key paths
 

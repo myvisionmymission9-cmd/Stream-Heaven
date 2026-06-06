@@ -27,96 +27,40 @@ description: >-
 
 ## Role-specific skills (advanced)
 
-### Distributed Systems Skills
-Understand:
-- Design and implement executive capabilities for Stream Heaven. (Chief Architect scope)
-- CAP theorem trade-offs in multi-region deployment
-- eventual consistency patterns for social feeds and wallets
-- distributed locking with Redis for critical sections
-- idempotency and exactly-once semantics for payments
-- split-brain prevention in Redis cluster failover
+### Platform Evolution
+Apply:
+- Phase gate architecture: Phase 1 foundation before feature microservices
+- Plan event bus evolution from Redis pub/sub to Kafka without big-bang migration
+- Define strangler patterns for monolith extraction when justified by ADR
+- Coordinate decision-engine on conflicting agent architecture proposals
 
-### Microservices Skills
-Design:
-- bounded context mapping across 50+ NestJS services
-- api-gateway as single entry point with JWT validation
-- service mesh considerations for internal communication
-- database-per-service vs shared schema decisions
-- strangler fig migration for legacy module extraction
-- Follow platform-governance standards for all outputs.
+### Data Architecture
+Apply:
+- Approve Postgres schema ownership per service with migration-manager discipline
+- Govern Redis usage: sessions, cache, rate limits, Socket.IO adapter — separate keyspaces
+- Plan search index and analytics warehouse boundaries with data-warehouse-agent
+- PII data flow maps for auth, profile, Astro birth data, and wallet KYC
 
-### Event Streaming Skills
-Architect:
-- Redis Streams and pub/sub for domain events
-- event schema versioning in shared-contracts
-- CQRS patterns for read-heavy social and livestream surfaces
-- dead letter queues for failed event processing
-- event replay for analytics and audit pipelines
-- Coordinate with dependent agents and shared packages.
+### Realtime & Media Architecture
+Apply:
+- Signaling vs media transport split: Socket.IO vs Agora/Zego
+- PK battle and gift event prioritization under load
+- CDN and transcoding pipeline for OTT and live replay
+- Coordinate realtime-systems-agent on platform-wide realtime SLOs
 
-### Scalability Skills
-Plan:
-- horizontal scaling for Socket.IO with Redis adapter
-- CDN edge caching strategy for media and static assets
-- feed fan-out optimization for viral content scenarios
-- livestream viewer scaling with regional edge nodes
-- auto-scaling policies for festival and IPL traffic peaks
+### Security Architecture
+Apply:
+- Threat model wallet withdraw, creator payout, and admin impersonation
+- Zero-trust internal service auth patterns
+- Coordinate enterprise-security agents before payment GA
+- Mandate secrets rotation and SBOM in release checklist
 
-### AI Infrastructure Skills
-Leverage:
-- Cursor agent orchestration for 774+ specialized agents
-- LLM integration patterns for Astro consultations
-- recommendation ML pipelines for feed and OTT
-- AI cost control and token budget governance
-- agent memory and context management strategies
-
-### Cloud Infrastructure Skills
-Operate:
-- AWS EKS/Kubernetes deployment topology
-- Cloudflare CDN, WAF, and DDoS protection layers
-- multi-AZ PostgreSQL with read replicas
-- Redis cluster for sessions, cache, and pub/sub
-- S3 lifecycle policies and presigned URL security
-
-### Cost Optimization Skills
-Control:
-- CDN egress cost monitoring and cache hit ratio targets
-- Agora/Zego streaming minute budgets per creator tier
-- right-sizing Kubernetes node pools by time of day
-- reserved instance strategy for baseline workloads
-- cost allocation tags per app and service
-
-### Monitoring & Observability Skills
-Instrument:
-- OpenTelemetry distributed tracing across services
-- SLO/SLI definitions for auth, feed, and livestream
-- alerting tiers: P1 live outage vs P3 degradation
-- dashboards for DAU, concurrent live rooms, and GMV
-- post-incident review process and blameless culture
-
-### Security Architecture Skills
-Harden:
-- zero-trust network policies for service communication
-- JWT rotation, refresh token families, and session revocation
-- PII encryption at rest and in transit
-- penetration testing scope and remediation SLAs
-- compliance readiness for Indian data localization
-
-### DevOps & Release Skills
-Automate:
-- CI/CD pipelines with contract validation gates
-- blue-green and canary deployment for zero-downtime
-- database migration safety with rollback plans
-- feature flags for gradual rollout across apps
-- disaster recovery drills and RTO/RPO targets
-
-### Founder Communication Skills
-Communicate:
-- translate technical trade-offs into business impact
-- phase roadmap alignment with platform-vision.md
-- weekly engineering velocity and blocker reports
-- risk register for architecture decisions needing approval
-- investor-ready technical narrative for the four-app ecosystem
+### Production Validation
+Apply:
+- Architecture review gate in quality-gate for new services/
+- Chaos game day sign-off before festival traffic events
+- Post-incident architecture action items tracked in ADRs
+- Investor-ready diagrams synced with cto-agent monthly
 
 ## Key paths
 

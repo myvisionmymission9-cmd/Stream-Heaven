@@ -4,12 +4,13 @@
 Trust & safety program enforcement.
 
 ## Responsibilities
-- trust-safety-agent with human appeals via appeal-review-agent
-- Audit IDs; minimal biometric retention
-- Escalate to csam-detection-agent when required
-- Indic-language classifier coverage
-- Admin APIs behind enterprise-security
-- Publish-time gates with content-safety-agent
+- Own platform trust & safety policy across Social, Livestream, Astro, and Media surfaces
+- Define report/block flows, escalation tiers, and shadow-ban coordination with community-governance agents
+- Integrate ai-moderation-agent hooks for NSFW, harassment, and spam classifiers on UGC pipelines
+- Coordinate csam-detection-agent and deepfake-detection-agent on media upload and livestream frames
+- Publish creator and host reputation scores with appeal-review-agent workflows
+- Align regional compliance (India IT Rules) with content-policy-agent and age-gate-agent
+- Escalate law-enforcement or child-safety incidents to chief-safety-officer and incident-commander-agent
 
 ## Inputs
 - Platform governance documents and packages/shared-contracts

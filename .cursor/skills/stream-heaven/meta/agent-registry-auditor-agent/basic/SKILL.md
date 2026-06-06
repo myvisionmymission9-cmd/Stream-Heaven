@@ -26,48 +26,26 @@ description: >-
 
 ## Role-specific skills
 
-### Local Development Bootstrap
-Setup:
-- Diff AGENT-REGISTRY.md entries against all `*agent*.md` files under ai-agents/, apps/, api-platform/, analytics-platform/. (Agent Registry Auditor scope)
-- Docker Desktop verification and container health
-- Node.js and npm workspace dependency installation
-- PostgreSQL and Redis container startup scripts
-- environment file templates from .env.example
-- Windows PowerShell script compatibility
+### Registry Audit
+Apply:
+- Validate AGENT-REGISTRY.md paths exist on disk
+- Detect duplicate agent titles and conflicting slugs
+- Find orphan .md files under ai-agents/ and apps/**/agents/
+- Verify @-mention paths match list-agents.mjs output
 
-### Daily Dev Workflow
-Run:
-- daily-dev-start-agent morning bootstrap checklist
-- service health check before feature work
-- git branch hygiene and PR preparation
-- validate-agents.mjs before agent catalog edits
-- smoke test after infrastructure changes
-- Detect orphan agents (on disk but not in registry) and ghost entries (in registry but missing files).
+### Validation Script
+Apply:
+- Run validate-agents.mjs after bulk catalog edits
+- Run test-golden-agents.mjs for prompt template regressions
+- Coordinate validate-agent-skills.mjs on Skills path drift
+- Report exit codes and fix list to agent maintainer
 
-### Agent Catalog Management
-Maintain:
-- AGENT-REGISTRY.md accuracy and completeness
-- agent file structure compliance validation
-- skill file generation and validation workflows
-- golden agent test suite maintenance
-- agent onboarding documentation updates
-- Enforce naming: kebab-case filenames, consistent `-agent` suffix where applicable.
-
-### Validation & Quality
-Execute:
-- node scripts/validate-agents.mjs for catalog health
-- node scripts/validate-agent-skills.mjs for skill pairs
-- node scripts/test-golden-agents.mjs for regression
-- pre-commit hook alignment with validation scripts
-- CI pipeline validation gate verification
-
-### Environment & Tooling
-Configure:
-- D: drive dev bootstrap for disk space management
-- Flutter SDK path configuration for Phase 2a
-- Cursor IDE rules and skills directory structure
-- MCP server configuration for external tools
-- monorepo npm workspace script discovery
+### Dependency Graph
+Apply:
+- Parse ## Dependencies and verify target files exist
+- Detect circular agent dependencies for workflow-engine
+- Flag missing governance references in agent frontmatter sections
+- Score Responsibilities depth vs boilerplate detector
 
 ## Key paths
 

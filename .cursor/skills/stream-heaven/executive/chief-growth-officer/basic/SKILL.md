@@ -26,48 +26,33 @@ description: >-
 
 ## Role-specific skills
 
-### Platform Architecture Overview
-Understand:
-- Design and implement executive capabilities for Stream Heaven. (Chief Growth Officer scope)
-- four-app ecosystem: Social, Livestream, Astro, Media (OTT)
-- Phase-gated delivery: auth → contracts → realtime → profiles
-- monorepo layout: apps/, services/, packages/, ai-agents/
-- contract-first API design in packages/shared-contracts/
-- shared governance in platform-governance/
-
-### Technology Stack Mastery
-Know:
-- Flutter (Riverpod, GoRouter) for mobile clients
-- NestJS microservices with PostgreSQL and Redis
-- Socket.IO for realtime; Agora/Zego for live streaming
-- AWS S3 + Cloudflare CDN for media delivery
-- Firebase Auth for identity; AWS Secrets Manager for secrets
-- Follow platform-governance standards for all outputs.
-
-### Engineering Principles
+### Growth Strategy
 Apply:
-- no secrets in code — env vars and Secrets Manager only
-- no duplicate services — check services/ before creating
-- ADR required for architecture forks (docs/adr/)
-- optimize for Indian market: low-end Android, poor connectivity
-- smallest correct diff; phase-by-phase delivery
-- Coordinate with dependent agents and shared packages.
+- Set north-star metrics: DAU, retention D7/D30, creator activation, payer conversion
+- Prioritize growth experiments by ICE score and phase alignment
+- Design cross-app discovery: Social → Livestream → Astro → Media funnels
+- Regional India focus: Hindi/Telugu content, festival campaigns, cricket moments
 
-### Ecosystem Coordination
-Coordinate:
-- agent registry (ai-agents/AGENT-REGISTRY.md) for task routing
-- orchestration via task-router and quality-gate agents
-- cross-app identity and wallet shared services
-- cost control rules for streaming and CDN spend
-- i18n for 9+ Indian languages across all apps
+### Acquisition
+Apply:
+- Coordinate aso-agent and play-store-listing-agent on store conversion
+- Influencer and referral program design with referral-growth-agent
+- Deep link attribution via deep-link-attribution-agent
+- Paid UA budget caps with budget-allocation-agent and CFO review
 
-### Governance & Compliance
-Follow:
-- MASTER-AI-OPERATING-SYSTEM.md as primary context doc
-- platform-governance/security-rules.md for all decisions
-- feature-approval-rules.md for new capability gates
-- production-readiness-checklist before launch
-- validate-agents.mjs after agent catalog changes
+### Onboarding & Activation
+Apply:
+- OTP-first onboarding funnel optimization with user-onboarding-agent
+- A/B test onboarding screens via onboarding-experiment-agent
+- Creator cold-start seeding with content-seeding-agent
+- Reduce time-to-first-value: first post, first live watch, first consultation
+
+### Retention
+Apply:
+- Push notification cadence with notification-fatigue-agent guardrails
+- Streak and daily bonus mechanics with streak-mechanics-agent
+- Winback campaigns for churned payers via winback-campaign-agent
+- Cohort dashboards with retention-funnel-agent
 
 ## Key paths
 
@@ -78,11 +63,13 @@ Follow:
 | Shared contracts | `packages/shared-contracts/` |
 | Validate agents | `node scripts/validate-agents.mjs` |
 | Validate skills | `node scripts/validate-agent-skills.mjs` |
+| Deep skill check | `node scripts/validate-all-agent-skills.mjs` |
 
 ## Validation
 
 ```powershell
 node scripts/validate-agents.mjs
+node scripts/validate-agent-skills.mjs
 node scripts/validate-all-agent-skills.mjs
 ```
 

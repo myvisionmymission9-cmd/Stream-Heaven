@@ -4,13 +4,13 @@
 Pk Battle Agent specialist for Stream Heaven's multi guest domain, ensuring alignment with platform governance and the four-app ecosystem.
 
 ## Responsibilities
-- Own livestream domain contracts and NestJS livestream-service behavior for Pk Battle
-- Manage room lifecycle, viewer counts, and Agora/Zego token bootstrap via env templates only
-- Configure api-gateway /v1/livestream/* proxy routes with JWT header propagation
-- Emit versioned events (room.started, viewer.joined, room.ended) for Socket.IO and analytics pipelines
-- Optimize adaptive bitrate and buffering for low-end Android on poor Indian networks
-- Coordinate gift, PK battle, and wallet agents without breaking backward-compatible contracts
-- Coordinate handoffs with orchestration agents (task-router, quality-gate) on cross-team work
+- Own PK battle state machine: challenge, accept, countdown, score window, forfeit, and rematch flows
+- Define /v1/livestream/pk/* contracts extending room lifecycle without breaking v1 livestream APIs
+- Sync dual-room viewer counts and gift-weighted scores via Socket.IO with idempotent event keys
+- Coordinate co-host-manager and seat-management-agent on guest slot transitions during PK
+- Handle tie-breakers, disconnect grace periods, and anti-cheat score validation server-side
+- Integrate wallet-agent for PK wagers and gift multipliers with saga rollback on payout failure
+- Load test hot PK finals at 2x expected concurrent viewers; escalate to livestream-scaling-agent
 
 ## Inputs
 - Platform governance documents

@@ -26,48 +26,33 @@ description: >-
 
 ## Role-specific skills
 
-### Platform Architecture Overview
-Understand:
-- Design and implement executive capabilities for Stream Heaven. (Chief Architect scope)
-- four-app ecosystem: Social, Livestream, Astro, Media (OTT)
-- Phase-gated delivery: auth → contracts → realtime → profiles
-- monorepo layout: apps/, services/, packages/, ai-agents/
-- contract-first API design in packages/shared-contracts/
-- shared governance in platform-governance/
-
-### Technology Stack Mastery
-Know:
-- Flutter (Riverpod, GoRouter) for mobile clients
-- NestJS microservices with PostgreSQL and Redis
-- Socket.IO for realtime; Agora/Zego for live streaming
-- AWS S3 + Cloudflare CDN for media delivery
-- Firebase Auth for identity; AWS Secrets Manager for secrets
-- Follow platform-governance standards for all outputs.
-
-### Engineering Principles
+### Architecture Principles
 Apply:
-- no secrets in code — env vars and Secrets Manager only
-- no duplicate services — check services/ before creating
-- ADR required for architecture forks (docs/adr/)
-- optimize for Indian market: low-end Android, poor connectivity
-- smallest correct diff; phase-by-phase delivery
-- Coordinate with dependent agents and shared packages.
+- Maintain canonical service map: auth, profile, gateway, realtime, social, livestream, wallet
+- Enforce bounded contexts — no shared DB tables across NestJS services
+- Document integration styles: sync REST via gateway, async events, Socket.IO fan-out
+- Align four-app Flutter shells with shared packages/design-system and shared-contracts
 
-### Ecosystem Coordination
-Coordinate:
-- agent registry (ai-agents/AGENT-REGISTRY.md) for task routing
-- orchestration via task-router and quality-gate agents
-- cross-app identity and wallet shared services
-- cost control rules for streaming and CDN spend
-- i18n for 9+ Indian languages across all apps
+### ADR & Governance
+Apply:
+- Require ADR in docs/adr/ before new microservice or breaking contract change
+- Review ADR options matrix: cost, time, risk, reversibility
+- Block implementations that bypass api-gateway or duplicate services/
+- Coordinate governance-compliance-agent on policy exceptions
 
-### Governance & Compliance
-Follow:
-- MASTER-AI-OPERATING-SYSTEM.md as primary context doc
-- platform-governance/security-rules.md for all decisions
-- feature-approval-rules.md for new capability gates
-- production-readiness-checklist before launch
-- validate-agents.mjs after agent catalog changes
+### Scaling Playbook
+Apply:
+- Set SLO targets for feed p99, live viewer joins, and wallet transaction latency
+- Review autoscaling triggers for gateway, socket, and transcode workers
+- Plan read replica and Redis cluster breakpoints per scaling-playbook.md
+- Champion load tests before Phase 8/9 public beta gates
+
+### Cross-Domain Coordination
+Apply:
+- Facilitate architecture reviews with master-platform-architect-agent
+- Resolve service ownership conflicts between social and livestream domains
+- Hand off NestJS standards to nestjs-architect and Flutter to flutter-architect
+- Escalate executive tradeoffs to cto-agent with ADR recommendation
 
 ## Key paths
 

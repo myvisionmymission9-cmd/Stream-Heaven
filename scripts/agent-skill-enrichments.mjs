@@ -1001,4 +1001,1098 @@ export const AGENT_SKILL_ENRICHMENTS = {
       },
     ],
   },
+
+  'ai-agents/executive/chief-architect.md': {
+    basic: [
+      {
+        title: 'Architecture Principles Skills',
+        bullets: [
+          'Maintain canonical service map: auth, profile, gateway, realtime, social, livestream, wallet',
+          'Enforce bounded contexts — no shared DB tables across NestJS services',
+          'Document integration styles: sync REST via gateway, async events, Socket.IO fan-out',
+          'Align four-app Flutter shells with shared packages/design-system and shared-contracts',
+        ],
+      },
+      {
+        title: 'ADR & Governance Skills',
+        bullets: [
+          'Require ADR in docs/adr/ before new microservice or breaking contract change',
+          'Review ADR options matrix: cost, time, risk, reversibility',
+          'Block implementations that bypass api-gateway or duplicate services/',
+          'Coordinate governance-compliance-agent on policy exceptions',
+        ],
+      },
+      {
+        title: 'Scaling Playbook Skills',
+        bullets: [
+          'Set SLO targets for feed p99, live viewer joins, and wallet transaction latency',
+          'Review autoscaling triggers for gateway, socket, and transcode workers',
+          'Plan read replica and Redis cluster breakpoints per scaling-playbook.md',
+          'Champion load tests before Phase 8/9 public beta gates',
+        ],
+      },
+      {
+        title: 'Cross-Domain Coordination Skills',
+        bullets: [
+          'Facilitate architecture reviews with master-platform-architect-agent',
+          'Resolve service ownership conflicts between social and livestream domains',
+          'Hand off NestJS standards to nestjs-architect and Flutter to flutter-architect',
+          'Escalate executive tradeoffs to cto-agent with ADR recommendation',
+        ],
+      },
+    ],
+    advanced: [
+      {
+        title: 'Platform Evolution Skills',
+        bullets: [
+          'Phase gate architecture: Phase 1 foundation before feature microservices',
+          'Plan event bus evolution from Redis pub/sub to Kafka without big-bang migration',
+          'Define strangler patterns for monolith extraction when justified by ADR',
+          'Coordinate decision-engine on conflicting agent architecture proposals',
+        ],
+      },
+      {
+        title: 'Data Architecture Skills',
+        bullets: [
+          'Approve Postgres schema ownership per service with migration-manager discipline',
+          'Govern Redis usage: sessions, cache, rate limits, Socket.IO adapter — separate keyspaces',
+          'Plan search index and analytics warehouse boundaries with data-warehouse-agent',
+          'PII data flow maps for auth, profile, Astro birth data, and wallet KYC',
+        ],
+      },
+      {
+        title: 'Realtime & Media Architecture Skills',
+        bullets: [
+          'Signaling vs media transport split: Socket.IO vs Agora/Zego',
+          'PK battle and gift event prioritization under load',
+          'CDN and transcoding pipeline for OTT and live replay',
+          'Coordinate realtime-systems-agent on platform-wide realtime SLOs',
+        ],
+      },
+      {
+        title: 'Security Architecture Skills',
+        bullets: [
+          'Threat model wallet withdraw, creator payout, and admin impersonation',
+          'Zero-trust internal service auth patterns',
+          'Coordinate enterprise-security agents before payment GA',
+          'Mandate secrets rotation and SBOM in release checklist',
+        ],
+      },
+      {
+        title: 'Production Validation Skills',
+        bullets: [
+          'Architecture review gate in quality-gate for new services/',
+          'Chaos game day sign-off before festival traffic events',
+          'Post-incident architecture action items tracked in ADRs',
+          'Investor-ready diagrams synced with cto-agent monthly',
+        ],
+      },
+    ],
+  },
+
+  'ai-agents/executive/chief-growth-officer.md': {
+    basic: [
+      {
+        title: 'Growth Strategy Skills',
+        bullets: [
+          'Set north-star metrics: DAU, retention D7/D30, creator activation, payer conversion',
+          'Prioritize growth experiments by ICE score and phase alignment',
+          'Design cross-app discovery: Social → Livestream → Astro → Media funnels',
+          'Regional India focus: Hindi/Telugu content, festival campaigns, cricket moments',
+        ],
+      },
+      {
+        title: 'Acquisition Skills',
+        bullets: [
+          'Coordinate aso-agent and play-store-listing-agent on store conversion',
+          'Influencer and referral program design with referral-growth-agent',
+          'Deep link attribution via deep-link-attribution-agent',
+          'Paid UA budget caps with budget-allocation-agent and CFO review',
+        ],
+      },
+      {
+        title: 'Onboarding & Activation Skills',
+        bullets: [
+          'OTP-first onboarding funnel optimization with user-onboarding-agent',
+          'A/B test onboarding screens via onboarding-experiment-agent',
+          'Creator cold-start seeding with content-seeding-agent',
+          'Reduce time-to-first-value: first post, first live watch, first consultation',
+        ],
+      },
+      {
+        title: 'Retention Skills',
+        bullets: [
+          'Push notification cadence with notification-fatigue-agent guardrails',
+          'Streak and daily bonus mechanics with streak-mechanics-agent',
+          'Winback campaigns for churned payers via winback-campaign-agent',
+          'Cohort dashboards with retention-funnel-agent',
+        ],
+      },
+    ],
+    advanced: [
+      {
+        title: 'Viral Loop Design Skills',
+        bullets: [
+          'WhatsApp share incentives and share-deeplink-agent integration',
+          'Live PK battle and gift moments as shareable clips to Social',
+          'Referral rewards funded via wallet-agent promo credits',
+          'Measure K-factor per loop with analytics-agent',
+        ],
+      },
+      {
+        title: 'Cross-App Growth Skills',
+        bullets: [
+          'Unified wallet and identity for cross-app promotion-agent',
+          'Livestream viewer → Social follow conversion hooks',
+          'Astro consultation upsell from Social creator profiles',
+          'OTT trial from Livestream highlight reels',
+        ],
+      },
+      {
+        title: 'Experimentation Platform Skills',
+        bullets: [
+          'Feature flags for growth tests via decision-engine',
+          'Guardrail metrics: crash rate, OTP cost, moderation queue depth',
+          'Coordinate ab-testing-agent on experiment design and power analysis',
+          'Document failed experiments for institutional learning',
+        ],
+      },
+      {
+        title: 'Compliance & Trust Skills',
+        bullets: [
+          'Store policy compliance for incentive campaigns',
+          'Coordinate governance-compliance-agent on promotional copy',
+          'Avoid dark patterns flagged by trust-safety-agent',
+          'Regional telecom and SMS regulations for OTP growth hacks',
+        ],
+      },
+    ],
+  },
+
+  'ai-agents/orchestration/quality-gate.md': {
+    basic: [
+      {
+        title: 'Gate Checklist Skills',
+        bullets: [
+          'NestJS PR gate: health endpoints, guards, OpenAPI sync, npm test green',
+          'Flutter PR gate: analyze clean, widget tests on auth/profile paths',
+          'Agent .md gate: governance refs, Dependencies resolve, Skills paths exist',
+          'Contract gate: shared-contracts diff reviewed before implementation merge',
+        ],
+      },
+      {
+        title: 'Validation Script Skills',
+        bullets: [
+          'Run node scripts/validate-agents.mjs on ai-agents/ and apps/ agent changes',
+          'Run validate-agent-skills.mjs and validate-all-agent-skills.mjs on skill updates',
+          'Trigger test-golden-agents.mjs when agent prompt templates change',
+          'Block merge on non-zero exit codes without documented waiver ADR',
+        ],
+      },
+      {
+        title: 'Handoff Review Skills',
+        bullets: [
+          'Verify handoff-manager package: artifacts, tests, governance checklist',
+          'Confirm task-router assigned correct owner agent',
+          'Check openapi-contract-validation-agent sign-off on API changes',
+          'Require smoke test PASS for Phase 1 service modifications',
+        ],
+      },
+    ],
+    advanced: [
+      {
+        title: 'Production Readiness Skills',
+        bullets: [
+          'Apply production-readiness-checklist.md before release tags',
+          'Coordinate rollback-coordinator on gate failures near deploy window',
+          'Escalate to incident-commander-agent if gate bypass risks outage',
+          'Track gate bypass waivers with expiry and remediation owner',
+        ],
+      },
+      {
+        title: 'Agent Catalog Quality Skills',
+        bullets: [
+          'Score agent Responsibilities depth vs auth-service-agent quality bar',
+          'Flag boilerplate Skills stubs under 500 bytes for regeneration',
+          'Coordinate agent-registry-auditor-agent on registry drift',
+          'Mandate skill enrichment for executive and Phase 1 agents',
+        ],
+      },
+      {
+        title: 'Cross-Team Enforcement Skills',
+        bullets: [
+          'Align senior-code-review-agent with gate criteria in PR templates',
+          'Publish gate status badges for multi-chat execution guide',
+          'Train agents via prompt template gate reminders',
+          'Post-mortem when gate miss caused production defect',
+        ],
+      },
+    ],
+  },
+
+  'ai-agents/orchestration/master-platform-architect-agent.md': {
+    basic: [
+      {
+        title: 'Architecture Map Skills',
+        bullets: [
+          'Maintain living diagram: services/, packages/, apps/, ai-agents/ ownership',
+          'Track contract versions per domain in packages/shared-contracts/',
+          'Document port allocation: 3000 gateway, 3001 auth, 3002 profile, 3009 realtime',
+          'Identify duplicate or orphan modules before new scaffolding',
+        ],
+      },
+      {
+        title: 'Integration Pattern Skills',
+        bullets: [
+          'Standardize gateway proxy headers: X-User-Id, X-Request-Id, X-Session-Id',
+          'Redis cache-aside vs write-through decision tree per domain',
+          'Socket.IO room naming conventions per app namespace',
+          'S3 + Cloudflare CDN patterns for media and avatars',
+        ],
+      },
+      {
+        title: 'Review & Sign-off Skills',
+        bullets: [
+          'Architecture review template for Phase 2+ feature proposals',
+          'Backward compatibility checklist for /v1/* extensions',
+          'Coordinate chief-architect on ADR-required forks',
+          'Quality-gate architecture section completion before merge',
+        ],
+      },
+    ],
+    advanced: [
+      {
+        title: 'Multi-App Orchestration Skills',
+        bullets: [
+          'Shared identity and wallet across Social, Livestream, Astro, Media',
+          'Cross-app notification and deep link routing standards',
+          'Feature module boundaries in Flutter monorepo',
+          'Task-router escalation for ambiguous cross-app ownership',
+        ],
+      },
+      {
+        title: 'Scale & Reliability Skills',
+        bullets: [
+          'Hot path identification: feed scroll, live join, wallet debit, OTP verify',
+          'Sharding and read replica triggers per postgres-architect',
+          'Realtime fan-out limits per realtime-systems-agent',
+          'Incident architecture actions via rollback-coordinator',
+        ],
+      },
+    ],
+  },
+
+  'ai-agents/governance/governance-compliance-agent.md': {
+    basic: [
+      {
+        title: 'Governance Mapping Skills',
+        bullets: [
+          'Map tasks to 22 platform-governance/ files with required vs optional compliance',
+          'Produce per-PR compliance matrix: security, API, database, deployment, testing',
+          'Block secrets in code, duplicate services, and gateway bypass patterns',
+          'Enforce Phase 1 before Phase 8 ordering in agent task routing',
+        ],
+      },
+      {
+        title: 'Agent Catalog Compliance Skills',
+        bullets: [
+          'Validate agent .md has Role, Responsibilities, Dependencies, Governance References',
+          'Coordinate agent-skill-validator-agent on Skills section health',
+          'Flag boilerplate Responsibilities for enrich-agent-responsibilities.mjs',
+          'Require ADR reference when agent proposes new service in services/',
+        ],
+      },
+      {
+        title: 'Contract-First Enforcement Skills',
+        bullets: [
+          'No NestJS controller without packages/shared-contracts OpenAPI entry',
+          'Version breaking API changes with deprecation window',
+          'Coordinate api-contract-author on schema ownership',
+          'Block Flutter client work on undocumented endpoints',
+        ],
+      },
+    ],
+    advanced: [
+      {
+        title: 'Audit & Remediation Skills',
+        bullets: [
+          'Quarterly audit: services/ deduplication, packages/ dependency hygiene',
+          'Secrets scan and .env.example completeness review',
+          'Phase exit audit with phase-1-autonomous-completion-agent evidence',
+          'Remediation tickets with owner agent and deadline',
+        ],
+      },
+      {
+        title: 'Regulatory Alignment Skills',
+        bullets: [
+          'India IT Rules and store policy checkpoints for UGC and payments',
+          'Astro disclaimer and non-medical advice compliance with astro-disclaimer-compliance',
+          'Wallet KYC/AML escalation paths to tax-compliance-agent',
+          'Coordinate chief-safety-officer on child safety policies',
+        ],
+      },
+    ],
+  },
+
+  'ai-agents/phase-1/phase-1-autonomous-completion-agent.md': {
+    basic: [
+      {
+        title: 'Phase 1 Orchestration Skills',
+        bullets: [
+          'Run full bootstrap: Docker Postgres/Redis, four NestJS services, smoke suite',
+          'Collect evidence: health JSON, OTP log snippet, smoke PASS output',
+          'Sequence validate-agents → validate-agent-skills → golden tests',
+          'Update docs/FINAL-READINESS-REPORT.md with dated PASS/FAIL summary',
+        ],
+      },
+      {
+        title: 'Exit Criteria Skills',
+        bullets: [
+          'Gateway /health aggregates auth, profile, realtime upstream status',
+          'Auth OTP register → verify → JWT → profile CRUD chain works',
+          'Realtime socket ping/pong or room join smoke passes',
+          'No secrets committed; .env.example documents all required vars',
+        ],
+      },
+      {
+        title: 'Remediation Routing Skills',
+        bullets: [
+          'Route compile errors to phase-1-remediation-agent and nestjs-architect',
+          'Route contract mismatches to openapi-contract-validation-agent',
+          'Route Docker issues to local-dev-bootstrap-agent',
+          'Block Phase 2a until two consecutive green Phase 1 runs',
+        ],
+      },
+    ],
+    advanced: [
+      {
+        title: 'Autonomous Validation Skills',
+        bullets: [
+          'Retry flaky smoke up to 3x with structured failure classification',
+          'Parallel agent validation in CI alongside integration smoke',
+          'Produce executive summary for cto-agent and platform-orchestrator',
+          'Handoff checklist for phase-2a-autonomous-bootstrap-agent',
+        ],
+      },
+    ],
+  },
+
+  'ai-agents/core-engineering/backend/api-gateway-agent.md': {
+    basic: [
+      {
+        title: 'Production Gateway Skills',
+        bullets: [
+          'Own routing table versioning and upstream service registry',
+          'TLS termination at Cloudflare; origin protection and WAF rules',
+          'Global /v1 error envelope and RFC7807 problem details',
+          'Request size limits and JSON depth validation at edge',
+        ],
+      },
+      {
+        title: 'Auth & Rate Limit Skills',
+        bullets: [
+          'JWT validation middleware shared with api-gateway-bootstrap-agent patterns',
+          'Per-route rate limits: stricter on /auth/*, wallet, and report endpoints',
+          'Bot detection hooks coordinated with bot-protection-agent',
+          'Service-to-service internal routes with mTLS or signed internal JWT',
+        ],
+      },
+      {
+        title: 'Observability Skills',
+        bullets: [
+          'Per-route RED metrics and distributed tracing headers',
+          'Access logs with hashed IP; no Bearer tokens in logs',
+          'Alert on 5xx ratio and upstream timeout spikes',
+          'Dashboard for gateway saturation during festival events',
+        ],
+      },
+    ],
+    advanced: [
+      {
+        title: 'Deploy & Resilience Skills',
+        bullets: [
+          'Blue/green and canary deploy with automatic rollback on error budget burn',
+          'Circuit breaker per upstream with half-open probe policy',
+          'Graceful shutdown and connection draining',
+          'Chaos: auth service outage — protected routes fail closed',
+        ],
+      },
+      {
+        title: 'Multi-Environment Skills',
+        bullets: [
+          'Dev/staging/prod upstream URL parity via env templates',
+          'Coordinate kubernetes-agent on ingress and HPA for gateway pods',
+          'ADR for managed API gateway (Kong/AWS) vs custom NestJS at scale',
+          'Quality-gate checklist for every new proxied path',
+        ],
+      },
+    ],
+  },
+
+  'ai-agents/core-engineering/realtime/realtime-systems-agent.md': {
+    basic: [
+      {
+        title: 'Realtime Platform Skills',
+        bullets: [
+          'Own realtime-service (port 3009) platform SLOs and capacity plan',
+          'Namespace topology: /social, /livestream, /games, /notifications',
+          'Redis adapter cluster sizing for Socket.IO horizontal scale',
+          'Handshake auth with JWT from auth-service — reject anonymous joins',
+        ],
+      },
+      {
+        title: 'Presence & Messaging Skills',
+        bullets: [
+          'Presence heartbeat TTL and stale cleanup in Redis',
+          'Message ordering guarantees per room vs eventual for viewer counts',
+          'Backpressure: drop low-priority events under CPU/memory pressure',
+          'Reconnect policy: exponential backoff, room rejoin, state sync',
+        ],
+      },
+      {
+        title: 'Event Catalog Skills',
+        bullets: [
+          'Versioned events in packages/shared-contracts/realtime/',
+          'Schema validation on inbound client emits',
+          'Server event catalog for analytics pipeline ingestion',
+          'Coordinate socketio-architect on implementation details',
+        ],
+      },
+    ],
+    advanced: [
+      {
+        title: 'High-Scale Livestream Skills',
+        bullets: [
+          'Hot room sharding and coalesced viewer count broadcasts',
+          'PK battle and gift event priority queues',
+          'Load test 100k connection architecture with chaos-engineering-agent',
+          'Polling fallback when socket unavailable on poor networks',
+        ],
+      },
+      {
+        title: 'Evolution & Incidents Skills',
+        bullets: [
+          'Kafka bridge for analytics without blocking Socket.IO MVP',
+          'Incident runbooks with incident-commander-agent',
+          'Post-mortem template for reconnect storms and adapter lag',
+          'ADR for alternative transports (MQTT, WebTransport) when justified',
+        ],
+      },
+    ],
+  },
+
+  'ai-agents/core-engineering/database/postgres-architect.md': {
+    basic: [
+      {
+        title: 'Schema Design Skills',
+        bullets: [
+          'One schema owner per NestJS service — no cross-service FKs',
+          'UUID primary keys; timestamptz for all audit columns',
+          'Soft delete with deleted_at where GDPR export requires',
+          'Index strategy: composite indexes for feed and wallet hot queries',
+        ],
+      },
+      {
+        title: 'Migration Skills',
+        bullets: [
+          'Reversible migrations via migration-manager conventions',
+          'Expand-contract pattern for zero-downtime column changes',
+          'Migration ordering in CI before deploy',
+          'Never destructive migration without ADR and backup plan',
+        ],
+      },
+      {
+        title: 'Performance Skills',
+        bullets: [
+          'Connection pool tuning per service and PgBouncer when needed',
+          'EXPLAIN ANALYZE on p99 offenders with query-optimization-agent',
+          'Partition large tables: messages, wallet_ledger, analytics events',
+          'Read replica routing for read-heavy profile and feed queries',
+        ],
+      },
+    ],
+    advanced: [
+      {
+        title: 'Reliability & DR Skills',
+        bullets: [
+          'RPO/RTO targets per revenue-critical database',
+          'Point-in-time recovery drills quarterly',
+          'Failover runbook with rollback-coordinator',
+          'Logical replication for analytics warehouse with data-warehouse-agent',
+        ],
+      },
+      {
+        title: 'Domain-Specific Schema Skills',
+        bullets: [
+          'Wallet double-entry ledger tables with idempotency keys',
+          'Social graph edge tables with efficient block/mute queries',
+          'Livestream room state with optimistic locking',
+          'Astro consultation booking with timezone-aware slots',
+        ],
+      },
+    ],
+  },
+
+  'ai-agents/core-engineering/database/redis-cache-specialist.md': {
+    basic: [
+      {
+        title: 'Key Design Skills',
+        bullets: [
+          'Prefix convention: auth:session:, social:feed:, live:presence:, ratelimit:',
+          'Hash tags for cluster multi-key ops: {userId} session families',
+          'TTL on all cache keys — no immortal keys without ADR',
+          'Document key catalog in platform-governance/database-rules.md',
+        ],
+      },
+      {
+        title: 'Session & Auth Cache Skills',
+        bullets: [
+          'Refresh token rotation families with reuse detection',
+          'OTP attempt counters and cooldown keys per phone hash',
+          'Session invalidation on password change and admin lock',
+          'Coordinate auth-service-agent on schema changes',
+        ],
+      },
+      {
+        title: 'Cache Pattern Skills',
+        bullets: [
+          'Cache-aside for profiles and feed slices',
+          'Rate limit sliding windows with INCR + EXPIRE',
+          'Probabilistic early expiration against stampede',
+          'Socket.IO Redis adapter memory and channel planning',
+        ],
+      },
+    ],
+    advanced: [
+      {
+        title: 'Cluster Operations Skills',
+        bullets: [
+          'Memory maxmemory policy: volatile-lru for cache workloads',
+          'Slowlog monitoring and hot key detection',
+          'Failover drill with realtime-systems-agent',
+          'Elasticache/Redis Cluster vs single-node dev parity',
+        ],
+      },
+      {
+        title: 'Festival Scale Skills',
+        bullets: [
+          'Pre-warm feed and room keys before known events',
+          'Emergency eviction playbook when memory > 90%',
+          'Coordinate autoscaling-agent on node count',
+          'Post-event cache flush validation',
+        ],
+      },
+    ],
+  },
+
+  'ai-agents/economy/wallet-agent.md': {
+    basic: [
+      {
+        title: 'Ledger Design Skills',
+        bullets: [
+          'Double-entry ledger: every debit has matching credit row',
+          'Idempotency-Key header on all POST wallet mutations',
+          'Balance snapshot with optimistic locking on user wallet row',
+          'Immutable audit log table append-only',
+        ],
+      },
+      {
+        title: 'Contract & API Skills',
+        bullets: [
+          'OpenAPI wallet/v1: balance, credit, debit, hold, release, transfer',
+          'Webhook endpoints for Razorpay/Stripe with signature verification',
+          'No PAN/card data in Postgres — tokenize via payment provider',
+          'Flutter wallet UI consumes generated contract types',
+        ],
+      },
+      {
+        title: 'Fraud & Limits Skills',
+        bullets: [
+          'Velocity limits per user, device, and IP hash',
+          'Hold funds during dispute with refund-policy-agent rules',
+          'Reconciliation nightly job vs payment provider statements',
+          'Coordinate fraud-detection-agent on anomaly scoring',
+        ],
+      },
+    ],
+    advanced: [
+      {
+        title: 'Cross-App Economy Skills',
+        bullets: [
+          'Unified coin balance across Social gifts, Livestream tips, Astro consults',
+          'Saga pattern: gift send → wallet debit → creator credit → rollback on fail',
+          'Cross-app-wallet-sync event schema',
+          'ADR before splitting wallet into regional shards',
+        ],
+      },
+      {
+        title: 'Compliance Skills',
+        bullets: [
+          'KYC gates for withdraw per identity-verification-agent',
+          'Tax reporting hooks with tax-compliance-agent',
+          'PCI scope minimization — no card storage in Stream Heaven DB',
+          'Governance-compliance-agent sign-off before public wallet GA',
+        ],
+      },
+    ],
+  },
+
+  'ai-agents/safety/trust-safety-agent.md': {
+    basic: [
+      {
+        title: 'Policy & Enforcement Skills',
+        bullets: [
+          'Community guidelines alignment across four apps',
+          'Report taxonomy: spam, harassment, CSAM, fraud, impersonation',
+          'Block/mute enforcement on API and Socket.IO layers',
+          'Shadow-ban coordination without alerting bad actors',
+        ],
+      },
+      {
+        title: 'Moderation Pipeline Skills',
+        bullets: [
+          'Pre-publish ML scores via ai-moderation-agent hooks',
+          'Human review queue SLA for high-severity reports',
+          'Appeal workflow with appeal-review-agent',
+          'Creator and host strike system with escalating penalties',
+        ],
+      },
+      {
+        title: 'Regional Compliance Skills',
+        bullets: [
+          'India IT Rules grievance officer workflow stubs',
+          'Age-gate integration for sensitive content',
+          'Astro non-medical disclaimer enforcement',
+          'Store policy alignment for incentive and UGC features',
+        ],
+      },
+    ],
+    advanced: [
+      {
+        title: 'Threat Response Skills',
+        bullets: [
+          'CSAM zero-tolerance pipeline with csam-detection-agent',
+          'Deepfake detection on livestream frames and uploads',
+          'Coordinated inauthentic behavior detection',
+          'Law enforcement escalation playbook with chief-safety-officer',
+        ],
+      },
+      {
+        title: 'Trust Score Skills',
+        bullets: [
+          'Host and creator reputation metrics',
+          'High-risk action friction: withdraw, go-live, mass DM',
+          'Coordinate trust-score-agent on feature gating',
+          'Transparency reports for executive agents quarterly',
+        ],
+      },
+    ],
+  },
+
+  'apps/livestream-app/agents/multi-guest/pk-battle-agent.md': {
+    basic: [
+      {
+        title: 'PK State Machine Skills',
+        bullets: [
+          'States: idle → challenge_sent → active → scoring → ended → rematch_optional',
+          'Server-authoritative timers; client display only',
+          'Forfeit and disconnect grace with configurable windows',
+          'Idempotent challenge/accept with dedup keys',
+        ],
+      },
+      {
+        title: 'Scoring & Sync Skills',
+        bullets: [
+          'Gift-weighted score aggregation per room side',
+          'Viewer count tie-breaker rules documented in contracts',
+          'Socket.IO pk.score_update with coalesced broadcast rate',
+          'Redis hot score cache with Postgres persistence at end',
+        ],
+      },
+      {
+        title: 'Contract Skills',
+        bullets: [
+          '/v1/livestream/pk/challenge, accept, status, forfeit endpoints',
+          'Extend livestream room model without breaking v1 clients',
+          'Event schema: pk.started, pk.score, pk.ended',
+          'Quality-gate before enabling PK in production',
+        ],
+      },
+    ],
+    advanced: [
+      {
+        title: 'Monetization Integration Skills',
+        bullets: [
+          'PK wager holds via wallet-agent saga',
+          'Gift multiplier windows during final 30 seconds',
+          'Anti-cheat: validate gift events server-side only',
+          'Revenue share to creators per creator-economy rules',
+        ],
+      },
+      {
+        title: 'Scale & UX Skills',
+        bullets: [
+          'Dual-room Agora layout compositor handoff',
+          'Low-end Android PK UI: minimal animations, clear score bar',
+          'Load test finals with livestream-scaling-agent',
+          'Moderation: report PK harassment in real time',
+        ],
+      },
+    ],
+  },
+
+  'apps/social-app/agents/dm-messaging-agent.md': {
+    basic: [
+      {
+        title: 'DM API Skills',
+        bullets: [
+          '/v1/social/dm/threads, messages, read, delete contracts',
+          'Cursor pagination on messages with stable (created_at, id) sort',
+          'Media attachments via S3 presigned upload refs only',
+          'Block graph check on every send — return 403 without leak',
+        ],
+      },
+      {
+        title: 'Realtime DM Skills',
+        bullets: [
+          'Socket namespace /social/dm per thread room',
+          'Typing indicators with debounced emit rate',
+          'Delivery and read receipt events with idempotency',
+          'Offline queue sync on reconnect',
+        ],
+      },
+      {
+        title: 'Flutter DM UI Skills',
+        bullets: [
+          'Thread list with unread badges and mute support',
+          'Message composer with attachment picker and low-data mode',
+          'Optimistic send with rollback on failure',
+          'i18n for all user-visible strings via ARB files',
+        ],
+      },
+    ],
+    advanced: [
+      {
+        title: 'Safety & Privacy Skills',
+        bullets: [
+          'Report message flow to trust-safety-agent',
+          'Rate limit new threads to strangers per day',
+          'E2E encryption roadmap ADR without blocking MVP plaintext server store',
+          'No message content in push notification payloads',
+        ],
+      },
+      {
+        title: 'Scale Skills',
+        bullets: [
+          'Partition messages table by thread_id hash',
+          'Redis cache last N messages per thread for fast open',
+          'Load test viral creator DM inbox spikes',
+          'Search integration for message history opt-in',
+        ],
+      },
+    ],
+  },
+
+  'apps/astro-app/consultation-agent.md': {
+    basic: [
+      {
+        title: 'Booking Flow Skills',
+        bullets: [
+          'Astrologer availability slots with timezone conversion (IST default)',
+          '/v1/astro/consultations/book, cancel, reschedule contracts',
+          'Razorpay checkout session with webhook confirmation',
+          'Session timer with auto-end and overtime billing rules',
+        ],
+      },
+      {
+        title: 'Live Session Skills',
+        bullets: [
+          'Agora audio/video room per consultation ID',
+          'Recording consent checkbox and storage policy stub',
+          'In-session chat with moderation hooks',
+          'Reconnect handling for poor Indian mobile networks',
+        ],
+      },
+      {
+        title: 'Compliance Copy Skills',
+        bullets: [
+          'Mandatory disclaimer: entertainment not medical/legal/financial advice',
+          'astro-disclaimer-compliance agent copy on every screen',
+          'Refund policy display before payment',
+          'Minor account booking restrictions',
+        ],
+      },
+    ],
+    advanced: [
+      {
+        title: 'Creator Economy Skills',
+        bullets: [
+          'Astrologer payout split via wallet-agent and creator-payout-agent',
+          'Rating and review after session with review-rating-agent',
+          'Ranking signals to astrologer-ranking-agent',
+          'Promo credits for first consultation via growth campaigns',
+        ],
+      },
+      {
+        title: 'Privacy Skills',
+        bullets: [
+          'Birth chart data encrypted at rest; minimal JWT claims',
+          'No chart PII in logs or analytics events',
+          'GDPR export/delete hooks on consultation history',
+          'Sensitive-conversation-agent escalation on self-harm signals',
+        ],
+      },
+    ],
+  },
+
+  'apps/media-app/ott-streaming-agent.md': {
+    basic: [
+      {
+        title: 'Playback Skills',
+        bullets: [
+          'HLS/DASH player in Flutter with adaptive bitrate ladder',
+          'Continue watching progress events to watch-history-agent',
+          'Offline download quota per device storage tier',
+          'Low-data mode: cap resolution and manual play default',
+        ],
+      },
+      {
+        title: 'Entitlement Skills',
+        bullets: [
+          '/v1/media/entitlement/check before stream start',
+          'Subscription tier and rental window validation',
+          'Geo restriction hooks with media-regional-content agent',
+          'Parental PIN gate for age-rated content',
+        ],
+      },
+      {
+        title: 'CDN & Origin Skills',
+        bullets: [
+          'Cloudflare signed URL generation with short TTL',
+          'S3 origin failover documented in runbook',
+          'Thumbnail and poster CDN cache policies',
+          'Coordinate media-cdn-optimizer on cache hit targets',
+        ],
+      },
+    ],
+    advanced: [
+      {
+        title: 'Pipeline Integration Skills',
+        bullets: [
+          'Transcode job status webhooks from transcoding-pipeline-agent',
+          'DRM stub with drm-protection-agent before premium GA',
+          'Live-to-VOD replay from livestream recording agents',
+          'Catalog sync with ott-catalog-agent',
+        ],
+      },
+      {
+        title: 'Scale & Cost Skills',
+        bullets: [
+          'Concurrent stream start load tests for campaign launches',
+          'Bitrate cap policies for free tier users',
+          'S3 lifecycle for expired offline downloads',
+          'Cost dashboard per watch hour with cto-agent review',
+        ],
+      },
+    ],
+  },
+
+  'ai-agents/games/ludo-agent.md': {
+    basic: [
+      {
+        title: 'Game Rules Skills',
+        bullets: [
+          'Server-authoritative dice with CSPRNG and audit log per roll',
+          'Classic 4-player and quick 2-player rule variants',
+          'Turn timeout auto-forfeit with configurable duration',
+          'Win detection: all tokens home + exact dice on final stretch',
+        ],
+      },
+      {
+        title: 'Matchmaking Skills',
+        bullets: [
+          'Quick match queue with games-matchmaking-agent ELO bands',
+          'Play-with-friends room codes via Redis TTL rooms',
+          'NestJS game module state machine per match ID',
+          '/v1/games/ludo/match, move, forfeit contracts',
+        ],
+      },
+      {
+        title: 'Flutter Board Skills',
+        bullets: [
+          'CustomPainter board with 60fps target on low-end Android',
+          'Dice animation without blocking game state updates',
+          'One-hand friendly controls and haptic feedback hooks',
+          'i18n for rules and error toasts',
+        ],
+      },
+    ],
+    advanced: [
+      {
+        title: 'Realtime Sync Skills',
+        bullets: [
+          'games-socket-sync-agent broadcast on move and turn change',
+          'Reconnect: resync full board state from server snapshot',
+          'Anti-cheat: reject client-proposed dice values',
+          'Spectator mode stub for livestream embed',
+        ],
+      },
+      {
+        title: 'Economy Integration Skills',
+        bullets: [
+          'Optional coin-table entry via wallet-agent hold/release',
+          'Winner payout idempotency key per match',
+          'games-fair-play-agent dice distribution audits',
+          'Tournament handoff to games-tournament-agent',
+        ],
+      },
+    ],
+  },
+
+  'ai-agents/meta/agent-registry-auditor-agent.md': {
+    basic: [
+      {
+        title: 'Registry Audit Skills',
+        bullets: [
+          'Validate AGENT-REGISTRY.md paths exist on disk',
+          'Detect duplicate agent titles and conflicting slugs',
+          'Find orphan .md files under ai-agents/ and apps/**/agents/',
+          'Verify @-mention paths match list-agents.mjs output',
+        ],
+      },
+      {
+        title: 'Validation Script Skills',
+        bullets: [
+          'Run validate-agents.mjs after bulk catalog edits',
+          'Run test-golden-agents.mjs for prompt template regressions',
+          'Coordinate validate-agent-skills.mjs on Skills path drift',
+          'Report exit codes and fix list to agent maintainer',
+        ],
+      },
+      {
+        title: 'Dependency Graph Skills',
+        bullets: [
+          'Parse ## Dependencies and verify target files exist',
+          'Detect circular agent dependencies for workflow-engine',
+          'Flag missing governance references in agent frontmatter sections',
+          'Score Responsibilities depth vs boilerplate detector',
+        ],
+      },
+    ],
+    advanced: [
+      {
+        title: 'Catalog Health Skills',
+        bullets: [
+          'Publish top 20 agents needing skill enrichment',
+          'Track manifest drift in agent-skills-manifest.json',
+          'Propose registry schema ADR for new domains',
+          'Coordinate agent-coverage-analyst-agent on gap analysis',
+        ],
+      },
+      {
+        title: 'CI Integration Skills',
+        bullets: [
+          'GitHub Actions gate on validate-agents for agent PRs',
+          'Pre-commit hook recommendation via create-hook skill',
+          'Bulk update playbooks for agent-skill-validator-agent',
+          'Escalate catalog breakage to platform-orchestrator',
+        ],
+      },
+    ],
+  },
+
+  'ai-agents/phase-1/phase-1-remediation-agent.md': {
+    basic: [
+      {
+        title: 'Bootstrap Debug Skills',
+        bullets: [
+          'Diagnose port 3000–3002, 3009 conflicts on Windows dev machines',
+          'Docker compose health: postgres ready, redis PONG',
+          'NestJS compile errors: missing env, bad imports, migration fail',
+          'Parse logs/dev-*.log for stack traces and root cause',
+        ],
+      },
+      {
+        title: 'Service Fix Skills',
+        bullets: [
+          'Gateway proxy route typos and upstream URL mismatches',
+          'Auth OTP dev log capture for smoke-test-phase1.ps1',
+          'Redis connection string and session key schema fixes',
+          'Profile migration ordering and seed data issues',
+        ],
+      },
+      {
+        title: 'Script Repair Skills',
+        bullets: [
+          'Patch setup-phase1.ps1 and phase1-start-services.ps1 minimally',
+          'Preserve Windows PowerShell parity with documented bash alternatives',
+          'Re-run smoke after each fix; document repro steps',
+          'Avoid scope creep into Phase 2 features',
+        ],
+      },
+    ],
+    advanced: [
+      {
+        title: 'Escalation Skills',
+        bullets: [
+          'Architectural blockers → phase-1-autonomous-completion-agent',
+          'NestJS pattern fixes → nestjs-architect',
+          'Contract mismatches → openapi-contract-validation-agent',
+          'Repeated failures → cto-agent with incident summary',
+        ],
+      },
+    ],
+  },
+
+  'ai-agents/orchestration/senior-code-review-agent.md': {
+    basic: [
+      {
+        title: 'Code Review Skills',
+        bullets: [
+          'NestJS: guards, DTO validation, no business logic in controllers',
+          'Flutter: Riverpod patterns, no API calls in build methods',
+          'Reject secrets, console.log of PII, and commented-out dead code',
+          'Smallest correct diff — challenge unrelated refactors',
+        ],
+      },
+      {
+        title: 'Contract Review Skills',
+        bullets: [
+          'Require shared-contracts update before API implementation',
+          'Check breaking change policy and version bumps',
+          'Verify OpenAPI matches controller decorators',
+          'Block undocumented query params and response fields',
+        ],
+      },
+      {
+        title: 'Test & Quality Skills',
+        bullets: [
+          'Meaningful tests on auth, wallet, realtime critical paths',
+          'npm test / flutter test green in CI',
+          'Quality-gate checklist items addressed in PR description',
+          'ADR link present for architecture changes',
+        ],
+      },
+    ],
+    advanced: [
+      {
+        title: 'System Design Review Skills',
+        bullets: [
+          'Coordinate system-design-reviewer-agent on cross-service PRs',
+          'Challenge N+1 queries, missing indexes, unbounded fan-out',
+          'Review idempotency on wallet and gift mutations',
+          'Scale implications for livestream and feed hot paths',
+        ],
+      },
+      {
+        title: 'Governance Enforcement Skills',
+        bullets: [
+          'platform-governance/ compliance per governance-compliance-agent matrix',
+          'No duplicate services in services/',
+          'Phase ordering: no Phase 8 feature without Phase 1 auth path',
+          'Escalate repeat offenders to rollback-coordinator',
+        ],
+      },
+    ],
+  },
 };

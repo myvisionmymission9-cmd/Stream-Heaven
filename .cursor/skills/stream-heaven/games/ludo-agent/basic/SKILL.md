@@ -26,48 +26,26 @@ description: >-
 
 ## Role-specific skills
 
-### Game Loop & State Management
-Design:
-- Design server-authoritative Ludo rules (classic 4-player, quick 2-player variant). (Ludo scope)
-- server-authoritative game state with deterministic turn order
-- state snapshots for reconnect and late-join recovery
-- turn timeout and forfeit handling for mobile sessions
-- idle player detection and bot backfill policies
-- game phase transitions (lobby → active → results)
+### Game Rules
+Apply:
+- Server-authoritative dice with CSPRNG and audit log per roll
+- Classic 4-player and quick 2-player rule variants
+- Turn timeout auto-forfeit with configurable duration
+- Win detection: all tokens home + exact dice on final stretch
 
-### Realtime Sync & Socket Protocol
-Implement:
-- Socket.IO room channels per match with Redis pub/sub fan-out
-- delta updates vs full-state sync for low-bandwidth clients
-- client prediction with server reconciliation for smooth UX
-- heartbeat and disconnect grace periods
-- event ordering guarantees for dice rolls and moves
-- Implement dice roll verification and turn timeout handling.
+### Matchmaking
+Apply:
+- Quick match queue with games-matchmaking-agent ELO bands
+- Play-with-friends room codes via Redis TTL rooms
+- NestJS game module state machine per match ID
+- /v1/games/ludo/match, move, forfeit contracts
 
-### Matchmaking & Lobbies
-Configure:
-- skill-based and casual queue definitions in Redis
-- private room codes and friend-invite flows
-- queue wait thresholds with optional bot fill
-- regional latency-aware server selection
-- concurrent match capacity per game type
-- Build Flutter board UI optimized for small screens and one-hand play.
-
-### Fair Play & Anti-Cheat
-Enforce:
-- server-side RNG for dice, cards, and outcomes
-- move validation against authoritative rules engine
-- rate limits on actions and suspicious pattern detection
-- audit logs for disputed matches and refunds
-- replay verification for tournament disputes
-
-### Economy & Rewards Integration
-Wire:
-- optional coin entry fees via wallet-service contracts
-- winner payout and rake configuration
-- daily reward hooks and streak bonuses
-- leaderboard point accrual on match completion
-- graceful handling of insufficient balance at entry
+### Flutter Board
+Apply:
+- CustomPainter board with 60fps target on low-end Android
+- Dice animation without blocking game state updates
+- One-hand friendly controls and haptic feedback hooks
+- i18n for rules and error toasts
 
 ## Key paths
 

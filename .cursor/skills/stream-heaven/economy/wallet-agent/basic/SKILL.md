@@ -26,48 +26,26 @@ description: >-
 
 ## Role-specific skills
 
-### Wallet Ledger Design
-Design:
-- Design and implement economy capabilities for Stream Heaven. (Wallet scope)
-- double-entry ledger with immutable transaction log
-- idempotent debit/credit APIs with client request IDs
-- balance snapshots vs event-sourced reconstruction
-- multi-currency coin vs fiat wallet separation
-- contract schemas in packages/shared-contracts/wallet/
+### Ledger Design
+Apply:
+- Double-entry ledger: every debit has matching credit row
+- Idempotency-Key header on all POST wallet mutations
+- Balance snapshot with optimistic locking on user wallet row
+- Immutable audit log table append-only
 
-### Payment Gateway Integration
-Integrate:
-- Razorpay/Stripe/PayU abstraction with env-based provider selection
-- UPI, cards, and netbanking flows for Indian users
-- webhook signature verification and replay protection
-- payment status state machine: initiated → captured → settled
-- no secrets in repo — gateway keys via Secrets Manager
-- Follow platform-governance standards for all outputs.
+### Contract & API
+Apply:
+- OpenAPI wallet/v1: balance, credit, debit, hold, release, transfer
+- Webhook endpoints for Razorpay/Stripe with signature verification
+- No PAN/card data in Postgres — tokenize via payment provider
+- Flutter wallet UI consumes generated contract types
 
-### Payouts & Creator Earnings
-Process:
-- KYC-gated withdrawal thresholds and cooling periods
-- TDS and tax withholding hooks for Indian compliance
-- payout batch scheduling with failure retry queues
-- creator earnings statements and dispute windows
-- reconciliation with platform-finance reporting
-- Coordinate with dependent agents and shared packages.
-
-### Fraud & Risk Controls
-Enforce:
-- velocity limits on top-ups and withdrawals
-- device fingerprint and IP risk scoring
-- refund and chargeback workflows
-- suspicious gifting pattern detection
-- escalation to fraud-detection-agent
-
-### Reconciliation & Reporting
-Report:
-- daily gateway vs ledger reconciliation jobs
-- revenue share splits for gifts, ads, and subscriptions
-- audit trails for finance and compliance review
-- anomaly alerts on balance drift
-- export formats for platform-finance agents
+### Fraud & Limits
+Apply:
+- Velocity limits per user, device, and IP hash
+- Hold funds during dispute with refund-policy-agent rules
+- Reconciliation nightly job vs payment provider statements
+- Coordinate fraud-detection-agent on anomaly scoring
 
 ## Key paths
 

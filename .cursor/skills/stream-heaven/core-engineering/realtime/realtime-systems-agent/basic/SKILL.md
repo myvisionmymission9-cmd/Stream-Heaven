@@ -26,48 +26,26 @@ description: >-
 
 ## Role-specific skills
 
-### Socket.IO Architecture
-Design:
-- Design and implement realtime capabilities for Stream Heaven. (Realtime Systems scope)
-- namespace and room topology for four-app ecosystem
-- Redis adapter for multi-instance Socket.IO scaling
-- authentication handshake with JWT validation
-- connection lifecycle: connect, reconnect, disconnect grace
-- event naming conventions and schema versioning
+### Realtime Platform
+Apply:
+- Own realtime-service (port 3009) platform SLOs and capacity plan
+- Namespace topology: /social, /livestream, /games, /notifications
+- Redis adapter cluster sizing for Socket.IO horizontal scale
+- Handshake auth with JWT from auth-service — reject anonymous joins
 
-### Event Protocol Design
-Define:
-- typed event payloads in packages/shared-contracts/realtime
-- ack/retry semantics for critical events
-- broadcast vs unicast vs room-scoped delivery
-- event ordering guarantees per room/channel
-- backpressure handling for slow clients
-- Follow platform-governance standards for all outputs.
+### Presence & Messaging
+Apply:
+- Presence heartbeat TTL and stale cleanup in Redis
+- Message ordering guarantees per room vs eventual for viewer counts
+- Backpressure: drop low-priority events under CPU/memory pressure
+- Reconnect policy: exponential backoff, room rejoin, state sync
 
-### Presence & State Sync
-Implement:
-- online/offline presence with heartbeat intervals
-- room membership tracking in Redis sets
-- state snapshot and delta sync patterns
-- reconnect state recovery from server cache
-- presence fan-out cost optimization
-- Coordinate with dependent agents and shared packages.
-
-### Performance for Mobile India
-Optimize:
-- minimal payload sizes for 2G/3G networks
-- WebSocket fallback to long-polling configuration
-- connection pooling and keep-alive tuning
-- battery-aware heartbeat frequency on mobile
-- graceful degradation when realtime unavailable
-
-### Security & Authorization
-Enforce:
-- room join authorization against JWT claims
-- rate limiting on event emission per connection
-- input validation on all inbound socket events
-- CORS and origin validation for web clients
-- audit logging for privileged socket operations
+### Event Catalog
+Apply:
+- Versioned events in packages/shared-contracts/realtime/
+- Schema validation on inbound client emits
+- Server event catalog for analytics pipeline ingestion
+- Coordinate socketio-architect on implementation details
 
 ## Key paths
 

@@ -14,60 +14,38 @@ description: >-
 
 ## Agent
 
-- **Path:** `apps/livestream-app/core/pk-battle-agent.md`
-- **Role:** Pk Battle Agent specialist for Stream Heaven's core domain, ensuring alignment with platform governance and the four-app ecosystem.
+- **Path:** `apps/livestream-app/agents/multi-guest/pk-battle-agent.md`
+- **Role:** Pk Battle Agent specialist for Stream Heaven's multi guest domain, ensuring alignment with platform governance and the four-app ecosystem.
 
 ## Scope (basic)
 
 - Load `platform-governance/MASTER-AI-OPERATING-SYSTEM.md` (or `MASTER-GOVERNANCE-PROMPT.md` for lighter sessions)
-- Open agent: `apps/livestream-app/core/pk-battle-agent.md` and copy its `## Prompt Template` block
+- Open agent: `apps/livestream-app/agents/multi-guest/pk-battle-agent.md` and copy its `## Prompt Template` block
 - Work within assigned path boundaries; contract-first in `packages/shared-contracts/`
 - Run `node scripts/validate-agents.mjs` after editing agent markdown
 
 ## Role-specific skills
 
-### Live Room Lifecycle
-Own:
-- Design and implement core capabilities for Stream Heaven. (Pk Battle scope)
-- room create, start, join, leave, and end state machine
-- deterministic transitions with idempotent API calls
-- viewer count safety guards against race conditions
-- graceful host disconnect and co-host takeover
-- cross-app handoff for room discovery surfaces
+### PK State Machine
+Apply:
+- States: idle → challenge_sent → active → scoring → ended → rematch_optional
+- Server-authoritative timers; client display only
+- Forfeit and disconnect grace with configurable windows
+- Idempotent challenge/accept with dedup keys
 
-### Streaming Token & Provider Integration
-Integrate:
-- Agora token bootstrap contract with AGORA_APP_ID env only
-- no embedded provider secrets in codebase
-- token TTL aligned with expected session duration
-- publisher vs subscriber role token differentiation
-- provider failover prep for Zego as alternate
-- Follow platform-governance standards for all outputs.
+### Scoring & Sync
+Apply:
+- Gift-weighted score aggregation per room side
+- Viewer count tie-breaker rules documented in contracts
+- Socket.IO pk.score_update with coalesced broadcast rate
+- Redis hot score cache with Postgres persistence at end
 
-### Livestream API Contracts
-Define:
-- /v1/livestream/* OpenAPI in packages/shared-contracts
-- room list, create, start, join, leave, end endpoints
-- viewer count and room metadata in responses
-- api-gateway proxy with JWT X-User-Id propagation
-- backward-compatible contract evolution for Phase 3 features
-- Coordinate with dependent agents and shared packages.
-
-### Realtime Events
-Emit:
-- livestream.room.started event schema
-- livestream.viewer.joined and viewer.left events
-- livestream.room.ended with duration and peak viewer stats
-- Socket.IO broadcast channels per room
-- event schema ownership with socketio-architect
-
-### Mobile Live Room UX
-Guide:
-- Flutter live room list in apps/mobile
-- low-bandwidth preview thumbnails via CDN
-- one-tap join with minimal pre-buffer
-- host go-live flow optimized for low-end Android
-- background audio handling for audio-room mode
+### Contract
+Apply:
+- /v1/livestream/pk/challenge, accept, status, forfeit endpoints
+- Extend livestream room model without breaking v1 clients
+- Event schema: pk.started, pk.score, pk.ended
+- Quality-gate before enabling PK in production
 
 ## Key paths
 

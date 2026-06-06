@@ -27,72 +27,19 @@ description: >-
 
 ## Role-specific skills (advanced)
 
-### Redis Cluster Architecture
-Architect:
-- Design and implement database capabilities for Stream Heaven. (Redis Cache Specialist scope)
-- hash slot planning for even key distribution
-- read replica routing for session reads
-- cluster failover drills and split-brain prevention
-- cross-AZ latency budgets for Indian regions
-- Elasticache vs self-managed trade-off ADRs
+### Cluster Operations
+Apply:
+- Memory maxmemory policy: volatile-lru for cache workloads
+- Slowlog monitoring and hot key detection
+- Failover drill with realtime-systems-agent
+- Elasticache/Redis Cluster vs single-node dev parity
 
-### Performance Tuning
-Tune:
-- pipeline batching for bulk cache operations
-- Lua scripts for atomic multi-key updates
-- connection pooling sizing per NestJS service
-- large key detection and structural refactoring
-- slowlog analysis and hot key resharding
-- Follow platform-governance standards for all outputs.
-
-### Streams & Event Backbones
-Leverage:
-- Redis Streams consumer groups for domain events
-- at-least-once delivery with pending entry recovery
-- stream trimming policies for retention compliance
-- cross-service event catalog alignment
-- migration path to Kafka for analytics fan-out
-- Coordinate with dependent agents and shared packages.
-
-### Distributed Locks & Coordination
-Coordinate:
-- Redlock patterns for wallet debit serialization
-- lock TTL and fencing token best practices
-- leader election for cron and batch workers
-- idempotency keys for payment and gift events
-- chaos tests for lock holder crash scenarios
-
-### Security Hardening
-Harden:
-- TLS in transit for managed Redis endpoints
-- ACL users per microservice with least privilege
-- command renaming/disabling dangerous commands in prod
-- VPC security group isolation
-- audit logging for admin commands
-
-### Observability
-Monitor:
-- memory, ops/sec, and hit ratio dashboards
-- alerting on replication lag and failover events
-- tracing cache calls with correlation IDs
-- SLI definitions for cache availability
-- runbooks for cache stampede incidents
-
-### Production Validation
-Validate:
-- load tests for session and rate limit throughput
-- failover game days with chaos-engineering-agent
-- contract tests for cache invalidation events
-- data consistency checks after invalidation storms
-- golden tests for TTL and lock edge cases
-
-### Multi-Agent Orchestration
-Coordinate:
-- socketio-architect for adapter configuration
-- auth-service-agent for session TTL policies
-- nestjs-architect for Redis module injection patterns
-- kubernetes-agent for Redis StatefulSet manifests
-- ADR for cluster topology changes
+### Festival Scale
+Apply:
+- Pre-warm feed and room keys before known events
+- Emergency eviction playbook when memory > 90%
+- Coordinate autoscaling-agent on node count
+- Post-event cache flush validation
 
 ## Key paths
 

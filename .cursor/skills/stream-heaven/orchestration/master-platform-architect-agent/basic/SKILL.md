@@ -26,48 +26,26 @@ description: >-
 
 ## Role-specific skills
 
-### Task Routing & Delegation
-Route:
-- Design and implement orchestration capabilities for Stream Heaven. (Master Platform Architect scope)
-- task-router.md selection by domain, phase, and keywords
-- single-agent vs multi-chat orchestration decision tree
-- scope boundaries to prevent agent overlap
-- dependency-ordered execution for cross-service work
-- escalation paths when no agent matches
-
-### Quality Gate Enforcement
-Gate:
-- validate-agents.mjs before catalog merges
-- validate-agent-skills.mjs for skill pair integrity
-- contract diff review before implementation
-- smoke test requirements per phase exit
-- production-readiness-checklist alignment
-- Follow platform-governance standards for all outputs.
-
-### Handoff Management
-Document:
-- structured handoff artifacts: context, decisions, blockers
-- agent ## Dependencies paths in every delegation
-- contract-first reminders in cross-agent prompts
-- test plan attachment before quality-gate sign-off
-- rollback notes for risky multi-service changes
-- Coordinate with dependent agents and shared packages.
-
-### Workflow Orchestration
-Sequence:
-- Phase 1→2→2a→8→9 dependency ordering
-- parallel vs serial agent activation rules
-- chat-coordinator for multi-window Cursor sessions
-- agent-scheduler for long-running validation loops
-- pipeline-builder for CI-aligned local workflows
-
-### Governance Prefix
+### Architecture Map
 Apply:
-- MASTER-AI-OPERATING-SYSTEM.md load on every orchestration start
-- no duplicate services — services/ catalog check
-- ADR requirement for architecture forks
-- smallest correct diff principle across delegations
-- English in code; i18n ARB for user strings
+- Maintain living diagram: services/, packages/, apps/, ai-agents/ ownership
+- Track contract versions per domain in packages/shared-contracts/
+- Document port allocation: 3000 gateway, 3001 auth, 3002 profile, 3009 realtime
+- Identify duplicate or orphan modules before new scaffolding
+
+### Integration Pattern
+Apply:
+- Standardize gateway proxy headers: X-User-Id, X-Request-Id, X-Session-Id
+- Redis cache-aside vs write-through decision tree per domain
+- Socket.IO room naming conventions per app namespace
+- S3 + Cloudflare CDN patterns for media and avatars
+
+### Review & Sign-off
+Apply:
+- Architecture review template for Phase 2+ feature proposals
+- Backward compatibility checklist for /v1/* extensions
+- Coordinate chief-architect on ADR-required forks
+- Quality-gate architecture section completion before merge
 
 ## Key paths
 

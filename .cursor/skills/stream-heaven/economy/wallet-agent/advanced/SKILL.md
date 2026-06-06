@@ -27,72 +27,19 @@ description: >-
 
 ## Role-specific skills (advanced)
 
-### Financial Integrity at Scale
-Scale:
-- Design and implement economy capabilities for Stream Heaven. (Wallet scope)
-- sharded ledger partitions by user ID ranges
-- saga patterns for cross-service payment flows
-- exactly-once settlement with outbox pattern
-- read models for real-time balance queries
-- month-end close automation with finance agents
+### Cross-App Economy
+Apply:
+- Unified coin balance across Social gifts, Livestream tips, Astro consults
+- Saga pattern: gift send → wallet debit → creator credit → rollback on fail
+- Cross-app-wallet-sync event schema
+- ADR before splitting wallet into regional shards
 
-### Subscription & IAP
-Manage:
-- Google Play and App Store receipt validation
-- subscription grace periods and dunning flows
-- proration rules for plan upgrades
-- family sharing and regional pricing tiers
-- entitlement sync across four apps
-- Follow platform-governance standards for all outputs.
-
-### Cross-App Wallet Federation
-Federate:
-- unified wallet balance across Social, Livestream, Astro, OTT
-- cross-app transfer rules and fee policies
-- promotional credit scopes per app surface
-- identity-platform session binding for wallet ops
-- deep link flows for low-balance top-up
-- Coordinate with dependent agents and shared packages.
-
-### Compliance & Tax
-Comply:
-- GST invoicing for digital services in India
-- RBI prepaid instrument guidelines alignment
-- PCI-DSS scope minimization via tokenization
-- AML monitoring thresholds and SAR workflows
-- data localization for financial records
-
-### Treasury & Cash Management
-Operate:
-- float monitoring across payment gateways
-- FX handling for international creator payouts
-- reserve accounting for pending withdrawals
-- treasury reporting dashboards
-- vendor invoice matching automation
-
-### Production Validation
-Validate:
-- property-based tests for ledger invariants
-- chaos tests for webhook delivery failures
-- reconciliation diff zero-tolerance CI gates
-- load tests for festival coin purchase spikes
-- golden tests for refund and chargeback edge cases
-
-### Multi-Agent Orchestration
-Coordinate:
-- gift-economy-agent for live tipping flows
-- creator-economy-agent for revenue share rules
-- platform-finance-agent for month-end reporting
-- auth-service-agent for step-up authentication on withdraw
-- ADR for new payment provider onboarding
-
-### Incident Response
-Respond:
-- payment outage comms templates
-- manual ledger adjustment approval workflow
-- freeze switches for suspected fraud rings
-- post-incident financial impact assessment
-- regulatory notification timelines if required
+### Compliance
+Apply:
+- KYC gates for withdraw per identity-verification-agent
+- Tax reporting hooks with tax-compliance-agent
+- PCI scope minimization — no card storage in Stream Heaven DB
+- Governance-compliance-agent sign-off before public wallet GA
 
 ## Key paths
 

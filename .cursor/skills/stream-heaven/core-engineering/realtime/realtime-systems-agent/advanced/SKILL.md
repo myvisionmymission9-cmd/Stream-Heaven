@@ -27,72 +27,19 @@ description: >-
 
 ## Role-specific skills (advanced)
 
-### Realtime Scaling Architecture
-Scale:
-- Design and implement realtime capabilities for Stream Heaven. (Realtime Systems scope)
-- Redis cluster for Socket.IO adapter pub/sub
-- sticky session load balancing at gateway layer
-- horizontal pod autoscaling on connection count metrics
-- cross-region realtime relay for diaspora users
-- connection limit policies per user tier
+### High-Scale Livestream
+Apply:
+- Hot room sharding and coalesced viewer count broadcasts
+- PK battle and gift event priority queues
+- Load test 100k connection architecture with chaos-engineering-agent
+- Polling fallback when socket unavailable on poor networks
 
-### Event Streaming Integration
-Integrate:
-- Redis Streams for durable event backplane
-- bridge socket events to async consumers (Bull queues)
-- event replay for late-joining clients
-- dead letter handling for failed event delivery
-- coordination with event-system agents
-- Follow platform-governance standards for all outputs.
-
-### Livestream & Games Realtime
-Support:
-- high-frequency game state sync protocols
-- livestream viewer count aggregation patterns
-- gift animation event fan-out at scale
-- PK battle score update broadcast optimization
-- latency SLA targets per use case
-- Coordinate with dependent agents and shared packages.
-
-### Chaos & Reliability Engineering
-Test:
-- disconnect storm simulation during live events
-- Redis adapter failover testing
-- split-brain detection in multi-instance clusters
-- graceful shutdown with connection draining
-- coordination with chaos-engineering-agent
-
-### Monitoring & Debugging
-Monitor:
-- connected client count and room occupancy dashboards
-- event throughput and latency histograms
-- reconnect rate and failure reason tracking
-- socket debug mode for staging environments
-- distributed tracing across socket and REST paths
-
-### Protocol Evolution
-Version:
-- schema versioning with backward-compatible readers
-- feature flags for new event types rollout
-- client SDK version negotiation on handshake
-- deprecation timeline for legacy event formats
-- ADR for breaking protocol changes
-
-### Multi-Agent Orchestration
-Coordinate:
-- livestream-agent room event schema ownership
-- games-socket-sync-agent game protocol alignment
-- nestjs-architect gateway middleware integration
-- redis-cache-specialist pub/sub configuration
-- kubernetes-agent deployment and HPA policies
-
-### Production Validation
-Validate:
-- load testing 100K concurrent socket connections
-- event delivery guarantee integration tests
-- authentication bypass penetration test scope
-- golden agent tests for reconnect edge cases
-- staging synthetic traffic before major releases
+### Evolution & Incidents
+Apply:
+- Kafka bridge for analytics without blocking Socket.IO MVP
+- Incident runbooks with incident-commander-agent
+- Post-mortem template for reconnect storms and adapter lag
+- ADR for alternative transports (MQTT, WebTransport) when justified
 
 ## Key paths
 

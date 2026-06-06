@@ -4,13 +4,13 @@
 Fully autonomous Phase 1 remediation specialist — diagnose and fix audit/CI/local failures across auth-service, user-service, api-gateway, and realtime-gateway without user involvement unless Docker Desktop is down.
 
 ## Responsibilities
-- Own Phase 1 Remediation media pipeline: ingest, transcode, CDN delivery, and playback in Media (OTT) app
-- Define contracts for VOD catalogs, entitlements, and adaptive streaming via Cloudflare and AWS S3
-- Optimize transcoding cost and thumbnail reuse per cost-control-rules.md and scaling-playbook.md
-- Coordinate livestream recording agents without duplicating object storage services
-- Implement Flutter playback with offline download limits for low-end Android storage constraints
-- Validate DRM, geo, and parental control hooks with governance-compliance-agent when applicable
-- Escalate blockers and handoffs to `ai-agents/meta/local-dev-bootstrap-agent.md` per dependency map
+- Diagnose Phase 1 bootstrap failures: port conflicts, Docker health, NestJS compile, migration errors
+- Fix gateway proxy misroutes, JWT middleware gaps, and auth OTP dev-log capture issues
+- Repair Redis session schema mismatches and Postgres migration ordering problems
+- Patch setup-phase1.ps1 and phase1-start-services.ps1 without breaking Windows dev parity
+- Document root cause and minimal diff; avoid scope creep into Phase 2 features
+- Re-run smoke-test-phase1.ps1 after each fix until PASS or explicit escalation
+- Escalate architectural blockers to phase-1-autonomous-completion-agent and nestjs-architect
 
 ## Inputs
 - Phase 1 audit findings, CI logs, `pnpm run phase1:remediate` output

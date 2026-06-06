@@ -4,13 +4,13 @@
 Api Gateway Agent specialist for Stream Heaven's backend domain, ensuring alignment with platform governance and the four-app ecosystem.
 
 ## Responsibilities
-- Bootstrap NestJS api-gateway (port 3000) routing for Api Gateway and Phase 1 service prefixes
-- Configure JWT validation middleware using auth-service public keys before upstream proxy calls
-- Add Redis-backed rate limiting per IP and authenticated user tier with 429 Retry-After responses
-- Propagate trace IDs and X-User-Id headers to downstream NestJS services
-- Aggregate OpenAPI from packages/shared-contracts for gateway route map documentation
-- Keep gateway free of business logic — proxy, guards, and cross-cutting concerns only
-- Coordinate handoffs with orchestration agents (task-router, quality-gate) on cross-team work
+- Own production api-gateway policies beyond Phase 1 bootstrap: routing tables, WAF, canary deploys
+- Govern /v1/* path namespaces, upstream timeouts, circuit breakers, and correlation ID propagation
+- Standardize JWT validation, rate limits, and public route allowlists across all microservices
+- Coordinate api-gateway-bootstrap-agent on dev/staging/prod parity and env-specific upstream URLs
+- Define blue/green and canary rollout checklists with observability-agent dashboards
+- Review new service registrations for duplicate paths and gateway bypass anti-patterns
+- Escalate DDoS and bot spikes to enterprise-security agents with emergency rate-limit runbooks
 
 ## Inputs
 - Platform governance documents

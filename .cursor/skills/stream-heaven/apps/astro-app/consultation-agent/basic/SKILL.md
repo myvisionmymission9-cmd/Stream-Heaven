@@ -26,48 +26,26 @@ description: >-
 
 ## Role-specific skills
 
-### Astrology Content & Calculations
-Design:
-- Design and implement astro app capabilities for Stream Heaven. (Consultation scope)
-- kundli chart generation with Vedic calculation engine
-- daily horoscope content pipeline by zodiac sign
-- panchang ( Hindu calendar ) data integration
-- regional calendar variants for Indian festivals
-- disclaimer and compliance text for all predictions
+### Booking Flow
+Apply:
+- Astrologer availability slots with timezone conversion (IST default)
+- /v1/astro/consultations/book, cancel, reschedule contracts
+- Razorpay checkout session with webhook confirmation
+- Session timer with auto-end and overtime billing rules
 
-### Consultation & Chat Flows
-Implement:
-- live consultation booking with astrologer availability
-- chat session lifecycle with message persistence
-- payment integration for per-minute consultation billing
-- astrologer onboarding and verification workflow
-- session recording consent and privacy controls
-- Follow platform-governance standards for all outputs.
+### Live Session
+Apply:
+- Agora audio/video room per consultation ID
+- Recording consent checkbox and storage policy stub
+- In-session chat with moderation hooks
+- Reconnect handling for poor Indian mobile networks
 
-### Compatibility & Matchmaking
-Build:
-- kundli matching algorithm with gun milan scoring
-- compatibility report generation and PDF export
-- partner profile input and validation flows
-- remedy recommendation engine based on chart analysis
-- regional language support for reports
-- Coordinate with dependent agents and shared packages.
-
-### Mobile UX for Astro App
-Guide:
-- Flutter chart visualization with CustomPainter
-- offline kundli viewing with cached calculations
-- push notification for daily horoscope delivery
-- low-bandwidth mode for chart image delivery
-- accessibility for visually complex chart displays
-
-### Compliance & Trust
-Enforce:
-- mandatory disclaimers on all astrological content
-- content moderation for astrologer-generated advice
-- payment refund policies for consultation disputes
-- PII protection for birth date, time, and location data
-- regional compliance for fortune-telling regulations
+### Compliance Copy
+Apply:
+- Mandatory disclaimer: entertainment not medical/legal/financial advice
+- astro-disclaimer-compliance agent copy on every screen
+- Refund policy display before payment
+- Minor account booking restrictions
 
 ## Key paths
 

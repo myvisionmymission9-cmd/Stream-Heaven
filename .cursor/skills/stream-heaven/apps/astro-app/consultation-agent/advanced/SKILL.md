@@ -27,72 +27,19 @@ description: >-
 
 ## Role-specific skills (advanced)
 
-### Astrology Engine Architecture
-Architect:
-- Design and implement astro app capabilities for Stream Heaven. (Consultation scope)
-- ephemeris data pipeline for accurate planetary positions
-- calculation caching in Redis for repeated kundli requests
-- A/B testing different calculation tradition variants
-- batch horoscope generation for push notification scale
-- ADR for third-party ephemeris library selection
+### Creator Economy
+Apply:
+- Astrologer payout split via wallet-agent and creator-payout-agent
+- Rating and review after session with review-rating-agent
+- Ranking signals to astrologer-ranking-agent
+- Promo credits for first consultation via growth campaigns
 
-### Live Consultation at Scale
-Scale:
-- astrologer queue management with wait time estimation
-- video/audio consultation via Agora integration
-- concurrent session limits per astrologer tier
-- quality monitoring for consultation completion rates
-- peak demand handling during festival periods
-- Follow platform-governance standards for all outputs.
-
-### AI-Enhanced Astrology Features
-Leverage:
-- LLM-assisted remedy recommendation with guardrails
-- natural language chart interpretation generation
-- chatbot triage before live astrologer handoff
-- AI cost control for per-consultation LLM usage
-- human review queue for AI-generated content
-- Coordinate with dependent agents and shared packages.
-
-### Monetization & Payments
-Optimize:
-- per-minute billing with precise session timing
-- wallet integration for consultation credits
-- astrologer revenue share and payout scheduling
-- promotional free consultation campaigns
-- UPI-first payment flow for Indian users
-
-### Content Moderation & Safety
-Operate:
-- astrologer advice audit sampling program
-- user report and block flows for inappropriate guidance
-- automated flagging for medical/financial advice violations
-- astrologer rating and review integrity checks
-- coordination with trust-safety-agent policies
-
-### Production Validation
-Validate:
-- kundli calculation accuracy regression tests
-- consultation booking E2E flow tests
-- payment and refund integration tests
-- disclaimer display enforcement checks
-- golden agent tests for chart edge cases
-
-### Multi-Agent Orchestration
-Coordinate:
-- kundli-chart-agent for calculation engine specs
-- live-consultation-agent for session management
-- astro-payment-agent for billing integration
-- astro-disclaimer-compliance for regulatory text
-- profile-service for astrologer profile display
-
-### Observability & Operations
-Monitor:
-- consultation completion rate dashboards
-- kundli generation latency and error tracking
-- astrologer utilization and queue depth metrics
-- payment failure rate alerting
-- runbooks for ephemeris data pipeline failures
+### Privacy
+Apply:
+- Birth chart data encrypted at rest; minimal JWT claims
+- No chart PII in logs or analytics events
+- GDPR export/delete hooks on consultation history
+- Sensitive-conversation-agent escalation on self-harm signals
 
 ## Key paths
 

@@ -27,72 +27,19 @@ description: >-
 
 ## Role-specific skills (advanced)
 
-### Ecosystem Policy Design
-Design:
-- Map each task to required governance docs (security, API, database, deployment, testing, AI usage). (Governance Compliance scope)
-- cross-app policy harmonization (safety, payments, AI)
-- cost-control-rules.md enforcement automation
-- ai-usage-rules.md for LLM feature governance
-- data retention and localization policies
-- vendor risk assessment frameworks
+### Audit & Remediation
+Apply:
+- Quarterly audit: services/ deduplication, packages/ dependency hygiene
+- Secrets scan and .env.example completeness review
+- Phase exit audit with phase-1-autonomous-completion-agent evidence
+- Remediation tickets with owner agent and deadline
 
-### Compliance Automation
-Automate:
-- CI gates for governance doc references in PRs
-- automated boilerplate agent detection
-- policy-as-code for security and rate limits
-- contract drift scanners in nightly jobs
-- audit trail exports for external reviews
-- Block work that duplicates services, bypasses api-gateway, or violates contract-first rules in `packages/shared-contracts/`.
-
-### Community Governance
-Moderate:
-- community guidelines across apps and games
-- creator council feedback incorporation
-- transparency reporting standards
-- appeals process governance
-- regional legal variant tracking
-- Produce a compliance checklist with pass/fail per governance file before merge.
-
-### Multi-Chat & AI Operations
-Govern:
-- Cursor agent scope boundaries and handoffs
-- prompt template quality standards
-- agent-skill-validator quality thresholds
-- multi-chat execution guide compliance
-- AI cost and safety budgets per feature
-
-### Risk Management
-Assess:
-- risk registers for phase transitions
-- third-party dependency concentration risks
-- regulatory change monitoring (India digital rules)
-- business continuity planning requirements
-- insurance and liability documentation hooks
-
-### Production Validation
-Validate:
-- quarterly governance audit playbooks
-- sample-based PR compliance reviews
-- post-incident governance gap analysis
-- training completion tracking for engineering
-- golden tests for governance agent prompts
-
-### Multi-Agent Orchestration
-Coordinate:
-- governance-compliance-agent as enforcement hub
-- quality-gate before production releases
-- platform-orchestrator for policy rollouts
-- adr-writer-agent for documentation
-- cto-agent sign-off on policy exceptions
-
-### International Expansion Governance
-Prepare:
-- locale-specific compliance matrices
-- payment and tax rule variants by country
-- content legality maps per jurisdiction
-- data residency decision trees
-- partnership legal review checkpoints
+### Regulatory Alignment
+Apply:
+- India IT Rules and store policy checkpoints for UGC and payments
+- Astro disclaimer and non-medical advice compliance with astro-disclaimer-compliance
+- Wallet KYC/AML escalation paths to tax-compliance-agent
+- Coordinate chief-safety-officer on child safety policies
 
 ## Key paths
 

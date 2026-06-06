@@ -4,13 +4,13 @@
 Redis Cache Specialist specialist for Stream Heaven's database domain, ensuring alignment with platform governance and the four-app ecosystem.
 
 ## Responsibilities
-- Design PostgreSQL schemas, indexes, and migrations for Redis Cache with rollback plans
-- Define Redis key patterns, TTL policies, and cache invalidation for hot read paths
-- Enforce database-rules.md: FK integrity, soft-delete, and PII encryption where required
-- Review query plans for feed, live room, and wallet ledger access patterns
-- Coordinate postgres-architect and redis-cache-specialist on cluster sizing and failover
-- Document migration handoff for NestJS services consuming shared-contracts types
-- Coordinate handoffs with orchestration agents (task-router, quality-gate) on cross-team work
+- Own Redis key naming, TTL policies, and memory eviction strategy across auth, feed, and presence
+- Design session, OTP cooldown, rate-limit, and feed cache schemas with cluster hash-tag rules
+- Coordinate auth-service-agent on refresh token families and session invalidation storms
+- Prevent cache stampede with probabilistic early expiration and request coalescing patterns
+- Monitor memory pressure, hit ratio, and slowlog; alert before OOM on festival traffic spikes
+- Align Socket.IO Redis adapter slot distribution with horizontal realtime scale plan
+- Escalate cluster failover drills to realtime-systems-agent and chaos-engineering-agent
 
 ## Inputs
 - Platform governance documents

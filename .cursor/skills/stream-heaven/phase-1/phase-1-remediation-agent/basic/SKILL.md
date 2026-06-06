@@ -26,45 +26,26 @@ description: >-
 
 ## Role-specific skills
 
-### Phase 1 Foundation Setup
-Bootstrap:
-- Docker Postgres and Redis via setup-phase1.ps1
-- NestJS service scaffolds in services/
-- api-gateway on port 3000 as single entry point
-- auth-service (3001) and user-service (3002) boot order
-- environment templates without secrets in repo
+### Bootstrap Debug
+Apply:
+- Diagnose port 3000–3002, 3009 conflicts on Windows dev machines
+- Docker compose health: postgres ready, redis PONG
+- NestJS compile errors: missing env, bad imports, migration fail
+- Parse logs/dev-*.log for stack traces and root cause
 
-### Contract-First Development
-Define:
-- OpenAPI specs in packages/shared-contracts before code
-- shared-types generation from contract schemas
-- breaking change detection in CI validation
-- api-contract-author review for new endpoints
-- gateway proxy rules aligned with contract paths
+### Service Fix
+Apply:
+- Gateway proxy route typos and upstream URL mismatches
+- Auth OTP dev log capture for smoke-test-phase1.ps1
+- Redis connection string and session key schema fixes
+- Profile migration ordering and seed data issues
 
-### Auth & Identity Foundation
-Implement:
-- Firebase Auth bridge with OTP login flow
-- JWT issuance and Redis session management
-- api-gateway JWT validation middleware
-- user profile linkage via JWT sub claim
-- rate limiting on authentication endpoints
-
-### Local Dev & Validation
-Run:
-- setup-phase1.ps1 for Windows Docker bootstrap
-- smoke tests for gateway health and auth flow
-- validate-agents.mjs after agent catalog changes
-- phase1:complete npm script for full validation gate
-- handoff documentation for Phase 2 agents
-
-### Governance Compliance
-Follow:
-- MASTER-AI-OPERATING-SYSTEM.md as primary context
-- platform-governance/engineering-rules.md standards
-- no duplicate services — check services/ first
-- ADR for any Phase 1 architecture deviations
-- smallest correct diff for all Phase 1 changes
+### Script Repair
+Apply:
+- Patch setup-phase1.ps1 and phase1-start-services.ps1 minimally
+- Preserve Windows PowerShell parity with documented bash alternatives
+- Re-run smoke after each fix; document repro steps
+- Avoid scope creep into Phase 2 features
 
 ## Key paths
 

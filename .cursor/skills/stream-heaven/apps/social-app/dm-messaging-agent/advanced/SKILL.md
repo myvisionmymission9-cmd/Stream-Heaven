@@ -27,72 +27,19 @@ description: >-
 
 ## Role-specific skills (advanced)
 
-### Feed Architecture at Scale
-Architect:
-- Design and implement social app capabilities for Stream Heaven. (Dm Messaging scope)
-- fan-out on write vs fan-out on read trade-off analysis
-- Redis-backed feed cache with TTL and invalidation
-- hot creator feed pre-computation for viral posts
-- feed shard partitioning by user cohort
-- cross-region feed consistency for diaspora users
+### Safety & Privacy
+Apply:
+- Report message flow to trust-safety-agent
+- Rate limit new threads to strangers per day
+- E2E encryption roadmap ADR without blocking MVP plaintext server store
+- No message content in push notification payloads
 
-### Content Moderation Pipeline
-Integrate:
-- pre-publish content scanning hooks
-- post-report triage queue integration
-- automated shadow-ban and visibility reduction
-- appeal workflow for moderated content
-- coordination with trust-safety-agent policies
-- Follow platform-governance standards for all outputs.
-
-### Media & CDN Integration
-Optimize:
-- S3 presigned upload for post images and videos
-- Cloudflare CDN URL generation with cache purge
-- WebP/AVIF transcoding for bandwidth savings
-- video thumbnail generation for feed previews
-- media pipeline cost tracking per post type
-- Coordinate with dependent agents and shared packages.
-
-### Engagement Analytics
-Track:
-- impression, click, dwell time event schemas
-- real-time trending post detection
-- creator analytics dashboard data feeds
-- A/B test result aggregation for feed experiments
-- privacy-compliant analytics with consent gates
-
-### Search & Discovery Integration
-Wire:
-- post indexing hooks for search-infrastructure
-- hashtag normalization and trending computation
-- user discovery via mutual follows graph
-- content deduplication for repost detection
-- regional trending with language filters
-
-### Production Validation
-Validate:
-- contract tests for all social OpenAPI endpoints
-- load testing feed fetch at peak evening traffic
-- moderation pathway integration tests
-- feed ranking regression test suite
-- golden agent tests for feed edge cases
-
-### Observability & Operations
-Monitor:
-- feed latency p50/p99 dashboards
-- post creation failure rate alerting
-- moderation queue depth monitoring
-- runbooks for feed staleness and cache poisoning
-- post-incident review for content safety events
-
-### Multi-Agent Orchestration
-Coordinate:
-- feed-architect and feed-ranking-agent alignment
-- story-system-designer cross-surface consistency
-- profile-service avatar and handle display
-- socketio-architect realtime notification events
-- ADR drafts for feed architecture forks
+### Scale
+Apply:
+- Partition messages table by thread_id hash
+- Redis cache last N messages per thread for fast open
+- Load test viral creator DM inbox spikes
+- Search integration for message history opt-in
 
 ## Key paths
 

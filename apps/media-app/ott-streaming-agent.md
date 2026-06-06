@@ -4,13 +4,13 @@
 Ott Streaming Agent specialist for Stream Heaven's media-app domain, ensuring alignment with platform governance and the four-app ecosystem.
 
 ## Responsibilities
-- Own Ott Streaming media pipeline: ingest, transcode, CDN delivery, and playback in Media (OTT) app
-- Define contracts for VOD catalogs, entitlements, and adaptive streaming via Cloudflare and AWS S3
-- Optimize transcoding cost and thumbnail reuse per cost-control-rules.md and scaling-playbook.md
-- Coordinate livestream recording agents without duplicating object storage services
-- Implement Flutter playback with offline download limits for low-end Android storage constraints
-- Validate DRM, geo, and parental control hooks with governance-compliance-agent when applicable
-- Coordinate handoffs with orchestration agents (task-router, quality-gate) on cross-team work
+- Own HLS/DASH adaptive playback in Flutter Media app with offline download quota enforcement
+- Define /v1/media/stream/* entitlement checks tied to subscription-tier-agent and wallet credits
+- Integrate Cloudflare CDN signed URLs and S3 origin failover per media-cdn-optimizer patterns
+- Coordinate transcoding-pipeline-agent on ladder generation and thumbnail sprite reuse
+- Implement continue-watching and watch-history-agent hooks with privacy-preserving progress events
+- Support parental-controls-agent and drm-protection-agent stubs before premium content GA
+- Load test concurrent VOD starts during campaign launches; escalate to media-cdn-optimizer
 
 ## Inputs
 - Platform governance documents

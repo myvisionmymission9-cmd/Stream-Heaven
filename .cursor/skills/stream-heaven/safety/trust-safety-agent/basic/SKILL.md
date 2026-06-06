@@ -26,48 +26,26 @@ description: >-
 
 ## Role-specific skills
 
-### Content Moderation Pipeline
-Build:
-- trust-safety-agent with human appeals via appeal-review-agent. (Trust Safety scope)
-- AI pre-filter + human review queue for UGC
-- real-time live stream moderation hooks
-- CSAM and illegal content zero-tolerance workflows
-- appeal and restoration processes for creators
-- moderation SLA tiers by content severity
+### Policy & Enforcement
+Apply:
+- Community guidelines alignment across four apps
+- Report taxonomy: spam, harassment, CSAM, fraud, impersonation
+- Block/mute enforcement on API and Socket.IO layers
+- Shadow-ban coordination without alerting bad actors
 
-### Trust & Safety Policies
-Enforce:
-- content-policy-agent rule sets per app surface
-- age-gate and minor protection flows
-- harassment and hate speech detection thresholds
-- creator verification for monetization eligibility
-- regional legal compliance for Indian jurisdictions
-- Audit IDs; minimal biometric retention.
+### Moderation Pipeline
+Apply:
+- Pre-publish ML scores via ai-moderation-agent hooks
+- Human review queue SLA for high-severity reports
+- Appeal workflow with appeal-review-agent
+- Creator and host strike system with escalating penalties
 
-### Fraud & Abuse Detection
-Detect:
-- fake profile and bot farm identification
-- spam and scam link blocking in chat
-- gift and wallet wash trading patterns
-- deepfake detection on profile media
-- rate limits coordinated with auth-service
-- Escalate to csam-detection-agent when required.
-
-### User Reporting & Appeals
-Operate:
-- in-app report flows with evidence capture
-- ticket triage priority by harm severity
-- reporter feedback without revealing outcomes
-- repeat offender escalation ladders
-- law enforcement request handling procedures
-
-### Community Reputation
-Score:
-- trust-score-agent composite signals
-- host and viewer reputation badges
-- shadow restrictions before hard bans
-- community moderator tooling
-- transparent community guidelines surfacing
+### Regional Compliance
+Apply:
+- India IT Rules grievance officer workflow stubs
+- Age-gate integration for sensitive content
+- Astro non-medical disclaimer enforcement
+- Store policy alignment for incentive and UGC features
 
 ## Key paths
 

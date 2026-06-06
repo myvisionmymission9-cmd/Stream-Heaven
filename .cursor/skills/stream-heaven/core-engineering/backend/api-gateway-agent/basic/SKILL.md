@@ -26,48 +26,26 @@ description: >-
 
 ## Role-specific skills
 
-### NestJS Module Architecture
-Define:
-- Design and implement backend capabilities for Stream Heaven. (Api Gateway scope)
-- module template for services/* (config, health, logging, metrics)
-- feature module isolation with clear domain boundaries
-- shared library consumption from packages/
-- global vs scoped provider registration patterns
-- lazy-loaded module strategy for large services
+### Production Gateway
+Apply:
+- Own routing table versioning and upstream service registry
+- TLS termination at Cloudflare; origin protection and WAF rules
+- Global /v1 error envelope and RFC7807 problem details
+- Request size limits and JSON depth validation at edge
 
-### Cross-Cutting Middleware
-Standardize:
-- global JWT auth guards across microservices
-- rate limiting guards with Redis-backed counters
-- validation pipes with class-validator DTOs
-- exception filters for consistent error responses
-- request-id and tracing interceptors
-- Follow platform-governance standards for all outputs.
+### Auth & Rate Limit
+Apply:
+- JWT validation middleware shared with api-gateway-bootstrap-agent patterns
+- Per-route rate limits: stricter on /auth/*, wallet, and report endpoints
+- Bot detection hooks coordinated with bot-protection-agent
+- Service-to-service internal routes with mTLS or signed internal JWT
 
-### Inter-Service Communication
-Architect:
-- sync REST via api-gateway for client-facing APIs
-- async events via Redis pub/sub and Bull queues
-- domain event emission to Redis Streams
-- circuit breaker patterns for downstream calls
-- idempotency keys for mutation endpoints
-- Coordinate with dependent agents and shared packages.
-
-### OpenAPI & Contract Alignment
-Align:
-- OpenAPI generation from NestJS decorators
-- packages/shared-contracts as source of truth
-- api-contract-author review workflow
-- DTO mapping between contract and internal models
-- breaking change detection in CI
-
-### Service Scaffolding Standards
-Document:
-- folder structure: controllers, services, dto, entities
-- health check and readiness probe endpoints
-- structured logging with correlation IDs
-- environment config via @nestjs/config
-- Phase 1 build order alignment
+### Observability
+Apply:
+- Per-route RED metrics and distributed tracing headers
+- Access logs with hashed IP; no Bearer tokens in logs
+- Alert on 5xx ratio and upstream timeout spikes
+- Dashboard for gateway saturation during festival events
 
 ## Key paths
 
