@@ -48,7 +48,9 @@ Token needs `repo` scope (private repos) or equivalent fine-grained PAT with rep
 - Secret scan summary (clean or blocked paths)
 - Push result or skip reason
 - CI pointer: `.github/workflows/phase1-ci.yml` (runs on push/PR to main)
-- Single manual follow-up when blocked: set `GH_TOKEN` and re-run script
+- Post-bootstrap handoff: run `scripts/github-workflow-complete.ps1` via `ai-agents/meta/github-workflow-completion-agent.md` (hygiene verify, `gh workflow list`, `gh run list`)
+- Dirty tree: report `git status -sb` before push; do not push when user has uncommitted secret-risk paths; user commits or stashes before re-run
+- Single manual follow-up when blocked: set `GH_TOKEN` and re-run script; then re-run workflow completion
 
 
 ## Auto-run hooks
@@ -82,7 +84,8 @@ detect tools → load token → gh auth login --with-token → secret scan → g
 | 2 | If exit 1 | Tell user: set `GH_TOKEN` in User env or `.env.local`, re-run script |
 | 3 | If exit 2 | List blocked paths; do not commit until clean |
 | 4 | If exit 3 | Report push error; remote may exist, fix network/permissions |
-| 5 | If exit 0 | Report remote URL and CI workflow path |
+| 5 | If exit 0 | Report remote URL and CI workflow path; run `github-workflow-complete.ps1` |
+| 6 | If exit 1 | Automated retry: set `GH_TOKEN` (User env or `.env.local`), restart shell, re-run bootstrap then workflow completion |
 
 Script flags:
 

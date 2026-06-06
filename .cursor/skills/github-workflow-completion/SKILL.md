@@ -63,8 +63,16 @@ Read first: `platform-governance/MASTER-AI-OPERATING-SYSTEM.md`, `platform-gover
 ## Branch strategy
 
 - `main` — protected default; CI on push/PR
-- `feat/*`, `fix/*`, `chore/*` — branch prefixes for PRs to `main`
+- `develop` — optional integration branch (`git checkout -b develop && git push -u origin develop`)
+- `feat/*`, `fix/*`, `chore/*` — branch prefixes for PRs to `main` (or `develop`)
 - Branch protection: document `gh api repos/OWNER/REPO/branches/main/protection` (admin PAT); do not auto-apply
+
+## Auth retry (exit 1)
+
+1. `[System.Environment]::SetEnvironmentVariable('GH_TOKEN','<pat>','User')` or add to `.env.local` (gitignored)
+2. Restart terminal or Cursor
+3. `powershell -ExecutionPolicy Bypass -File scripts/github-bootstrap-autonomous.ps1`
+4. `powershell -ExecutionPolicy Bypass -File scripts/github-workflow-complete.ps1 -RequireAuth`
 
 ## Common fixes
 

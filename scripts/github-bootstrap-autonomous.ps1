@@ -310,8 +310,20 @@ Phase 1 NestJS services, shared contracts, agent catalog, and CI scaffolding.
   return $true
 }
 
+function Test-DirtyWorkingTree {
+  $prev = $ErrorActionPreference
+  $ErrorActionPreference = "Continue"
+  $porcelain = & git status --porcelain 2>&1
+  $ErrorActionPreference = $prev
+  return ($porcelain -and ($porcelain | Measure-Object -Line).Lines -gt 0)
+}
+
 function Invoke-PushMain {
   Write-Step "Pushing main to origin"
+  if (Test-DirtyWorkingTree) {
+    Write-Host "WARN: Uncommitted changes present; push sends committed history only." -ForegroundColor Yellow
+    Write-Host "Run 'git status -sb' and commit or stash before expecting remote to match working tree." -ForegroundColor Yellow
+  }
   if ($DryRun) {
     Write-Host "[DryRun] would run: git push -u origin main" -ForegroundColor Yellow
     return

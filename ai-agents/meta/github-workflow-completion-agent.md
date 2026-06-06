@@ -8,7 +8,8 @@ Post-bootstrap GitHub hygiene and verification for Stream Heaven — templates, 
 - Verify GitHub hygiene files exist: `.github/PULL_REQUEST_TEMPLATE.md`, `.github/ISSUE_TEMPLATE/`, `.github/dependabot.yml`, `.github/CODEOWNERS`, `.github/workflows/phase1-ci.yml`
 - Post-bootstrap verification: `git remote -v`, `gh workflow list`, `gh run list --limit 5` when authenticated
 - Document branch strategy: `main` protected, feature branches `feat/*`, `fix/*`, PRs required; branch protection via `gh api` (documented commands, not auto-applied)
-- Dirty tree handling: report `git status -sb`; never auto-commit unless user explicitly requests; block push when secrets scan would fail
+- Dirty tree handling: report `git status -sb` before push; never auto-commit unless user explicitly requests; if bootstrap would push with uncommitted changes, report dirty paths and skip push (user commits first or uses `git stash`)
+- Automated retry when bootstrap exits 1: set `GH_TOKEN` in User env or `.env.local`, restart terminal, re-run `github-bootstrap-autonomous.ps1` then `github-workflow-complete.ps1`
 - Idempotent re-run: safe to execute multiple times; skip steps already satisfied
 - Load token from `GH_TOKEN`/`GITHUB_TOKEN` or `.env.local`; never print token values; exit 1 when auth required but missing
 - Run `node scripts/validate-agents.mjs` after agent catalog edits
@@ -44,12 +45,21 @@ Post-bootstrap GitHub hygiene and verification for Stream Heaven — templates, 
 
 | Branch | Purpose |
 |--------|---------|
-| `main` | Protected default; CI on push/PR |
+| `main` | Protected default; CI on push/PR; production-ready |
+| `develop` | Optional integration branch for multi-PR batches (create when team grows) |
 | `feat/*` | Feature work |
 | `fix/*` | Bug fixes |
 | `chore/*` | Tooling, agents, docs |
 
-PRs target `main`. Do not force-push `main`.
+PRs target `main` (or `develop` when that branch exists). Do not force-push `main`.
+
+Optional `develop` setup (after remote exists):
+
+```powershell
+git checkout -b develop
+git push -u origin develop
+# Optional: mirror main protection on develop via gh api (admin PAT)
+```
 
 ## Branch Protection (documented, manual)
 
