@@ -1,0 +1,8 @@
+packages:
+  - "apps/*"
+  - "apps/mobile/*"
+  - "services/*"
+  - "packages/*"
+  - "infrastructure/*"
+  - "api-platform/*"
+  - "analytics-platform/*"

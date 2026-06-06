@@ -1,0 +1,331 @@
+openapi: 3.1.0
+info:
+  title: Stream Heaven Livestream API
+  version: 1.0.0
+  license:
+    name: Proprietary
+    identifier: LicenseRef-StreamHeaven-Proprietary
+  description: Livestream room lifecycle and token bootstrap APIs.
+
+servers:
+  - url: https://api.streamheaven.app/v1
+  - url: http://127.0.0.1:3000/v1
+
+tags:
+  - name: LivestreamRooms
+    description: Room lifecycle and viewer participation endpoints.
+  - name: LivestreamTokens
+    description: Provider token bootstrap for live sessions.
+
+paths:
+  /livestream/rooms:
+    post:
+      operationId: createRoom
+      tags: [LivestreamRooms]
+      summary: Create a livestream room in scheduled state
+      security:
+        - bearerAuth: []
+      parameters:
+        - $ref: './common.v1.yaml#/components/parameters/XRequestId'
+        - $ref: './common.v1.yaml#/components/parameters/XAppId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateRoomRequest'
+      responses:
+        '201':
+          description: Room created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LiveRoom'
+        '400':
+          $ref: './common.v1.yaml#/components/responses/BadRequest'
+        '401':
+          $ref: './common.v1.yaml#/components/responses/Unauthorized'
+    get:
+      operationId: listActiveRooms
+      tags: [LivestreamRooms]
+      summary: List active and scheduled live rooms
+      security:
+        - bearerAuth: []
+      parameters:
+        - $ref: './common.v1.yaml#/components/parameters/XRequestId'
+        - name: limit
+          in: query
+          required: false
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 50
+            default: 20
+      responses:
+        '200':
+          description: Room list
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListRoomsResponse'
+        '401':
+          $ref: './common.v1.yaml#/components/responses/Unauthorized'
+
+  /livestream/rooms/{roomId}/start:
+    post:
+      operationId: startRoom
+      tags: [LivestreamRooms]
+      summary: Transition room to live state
+      security:
+        - bearerAuth: []
+      parameters:
+        - $ref: './common.v1.yaml#/components/parameters/XRequestId'
+        - name: roomId
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      responses:
+        '200':
+          description: Room started
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LiveRoom'
+        '401':
+          $ref: './common.v1.yaml#/components/responses/Unauthorized'
+        '404':
+          $ref: './common.v1.yaml#/components/responses/NotFound'
+
+  /livestream/rooms/{roomId}/join:
+    post:
+      operationId: joinRoom
+      tags: [LivestreamRooms]
+      summary: Join a livestream room and increase viewer count
+      security:
+        - bearerAuth: []
+      parameters:
+        - $ref: './common.v1.yaml#/components/parameters/XRequestId'
+        - name: roomId
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      responses:
+        '200':
+          description: Join accepted
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ViewerCountResponse'
+        '401':
+          $ref: './common.v1.yaml#/components/responses/Unauthorized'
+        '404':
+          $ref: './common.v1.yaml#/components/responses/NotFound'
+
+  /livestream/rooms/{roomId}/leave:
+    post:
+      operationId: leaveRoom
+      tags: [LivestreamRooms]
+      summary: Leave a livestream room and decrease viewer count
+      security:
+        - bearerAuth: []
+      parameters:
+        - $ref: './common.v1.yaml#/components/parameters/XRequestId'
+        - name: roomId
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      responses:
+        '200':
+          description: Leave accepted
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ViewerCountResponse'
+        '401':
+          $ref: './common.v1.yaml#/components/responses/Unauthorized'
+        '404':
+          $ref: './common.v1.yaml#/components/responses/NotFound'
+
+  /livestream/rooms/{roomId}/end:
+    post:
+      operationId: endRoom
+      tags: [LivestreamRooms]
+      summary: End livestream room gracefully
+      security:
+        - bearerAuth: []
+      parameters:
+        - $ref: './common.v1.yaml#/components/parameters/XRequestId'
+        - name: roomId
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      responses:
+        '200':
+          description: Room ended
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LiveRoom'
+        '401':
+          $ref: './common.v1.yaml#/components/responses/Unauthorized'
+        '404':
+          $ref: './common.v1.yaml#/components/responses/NotFound'
+
+  /livestream/rooms/{roomId}/viewer-count:
+    get:
+      operationId: getViewerCount
+      tags: [LivestreamRooms]
+      summary: Get current viewer count for a room
+      security:
+        - bearerAuth: []
+      parameters:
+        - $ref: './common.v1.yaml#/components/parameters/XRequestId'
+        - name: roomId
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      responses:
+        '200':
+          description: Current viewer count
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ViewerCountResponse'
+        '401':
+          $ref: './common.v1.yaml#/components/responses/Unauthorized'
+        '404':
+          $ref: './common.v1.yaml#/components/responses/NotFound'
+
+  /livestream/rooms/{roomId}/token:
+    post:
+      operationId: mintRoomToken
+      tags: [LivestreamTokens]
+      summary: Mint Agora token stub for host or audience
+      security:
+        - bearerAuth: []
+      parameters:
+        - $ref: './common.v1.yaml#/components/parameters/XRequestId'
+        - name: roomId
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TokenRequest'
+      responses:
+        '200':
+          description: Token response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TokenResponse'
+        '401':
+          $ref: './common.v1.yaml#/components/responses/Unauthorized'
+        '404':
+          $ref: './common.v1.yaml#/components/responses/NotFound'
+
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+
+  schemas:
+    LiveRoom:
+      allOf:
+        - $ref: './common.v1.yaml#/components/schemas/Timestamps'
+        - type: object
+          required: [roomId, hostUserId, title, status, viewerCount]
+          properties:
+            roomId:
+              type: string
+              format: uuid
+            hostUserId:
+              $ref: './common.v1.yaml#/components/schemas/UserId'
+            title:
+              type: string
+              minLength: 1
+              maxLength: 120
+            status:
+              type: string
+              enum: [scheduled, live, ended]
+            viewerCount:
+              type: integer
+              minimum: 0
+            startedAt:
+              type: [string, 'null']
+              format: date-time
+            endedAt:
+              type: [string, 'null']
+              format: date-time
+
+    CreateRoomRequest:
+      type: object
+      required: [title]
+      properties:
+        title:
+          type: string
+          minLength: 1
+          maxLength: 120
+
+    ListRoomsResponse:
+      type: object
+      required: [items]
+      properties:
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/LiveRoom'
+
+    ViewerCountResponse:
+      type: object
+      required: [roomId, viewerCount]
+      properties:
+        roomId:
+          type: string
+          format: uuid
+        viewerCount:
+          type: integer
+          minimum: 0
+
+    TokenRequest:
+      type: object
+      required: [role]
+      properties:
+        role:
+          type: string
+          enum: [host, audience]
+
+    TokenResponse:
+      type: object
+      required: [provider, appId, channelName, token, expiresInSeconds]
+      properties:
+        provider:
+          type: string
+          enum: [agora]
+        appId:
+          type: string
+        channelName:
+          type: string
+        token:
+          type: string
+          description: Dev stub token. Replace with signed provider token in Phase 3.
+        expiresInSeconds:
+          type: integer
+          minimum: 1

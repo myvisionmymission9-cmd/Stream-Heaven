@@ -1,0 +1,37 @@
+---
+description: Stream Heaven master AI operating system — governance, agents, and phase boundaries
+alwaysApply: true
+---
+
+# Stream Heaven Master Rule
+
+You work on **Stream Heaven** — an AI-native multi-app entertainment ecosystem (Social, Livestream, Astro, OTT).
+
+## Before Any Work
+
+1. Read [`platform-governance/MASTER-AI-OPERATING-SYSTEM.md`](platform-governance/MASTER-AI-OPERATING-SYSTEM.md) for full context
+2. Comply with relevant docs in `platform-governance/` (22 governance files)
+3. Find your agent in [`ai-agents/AGENT-REGISTRY.md`](ai-agents/AGENT-REGISTRY.md) and stay in scope
+
+## Non-Negotiables
+
+- **Contract-first:** define APIs in `packages/shared-contracts/` before implementation
+- **No secrets in code** — AWS Secrets Manager / env vars only
+- **No duplicate services** — check `services/` first
+- **ADR for architecture forks** — use `docs/adr/SH-000-template.md`
+- **Phase 1 first:** auth → shared-contracts → realtime → profiles before feature work
+
+## Key Paths
+
+| Resource | Path |
+|----------|------|
+| Multi-chat guide | `docs/MULTI-CHAT-EXECUTION-GUIDE.md` |
+| Architecture | `docs/architecture-overview.md` |
+| Agent validation | `node scripts/validate-agents.mjs` |
+| Readiness status | `docs/FINAL-READINESS-REPORT.md` |
+
+## Tech Stack
+
+Flutter (Riverpod, GoRouter) · NestJS · PostgreSQL · Redis · Socket.IO · Agora/Zego · AWS S3 · Cloudflare · Firebase Auth
+
+Build **phase-by-phase**. Smallest correct diff. English in code; user strings via i18n ARB files.

@@ -1,0 +1,179 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://streamheaven.app/schemas/events/realtime.v1.json",
+  "title": "Stream Heaven Realtime Events v1",
+  "description": "Socket.IO event contracts for Phase 1 presence foundation.",
+  "definitions": {
+    "EventEnvelope": {
+      "type": "object",
+      "required": ["eventId", "eventType", "eventVersion", "occurredAt", "producer", "payload"],
+      "properties": {
+        "eventId": { "type": "string", "format": "uuid" },
+        "eventType": { "type": "string" },
+        "eventVersion": { "type": "string", "const": "1" },
+        "occurredAt": { "type": "string", "format": "date-time" },
+        "producer": { "type": "string" },
+        "traceId": { "type": "string" },
+        "payload": { "type": "object" }
+      }
+    },
+    "PresenceOnline": {
+      "allOf": [
+        { "$ref": "#/definitions/EventEnvelope" },
+        {
+          "properties": {
+            "eventType": { "const": "presence.online" },
+            "payload": {
+              "type": "object",
+              "required": ["userId", "appId"],
+              "properties": {
+                "userId": { "type": "string", "format": "uuid" },
+                "appId": { "type": "string", "enum": ["social", "livestream", "astro", "media"] },
+                "deviceId": { "type": "string", "format": "uuid" }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "PresenceOffline": {
+      "allOf": [
+        { "$ref": "#/definitions/EventEnvelope" },
+        {
+          "properties": {
+            "eventType": { "const": "presence.offline" },
+            "payload": {
+              "type": "object",
+              "required": ["userId"],
+              "properties": {
+                "userId": { "type": "string", "format": "uuid" },
+                "lastSeenAt": { "type": "string", "format": "date-time" }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "SocialPostCreated": {
+      "allOf": [
+        { "$ref": "#/definitions/EventEnvelope" },
+        {
+          "properties": {
+            "eventType": { "const": "social.post.created" },
+            "payload": {
+              "type": "object",
+              "required": ["postId", "authorId", "createdAt"],
+              "properties": {
+                "postId": { "type": "string", "format": "uuid" },
+                "authorId": { "type": "string", "format": "uuid" },
+                "createdAt": { "type": "string", "format": "date-time" }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "SocialUserBlocked": {
+      "allOf": [
+        { "$ref": "#/definitions/EventEnvelope" },
+        {
+          "properties": {
+            "eventType": { "const": "social.user.blocked" },
+            "payload": {
+              "type": "object",
+              "required": ["sourceUserId", "targetUserId", "blockedAt"],
+              "properties": {
+                "sourceUserId": { "type": "string", "format": "uuid" },
+                "targetUserId": { "type": "string", "format": "uuid" },
+                "blockedAt": { "type": "string", "format": "date-time" }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "LivestreamRoomStarted": {
+      "allOf": [
+        { "$ref": "#/definitions/EventEnvelope" },
+        {
+          "properties": {
+            "eventType": { "const": "livestream.room.started" },
+            "payload": {
+              "type": "object",
+              "required": ["roomId", "hostUserId", "startedAt"],
+              "properties": {
+                "roomId": { "type": "string", "format": "uuid" },
+                "hostUserId": { "type": "string", "format": "uuid" },
+                "startedAt": { "type": "string", "format": "date-time" }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "LivestreamViewerJoined": {
+      "allOf": [
+        { "$ref": "#/definitions/EventEnvelope" },
+        {
+          "properties": {
+            "eventType": { "const": "livestream.viewer.joined" },
+            "payload": {
+              "type": "object",
+              "required": ["roomId", "viewerUserId", "viewerCount"],
+              "properties": {
+                "roomId": { "type": "string", "format": "uuid" },
+                "viewerUserId": { "type": "string", "format": "uuid" },
+                "viewerCount": { "type": "integer", "minimum": 0 }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "LivestreamRoomEnded": {
+      "allOf": [
+        { "$ref": "#/definitions/EventEnvelope" },
+        {
+          "properties": {
+            "eventType": { "const": "livestream.room.ended" },
+            "payload": {
+              "type": "object",
+              "required": ["roomId", "hostUserId", "endedAt"],
+              "properties": {
+                "roomId": { "type": "string", "format": "uuid" },
+                "hostUserId": { "type": "string", "format": "uuid" },
+                "endedAt": { "type": "string", "format": "date-time" }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "ClientPing": {
+      "type": "object",
+      "required": ["ts"],
+      "properties": {
+        "ts": { "type": "integer", "description": "Client epoch ms" }
+      }
+    },
+    "ServerPong": {
+      "type": "object",
+      "required": ["ts"],
+      "properties": {
+        "ts": { "type": "integer" },
+        "serverTs": { "type": "integer" }
+      }
+    }
+  },
+  "events": {
+    "presence.online": { "$ref": "#/definitions/PresenceOnline" },
+    "presence.offline": { "$ref": "#/definitions/PresenceOffline" },
+    "social.post.created": { "$ref": "#/definitions/SocialPostCreated" },
+    "social.user.blocked": { "$ref": "#/definitions/SocialUserBlocked" },
+    "livestream.room.started": { "$ref": "#/definitions/LivestreamRoomStarted" },
+    "livestream.viewer.joined": { "$ref": "#/definitions/LivestreamViewerJoined" },
+    "livestream.room.ended": { "$ref": "#/definitions/LivestreamRoomEnded" },
+    "client.ping": { "$ref": "#/definitions/ClientPing" },
+    "server.pong": { "$ref": "#/definitions/ServerPong" }
+  }
+}

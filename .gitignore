@@ -1,0 +1,95 @@
+# Dependencies
+node_modules/
+.pnpm-store/
+.tools/
+
+# Build outputs
+dist/
+build/
+*.dart_tool/
+.flutter-plugins
+.flutter-plugins-dependencies
+.packages
+.pub-cache/
+.pub/
+coverage/
+
+# Flutter
+*.iml
+*.ipr
+*.iws
+.idea/
+*.swp
+*.swo
+*~
+.metadata
+**/ios/Pods/
+**/ios/.symlinks/
+**/ios/Flutter/Flutter.framework
+**/ios/Flutter/Flutter.podspec
+**/android/.gradle/
+**/android/captures/
+**/android/local.properties
+**/android/**/GeneratedPluginRegistrant.java
+**/android/key.properties
+*.jks
+*.keystore
+
+# Environment & secrets
+.env
+.env.*
+!.env.example
+*.pem
+*.p12
+credentials.json
+firebase-adminsdk*.json
+service-account*.json
+secrets/
+.aws/
+
+# Logs
+logs/
+*.log
+npm-debug.log*
+pnpm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# OS
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# IDE
+.vscode/*
+!.vscode/extensions.json
+!.vscode/settings.json.example
+*.sublime-*
+
+# Terraform
+**/.terraform/
+*.tfstate
+*.tfstate.*
+*.tfvars
+!*.tfvars.example
+.terraform.lock.hcl
+crash.log
+
+# Kubernetes
+kubeconfig
+*.kubeconfig
+
+# Testing
+.nyc_output/
+test-results/
+playwright-report/
+
+# Turbo
+.turbo/
+
+# Misc
+*.tsbuildinfo
+.cache/
+tmp/
+temp/
+*.bak

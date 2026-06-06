@@ -1,0 +1,16 @@
+---
+description: Agent lookup via registry and list script
+alwaysApply: true
+---
+
+# Agent Lookup Rule
+
+- Treat Stream Heaven agents as markdown files, not npm packages.
+- For agent discovery, use `ai-agents/AGENT-REGISTRY.md` first.
+- For filtered search, use `node scripts/list-agents.mjs` with:
+  - `--phase <value>`
+  - `--domain <value>`
+  - `--search <value>`
+- Prefer returning exact agent file paths and `@`-mentionable paths.
+- Use `scripts/validate-agents.mjs` to confirm catalog health after bulk updates.
+

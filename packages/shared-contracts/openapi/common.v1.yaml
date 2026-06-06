@@ -1,0 +1,131 @@
+openapi: 3.1.0
+info:
+  title: Stream Heaven Common Schemas
+  version: 1.0.0
+  license:
+    name: Proprietary
+    identifier: LicenseRef-StreamHeaven-Proprietary
+  description: Shared schemas referenced by all Stream Heaven REST contracts.
+
+servers:
+  - url: https://api.streamheaven.app/v1
+
+components:
+  schemas:
+    UserId:
+      type: string
+      format: uuid
+      description: Stream Heaven user identifier (UUID v7 preferred).
+      example: "018f3a2e-7b4c-7a1e-9c0d-123456789abc"
+
+    Timestamps:
+      type: object
+      required: [createdAt, updatedAt]
+      properties:
+        createdAt:
+          type: string
+          format: date-time
+          description: ISO 8601 UTC creation timestamp.
+        updatedAt:
+          type: string
+          format: date-time
+          description: ISO 8601 UTC last update timestamp.
+
+    ErrorResponse:
+      type: object
+      required: [statusCode, code, message, timestamp, path, requestId]
+      properties:
+        statusCode:
+          type: integer
+          example: 409
+        code:
+          type: string
+          example: AUTH_OTP_EXPIRED
+        message:
+          type: string
+          example: OTP has expired. Request a new code.
+        details:
+          type: object
+          additionalProperties: true
+        timestamp:
+          type: string
+          format: date-time
+        path:
+          type: string
+          example: /v1/auth/otp/verify
+        requestId:
+          type: string
+          example: req_abc123
+
+    CursorPagination:
+      type: object
+      properties:
+        cursor:
+          type: object
+          properties:
+            next:
+              type: [string, 'null']
+              description: Opaque cursor for the next page.
+        hasMore:
+          type: boolean
+
+    AppId:
+      type: string
+      enum: [social, livestream, astro, media]
+      description: Stream Heaven app identifier.
+
+    Role:
+      type: string
+      enum: [USER, CREATOR, MODERATOR, ADMIN]
+
+  parameters:
+    XRequestId:
+      name: X-Request-Id
+      in: header
+      required: false
+      schema:
+        type: string
+        format: uuid
+    XAppId:
+      name: X-App-Id
+      in: header
+      required: true
+      schema:
+        $ref: '#/components/schemas/AppId'
+    XDeviceId:
+      name: X-Device-Id
+      in: header
+      required: false
+      schema:
+        type: string
+        format: uuid
+
+  responses:
+    BadRequest:
+      description: Invalid request
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    Unauthorized:
+      description: Missing or invalid credentials
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    NotFound:
+      description: Resource not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    TooManyRequests:
+      description: Rate limit exceeded
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+      headers:
+        Retry-After:
+          schema:
+            type: integer

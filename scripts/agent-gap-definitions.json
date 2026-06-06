@@ -1,0 +1,2591 @@
+[
+  {
+    "file": "apps/livestream-app/agents/core/livestream-agent.md",
+    "phase": 9,
+    "domain": "livestream-app",
+    "role": "Owns end-to-end live room lifecycle — go-live, viewer join, graceful end, and cross-app handoff.",
+    "responsibilities": [
+      "Define room state machine (scheduled, live, paused, ended) with NestJS and Redis locks",
+      "Wire Agora/Zego channel lifecycle with auth-service token minting",
+      "Expose OpenAPI for host start/stop and viewer counts",
+      "Coordinate viewer-session-agent for presence on flaky networks",
+      "Alert stream-health-monitor on encoder stalls",
+      "Route monetization to creator-monetization-agent"
+    ],
+    "dependencies": [
+      "apps/livestream-app/agents/core/room-lifecycle-manager.md",
+      "apps/livestream-app/agents/core/viewer-session-agent.md"
+    ]
+  },
+  {
+    "file": "apps/livestream-app/agents/core/audio-room-agent.md",
+    "phase": 9,
+    "domain": "livestream-app",
+    "role": "Audio-only live rooms with seat maps, mute policies, and low-bandwidth profiles.",
+    "responsibilities": [
+      "Model speaker/listener seats separate from video stage",
+      "RTC audio-only profiles with Bluetooth routing on Flutter",
+      "Raise-hand flows with seat-management-agent",
+      "Throttle speakers via audio-mix-coordinator",
+      "Redis discovery metadata with idle TTL",
+      "Enforce age-gate before join"
+    ],
+    "dependencies": [
+      "apps/livestream-app/agents/multi-guest/seat-management-agent.md",
+      "ai-agents/safety/age-gate-agent.md"
+    ]
+  },
+  {
+    "file": "apps/livestream-app/agents/core/creator-monetization-agent.md",
+    "phase": 9,
+    "domain": "livestream-app",
+    "role": "Creator earnings — gifts, tips, subscriptions, and payout reconciliation.",
+    "responsibilities": [
+      "Idempotent gift/tip ledger to wallet-service",
+      "Regional revenue share and tax hooks",
+      "Real-time earnings UI off RTC thread",
+      "Coordinate high-spender-agent policies",
+      "Fraud signals to fraud-detection-agent",
+      "Contracts in shared-contracts/live/monetization/v1"
+    ],
+    "dependencies": [
+      "apps/livestream-app/agents/economy-psychology/gift-conversion-agent.md",
+      "ai-agents/safety/fraud-detection-agent.md"
+    ]
+  },
+  {
+    "file": "apps/livestream-app/agents/core/livestream-scaling-agent.md",
+    "phase": 9,
+    "domain": "livestream-app",
+    "role": "Horizontal scale for viewers, chat fanout, and regional CDN/RTC capacity.",
+    "responsibilities": [
+      "Capacity models for festival and PK peaks",
+      "Shard Socket.IO by region; Redis pub/sub chat",
+      "Coordinate cdn-stream-distributor",
+      "Autoscaling with autoscaling-agent",
+      "Game-day drills with chaos-engineering-agent",
+      "Degrade mode runbooks (low FX, chat-only)"
+    ],
+    "dependencies": [
+      "apps/livestream-app/agents/video-systems/cdn-stream-distributor.md",
+      "ai-agents/core-engineering/infrastructure/autoscaling-agent.md"
+    ]
+  },
+  {
+    "file": "apps/livestream-app/agents/video-systems/live-comment-agent.md",
+    "phase": 9,
+    "domain": "livestream-app",
+    "role": "Realtime live comment pipeline with moderation and translations.",
+    "responsibilities": [
+      "Socket.IO comment schema in shared-contracts",
+      "Redis rate limits per user and room",
+      "Backpressure fanout for 10k+ viewers",
+      "ai-moderation-agent pre-broadcast screening",
+      "Indic font/RTL safe overlays",
+      "Premium styles via floating-comment-agent"
+    ],
+    "dependencies": [
+      "ai-agents/safety/ai-moderation-agent.md",
+      "ai-agents/gift-effects/fx/floating-comment-agent.md"
+    ]
+  },
+  {
+    "file": "apps/livestream-app/agents/video-systems/live-reaction-agent.md",
+    "phase": 9,
+    "domain": "livestream-app",
+    "role": "Mass live reactions without choking RTC or socket throughput.",
+    "responsibilities": [
+      "Client-side burst aggregation before emit",
+      "Server sampling caps events/sec in viral rooms",
+      "Sync counts to fan-engagement-agent",
+      "emoji-burst-agent and reaction-animation-agent FX",
+      "Offline reaction queue on reconnect",
+      "A/B placement with gift-conversion-agent"
+    ],
+    "dependencies": [
+      "ai-agents/gift-effects/fx/emoji-burst-agent.md",
+      "apps/livestream-app/agents/operations/fan-engagement-agent.md"
+    ]
+  },
+  {
+    "file": "apps/livestream-app/agents/video-systems/low-latency-stream-agent.md",
+    "phase": 9,
+    "domain": "livestream-app",
+    "role": "Ultra-low-latency paths for PK and host-viewer sync.",
+    "responsibilities": [
+      "Agora interactive vs HLS latency budgets",
+      "Encoder presets for sub-second glass-to-glass",
+      "Coordinate ultra-low-latency-agent and rtc-quality-agent",
+      "Auto-fallback on jitter spikes",
+      "ADR for global low-latency rollout",
+      "Alert latency-monitor-agent on regressions"
+    ],
+    "dependencies": [
+      "ai-agents/core-engineering/realtime/ultra-low-latency-agent.md",
+      "ai-agents/core-engineering/realtime/latency-monitor-agent.md"
+    ]
+  },
+  {
+    "file": "apps/livestream-app/agents/multi-guest/seat-management-agent.md",
+    "phase": 9,
+    "domain": "livestream-app",
+    "role": "Speaker seats, locks, promotions, and layout slots.",
+    "responsibilities": [
+      "Seat graph per room tier in PostgreSQL",
+      "Atomic Redis seat claim/release",
+      "Flutter grids via layout-compositor",
+      "guest-request-agent queue integration",
+      "Mute/kick propagated to RTC <200ms target",
+      "Seat audit trail for disputes"
+    ],
+    "dependencies": [
+      "apps/livestream-app/agents/multi-guest/guest-request-agent.md",
+      "apps/livestream-app/agents/multi-guest/live-stage-agent.md"
+    ]
+  },
+  {
+    "file": "apps/livestream-app/agents/multi-guest/guest-request-agent.md",
+    "phase": 9,
+    "domain": "livestream-app",
+    "role": "Viewer requests to join stage — apply, approve, deny, timeout.",
+    "responsibilities": [
+      "FIFO queue with host overrides",
+      "Firebase push on pending requests",
+      "Auto-expire stale requests",
+      "ban-kick-moderator block list enforcement",
+      "Outcomes feed host-ranking-agent",
+      "Host tool APIs in shared-contracts"
+    ],
+    "dependencies": [
+      "apps/livestream-app/agents/multi-guest/seat-management-agent.md",
+      "apps/livestream-app/agents/operations/ban-kick-moderator.md"
+    ]
+  },
+  {
+    "file": "apps/livestream-app/agents/multi-guest/live-stage-agent.md",
+    "phase": 9,
+    "domain": "livestream-app",
+    "role": "Multi-guest stage modes — grid, spotlight, PK split.",
+    "responsibilities": [
+      "Stage mode state machine over Socket.IO",
+      "Transitions without breaking RTC subs",
+      "PK handoff to livestream-battle-agent",
+      "co-host-manager persistent slots",
+      "Thermal degrade to single-host",
+      "Stage API docs for future host SDK"
+    ],
+    "dependencies": [
+      "apps/livestream-app/agents/multi-guest/pk-battle-agent.md",
+      "apps/livestream-app/agents/operations/livestream-battle-agent.md"
+    ]
+  },
+  {
+    "file": "apps/livestream-app/agents/operations/pk-tournament-agent.md",
+    "phase": 9,
+    "domain": "livestream-app",
+    "role": "PK tournament brackets, scoring, and prizes.",
+    "responsibilities": [
+      "Define pk-tournament-agent models in PostgreSQL; hot leaderboards in Redis",
+      "NestJS + Socket.IO APIs in shared-contracts/live/ops",
+      "Coordinate live-ops-dashboard-agent tooling",
+      "Fan metrics tie to fan-engagement-agent",
+      "Load-test with livestream-scaling-agent pre-launch",
+      "Escalate bots to fraud-detection-agent"
+    ],
+    "dependencies": [
+      "apps/livestream-app/agents/core/livestream-agent.md"
+    ]
+  },
+  {
+    "file": "apps/livestream-app/agents/operations/festival-event-agent.md",
+    "phase": 9,
+    "domain": "livestream-app",
+    "role": "Multi-day festival schedules and sponsor zones.",
+    "responsibilities": [
+      "Define festival-event-agent models in PostgreSQL; hot leaderboards in Redis",
+      "NestJS + Socket.IO APIs in shared-contracts/live/ops",
+      "Coordinate live-ops-dashboard-agent tooling",
+      "Fan metrics tie to fan-engagement-agent",
+      "Load-test with livestream-scaling-agent pre-launch",
+      "Escalate bots to fraud-detection-agent"
+    ],
+    "dependencies": [
+      "apps/livestream-app/agents/core/livestream-agent.md"
+    ]
+  },
+  {
+    "file": "apps/livestream-app/agents/operations/fan-engagement-agent.md",
+    "phase": 9,
+    "domain": "livestream-app",
+    "role": "Fan quests, streaks, and engagement loops.",
+    "responsibilities": [
+      "Define fan-engagement-agent models in PostgreSQL; hot leaderboards in Redis",
+      "NestJS + Socket.IO APIs in shared-contracts/live/ops",
+      "Coordinate live-ops-dashboard-agent tooling",
+      "Fan metrics tie to fan-engagement-agent",
+      "Load-test with livestream-scaling-agent pre-launch",
+      "Escalate bots to fraud-detection-agent"
+    ],
+    "dependencies": [
+      "apps/livestream-app/agents/core/livestream-agent.md"
+    ]
+  },
+  {
+    "file": "apps/livestream-app/agents/operations/live-event-agent.md",
+    "phase": 9,
+    "domain": "livestream-app",
+    "role": "One-off live events — reminders and go-live.",
+    "responsibilities": [
+      "Define live-event-agent models in PostgreSQL; hot leaderboards in Redis",
+      "NestJS + Socket.IO APIs in shared-contracts/live/ops",
+      "Coordinate live-ops-dashboard-agent tooling",
+      "Fan metrics tie to fan-engagement-agent",
+      "Load-test with livestream-scaling-agent pre-launch",
+      "Escalate bots to fraud-detection-agent"
+    ],
+    "dependencies": [
+      "apps/livestream-app/agents/core/livestream-agent.md"
+    ]
+  },
+  {
+    "file": "apps/livestream-app/agents/operations/host-ranking-agent.md",
+    "phase": 9,
+    "domain": "livestream-app",
+    "role": "Host leaderboards with fair-play anti-cheat.",
+    "responsibilities": [
+      "Define host-ranking-agent models in PostgreSQL; hot leaderboards in Redis",
+      "NestJS + Socket.IO APIs in shared-contracts/live/ops",
+      "Coordinate live-ops-dashboard-agent tooling",
+      "Fan metrics tie to fan-engagement-agent",
+      "Load-test with livestream-scaling-agent pre-launch",
+      "Escalate bots to fraud-detection-agent"
+    ],
+    "dependencies": [
+      "apps/livestream-app/agents/core/livestream-agent.md"
+    ]
+  },
+  {
+    "file": "apps/livestream-app/agents/operations/community-event-agent.md",
+    "phase": 9,
+    "domain": "livestream-app",
+    "role": "Community watch parties and shared rooms.",
+    "responsibilities": [
+      "Define community-event-agent models in PostgreSQL; hot leaderboards in Redis",
+      "NestJS + Socket.IO APIs in shared-contracts/live/ops",
+      "Coordinate live-ops-dashboard-agent tooling",
+      "Fan metrics tie to fan-engagement-agent",
+      "Load-test with livestream-scaling-agent pre-launch",
+      "Escalate bots to fraud-detection-agent"
+    ],
+    "dependencies": [
+      "apps/livestream-app/agents/core/livestream-agent.md"
+    ]
+  },
+  {
+    "file": "apps/livestream-app/agents/operations/live-campaign-agent.md",
+    "phase": 9,
+    "domain": "livestream-app",
+    "role": "Live campaigns tied to marketing calendar.",
+    "responsibilities": [
+      "Define live-campaign-agent models in PostgreSQL; hot leaderboards in Redis",
+      "NestJS + Socket.IO APIs in shared-contracts/live/ops",
+      "Coordinate live-ops-dashboard-agent tooling",
+      "Fan metrics tie to fan-engagement-agent",
+      "Load-test with livestream-scaling-agent pre-launch",
+      "Escalate bots to fraud-detection-agent"
+    ],
+    "dependencies": [
+      "apps/livestream-app/agents/core/livestream-agent.md"
+    ]
+  },
+  {
+    "file": "apps/livestream-app/agents/operations/seasonal-campaign-agent.md",
+    "phase": 9,
+    "domain": "livestream-app",
+    "role": "Seasonal skins and gift themes.",
+    "responsibilities": [
+      "Define seasonal-campaign-agent models in PostgreSQL; hot leaderboards in Redis",
+      "NestJS + Socket.IO APIs in shared-contracts/live/ops",
+      "Coordinate live-ops-dashboard-agent tooling",
+      "Fan metrics tie to fan-engagement-agent",
+      "Load-test with livestream-scaling-agent pre-launch",
+      "Escalate bots to fraud-detection-agent"
+    ],
+    "dependencies": [
+      "apps/livestream-app/agents/core/livestream-agent.md"
+    ]
+  },
+  {
+    "file": "apps/livestream-app/agents/operations/global-ranking-event-agent.md",
+    "phase": 9,
+    "domain": "livestream-app",
+    "role": "Cross-region rankings with timezone fairness.",
+    "responsibilities": [
+      "Define global-ranking-event-agent models in PostgreSQL; hot leaderboards in Redis",
+      "NestJS + Socket.IO APIs in shared-contracts/live/ops",
+      "Coordinate live-ops-dashboard-agent tooling",
+      "Fan metrics tie to fan-engagement-agent",
+      "Load-test with livestream-scaling-agent pre-launch",
+      "Escalate bots to fraud-detection-agent"
+    ],
+    "dependencies": [
+      "apps/livestream-app/agents/core/livestream-agent.md"
+    ]
+  },
+  {
+    "file": "apps/livestream-app/agents/operations/host-competition-agent.md",
+    "phase": 9,
+    "domain": "livestream-app",
+    "role": "Host competitions with judging and appeals.",
+    "responsibilities": [
+      "Define host-competition-agent models in PostgreSQL; hot leaderboards in Redis",
+      "NestJS + Socket.IO APIs in shared-contracts/live/ops",
+      "Coordinate live-ops-dashboard-agent tooling",
+      "Fan metrics tie to fan-engagement-agent",
+      "Load-test with livestream-scaling-agent pre-launch",
+      "Escalate bots to fraud-detection-agent"
+    ],
+    "dependencies": [
+      "apps/livestream-app/agents/core/livestream-agent.md"
+    ]
+  },
+  {
+    "file": "apps/livestream-app/agents/operations/livestream-battle-agent.md",
+    "phase": 9,
+    "domain": "livestream-app",
+    "role": "Battle timers, win rules, and rematches.",
+    "responsibilities": [
+      "Define livestream-battle-agent models in PostgreSQL; hot leaderboards in Redis",
+      "NestJS + Socket.IO APIs in shared-contracts/live/ops",
+      "Coordinate live-ops-dashboard-agent tooling",
+      "Fan metrics tie to fan-engagement-agent",
+      "Load-test with livestream-scaling-agent pre-launch",
+      "Escalate bots to fraud-detection-agent"
+    ],
+    "dependencies": [
+      "apps/livestream-app/agents/core/livestream-agent.md"
+    ]
+  },
+  {
+    "file": "apps/livestream-app/agents/economy-psychology/high-spender-agent.md",
+    "phase": 9,
+    "domain": "livestream-app",
+    "role": "Whale detection and VIP treatment.",
+    "responsibilities": [
+      "PostgreSQL rules + Redis aggregates for high-spender-agent",
+      "Feature flags via product-labs experiments",
+      "Payout-safe tests with creator-monetization-agent",
+      "No predatory mechanics; security-rules compliance",
+      "Privacy-safe segmentation without raw PII logs",
+      "Anomalies to fraud-detection-agent"
+    ],
+    "dependencies": [
+      "apps/livestream-app/agents/core/creator-monetization-agent.md"
+    ]
+  },
+  {
+    "file": "apps/livestream-app/agents/economy-psychology/gift-conversion-agent.md",
+    "phase": 9,
+    "domain": "livestream-app",
+    "role": "Gift funnel analytics and nudges.",
+    "responsibilities": [
+      "PostgreSQL rules + Redis aggregates for gift-conversion-agent",
+      "Feature flags via product-labs experiments",
+      "Payout-safe tests with creator-monetization-agent",
+      "No predatory mechanics; security-rules compliance",
+      "Privacy-safe segmentation without raw PII logs",
+      "Anomalies to fraud-detection-agent"
+    ],
+    "dependencies": [
+      "apps/livestream-app/agents/core/creator-monetization-agent.md"
+    ]
+  },
+  {
+    "file": "apps/livestream-app/agents/economy-psychology/vip-retention-agent.md",
+    "phase": 9,
+    "domain": "livestream-app",
+    "role": "VIP tiers, churn, and win-back.",
+    "responsibilities": [
+      "PostgreSQL rules + Redis aggregates for vip-retention-agent",
+      "Feature flags via product-labs experiments",
+      "Payout-safe tests with creator-monetization-agent",
+      "No predatory mechanics; security-rules compliance",
+      "Privacy-safe segmentation without raw PII logs",
+      "Anomalies to fraud-detection-agent"
+    ],
+    "dependencies": [
+      "apps/livestream-app/agents/core/creator-monetization-agent.md"
+    ]
+  },
+  {
+    "file": "apps/livestream-app/agents/economy-psychology/creator-battle-agent.md",
+    "phase": 9,
+    "domain": "livestream-app",
+    "role": "Creator battle psychology and pacing.",
+    "responsibilities": [
+      "PostgreSQL rules + Redis aggregates for creator-battle-agent",
+      "Feature flags via product-labs experiments",
+      "Payout-safe tests with creator-monetization-agent",
+      "No predatory mechanics; security-rules compliance",
+      "Privacy-safe segmentation without raw PII logs",
+      "Anomalies to fraud-detection-agent"
+    ],
+    "dependencies": [
+      "apps/livestream-app/agents/core/creator-monetization-agent.md"
+    ]
+  },
+  {
+    "file": "apps/livestream-app/agents/economy-psychology/live-economy-balancer-agent.md",
+    "phase": 9,
+    "domain": "livestream-app",
+    "role": "Virtual economy sinks/sources balance.",
+    "responsibilities": [
+      "PostgreSQL rules + Redis aggregates for live-economy-balancer-agent",
+      "Feature flags via product-labs experiments",
+      "Payout-safe tests with creator-monetization-agent",
+      "No predatory mechanics; security-rules compliance",
+      "Privacy-safe segmentation without raw PII logs",
+      "Anomalies to fraud-detection-agent"
+    ],
+    "dependencies": [
+      "apps/livestream-app/agents/core/creator-monetization-agent.md"
+    ]
+  },
+  {
+    "file": "apps/livestream-app/agents/economy-psychology/emotional-engagement-agent.md",
+    "phase": 9,
+    "domain": "livestream-app",
+    "role": "Emotional hooks in live UX timing.",
+    "responsibilities": [
+      "PostgreSQL rules + Redis aggregates for emotional-engagement-agent",
+      "Feature flags via product-labs experiments",
+      "Payout-safe tests with creator-monetization-agent",
+      "No predatory mechanics; security-rules compliance",
+      "Privacy-safe segmentation without raw PII logs",
+      "Anomalies to fraud-detection-agent"
+    ],
+    "dependencies": [
+      "apps/livestream-app/agents/core/creator-monetization-agent.md"
+    ]
+  },
+  {
+    "file": "apps/livestream-app/agents/economy-psychology/spender-segmentation-agent.md",
+    "phase": 9,
+    "domain": "livestream-app",
+    "role": "RFM segmentation for live spenders.",
+    "responsibilities": [
+      "PostgreSQL rules + Redis aggregates for spender-segmentation-agent",
+      "Feature flags via product-labs experiments",
+      "Payout-safe tests with creator-monetization-agent",
+      "No predatory mechanics; security-rules compliance",
+      "Privacy-safe segmentation without raw PII logs",
+      "Anomalies to fraud-detection-agent"
+    ],
+    "dependencies": [
+      "apps/livestream-app/agents/core/creator-monetization-agent.md"
+    ]
+  },
+  {
+    "file": "apps/livestream-app/agents/economy-psychology/fan-loyalty-agent.md",
+    "phase": 9,
+    "domain": "livestream-app",
+    "role": "Loyalty points, badges, retention.",
+    "responsibilities": [
+      "PostgreSQL rules + Redis aggregates for fan-loyalty-agent",
+      "Feature flags via product-labs experiments",
+      "Payout-safe tests with creator-monetization-agent",
+      "No predatory mechanics; security-rules compliance",
+      "Privacy-safe segmentation without raw PII logs",
+      "Anomalies to fraud-detection-agent"
+    ],
+    "dependencies": [
+      "apps/livestream-app/agents/core/creator-monetization-agent.md"
+    ]
+  },
+  {
+    "file": "ai-agents/gift-effects/rendering/gift-trigger-agent.md",
+    "phase": 10,
+    "domain": "gift-effects",
+    "role": "Gift triggers — validation and dispatch.",
+    "responsibilities": [
+      "gift-trigger-agent in shared-contracts/gifts/v1",
+      "Idempotent wallet debits",
+      "gift-queue-manager + effect-budget-optimizer",
+      "Lightweight FX fallback on thermal/FPS drop",
+      "Socket.IO room sync with livestream-agent",
+      "Abuse audit with fraud-detection-agent"
+    ],
+    "dependencies": [
+      "ai-agents/gift-effects/fx/gift-queue-manager.md"
+    ]
+  },
+  {
+    "file": "ai-agents/gift-effects/rendering/gift-sync-agent.md",
+    "phase": 10,
+    "domain": "gift-effects",
+    "role": "Cross-client gift sync and ordering.",
+    "responsibilities": [
+      "gift-sync-agent in shared-contracts/gifts/v1",
+      "Idempotent wallet debits",
+      "gift-queue-manager + effect-budget-optimizer",
+      "Lightweight FX fallback on thermal/FPS drop",
+      "Socket.IO room sync with livestream-agent",
+      "Abuse audit with fraud-detection-agent"
+    ],
+    "dependencies": [
+      "ai-agents/gift-effects/fx/gift-queue-manager.md"
+    ]
+  },
+  {
+    "file": "ai-agents/gift-effects/rendering/gift-economy-agent.md",
+    "phase": 10,
+    "domain": "gift-effects",
+    "role": "Catalog pricing and wallet debits.",
+    "responsibilities": [
+      "gift-economy-agent in shared-contracts/gifts/v1",
+      "Idempotent wallet debits",
+      "gift-queue-manager + effect-budget-optimizer",
+      "Lightweight FX fallback on thermal/FPS drop",
+      "Socket.IO room sync with livestream-agent",
+      "Abuse audit with fraud-detection-agent"
+    ],
+    "dependencies": [
+      "ai-agents/gift-effects/fx/gift-queue-manager.md"
+    ]
+  },
+  {
+    "file": "ai-agents/gift-effects/rendering/gift-animation-agent.md",
+    "phase": 10,
+    "domain": "gift-effects",
+    "role": "Lottie/Rive pipelines and assets.",
+    "responsibilities": [
+      "gift-animation-agent in shared-contracts/gifts/v1",
+      "Idempotent wallet debits",
+      "gift-queue-manager + effect-budget-optimizer",
+      "Lightweight FX fallback on thermal/FPS drop",
+      "Socket.IO room sync with livestream-agent",
+      "Abuse audit with fraud-detection-agent"
+    ],
+    "dependencies": [
+      "ai-agents/gift-effects/fx/gift-queue-manager.md"
+    ]
+  },
+  {
+    "file": "ai-agents/gift-effects/rendering/gift-rendering-agent.md",
+    "phase": 10,
+    "domain": "gift-effects",
+    "role": "GPU/CPU render path per device.",
+    "responsibilities": [
+      "gift-rendering-agent in shared-contracts/gifts/v1",
+      "Idempotent wallet debits",
+      "gift-queue-manager + effect-budget-optimizer",
+      "Lightweight FX fallback on thermal/FPS drop",
+      "Socket.IO room sync with livestream-agent",
+      "Abuse audit with fraud-detection-agent"
+    ],
+    "dependencies": [
+      "ai-agents/gift-effects/fx/gift-queue-manager.md"
+    ]
+  },
+  {
+    "file": "ai-agents/gift-effects/rendering/gift-priority-agent.md",
+    "phase": 10,
+    "domain": "gift-effects",
+    "role": "Priority when FX budget saturated.",
+    "responsibilities": [
+      "gift-priority-agent in shared-contracts/gifts/v1",
+      "Idempotent wallet debits",
+      "gift-queue-manager + effect-budget-optimizer",
+      "Lightweight FX fallback on thermal/FPS drop",
+      "Socket.IO room sync with livestream-agent",
+      "Abuse audit with fraud-detection-agent"
+    ],
+    "dependencies": [
+      "ai-agents/gift-effects/fx/gift-queue-manager.md"
+    ]
+  },
+  {
+    "file": "ai-agents/gift-effects/audio/spatial-audio-agent.md",
+    "phase": 10,
+    "domain": "gift-effects",
+    "role": "Spatial audio for multi-guest stages.",
+    "responsibilities": [
+      "spatial-audio-agent audio graph in Flutter + platform channels",
+      "audio-mix-priority-agent overlap rules",
+      "Prefetch on WiFi; degrade on 2G/3G",
+      "haptic-feedback-agent paired cues",
+      "Peak limiter for low-end speakers",
+      "Coordinate live-audio-mixer-agent in battles"
+    ],
+    "dependencies": [
+      "ai-agents/gift-effects/audio/audio-mix-priority-agent.md"
+    ]
+  },
+  {
+    "file": "ai-agents/gift-effects/audio/voice-enhancement-agent.md",
+    "phase": 10,
+    "domain": "gift-effects",
+    "role": "Voice clarity and noise suppression.",
+    "responsibilities": [
+      "voice-enhancement-agent audio graph in Flutter + platform channels",
+      "audio-mix-priority-agent overlap rules",
+      "Prefetch on WiFi; degrade on 2G/3G",
+      "haptic-feedback-agent paired cues",
+      "Peak limiter for low-end speakers",
+      "Coordinate live-audio-mixer-agent in battles"
+    ],
+    "dependencies": [
+      "ai-agents/gift-effects/audio/audio-mix-priority-agent.md"
+    ]
+  },
+  {
+    "file": "ai-agents/gift-effects/audio/background-audio-agent.md",
+    "phase": 10,
+    "domain": "gift-effects",
+    "role": "Background music licensing and ducking.",
+    "responsibilities": [
+      "background-audio-agent audio graph in Flutter + platform channels",
+      "audio-mix-priority-agent overlap rules",
+      "Prefetch on WiFi; degrade on 2G/3G",
+      "haptic-feedback-agent paired cues",
+      "Peak limiter for low-end speakers",
+      "Coordinate live-audio-mixer-agent in battles"
+    ],
+    "dependencies": [
+      "ai-agents/gift-effects/audio/audio-mix-priority-agent.md"
+    ]
+  },
+  {
+    "file": "ai-agents/gift-effects/audio/live-audio-mixer-agent.md",
+    "phase": 10,
+    "domain": "gift-effects",
+    "role": "Live bus mixing host/guest/music.",
+    "responsibilities": [
+      "live-audio-mixer-agent audio graph in Flutter + platform channels",
+      "audio-mix-priority-agent overlap rules",
+      "Prefetch on WiFi; degrade on 2G/3G",
+      "haptic-feedback-agent paired cues",
+      "Peak limiter for low-end speakers",
+      "Coordinate live-audio-mixer-agent in battles"
+    ],
+    "dependencies": [
+      "ai-agents/gift-effects/audio/audio-mix-priority-agent.md"
+    ]
+  },
+  {
+    "file": "ai-agents/gift-effects/audio/audio-reaction-agent.md",
+    "phase": 10,
+    "domain": "gift-effects",
+    "role": "Audio stingers for reactions.",
+    "responsibilities": [
+      "audio-reaction-agent audio graph in Flutter + platform channels",
+      "audio-mix-priority-agent overlap rules",
+      "Prefetch on WiFi; degrade on 2G/3G",
+      "haptic-feedback-agent paired cues",
+      "Peak limiter for low-end speakers",
+      "Coordinate live-audio-mixer-agent in battles"
+    ],
+    "dependencies": [
+      "ai-agents/gift-effects/audio/audio-mix-priority-agent.md"
+    ]
+  },
+  {
+    "file": "ai-agents/gift-effects/audio/sound-effects-agent.md",
+    "phase": 10,
+    "domain": "gift-effects",
+    "role": "SFX library and CDN prefetch.",
+    "responsibilities": [
+      "sound-effects-agent audio graph in Flutter + platform channels",
+      "audio-mix-priority-agent overlap rules",
+      "Prefetch on WiFi; degrade on 2G/3G",
+      "haptic-feedback-agent paired cues",
+      "Peak limiter for low-end speakers",
+      "Coordinate live-audio-mixer-agent in battles"
+    ],
+    "dependencies": [
+      "ai-agents/gift-effects/audio/audio-mix-priority-agent.md"
+    ]
+  },
+  {
+    "file": "ai-agents/gift-effects/audio/gift-sound-agent.md",
+    "phase": 10,
+    "domain": "gift-effects",
+    "role": "Per-gift sounds and play limits.",
+    "responsibilities": [
+      "gift-sound-agent audio graph in Flutter + platform channels",
+      "audio-mix-priority-agent overlap rules",
+      "Prefetch on WiFi; degrade on 2G/3G",
+      "haptic-feedback-agent paired cues",
+      "Peak limiter for low-end speakers",
+      "Coordinate live-audio-mixer-agent in battles"
+    ],
+    "dependencies": [
+      "ai-agents/gift-effects/audio/audio-mix-priority-agent.md"
+    ]
+  },
+  {
+    "file": "ai-agents/gift-effects/audio/reaction-sound-agent.md",
+    "phase": 10,
+    "domain": "gift-effects",
+    "role": "Reaction packs with normalization.",
+    "responsibilities": [
+      "reaction-sound-agent audio graph in Flutter + platform channels",
+      "audio-mix-priority-agent overlap rules",
+      "Prefetch on WiFi; degrade on 2G/3G",
+      "haptic-feedback-agent paired cues",
+      "Peak limiter for low-end speakers",
+      "Coordinate live-audio-mixer-agent in battles"
+    ],
+    "dependencies": [
+      "ai-agents/gift-effects/audio/audio-mix-priority-agent.md"
+    ]
+  },
+  {
+    "file": "ai-agents/gift-effects/fx/particle-effects-agent.md",
+    "phase": 10,
+    "domain": "gift-effects",
+    "role": "Particle gifts with GPU caps.",
+    "responsibilities": [
+      "particle-effects-agent gated by effect-budget-optimizer",
+      "gift-queue-manager concurrent FX queue",
+      "fullscreen-overlay-agent layering",
+      "low-end-device-agent test matrix",
+      "memory-optimization-agent GPU budgets",
+      "Degrade ladders in livestream-scaling-agent"
+    ],
+    "dependencies": [
+      "ai-agents/gift-effects/fx/effect-budget-optimizer.md"
+    ]
+  },
+  {
+    "file": "ai-agents/gift-effects/fx/heart-rain-agent.md",
+    "phase": 10,
+    "domain": "gift-effects",
+    "role": "Heart-rain with client aggregation.",
+    "responsibilities": [
+      "heart-rain-agent gated by effect-budget-optimizer",
+      "gift-queue-manager concurrent FX queue",
+      "fullscreen-overlay-agent layering",
+      "low-end-device-agent test matrix",
+      "memory-optimization-agent GPU budgets",
+      "Degrade ladders in livestream-scaling-agent"
+    ],
+    "dependencies": [
+      "ai-agents/gift-effects/fx/effect-budget-optimizer.md"
+    ]
+  },
+  {
+    "file": "ai-agents/gift-effects/fx/shader-effects-agent.md",
+    "phase": 10,
+    "domain": "gift-effects",
+    "role": "Shader gifts and fallbacks.",
+    "responsibilities": [
+      "shader-effects-agent gated by effect-budget-optimizer",
+      "gift-queue-manager concurrent FX queue",
+      "fullscreen-overlay-agent layering",
+      "low-end-device-agent test matrix",
+      "memory-optimization-agent GPU budgets",
+      "Degrade ladders in livestream-scaling-agent"
+    ],
+    "dependencies": [
+      "ai-agents/gift-effects/fx/effect-budget-optimizer.md"
+    ]
+  },
+  {
+    "file": "ai-agents/gift-effects/fx/3d-animation-agent.md",
+    "phase": 10,
+    "domain": "gift-effects",
+    "role": "3D gift LOD per device.",
+    "responsibilities": [
+      "3d-animation-agent gated by effect-budget-optimizer",
+      "gift-queue-manager concurrent FX queue",
+      "fullscreen-overlay-agent layering",
+      "low-end-device-agent test matrix",
+      "memory-optimization-agent GPU budgets",
+      "Degrade ladders in livestream-scaling-agent"
+    ],
+    "dependencies": [
+      "ai-agents/gift-effects/fx/effect-budget-optimizer.md"
+    ]
+  },
+  {
+    "file": "ai-agents/gift-effects/fx/screen-overlay-agent.md",
+    "phase": 10,
+    "domain": "gift-effects",
+    "role": "Overlays without blocking touches.",
+    "responsibilities": [
+      "screen-overlay-agent gated by effect-budget-optimizer",
+      "gift-queue-manager concurrent FX queue",
+      "fullscreen-overlay-agent layering",
+      "low-end-device-agent test matrix",
+      "memory-optimization-agent GPU budgets",
+      "Degrade ladders in livestream-scaling-agent"
+    ],
+    "dependencies": [
+      "ai-agents/gift-effects/fx/effect-budget-optimizer.md"
+    ]
+  },
+  {
+    "file": "ai-agents/gift-effects/fx/emoji-burst-agent.md",
+    "phase": 10,
+    "domain": "gift-effects",
+    "role": "Emoji bursts on reactions.",
+    "responsibilities": [
+      "emoji-burst-agent gated by effect-budget-optimizer",
+      "gift-queue-manager concurrent FX queue",
+      "fullscreen-overlay-agent layering",
+      "low-end-device-agent test matrix",
+      "memory-optimization-agent GPU budgets",
+      "Degrade ladders in livestream-scaling-agent"
+    ],
+    "dependencies": [
+      "ai-agents/gift-effects/fx/effect-budget-optimizer.md"
+    ]
+  },
+  {
+    "file": "ai-agents/gift-effects/fx/dynamic-lighting-agent.md",
+    "phase": 10,
+    "domain": "gift-effects",
+    "role": "Lighting accents on host video.",
+    "responsibilities": [
+      "dynamic-lighting-agent gated by effect-budget-optimizer",
+      "gift-queue-manager concurrent FX queue",
+      "fullscreen-overlay-agent layering",
+      "low-end-device-agent test matrix",
+      "memory-optimization-agent GPU budgets",
+      "Degrade ladders in livestream-scaling-agent"
+    ],
+    "dependencies": [
+      "ai-agents/gift-effects/fx/effect-budget-optimizer.md"
+    ]
+  },
+  {
+    "file": "ai-agents/gift-effects/fx/motion-graphics-agent.md",
+    "phase": 10,
+    "domain": "gift-effects",
+    "role": "Campaign motion templates.",
+    "responsibilities": [
+      "motion-graphics-agent gated by effect-budget-optimizer",
+      "gift-queue-manager concurrent FX queue",
+      "fullscreen-overlay-agent layering",
+      "low-end-device-agent test matrix",
+      "memory-optimization-agent GPU budgets",
+      "Degrade ladders in livestream-scaling-agent"
+    ],
+    "dependencies": [
+      "ai-agents/gift-effects/fx/effect-budget-optimizer.md"
+    ]
+  },
+  {
+    "file": "ai-agents/gift-effects/fx/gpu-effects-agent.md",
+    "phase": 10,
+    "domain": "gift-effects",
+    "role": "GPU scheduling and crash guards.",
+    "responsibilities": [
+      "gpu-effects-agent gated by effect-budget-optimizer",
+      "gift-queue-manager concurrent FX queue",
+      "fullscreen-overlay-agent layering",
+      "low-end-device-agent test matrix",
+      "memory-optimization-agent GPU budgets",
+      "Degrade ladders in livestream-scaling-agent"
+    ],
+    "dependencies": [
+      "ai-agents/gift-effects/fx/effect-budget-optimizer.md"
+    ]
+  },
+  {
+    "file": "ai-agents/gift-effects/fx/floating-comment-agent.md",
+    "phase": 10,
+    "domain": "gift-effects",
+    "role": "Premium floating comments.",
+    "responsibilities": [
+      "floating-comment-agent gated by effect-budget-optimizer",
+      "gift-queue-manager concurrent FX queue",
+      "fullscreen-overlay-agent layering",
+      "low-end-device-agent test matrix",
+      "memory-optimization-agent GPU budgets",
+      "Degrade ladders in livestream-scaling-agent"
+    ],
+    "dependencies": [
+      "ai-agents/gift-effects/fx/effect-budget-optimizer.md"
+    ]
+  },
+  {
+    "file": "ai-agents/gift-effects/fx/animated-chat-agent.md",
+    "phase": 10,
+    "domain": "gift-effects",
+    "role": "Animated subscriber chat.",
+    "responsibilities": [
+      "animated-chat-agent gated by effect-budget-optimizer",
+      "gift-queue-manager concurrent FX queue",
+      "fullscreen-overlay-agent layering",
+      "low-end-device-agent test matrix",
+      "memory-optimization-agent GPU budgets",
+      "Degrade ladders in livestream-scaling-agent"
+    ],
+    "dependencies": [
+      "ai-agents/gift-effects/fx/effect-budget-optimizer.md"
+    ]
+  },
+  {
+    "file": "ai-agents/gift-effects/fx/sticker-effects-agent.md",
+    "phase": 10,
+    "domain": "gift-effects",
+    "role": "Sticker overlays live/replay.",
+    "responsibilities": [
+      "sticker-effects-agent gated by effect-budget-optimizer",
+      "gift-queue-manager concurrent FX queue",
+      "fullscreen-overlay-agent layering",
+      "low-end-device-agent test matrix",
+      "memory-optimization-agent GPU budgets",
+      "Degrade ladders in livestream-scaling-agent"
+    ],
+    "dependencies": [
+      "ai-agents/gift-effects/fx/effect-budget-optimizer.md"
+    ]
+  },
+  {
+    "file": "ai-agents/gift-effects/fx/reaction-animation-agent.md",
+    "phase": 10,
+    "domain": "gift-effects",
+    "role": "Reaction choreography.",
+    "responsibilities": [
+      "reaction-animation-agent gated by effect-budget-optimizer",
+      "gift-queue-manager concurrent FX queue",
+      "fullscreen-overlay-agent layering",
+      "low-end-device-agent test matrix",
+      "memory-optimization-agent GPU budgets",
+      "Degrade ladders in livestream-scaling-agent"
+    ],
+    "dependencies": [
+      "ai-agents/gift-effects/fx/effect-budget-optimizer.md"
+    ]
+  },
+  {
+    "file": "ai-agents/identity-platform/universal-user-agent.md",
+    "phase": 18,
+    "domain": "identity-platform",
+    "role": "Canonical user across all four apps.",
+    "responsibilities": [
+      "universal-user-agent in user-service + shared-contracts/identity/v1",
+      "Firebase Auth + OTP per security-rules",
+      "Outbox via event-stream-agent",
+      "No secrets in client repos",
+      "Short-TTL cross-app handoff tokens",
+      "Disputes to trust-safety-agent"
+    ],
+    "dependencies": [
+      "ai-agents/phase-1/auth-service-agent.md",
+      "ai-agents/identity-platform/unified-auth-agent.md"
+    ]
+  },
+  {
+    "file": "ai-agents/identity-platform/identity-resolution-agent.md",
+    "phase": 18,
+    "domain": "identity-platform",
+    "role": "Duplicate identity resolution.",
+    "responsibilities": [
+      "identity-resolution-agent in user-service + shared-contracts/identity/v1",
+      "Firebase Auth + OTP per security-rules",
+      "Outbox via event-stream-agent",
+      "No secrets in client repos",
+      "Short-TTL cross-app handoff tokens",
+      "Disputes to trust-safety-agent"
+    ],
+    "dependencies": [
+      "ai-agents/phase-1/auth-service-agent.md",
+      "ai-agents/identity-platform/unified-auth-agent.md"
+    ]
+  },
+  {
+    "file": "ai-agents/identity-platform/cross-app-profile-agent.md",
+    "phase": 18,
+    "domain": "identity-platform",
+    "role": "Cross-app profile sync.",
+    "responsibilities": [
+      "cross-app-profile-agent in user-service + shared-contracts/identity/v1",
+      "Firebase Auth + OTP per security-rules",
+      "Outbox via event-stream-agent",
+      "No secrets in client repos",
+      "Short-TTL cross-app handoff tokens",
+      "Disputes to trust-safety-agent"
+    ],
+    "dependencies": [
+      "ai-agents/phase-1/auth-service-agent.md",
+      "ai-agents/identity-platform/unified-auth-agent.md"
+    ]
+  },
+  {
+    "file": "ai-agents/identity-platform/single-sign-on-agent.md",
+    "phase": 18,
+    "domain": "identity-platform",
+    "role": "SSO across apps.",
+    "responsibilities": [
+      "single-sign-on-agent in user-service + shared-contracts/identity/v1",
+      "Firebase Auth + OTP per security-rules",
+      "Outbox via event-stream-agent",
+      "No secrets in client repos",
+      "Short-TTL cross-app handoff tokens",
+      "Disputes to trust-safety-agent"
+    ],
+    "dependencies": [
+      "ai-agents/phase-1/auth-service-agent.md",
+      "ai-agents/identity-platform/unified-auth-agent.md"
+    ]
+  },
+  {
+    "file": "ai-agents/identity-platform/device-identity-agent.md",
+    "phase": 18,
+    "domain": "identity-platform",
+    "role": "Trusted device registry.",
+    "responsibilities": [
+      "device-identity-agent in user-service + shared-contracts/identity/v1",
+      "Firebase Auth + OTP per security-rules",
+      "Outbox via event-stream-agent",
+      "No secrets in client repos",
+      "Short-TTL cross-app handoff tokens",
+      "Disputes to trust-safety-agent"
+    ],
+    "dependencies": [
+      "ai-agents/phase-1/auth-service-agent.md",
+      "ai-agents/identity-platform/unified-auth-agent.md"
+    ]
+  },
+  {
+    "file": "ai-agents/identity-platform/session-identity-agent.md",
+    "phase": 18,
+    "domain": "identity-platform",
+    "role": "Session tokens and revocation.",
+    "responsibilities": [
+      "session-identity-agent in user-service + shared-contracts/identity/v1",
+      "Firebase Auth + OTP per security-rules",
+      "Outbox via event-stream-agent",
+      "No secrets in client repos",
+      "Short-TTL cross-app handoff tokens",
+      "Disputes to trust-safety-agent"
+    ],
+    "dependencies": [
+      "ai-agents/phase-1/auth-service-agent.md",
+      "ai-agents/identity-platform/unified-auth-agent.md"
+    ]
+  },
+  {
+    "file": "ai-agents/identity-platform/multi-device-sync-agent.md",
+    "phase": 18,
+    "domain": "identity-platform",
+    "role": "Multi-device login sync.",
+    "responsibilities": [
+      "multi-device-sync-agent in user-service + shared-contracts/identity/v1",
+      "Firebase Auth + OTP per security-rules",
+      "Outbox via event-stream-agent",
+      "No secrets in client repos",
+      "Short-TTL cross-app handoff tokens",
+      "Disputes to trust-safety-agent"
+    ],
+    "dependencies": [
+      "ai-agents/phase-1/auth-service-agent.md",
+      "ai-agents/identity-platform/unified-auth-agent.md"
+    ]
+  },
+  {
+    "file": "ai-agents/identity-platform/identity-merge-agent.md",
+    "phase": 18,
+    "domain": "identity-platform",
+    "role": "Account merge with consent.",
+    "responsibilities": [
+      "identity-merge-agent in user-service + shared-contracts/identity/v1",
+      "Firebase Auth + OTP per security-rules",
+      "Outbox via event-stream-agent",
+      "No secrets in client repos",
+      "Short-TTL cross-app handoff tokens",
+      "Disputes to trust-safety-agent"
+    ],
+    "dependencies": [
+      "ai-agents/phase-1/auth-service-agent.md",
+      "ai-agents/identity-platform/unified-auth-agent.md"
+    ]
+  },
+  {
+    "file": "ai-agents/identity-platform/account-recovery-agent.md",
+    "phase": 18,
+    "domain": "identity-platform",
+    "role": "Recovery via OTP and backups.",
+    "responsibilities": [
+      "account-recovery-agent in user-service + shared-contracts/identity/v1",
+      "Firebase Auth + OTP per security-rules",
+      "Outbox via event-stream-agent",
+      "No secrets in client repos",
+      "Short-TTL cross-app handoff tokens",
+      "Disputes to trust-safety-agent"
+    ],
+    "dependencies": [
+      "ai-agents/phase-1/auth-service-agent.md",
+      "ai-agents/identity-platform/unified-auth-agent.md"
+    ]
+  },
+  {
+    "file": "ai-agents/identity-platform/account-linking-agent.md",
+    "phase": 18,
+    "domain": "identity-platform",
+    "role": "Link phone, email, OAuth.",
+    "responsibilities": [
+      "account-linking-agent in user-service + shared-contracts/identity/v1",
+      "Firebase Auth + OTP per security-rules",
+      "Outbox via event-stream-agent",
+      "No secrets in client repos",
+      "Short-TTL cross-app handoff tokens",
+      "Disputes to trust-safety-agent"
+    ],
+    "dependencies": [
+      "ai-agents/phase-1/auth-service-agent.md",
+      "ai-agents/identity-platform/unified-auth-agent.md"
+    ]
+  },
+  {
+    "file": "ai-agents/event-system/event-stream-agent.md",
+    "phase": 18,
+    "domain": "event-system",
+    "role": "Event streaming backbone.",
+    "responsibilities": [
+      "event-stream-agent validated by event-schema-guardian",
+      "Contracts in shared-contracts/events/v1",
+      "Outbox + Kafka when ordering required",
+      "DLQ depth alerts to incident-commander-agent",
+      "PII encryption and log redaction",
+      "Heavy consumers via async-processing-agent"
+    ],
+    "dependencies": [
+      "ai-agents/event-system/event-bus-architect.md"
+    ]
+  },
+  {
+    "file": "ai-agents/event-system/kafka-agent.md",
+    "phase": 18,
+    "domain": "event-system",
+    "role": "Kafka topics and retention.",
+    "responsibilities": [
+      "kafka-agent validated by event-schema-guardian",
+      "Contracts in shared-contracts/events/v1",
+      "Outbox + Kafka when ordering required",
+      "DLQ depth alerts to incident-commander-agent",
+      "PII encryption and log redaction",
+      "Heavy consumers via async-processing-agent"
+    ],
+    "dependencies": [
+      "ai-agents/event-system/event-bus-architect.md"
+    ]
+  },
+  {
+    "file": "ai-agents/event-system/queue-orchestration-agent.md",
+    "phase": 18,
+    "domain": "event-system",
+    "role": "Queue topology and retries.",
+    "responsibilities": [
+      "queue-orchestration-agent validated by event-schema-guardian",
+      "Contracts in shared-contracts/events/v1",
+      "Outbox + Kafka when ordering required",
+      "DLQ depth alerts to incident-commander-agent",
+      "PII encryption and log redaction",
+      "Heavy consumers via async-processing-agent"
+    ],
+    "dependencies": [
+      "ai-agents/event-system/event-bus-architect.md"
+    ]
+  },
+  {
+    "file": "ai-agents/event-system/event-routing-agent.md",
+    "phase": 18,
+    "domain": "event-system",
+    "role": "Consumer routing by type/region.",
+    "responsibilities": [
+      "event-routing-agent validated by event-schema-guardian",
+      "Contracts in shared-contracts/events/v1",
+      "Outbox + Kafka when ordering required",
+      "DLQ depth alerts to incident-commander-agent",
+      "PII encryption and log redaction",
+      "Heavy consumers via async-processing-agent"
+    ],
+    "dependencies": [
+      "ai-agents/event-system/event-bus-architect.md"
+    ]
+  },
+  {
+    "file": "ai-agents/event-system/async-processing-agent.md",
+    "phase": 18,
+    "domain": "event-system",
+    "role": "Async workers and idempotency.",
+    "responsibilities": [
+      "async-processing-agent validated by event-schema-guardian",
+      "Contracts in shared-contracts/events/v1",
+      "Outbox + Kafka when ordering required",
+      "DLQ depth alerts to incident-commander-agent",
+      "PII encryption and log redaction",
+      "Heavy consumers via async-processing-agent"
+    ],
+    "dependencies": [
+      "ai-agents/event-system/event-bus-architect.md"
+    ]
+  },
+  {
+    "file": "ai-agents/event-system/realtime-event-agent.md",
+    "phase": 18,
+    "domain": "event-system",
+    "role": "Bridge to Socket.IO fanout.",
+    "responsibilities": [
+      "realtime-event-agent validated by event-schema-guardian",
+      "Contracts in shared-contracts/events/v1",
+      "Outbox + Kafka when ordering required",
+      "DLQ depth alerts to incident-commander-agent",
+      "PII encryption and log redaction",
+      "Heavy consumers via async-processing-agent"
+    ],
+    "dependencies": [
+      "ai-agents/event-system/event-bus-architect.md"
+    ]
+  },
+  {
+    "file": "ai-agents/event-system/message-broker-agent.md",
+    "phase": 18,
+    "domain": "event-system",
+    "role": "Broker health and abstraction.",
+    "responsibilities": [
+      "message-broker-agent validated by event-schema-guardian",
+      "Contracts in shared-contracts/events/v1",
+      "Outbox + Kafka when ordering required",
+      "DLQ depth alerts to incident-commander-agent",
+      "PII encryption and log redaction",
+      "Heavy consumers via async-processing-agent"
+    ],
+    "dependencies": [
+      "ai-agents/event-system/event-bus-architect.md"
+    ]
+  },
+  {
+    "file": "ai-agents/event-system/pubsub-agent.md",
+    "phase": 18,
+    "domain": "event-system",
+    "role": "Pub/sub cross-service notify.",
+    "responsibilities": [
+      "pubsub-agent validated by event-schema-guardian",
+      "Contracts in shared-contracts/events/v1",
+      "Outbox + Kafka when ordering required",
+      "DLQ depth alerts to incident-commander-agent",
+      "PII encryption and log redaction",
+      "Heavy consumers via async-processing-agent"
+    ],
+    "dependencies": [
+      "ai-agents/event-system/event-bus-architect.md"
+    ]
+  },
+  {
+    "file": "ai-agents/event-system/stream-processing-agent.md",
+    "phase": 18,
+    "domain": "event-system",
+    "role": "Windowed stream aggregates.",
+    "responsibilities": [
+      "stream-processing-agent validated by event-schema-guardian",
+      "Contracts in shared-contracts/events/v1",
+      "Outbox + Kafka when ordering required",
+      "DLQ depth alerts to incident-commander-agent",
+      "PII encryption and log redaction",
+      "Heavy consumers via async-processing-agent"
+    ],
+    "dependencies": [
+      "ai-agents/event-system/event-bus-architect.md"
+    ]
+  },
+  {
+    "file": "ai-agents/event-system/event-replay-agent.md",
+    "phase": 18,
+    "domain": "event-system",
+    "role": "Controlled replay and backfill.",
+    "responsibilities": [
+      "event-replay-agent validated by event-schema-guardian",
+      "Contracts in shared-contracts/events/v1",
+      "Outbox + Kafka when ordering required",
+      "DLQ depth alerts to incident-commander-agent",
+      "PII encryption and log redaction",
+      "Heavy consumers via async-processing-agent"
+    ],
+    "dependencies": [
+      "ai-agents/event-system/event-bus-architect.md"
+    ]
+  },
+  {
+    "file": "ai-agents/event-system/dead-letter-queue-agent.md",
+    "phase": 18,
+    "domain": "event-system",
+    "role": "DLQ inspect, replay, alert.",
+    "responsibilities": [
+      "dead-letter-queue-agent validated by event-schema-guardian",
+      "Contracts in shared-contracts/events/v1",
+      "Outbox + Kafka when ordering required",
+      "DLQ depth alerts to incident-commander-agent",
+      "PII encryption and log redaction",
+      "Heavy consumers via async-processing-agent"
+    ],
+    "dependencies": [
+      "ai-agents/event-system/event-bus-architect.md"
+    ]
+  },
+  {
+    "file": "ai-agents/agent-memory/memory-coordination-agent.md",
+    "phase": 18,
+    "domain": "agent-memory",
+    "role": "Coordinate agent memory writes.",
+    "responsibilities": [
+      "memory-coordination-agent: Redis hot, PostgreSQL cold, vector tier",
+      "PII scrub per security-rules",
+      "TTL via memory-pruning-agent",
+      "knowledge-router.md consumption APIs",
+      "Schema migrations with event-replay-agent",
+      "Access audit via event-audit-agent"
+    ],
+    "dependencies": [
+      "ai-agents/agent-memory/context-store-agent.md"
+    ]
+  },
+  {
+    "file": "ai-agents/agent-memory/context-memory-agent.md",
+    "phase": 18,
+    "domain": "agent-memory",
+    "role": "Short-term session context.",
+    "responsibilities": [
+      "context-memory-agent: Redis hot, PostgreSQL cold, vector tier",
+      "PII scrub per security-rules",
+      "TTL via memory-pruning-agent",
+      "knowledge-router.md consumption APIs",
+      "Schema migrations with event-replay-agent",
+      "Access audit via event-audit-agent"
+    ],
+    "dependencies": [
+      "ai-agents/agent-memory/context-store-agent.md"
+    ]
+  },
+  {
+    "file": "ai-agents/agent-memory/long-term-memory-agent.md",
+    "phase": 18,
+    "domain": "agent-memory",
+    "role": "Durable memory retention.",
+    "responsibilities": [
+      "long-term-memory-agent: Redis hot, PostgreSQL cold, vector tier",
+      "PII scrub per security-rules",
+      "TTL via memory-pruning-agent",
+      "knowledge-router.md consumption APIs",
+      "Schema migrations with event-replay-agent",
+      "Access audit via event-audit-agent"
+    ],
+    "dependencies": [
+      "ai-agents/agent-memory/context-store-agent.md"
+    ]
+  },
+  {
+    "file": "ai-agents/agent-memory/conversation-memory-agent.md",
+    "phase": 18,
+    "domain": "agent-memory",
+    "role": "Thread memory for support.",
+    "responsibilities": [
+      "conversation-memory-agent: Redis hot, PostgreSQL cold, vector tier",
+      "PII scrub per security-rules",
+      "TTL via memory-pruning-agent",
+      "knowledge-router.md consumption APIs",
+      "Schema migrations with event-replay-agent",
+      "Access audit via event-audit-agent"
+    ],
+    "dependencies": [
+      "ai-agents/agent-memory/context-store-agent.md"
+    ]
+  },
+  {
+    "file": "ai-agents/agent-memory/agent-state-agent.md",
+    "phase": 18,
+    "domain": "agent-memory",
+    "role": "Resumable agent state snapshots.",
+    "responsibilities": [
+      "agent-state-agent: Redis hot, PostgreSQL cold, vector tier",
+      "PII scrub per security-rules",
+      "TTL via memory-pruning-agent",
+      "knowledge-router.md consumption APIs",
+      "Schema migrations with event-replay-agent",
+      "Access audit via event-audit-agent"
+    ],
+    "dependencies": [
+      "ai-agents/agent-memory/context-store-agent.md"
+    ]
+  },
+  {
+    "file": "ai-agents/agent-memory/semantic-memory-agent.md",
+    "phase": 18,
+    "domain": "agent-memory",
+    "role": "Semantic embeddings store.",
+    "responsibilities": [
+      "semantic-memory-agent: Redis hot, PostgreSQL cold, vector tier",
+      "PII scrub per security-rules",
+      "TTL via memory-pruning-agent",
+      "knowledge-router.md consumption APIs",
+      "Schema migrations with event-replay-agent",
+      "Access audit via event-audit-agent"
+    ],
+    "dependencies": [
+      "ai-agents/agent-memory/context-store-agent.md"
+    ]
+  },
+  {
+    "file": "ai-agents/agent-memory/vector-memory-agent.md",
+    "phase": 18,
+    "domain": "agent-memory",
+    "role": "Vector index sharding.",
+    "responsibilities": [
+      "vector-memory-agent: Redis hot, PostgreSQL cold, vector tier",
+      "PII scrub per security-rules",
+      "TTL via memory-pruning-agent",
+      "knowledge-router.md consumption APIs",
+      "Schema migrations with event-replay-agent",
+      "Access audit via event-audit-agent"
+    ],
+    "dependencies": [
+      "ai-agents/agent-memory/context-store-agent.md"
+    ]
+  },
+  {
+    "file": "ai-agents/agent-memory/memory-indexing-agent.md",
+    "phase": 18,
+    "domain": "agent-memory",
+    "role": "Memory search indexing.",
+    "responsibilities": [
+      "memory-indexing-agent: Redis hot, PostgreSQL cold, vector tier",
+      "PII scrub per security-rules",
+      "TTL via memory-pruning-agent",
+      "knowledge-router.md consumption APIs",
+      "Schema migrations with event-replay-agent",
+      "Access audit via event-audit-agent"
+    ],
+    "dependencies": [
+      "ai-agents/agent-memory/context-store-agent.md"
+    ]
+  },
+  {
+    "file": "ai-agents/agent-memory/cross-agent-memory-agent.md",
+    "phase": 18,
+    "domain": "agent-memory",
+    "role": "Shared memory across agents.",
+    "responsibilities": [
+      "cross-agent-memory-agent: Redis hot, PostgreSQL cold, vector tier",
+      "PII scrub per security-rules",
+      "TTL via memory-pruning-agent",
+      "knowledge-router.md consumption APIs",
+      "Schema migrations with event-replay-agent",
+      "Access audit via event-audit-agent"
+    ],
+    "dependencies": [
+      "ai-agents/agent-memory/context-store-agent.md"
+    ]
+  },
+  {
+    "file": "ai-agents/agent-memory/memory-retrieval-agent.md",
+    "phase": 18,
+    "domain": "agent-memory",
+    "role": "Retrieval ranking for prompts.",
+    "responsibilities": [
+      "memory-retrieval-agent: Redis hot, PostgreSQL cold, vector tier",
+      "PII scrub per security-rules",
+      "TTL via memory-pruning-agent",
+      "knowledge-router.md consumption APIs",
+      "Schema migrations with event-replay-agent",
+      "Access audit via event-audit-agent"
+    ],
+    "dependencies": [
+      "ai-agents/agent-memory/context-store-agent.md"
+    ]
+  },
+  {
+    "file": "ai-agents/safety/trust-safety-agent.md",
+    "phase": 20,
+    "domain": "safety",
+    "role": "Trust & safety program enforcement.",
+    "responsibilities": [
+      "trust-safety-agent with human appeals via appeal-review-agent",
+      "Audit IDs; minimal biometric retention",
+      "Escalate to csam-detection-agent when required",
+      "Indic-language classifier coverage",
+      "Admin APIs behind enterprise-security",
+      "Publish-time gates with content-safety-agent"
+    ],
+    "dependencies": [
+      "ai-agents/safety/content-safety-agent.md"
+    ]
+  },
+  {
+    "file": "ai-agents/safety/ai-moderation-agent.md",
+    "phase": 20,
+    "domain": "safety",
+    "role": "AI classifiers for UGC and live.",
+    "responsibilities": [
+      "ai-moderation-agent with human appeals via appeal-review-agent",
+      "Audit IDs; minimal biometric retention",
+      "Escalate to csam-detection-agent when required",
+      "Indic-language classifier coverage",
+      "Admin APIs behind enterprise-security",
+      "Publish-time gates with content-safety-agent"
+    ],
+    "dependencies": [
+      "ai-agents/safety/content-safety-agent.md"
+    ]
+  },
+  {
+    "file": "ai-agents/safety/anti-spam-agent.md",
+    "phase": 20,
+    "domain": "safety",
+    "role": "Spam in DM, comments, live chat.",
+    "responsibilities": [
+      "anti-spam-agent with human appeals via appeal-review-agent",
+      "Audit IDs; minimal biometric retention",
+      "Escalate to csam-detection-agent when required",
+      "Indic-language classifier coverage",
+      "Admin APIs behind enterprise-security",
+      "Publish-time gates with content-safety-agent"
+    ],
+    "dependencies": [
+      "ai-agents/safety/content-safety-agent.md"
+    ]
+  },
+  {
+    "file": "ai-agents/safety/content-policy-agent.md",
+    "phase": 20,
+    "domain": "safety",
+    "role": "Policy matrices per app/locale.",
+    "responsibilities": [
+      "content-policy-agent with human appeals via appeal-review-agent",
+      "Audit IDs; minimal biometric retention",
+      "Escalate to csam-detection-agent when required",
+      "Indic-language classifier coverage",
+      "Admin APIs behind enterprise-security",
+      "Publish-time gates with content-safety-agent"
+    ],
+    "dependencies": [
+      "ai-agents/safety/content-safety-agent.md"
+    ]
+  },
+  {
+    "file": "ai-agents/safety/fraud-detection-agent.md",
+    "phase": 20,
+    "domain": "safety",
+    "role": "Payments and gift fraud scoring.",
+    "responsibilities": [
+      "fraud-detection-agent with human appeals via appeal-review-agent",
+      "Audit IDs; minimal biometric retention",
+      "Escalate to csam-detection-agent when required",
+      "Indic-language classifier coverage",
+      "Admin APIs behind enterprise-security",
+      "Publish-time gates with content-safety-agent"
+    ],
+    "dependencies": [
+      "ai-agents/safety/content-safety-agent.md"
+    ]
+  },
+  {
+    "file": "ai-agents/safety/security-agent.md",
+    "phase": 20,
+    "domain": "safety",
+    "role": "AppSec standards and threat models.",
+    "responsibilities": [
+      "security-agent with human appeals via appeal-review-agent",
+      "Audit IDs; minimal biometric retention",
+      "Escalate to csam-detection-agent when required",
+      "Indic-language classifier coverage",
+      "Admin APIs behind enterprise-security",
+      "Publish-time gates with content-safety-agent"
+    ],
+    "dependencies": [
+      "ai-agents/safety/content-safety-agent.md"
+    ]
+  },
+  {
+    "file": "ai-agents/safety/compliance-agent.md",
+    "phase": 20,
+    "domain": "safety",
+    "role": "Regulatory and store compliance.",
+    "responsibilities": [
+      "compliance-agent with human appeals via appeal-review-agent",
+      "Audit IDs; minimal biometric retention",
+      "Escalate to csam-detection-agent when required",
+      "Indic-language classifier coverage",
+      "Admin APIs behind enterprise-security",
+      "Publish-time gates with content-safety-agent"
+    ],
+    "dependencies": [
+      "ai-agents/safety/content-safety-agent.md"
+    ]
+  },
+  {
+    "file": "ai-agents/safety/trust-score-agent.md",
+    "phase": 20,
+    "domain": "safety",
+    "role": "Trust scores for feature gating.",
+    "responsibilities": [
+      "trust-score-agent with human appeals via appeal-review-agent",
+      "Audit IDs; minimal biometric retention",
+      "Escalate to csam-detection-agent when required",
+      "Indic-language classifier coverage",
+      "Admin APIs behind enterprise-security",
+      "Publish-time gates with content-safety-agent"
+    ],
+    "dependencies": [
+      "ai-agents/safety/content-safety-agent.md"
+    ]
+  },
+  {
+    "file": "ai-agents/safety/host-reputation-agent.md",
+    "phase": 20,
+    "domain": "safety",
+    "role": "Host strikes and reputation.",
+    "responsibilities": [
+      "host-reputation-agent with human appeals via appeal-review-agent",
+      "Audit IDs; minimal biometric retention",
+      "Escalate to csam-detection-agent when required",
+      "Indic-language classifier coverage",
+      "Admin APIs behind enterprise-security",
+      "Publish-time gates with content-safety-agent"
+    ],
+    "dependencies": [
+      "ai-agents/safety/content-safety-agent.md"
+    ]
+  },
+  {
+    "file": "ai-agents/safety/creator-verification-agent.md",
+    "phase": 20,
+    "domain": "safety",
+    "role": "Creator KYC and badges.",
+    "responsibilities": [
+      "creator-verification-agent with human appeals via appeal-review-agent",
+      "Audit IDs; minimal biometric retention",
+      "Escalate to csam-detection-agent when required",
+      "Indic-language classifier coverage",
+      "Admin APIs behind enterprise-security",
+      "Publish-time gates with content-safety-agent"
+    ],
+    "dependencies": [
+      "ai-agents/safety/content-safety-agent.md"
+    ]
+  },
+  {
+    "file": "ai-agents/safety/identity-verification-agent.md",
+    "phase": 20,
+    "domain": "safety",
+    "role": "ID and liveness verification.",
+    "responsibilities": [
+      "identity-verification-agent with human appeals via appeal-review-agent",
+      "Audit IDs; minimal biometric retention",
+      "Escalate to csam-detection-agent when required",
+      "Indic-language classifier coverage",
+      "Admin APIs behind enterprise-security",
+      "Publish-time gates with content-safety-agent"
+    ],
+    "dependencies": [
+      "ai-agents/safety/content-safety-agent.md"
+    ]
+  },
+  {
+    "file": "ai-agents/safety/community-reputation-agent.md",
+    "phase": 20,
+    "domain": "safety",
+    "role": "Community karma weights.",
+    "responsibilities": [
+      "community-reputation-agent with human appeals via appeal-review-agent",
+      "Audit IDs; minimal biometric retention",
+      "Escalate to csam-detection-agent when required",
+      "Indic-language classifier coverage",
+      "Admin APIs behind enterprise-security",
+      "Publish-time gates with content-safety-agent"
+    ],
+    "dependencies": [
+      "ai-agents/safety/content-safety-agent.md"
+    ]
+  },
+  {
+    "file": "ai-agents/safety/review-rating-agent.md",
+    "phase": 20,
+    "domain": "safety",
+    "role": "Review fraud and integrity.",
+    "responsibilities": [
+      "review-rating-agent with human appeals via appeal-review-agent",
+      "Audit IDs; minimal biometric retention",
+      "Escalate to csam-detection-agent when required",
+      "Indic-language classifier coverage",
+      "Admin APIs behind enterprise-security",
+      "Publish-time gates with content-safety-agent"
+    ],
+    "dependencies": [
+      "ai-agents/safety/content-safety-agent.md"
+    ]
+  },
+  {
+    "file": "ai-agents/safety/anti-fake-profile-agent.md",
+    "phase": 20,
+    "domain": "safety",
+    "role": "Fake profiles and bot nets.",
+    "responsibilities": [
+      "anti-fake-profile-agent with human appeals via appeal-review-agent",
+      "Audit IDs; minimal biometric retention",
+      "Escalate to csam-detection-agent when required",
+      "Indic-language classifier coverage",
+      "Admin APIs behind enterprise-security",
+      "Publish-time gates with content-safety-agent"
+    ],
+    "dependencies": [
+      "ai-agents/safety/content-safety-agent.md"
+    ]
+  },
+  {
+    "file": "ai-agents/safety/deepfake-detection-agent.md",
+    "phase": 20,
+    "domain": "safety",
+    "role": "Deepfake on upload/live.",
+    "responsibilities": [
+      "deepfake-detection-agent with human appeals via appeal-review-agent",
+      "Audit IDs; minimal biometric retention",
+      "Escalate to csam-detection-agent when required",
+      "Indic-language classifier coverage",
+      "Admin APIs behind enterprise-security",
+      "Publish-time gates with content-safety-agent"
+    ],
+    "dependencies": [
+      "ai-agents/safety/content-safety-agent.md"
+    ]
+  },
+  {
+    "file": "ai-agents/testing/qa-automation-agent.md",
+    "phase": 20,
+    "domain": "testing",
+    "role": "QA automation frameworks and CI gates.",
+    "responsibilities": [
+      "qa-automation-agent test plans in CI with flake controls",
+      "Contract tests via openapi-contract-validation-agent",
+      "NestJS testcontainers for integration-testing-agent",
+      "Flutter integration_test for widget flows",
+      "Publish dashboards to observability-engineer",
+      "Block release on P0 regressions"
+    ],
+    "dependencies": [
+      "ai-agents/testing/e2e-test-architect.md"
+    ]
+  },
+  {
+    "file": "ai-agents/testing/integration-testing-agent.md",
+    "phase": 20,
+    "domain": "testing",
+    "role": "Service integration test suites.",
+    "responsibilities": [
+      "integration-testing-agent test plans in CI with flake controls",
+      "Contract tests via openapi-contract-validation-agent",
+      "NestJS testcontainers for integration-testing-agent",
+      "Flutter integration_test for widget flows",
+      "Publish dashboards to observability-engineer",
+      "Block release on P0 regressions"
+    ],
+    "dependencies": [
+      "ai-agents/testing/e2e-test-architect.md"
+    ]
+  },
+  {
+    "file": "ai-agents/testing/regression-testing-agent.md",
+    "phase": 20,
+    "domain": "testing",
+    "role": "Regression suites on release branches.",
+    "responsibilities": [
+      "regression-testing-agent test plans in CI with flake controls",
+      "Contract tests via openapi-contract-validation-agent",
+      "NestJS testcontainers for integration-testing-agent",
+      "Flutter integration_test for widget flows",
+      "Publish dashboards to observability-engineer",
+      "Block release on P0 regressions"
+    ],
+    "dependencies": [
+      "ai-agents/testing/e2e-test-architect.md"
+    ]
+  },
+  {
+    "file": "ai-agents/testing/end-to-end-testing-agent.md",
+    "phase": 20,
+    "domain": "testing",
+    "role": "E2E flows across four apps.",
+    "responsibilities": [
+      "end-to-end-testing-agent test plans in CI with flake controls",
+      "Contract tests via openapi-contract-validation-agent",
+      "NestJS testcontainers for integration-testing-agent",
+      "Flutter integration_test for widget flows",
+      "Publish dashboards to observability-engineer",
+      "Block release on P0 regressions"
+    ],
+    "dependencies": [
+      "ai-agents/testing/e2e-test-architect.md"
+    ]
+  },
+  {
+    "file": "ai-agents/testing/bug-reproduction-agent.md",
+    "phase": 20,
+    "domain": "testing",
+    "role": "Minimal repro scripts from tickets.",
+    "responsibilities": [
+      "bug-reproduction-agent test plans in CI with flake controls",
+      "Contract tests via openapi-contract-validation-agent",
+      "NestJS testcontainers for integration-testing-agent",
+      "Flutter integration_test for widget flows",
+      "Publish dashboards to observability-engineer",
+      "Block release on P0 regressions"
+    ],
+    "dependencies": [
+      "ai-agents/testing/e2e-test-architect.md"
+    ]
+  },
+  {
+    "file": "ai-agents/testing/crash-monitoring-agent.md",
+    "phase": 20,
+    "domain": "testing",
+    "role": "Crashlytics/Sentry triage.",
+    "responsibilities": [
+      "crash-monitoring-agent test plans in CI with flake controls",
+      "Contract tests via openapi-contract-validation-agent",
+      "NestJS testcontainers for integration-testing-agent",
+      "Flutter integration_test for widget flows",
+      "Publish dashboards to observability-engineer",
+      "Block release on P0 regressions"
+    ],
+    "dependencies": [
+      "ai-agents/testing/e2e-test-architect.md"
+    ]
+  },
+  {
+    "file": "ai-agents/testing/app-performance-agent.md",
+    "phase": 20,
+    "domain": "testing",
+    "role": "Mobile app performance budgets.",
+    "responsibilities": [
+      "app-performance-agent test plans in CI with flake controls",
+      "Contract tests via openapi-contract-validation-agent",
+      "NestJS testcontainers for integration-testing-agent",
+      "Flutter integration_test for widget flows",
+      "Publish dashboards to observability-engineer",
+      "Block release on P0 regressions"
+    ],
+    "dependencies": [
+      "ai-agents/testing/e2e-test-architect.md"
+    ]
+  },
+  {
+    "file": "ai-agents/testing/flutter-performance-agent.md",
+    "phase": 20,
+    "domain": "testing",
+    "role": "Flutter frame timing and jank.",
+    "responsibilities": [
+      "flutter-performance-agent test plans in CI with flake controls",
+      "Contract tests via openapi-contract-validation-agent",
+      "NestJS testcontainers for integration-testing-agent",
+      "Flutter integration_test for widget flows",
+      "Publish dashboards to observability-engineer",
+      "Block release on P0 regressions"
+    ],
+    "dependencies": [
+      "ai-agents/testing/e2e-test-architect.md"
+    ]
+  },
+  {
+    "file": "ai-agents/testing/memory-leak-detection-agent.md",
+    "phase": 20,
+    "domain": "testing",
+    "role": "Leak detection in long sessions.",
+    "responsibilities": [
+      "memory-leak-detection-agent test plans in CI with flake controls",
+      "Contract tests via openapi-contract-validation-agent",
+      "NestJS testcontainers for integration-testing-agent",
+      "Flutter integration_test for widget flows",
+      "Publish dashboards to observability-engineer",
+      "Block release on P0 regressions"
+    ],
+    "dependencies": [
+      "ai-agents/testing/e2e-test-architect.md"
+    ]
+  },
+  {
+    "file": "ai-agents/testing/network-resilience-agent.md",
+    "phase": 20,
+    "domain": "testing",
+    "role": "Network chaos on 2G/3G profiles.",
+    "responsibilities": [
+      "network-resilience-agent test plans in CI with flake controls",
+      "Contract tests via openapi-contract-validation-agent",
+      "NestJS testcontainers for integration-testing-agent",
+      "Flutter integration_test for widget flows",
+      "Publish dashboards to observability-engineer",
+      "Block release on P0 regressions"
+    ],
+    "dependencies": [
+      "ai-agents/testing/e2e-test-architect.md"
+    ]
+  },
+  {
+    "file": "ai-agents/testing/load-testing-agent.md",
+    "phase": 20,
+    "domain": "testing",
+    "role": "Load tests for live and API peaks.",
+    "responsibilities": [
+      "load-testing-agent test plans in CI with flake controls",
+      "Contract tests via openapi-contract-validation-agent",
+      "NestJS testcontainers for integration-testing-agent",
+      "Flutter integration_test for widget flows",
+      "Publish dashboards to observability-engineer",
+      "Block release on P0 regressions"
+    ],
+    "dependencies": [
+      "ai-agents/testing/e2e-test-architect.md"
+    ]
+  },
+  {
+    "file": "ai-agents/testing/device-compatibility-agent.md",
+    "phase": 20,
+    "domain": "testing",
+    "role": "Device matrix compatibility.",
+    "responsibilities": [
+      "device-compatibility-agent test plans in CI with flake controls",
+      "Contract tests via openapi-contract-validation-agent",
+      "NestJS testcontainers for integration-testing-agent",
+      "Flutter integration_test for widget flows",
+      "Publish dashboards to observability-engineer",
+      "Block release on P0 regressions"
+    ],
+    "dependencies": [
+      "ai-agents/testing/e2e-test-architect.md"
+    ]
+  },
+  {
+    "file": "ai-agents/testing/accessibility-testing-agent.md",
+    "phase": 20,
+    "domain": "testing",
+    "role": "a11y audits WCAG mobile.",
+    "responsibilities": [
+      "accessibility-testing-agent test plans in CI with flake controls",
+      "Contract tests via openapi-contract-validation-agent",
+      "NestJS testcontainers for integration-testing-agent",
+      "Flutter integration_test for widget flows",
+      "Publish dashboards to observability-engineer",
+      "Block release on P0 regressions"
+    ],
+    "dependencies": [
+      "ai-agents/testing/e2e-test-architect.md"
+    ]
+  },
+  {
+    "file": "ai-agents/testing/chaos-engineering-agent.md",
+    "phase": 20,
+    "domain": "testing",
+    "role": "Chaos experiments in staging.",
+    "responsibilities": [
+      "chaos-engineering-agent test plans in CI with flake controls",
+      "Contract tests via openapi-contract-validation-agent",
+      "NestJS testcontainers for integration-testing-agent",
+      "Flutter integration_test for widget flows",
+      "Publish dashboards to observability-engineer",
+      "Block release on P0 regressions"
+    ],
+    "dependencies": [
+      "ai-agents/testing/e2e-test-architect.md"
+    ]
+  },
+  {
+    "file": "ai-agents/testing/low-end-device-agent.md",
+    "phase": 20,
+    "domain": "testing",
+    "role": "Low-end Android soak tests.",
+    "responsibilities": [
+      "low-end-device-agent test plans in CI with flake controls",
+      "Contract tests via openapi-contract-validation-agent",
+      "NestJS testcontainers for integration-testing-agent",
+      "Flutter integration_test for widget flows",
+      "Publish dashboards to observability-engineer",
+      "Block release on P0 regressions"
+    ],
+    "dependencies": [
+      "ai-agents/testing/e2e-test-architect.md"
+    ]
+  },
+  {
+    "file": "ai-agents/testing/battery-optimization-agent.md",
+    "phase": 20,
+    "domain": "testing",
+    "role": "Battery drain profiling.",
+    "responsibilities": [
+      "battery-optimization-agent test plans in CI with flake controls",
+      "Contract tests via openapi-contract-validation-agent",
+      "NestJS testcontainers for integration-testing-agent",
+      "Flutter integration_test for widget flows",
+      "Publish dashboards to observability-engineer",
+      "Block release on P0 regressions"
+    ],
+    "dependencies": [
+      "ai-agents/testing/e2e-test-architect.md"
+    ]
+  },
+  {
+    "file": "ai-agents/testing/network-optimization-agent.md",
+    "phase": 20,
+    "domain": "testing",
+    "role": "Payload and retry optimization.",
+    "responsibilities": [
+      "network-optimization-agent test plans in CI with flake controls",
+      "Contract tests via openapi-contract-validation-agent",
+      "NestJS testcontainers for integration-testing-agent",
+      "Flutter integration_test for widget flows",
+      "Publish dashboards to observability-engineer",
+      "Block release on P0 regressions"
+    ],
+    "dependencies": [
+      "ai-agents/testing/e2e-test-architect.md"
+    ]
+  },
+  {
+    "file": "ai-agents/testing/offline-sync-agent.md",
+    "phase": 20,
+    "domain": "testing",
+    "role": "Offline queue sync validation.",
+    "responsibilities": [
+      "offline-sync-agent test plans in CI with flake controls",
+      "Contract tests via openapi-contract-validation-agent",
+      "NestJS testcontainers for integration-testing-agent",
+      "Flutter integration_test for widget flows",
+      "Publish dashboards to observability-engineer",
+      "Block release on P0 regressions"
+    ],
+    "dependencies": [
+      "ai-agents/testing/e2e-test-architect.md"
+    ]
+  },
+  {
+    "file": "ai-agents/testing/memory-optimization-agent.md",
+    "phase": 20,
+    "domain": "testing",
+    "role": "Heap/GPU memory optimization.",
+    "responsibilities": [
+      "memory-optimization-agent test plans in CI with flake controls",
+      "Contract tests via openapi-contract-validation-agent",
+      "NestJS testcontainers for integration-testing-agent",
+      "Flutter integration_test for widget flows",
+      "Publish dashboards to observability-engineer",
+      "Block release on P0 regressions"
+    ],
+    "dependencies": [
+      "ai-agents/testing/e2e-test-architect.md"
+    ]
+  },
+  {
+    "file": "ai-agents/testing/startup-time-agent.md",
+    "phase": 20,
+    "domain": "testing",
+    "role": "Cold start and TTI budgets.",
+    "responsibilities": [
+      "startup-time-agent test plans in CI with flake controls",
+      "Contract tests via openapi-contract-validation-agent",
+      "NestJS testcontainers for integration-testing-agent",
+      "Flutter integration_test for widget flows",
+      "Publish dashboards to observability-engineer",
+      "Block release on P0 regressions"
+    ],
+    "dependencies": [
+      "ai-agents/testing/e2e-test-architect.md"
+    ]
+  },
+  {
+    "file": "ai-agents/incident-command/on-call-rotation-agent.md",
+    "phase": 20,
+    "domain": "incident-command",
+    "role": "On-call schedules and escalation policies.",
+    "responsibilities": [
+      "on-call-rotation-agent integrated with PagerDuty/webhook stubs",
+      "Link status-page-agent updates",
+      "postmortem-writer.md templates after SEVs",
+      "Severity matrix with incident-commander-agent",
+      "Blameless RCA storage in platform-knowledge",
+      "Game-day calendar with chaos-engineering-agent"
+    ],
+    "dependencies": [
+      "ai-agents/incident-command/incident-commander-agent.md"
+    ]
+  },
+  {
+    "file": "ai-agents/incident-command/runbook-automation-agent.md",
+    "phase": 20,
+    "domain": "incident-command",
+    "role": "Automated runbooks for known failures.",
+    "responsibilities": [
+      "runbook-automation-agent integrated with PagerDuty/webhook stubs",
+      "Link status-page-agent updates",
+      "postmortem-writer.md templates after SEVs",
+      "Severity matrix with incident-commander-agent",
+      "Blameless RCA storage in platform-knowledge",
+      "Game-day calendar with chaos-engineering-agent"
+    ],
+    "dependencies": [
+      "ai-agents/incident-command/incident-commander-agent.md"
+    ]
+  },
+  {
+    "file": "ai-agents/incident-command/customer-comms-agent.md",
+    "phase": 20,
+    "domain": "incident-command",
+    "role": "Customer comms during incidents.",
+    "responsibilities": [
+      "customer-comms-agent integrated with PagerDuty/webhook stubs",
+      "Link status-page-agent updates",
+      "postmortem-writer.md templates after SEVs",
+      "Severity matrix with incident-commander-agent",
+      "Blameless RCA storage in platform-knowledge",
+      "Game-day calendar with chaos-engineering-agent"
+    ],
+    "dependencies": [
+      "ai-agents/incident-command/incident-commander-agent.md"
+    ]
+  },
+  {
+    "file": "ai-agents/enterprise-security/zero-trust-network-agent.md",
+    "phase": 20,
+    "domain": "enterprise-security",
+    "role": "Zero-trust network policies.",
+    "responsibilities": [
+      "zero-trust-network-agent aligned with soc2-compliance-agent controls",
+      "secrets-rotation-agent schedules",
+      "vulnerability-scanner-agent findings triage",
+      "No credentials in git; Secrets Manager only",
+      "Audit trails to event-audit-agent",
+      "Escalate critical CVEs to incident-commander-agent"
+    ],
+    "dependencies": [
+      "ai-agents/enterprise-security/soc2-compliance-agent.md"
+    ]
+  },
+  {
+    "file": "ai-agents/enterprise-security/iam-policy-agent.md",
+    "phase": 20,
+    "domain": "enterprise-security",
+    "role": "IAM least-privilege policies.",
+    "responsibilities": [
+      "iam-policy-agent aligned with soc2-compliance-agent controls",
+      "secrets-rotation-agent schedules",
+      "vulnerability-scanner-agent findings triage",
+      "No credentials in git; Secrets Manager only",
+      "Audit trails to event-audit-agent",
+      "Escalate critical CVEs to incident-commander-agent"
+    ],
+    "dependencies": [
+      "ai-agents/enterprise-security/soc2-compliance-agent.md"
+    ]
+  },
+  {
+    "file": "ai-agents/enterprise-security/data-loss-prevention-agent.md",
+    "phase": 20,
+    "domain": "enterprise-security",
+    "role": "DLP for exports and logs.",
+    "responsibilities": [
+      "data-loss-prevention-agent aligned with soc2-compliance-agent controls",
+      "secrets-rotation-agent schedules",
+      "vulnerability-scanner-agent findings triage",
+      "No credentials in git; Secrets Manager only",
+      "Audit trails to event-audit-agent",
+      "Escalate critical CVEs to incident-commander-agent"
+    ],
+    "dependencies": [
+      "ai-agents/enterprise-security/soc2-compliance-agent.md"
+    ]
+  },
+  {
+    "file": "ai-agents/enterprise-security/breach-response-agent.md",
+    "phase": 20,
+    "domain": "enterprise-security",
+    "role": "Breach playbooks and forensics.",
+    "responsibilities": [
+      "breach-response-agent aligned with soc2-compliance-agent controls",
+      "secrets-rotation-agent schedules",
+      "vulnerability-scanner-agent findings triage",
+      "No credentials in git; Secrets Manager only",
+      "Audit trails to event-audit-agent",
+      "Escalate critical CVEs to incident-commander-agent"
+    ],
+    "dependencies": [
+      "ai-agents/enterprise-security/soc2-compliance-agent.md"
+    ]
+  },
+  {
+    "file": "ai-agents/enterprise-security/security-audit-agent.md",
+    "phase": 20,
+    "domain": "enterprise-security",
+    "role": "Continuous security audits.",
+    "responsibilities": [
+      "security-audit-agent aligned with soc2-compliance-agent controls",
+      "secrets-rotation-agent schedules",
+      "vulnerability-scanner-agent findings triage",
+      "No credentials in git; Secrets Manager only",
+      "Audit trails to event-audit-agent",
+      "Escalate critical CVEs to incident-commander-agent"
+    ],
+    "dependencies": [
+      "ai-agents/enterprise-security/soc2-compliance-agent.md"
+    ]
+  },
+  {
+    "file": "ai-agents/store-growth/aso-agent.md",
+    "phase": 20,
+    "domain": "store-growth",
+    "role": "App store optimization strategy.",
+    "responsibilities": [
+      "aso-agent per locale store guidelines",
+      "Experiments via store-experiment-agent",
+      "play-store-listing-agent + app-store-optimization-agent parity",
+      "Indic screenshot copy review",
+      "Track keyword-ranking-agent weekly",
+      "Hand creatives to growth marketing agents"
+    ],
+    "dependencies": [
+      "ai-agents/store-growth/app-store-optimization-agent.md"
+    ]
+  },
+  {
+    "file": "ai-agents/store-growth/conversion-rate-agent.md",
+    "phase": 20,
+    "domain": "store-growth",
+    "role": "Store listing conversion experiments.",
+    "responsibilities": [
+      "conversion-rate-agent per locale store guidelines",
+      "Experiments via store-experiment-agent",
+      "play-store-listing-agent + app-store-optimization-agent parity",
+      "Indic screenshot copy review",
+      "Track keyword-ranking-agent weekly",
+      "Hand creatives to growth marketing agents"
+    ],
+    "dependencies": [
+      "ai-agents/store-growth/app-store-optimization-agent.md"
+    ]
+  },
+  {
+    "file": "ai-agents/store-growth/store-screenshot-agent.md",
+    "phase": 20,
+    "domain": "store-growth",
+    "role": "Screenshot/localized creative pipeline.",
+    "responsibilities": [
+      "store-screenshot-agent per locale store guidelines",
+      "Experiments via store-experiment-agent",
+      "play-store-listing-agent + app-store-optimization-agent parity",
+      "Indic screenshot copy review",
+      "Track keyword-ranking-agent weekly",
+      "Hand creatives to growth marketing agents"
+    ],
+    "dependencies": [
+      "ai-agents/store-growth/app-store-optimization-agent.md"
+    ]
+  },
+  {
+    "file": "ai-agents/store-growth/keyword-ranking-agent.md",
+    "phase": 20,
+    "domain": "store-growth",
+    "role": "Keyword tracking and ASO iterations.",
+    "responsibilities": [
+      "keyword-ranking-agent per locale store guidelines",
+      "Experiments via store-experiment-agent",
+      "play-store-listing-agent + app-store-optimization-agent parity",
+      "Indic screenshot copy review",
+      "Track keyword-ranking-agent weekly",
+      "Hand creatives to growth marketing agents"
+    ],
+    "dependencies": [
+      "ai-agents/store-growth/app-store-optimization-agent.md"
+    ]
+  },
+  {
+    "file": "ai-agents/store-growth/app-preview-video-agent.md",
+    "phase": 20,
+    "domain": "store-growth",
+    "role": "Preview video storyboards and specs.",
+    "responsibilities": [
+      "app-preview-video-agent per locale store guidelines",
+      "Experiments via store-experiment-agent",
+      "play-store-listing-agent + app-store-optimization-agent parity",
+      "Indic screenshot copy review",
+      "Track keyword-ranking-agent weekly",
+      "Hand creatives to growth marketing agents"
+    ],
+    "dependencies": [
+      "ai-agents/store-growth/app-store-optimization-agent.md"
+    ]
+  },
+  {
+    "file": "ai-agents/core-engineering/frontend/design-token-sync-agent.md",
+    "phase": 5,
+    "domain": "core-engineering-frontend",
+    "role": "Design token sync Figma → Flutter theme extensions.",
+    "responsibilities": [
+      "Document ai-agents/core-engineering/frontend/design-token-sync-agent.md standards in platform-governance and ADRs",
+      "Implement with NestJS/Flutter patterns from nestjs-architect.md",
+      "Observability hooks for aws-architect and observability-engineer",
+      "Coordinate socketio-architect.md for realtime subsystems",
+      "Load/chaos validation before production enable",
+      "No duplicate microservices — check services/ first"
+    ],
+    "dependencies": [
+      "ai-agents/core-engineering/frontend/flutter-architect.md"
+    ]
+  },
+  {
+    "file": "ai-agents/core-engineering/backend/queue-processing-agent.md",
+    "phase": 5,
+    "domain": "core-engineering-backend",
+    "role": "Queue workers for NestJS background jobs.",
+    "responsibilities": [
+      "Document ai-agents/core-engineering/backend/queue-processing-agent.md standards in platform-governance and ADRs",
+      "Implement with NestJS/Flutter patterns from nestjs-architect.md",
+      "Observability hooks for aws-architect and observability-engineer",
+      "Coordinate socketio-architect.md for realtime subsystems",
+      "Load/chaos validation before production enable",
+      "No duplicate microservices — check services/ first"
+    ],
+    "dependencies": [
+      "ai-agents/core-engineering/backend/nestjs-architect.md"
+    ]
+  },
+  {
+    "file": "ai-agents/core-engineering/backend/background-jobs-agent.md",
+    "phase": 5,
+    "domain": "core-engineering-backend",
+    "role": "Scheduled jobs, cron, and job dashboards.",
+    "responsibilities": [
+      "Document ai-agents/core-engineering/backend/background-jobs-agent.md standards in platform-governance and ADRs",
+      "Implement with NestJS/Flutter patterns from nestjs-architect.md",
+      "Observability hooks for aws-architect and observability-engineer",
+      "Coordinate socketio-architect.md for realtime subsystems",
+      "Load/chaos validation before production enable",
+      "No duplicate microservices — check services/ first"
+    ],
+    "dependencies": [
+      "ai-agents/core-engineering/backend/nestjs-architect.md"
+    ]
+  },
+  {
+    "file": "ai-agents/core-engineering/database/replication-agent.md",
+    "phase": 5,
+    "domain": "core-engineering-database",
+    "role": "Postgres replication, lag monitoring, failover.",
+    "responsibilities": [
+      "Document ai-agents/core-engineering/database/replication-agent.md standards in platform-governance and ADRs",
+      "Implement with NestJS/Flutter patterns from nestjs-architect.md",
+      "Observability hooks for aws-architect and observability-engineer",
+      "Coordinate socketio-architect.md for realtime subsystems",
+      "Load/chaos validation before production enable",
+      "No duplicate microservices — check services/ first"
+    ],
+    "dependencies": [
+      "ai-agents/core-engineering/realtime/socketio-architect.md"
+    ]
+  },
+  {
+    "file": "ai-agents/core-engineering/database/sharding-agent.md",
+    "phase": 5,
+    "domain": "core-engineering-database",
+    "role": "Sharding strategy for hot social/live tables.",
+    "responsibilities": [
+      "Document ai-agents/core-engineering/database/sharding-agent.md standards in platform-governance and ADRs",
+      "Implement with NestJS/Flutter patterns from nestjs-architect.md",
+      "Observability hooks for aws-architect and observability-engineer",
+      "Coordinate socketio-architect.md for realtime subsystems",
+      "Load/chaos validation before production enable",
+      "No duplicate microservices — check services/ first"
+    ],
+    "dependencies": [
+      "ai-agents/core-engineering/realtime/socketio-architect.md"
+    ]
+  },
+  {
+    "file": "ai-agents/core-engineering/realtime/rtc-quality-agent.md",
+    "phase": 5,
+    "domain": "core-engineering-realtime",
+    "role": "RTC quality scoring and provider failover.",
+    "responsibilities": [
+      "Document ai-agents/core-engineering/realtime/rtc-quality-agent.md standards in platform-governance and ADRs",
+      "Implement with NestJS/Flutter patterns from nestjs-architect.md",
+      "Observability hooks for aws-architect and observability-engineer",
+      "Coordinate socketio-architect.md for realtime subsystems",
+      "Load/chaos validation before production enable",
+      "No duplicate microservices — check services/ first"
+    ],
+    "dependencies": [
+      "ai-agents/core-engineering/realtime/socketio-architect.md"
+    ]
+  },
+  {
+    "file": "ai-agents/core-engineering/realtime/latency-monitor-agent.md",
+    "phase": 5,
+    "domain": "core-engineering-realtime",
+    "role": "Latency SLO monitors for Socket.IO and RTC.",
+    "responsibilities": [
+      "Document ai-agents/core-engineering/realtime/latency-monitor-agent.md standards in platform-governance and ADRs",
+      "Implement with NestJS/Flutter patterns from nestjs-architect.md",
+      "Observability hooks for aws-architect and observability-engineer",
+      "Coordinate socketio-architect.md for realtime subsystems",
+      "Load/chaos validation before production enable",
+      "No duplicate microservices — check services/ first"
+    ],
+    "dependencies": [
+      "ai-agents/core-engineering/realtime/socketio-architect.md"
+    ]
+  },
+  {
+    "file": "ai-agents/core-engineering/realtime/voice-sync-agent.md",
+    "phase": 5,
+    "domain": "core-engineering-realtime",
+    "role": "Voice sync lip-alignment for co-hosts.",
+    "responsibilities": [
+      "Document ai-agents/core-engineering/realtime/voice-sync-agent.md standards in platform-governance and ADRs",
+      "Implement with NestJS/Flutter patterns from nestjs-architect.md",
+      "Observability hooks for aws-architect and observability-engineer",
+      "Coordinate socketio-architect.md for realtime subsystems",
+      "Load/chaos validation before production enable",
+      "No duplicate microservices — check services/ first"
+    ],
+    "dependencies": [
+      "ai-agents/core-engineering/realtime/socketio-architect.md"
+    ]
+  },
+  {
+    "file": "ai-agents/core-engineering/realtime/ultra-low-latency-agent.md",
+    "phase": 5,
+    "domain": "core-engineering-realtime",
+    "role": "Ultra-low-latency RTC tuning guides.",
+    "responsibilities": [
+      "Document ai-agents/core-engineering/realtime/ultra-low-latency-agent.md standards in platform-governance and ADRs",
+      "Implement with NestJS/Flutter patterns from nestjs-architect.md",
+      "Observability hooks for aws-architect and observability-engineer",
+      "Coordinate socketio-architect.md for realtime subsystems",
+      "Load/chaos validation before production enable",
+      "No duplicate microservices — check services/ first"
+    ],
+    "dependencies": [
+      "ai-agents/core-engineering/realtime/socketio-architect.md"
+    ]
+  },
+  {
+    "file": "ai-agents/core-engineering/infrastructure/autoscaling-agent.md",
+    "phase": 5,
+    "domain": "core-engineering-infrastructure",
+    "role": "HPA/cluster autoscaling policies.",
+    "responsibilities": [
+      "Document ai-agents/core-engineering/infrastructure/autoscaling-agent.md standards in platform-governance and ADRs",
+      "Implement with NestJS/Flutter patterns from nestjs-architect.md",
+      "Observability hooks for aws-architect and observability-engineer",
+      "Coordinate socketio-architect.md for realtime subsystems",
+      "Load/chaos validation before production enable",
+      "No duplicate microservices — check services/ first"
+    ],
+    "dependencies": [
+      "ai-agents/core-engineering/realtime/socketio-architect.md"
+    ]
+  },
+  {
+    "file": "ai-agents/core-engineering/infrastructure/serverless-agent.md",
+    "phase": 5,
+    "domain": "core-engineering-infrastructure",
+    "role": "Lambda/serverless for burst workloads.",
+    "responsibilities": [
+      "Document ai-agents/core-engineering/infrastructure/serverless-agent.md standards in platform-governance and ADRs",
+      "Implement with NestJS/Flutter patterns from nestjs-architect.md",
+      "Observability hooks for aws-architect and observability-engineer",
+      "Coordinate socketio-architect.md for realtime subsystems",
+      "Load/chaos validation before production enable",
+      "No duplicate microservices — check services/ first"
+    ],
+    "dependencies": [
+      "ai-agents/core-engineering/realtime/socketio-architect.md"
+    ]
+  },
+  {
+    "file": "ai-agents/core-engineering/infrastructure/geo-routing-agent.md",
+    "phase": 5,
+    "domain": "core-engineering-infrastructure",
+    "role": "Geo DNS and traffic routing.",
+    "responsibilities": [
+      "Document ai-agents/core-engineering/infrastructure/geo-routing-agent.md standards in platform-governance and ADRs",
+      "Implement with NestJS/Flutter patterns from nestjs-architect.md",
+      "Observability hooks for aws-architect and observability-engineer",
+      "Coordinate socketio-architect.md for realtime subsystems",
+      "Load/chaos validation before production enable",
+      "No duplicate microservices — check services/ first"
+    ],
+    "dependencies": [
+      "ai-agents/core-engineering/realtime/socketio-architect.md"
+    ]
+  },
+  {
+    "file": "ai-agents/core-engineering/reliability/uptime-agent.md",
+    "phase": 5,
+    "domain": "core-engineering-reliability",
+    "role": "Uptime SLOs, error budgets, status comms.",
+    "responsibilities": [
+      "Document ai-agents/core-engineering/reliability/uptime-agent.md standards in platform-governance and ADRs",
+      "Implement with NestJS/Flutter patterns from nestjs-architect.md",
+      "Observability hooks for aws-architect and observability-engineer",
+      "Coordinate socketio-architect.md for realtime subsystems",
+      "Load/chaos validation before production enable",
+      "No duplicate microservices — check services/ first"
+    ],
+    "dependencies": [
+      "ai-agents/core-engineering/realtime/socketio-architect.md"
+    ]
+  },
+  {
+    "file": "ai-agents/core-engineering/reliability/chaos-engineering-agent.md",
+    "phase": 5,
+    "domain": "core-engineering-reliability",
+    "role": "Platform chaos experiments (infra plane).",
+    "responsibilities": [
+      "Document ai-agents/core-engineering/reliability/chaos-engineering-agent.md standards in platform-governance and ADRs",
+      "Implement with NestJS/Flutter patterns from nestjs-architect.md",
+      "Observability hooks for aws-architect and observability-engineer",
+      "Coordinate socketio-architect.md for realtime subsystems",
+      "Load/chaos validation before production enable",
+      "No duplicate microservices — check services/ first"
+    ],
+    "dependencies": [
+      "ai-agents/core-engineering/realtime/socketio-architect.md"
+    ]
+  },
+  {
+    "file": "apps/social-app/agents/social-feed-agent.md",
+    "phase": 8,
+    "domain": "social-app",
+    "role": "Home feed composition — following, For You, and ads insertion.",
+    "responsibilities": [
+      "Feed mixer service with cursor pagination in PostgreSQL",
+      "Redis cache for hot feeds; stale-while-revalidate on 3G",
+      "Coordinate feed-ranking-agent and feed-architect.md",
+      "Insert sponsored slots per ad-serving-agent policy",
+      "Offline feed pack for social-offline-sync-agent",
+      "Report bad recommendations to content-moderation-pipeline"
+    ],
+    "dependencies": [
+      "apps/social-app/agents/feed-architect.md",
+      "apps/social-app/agents/feed-ranking-agent.md"
+    ]
+  },
+  {
+    "file": "apps/social-app/agents/follow-system-agent.md",
+    "phase": 8,
+    "domain": "social-app",
+    "role": "Follow graph — requests, mutual follows, blocks, and counts.",
+    "responsibilities": [
+      "Follow edge model with soft-delete and block symmetry",
+      "Counts in Redis; reconcile jobs nightly",
+      "Private account follow requests with notifications",
+      "Integrate follow-graph-manager patterns without breaking APIs",
+      "Anti-spam rate limits with anti-spam-agent",
+      "Contracts in shared-contracts/social/graph/v1"
+    ],
+    "dependencies": [
+      "apps/social-app/agents/follow-graph-manager.md",
+      "ai-agents/safety/anti-spam-agent.md"
+    ]
+  }
+]

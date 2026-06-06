@@ -1,0 +1,21 @@
+---
+description: Route zero-involvement Phase 1 completion requests to the autonomous completion agent
+globs:
+  - scripts/phase1-autonomous-complete.ps1
+  - scripts/setup-phase1.ps1
+  - scripts/ensure-docker.ps1
+  - scripts/smoke-test-phase1.ps1
+  - scripts/smoke-test-realtime.mjs
+  - ai-agents/phase-1/phase-1-autonomous-completion-agent.md
+---
+
+# Phase 1 Autonomous Completion Rule
+
+When the user asks to **complete Phase 1**, **finish Phase 1 without involvement**, or run full Phase 1 validation end-to-end:
+
+1. Read [`ai-agents/phase-1/phase-1-autonomous-completion-agent.md`](ai-agents/phase-1/phase-1-autonomous-completion-agent.md)
+2. Use skill [`.cursor/skills/stream-heaven/phase-1/phase-1-autonomous-completion-agent/basic/SKILL.md`](.cursor/skills/stream-heaven/phase-1/phase-1-autonomous-completion-agent/basic/SKILL.md) for `pnpm run phase1:complete`
+3. Use [advanced skill](.cursor/skills/stream-heaven/phase-1/phase-1-autonomous-completion-agent/advanced/SKILL.md) for fix loops, docs, and gap closure
+4. Delegate tooling regressions to [`phase-1-remediation-agent.md`](ai-agents/phase-1/phase-1-remediation-agent.md)
+
+Run `pnpm run phase1:complete` before handoff. Do not regenerate agents with `generate-agents.mjs`.

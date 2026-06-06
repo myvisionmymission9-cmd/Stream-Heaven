@@ -1,0 +1,132 @@
+services:
+  postgres:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_USER: sh_admin
+      POSTGRES_PASSWORD: sh_admin_dev
+    ports:
+      - "5432:5432"
+    volumes:
+      - sh_postgres_data:/var/lib/postgresql/data
+      - ./infrastructure/local/init-db.sql:/docker-entrypoint-initdb.d/init-db.sql
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U sh_admin"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  redis:
+    image: redis:7-alpine
+    ports:
+      - "6379:6379"
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 5s
+      timeout: 3s
+      retries: 5
+
+  auth-service:
+    profiles: ["services"]
+    build:
+      context: ./services/auth-service
+    environment:
+      PORT: 3001
+      DATABASE_URL: postgresql://sh_auth:sh_auth_dev@postgres:5432/sh_auth
+      REDIS_URL: redis://redis:6379
+      JWT_ACCESS_SECRET: dev-access-secret-change-in-prod-min-32-chars
+      JWT_REFRESH_SECRET: dev-refresh-secret-change-in-prod-min-32-chars
+      NODE_ENV: development
+      SMS_PROVIDER: mock
+      PHONE_ENCRYPTION_KEY: "0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef"
+    ports:
+      - "3001:3001"
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+
+  user-service:
+    profiles: ["services"]
+    build:
+      context: ./services/user-service
+    environment:
+      PORT: 3002
+      DATABASE_URL: postgresql://sh_user:sh_user_dev@postgres:5432/sh_user
+      REDIS_URL: redis://redis:6379
+      NODE_ENV: development
+    ports:
+      - "3002:3002"
+    depends_on:
+      postgres:
+        condition: service_healthy
+
+  social-service:
+    profiles: ["services"]
+    build:
+      context: ./services/social-service
+    environment:
+      PORT: 3003
+      REDIS_URL: redis://redis:6379
+      INTERNAL_SERVICE_TOKEN: dev-internal-token
+      NODE_ENV: development
+    ports:
+      - "3003:3003"
+    depends_on:
+      redis:
+        condition: service_healthy
+
+  livestream-service:
+    profiles: ["services"]
+    build:
+      context: ./services/livestream-service
+    environment:
+      PORT: 3004
+      REDIS_URL: redis://redis:6379
+      INTERNAL_SERVICE_TOKEN: dev-internal-token
+      AGORA_APP_ID: dev-agora-app-id
+      NODE_ENV: development
+    ports:
+      - "3004:3004"
+    depends_on:
+      redis:
+        condition: service_healthy
+
+  api-gateway:
+    profiles: ["services"]
+    build:
+      context: ./services/api-gateway
+    environment:
+      PORT: 3000
+      AUTH_SERVICE_URL: http://auth-service:3001
+      USER_SERVICE_URL: http://user-service:3002
+      SOCIAL_SERVICE_URL: http://social-service:3003
+      LIVESTREAM_SERVICE_URL: http://livestream-service:3004
+      REDIS_URL: redis://redis:6379
+      JWT_ACCESS_SECRET: dev-access-secret-change-in-prod-min-32-chars
+      CORS_ORIGINS: "*"
+    ports:
+      - "3000:3000"
+    depends_on:
+      - auth-service
+      - user-service
+      - social-service
+      - livestream-service
+      - redis
+
+  realtime-gateway:
+    profiles: ["services"]
+    build:
+      context: ./services/realtime-gateway
+    environment:
+      PORT: 3009
+      REDIS_URL: redis://redis:6379
+      JWT_ACCESS_SECRET: dev-access-secret-change-in-prod-min-32-chars
+    ports:
+      - "3009:3009"
+    depends_on:
+      redis:
+        condition: service_healthy
+
+volumes:
+  sh_postgres_data:

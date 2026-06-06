@@ -1,0 +1,216 @@
+openapi: 3.1.0
+info:
+  title: Stream Heaven User / Profile API
+  version: 1.0.0
+  license:
+    name: Proprietary
+    identifier: LicenseRef-StreamHeaven-Proprietary
+  description: Profile CRUD, device registration, cross-app identity.
+
+servers:
+  - url: https://api.streamheaven.app/v1
+  - url: http://127.0.0.1:3000/v1
+
+tags:
+  - name: Profile
+    description: User profile CRUD
+  - name: Devices
+    description: Push notification device registration
+
+paths:
+  /users/me:
+    get:
+      operationId: getMyProfile
+      tags: [Profile]
+      summary: Get authenticated user profile
+      security:
+        - bearerAuth: []
+      parameters:
+        - $ref: './common.v1.yaml#/components/parameters/XRequestId'
+        - $ref: './common.v1.yaml#/components/parameters/XAppId'
+      responses:
+        '200':
+          description: Profile
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserProfile'
+        '401':
+          $ref: './common.v1.yaml#/components/responses/Unauthorized'
+        '404':
+          $ref: './common.v1.yaml#/components/responses/NotFound'
+
+    patch:
+      operationId: updateMyProfile
+      tags: [Profile]
+      summary: Update authenticated user profile
+      security:
+        - bearerAuth: []
+      parameters:
+        - $ref: './common.v1.yaml#/components/parameters/XRequestId'
+        - $ref: './common.v1.yaml#/components/parameters/XAppId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateProfileRequest'
+      responses:
+        '200':
+          description: Updated profile
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserProfile'
+        '400':
+          $ref: './common.v1.yaml#/components/responses/BadRequest'
+        '401':
+          $ref: './common.v1.yaml#/components/responses/Unauthorized'
+
+  /users/{userId}:
+    get:
+      operationId: getUserProfile
+      tags: [Profile]
+      summary: Get public profile by user ID
+      security:
+        - bearerAuth: []
+      parameters:
+        - $ref: './common.v1.yaml#/components/parameters/XRequestId'
+        - name: userId
+          in: path
+          required: true
+          schema:
+            $ref: './common.v1.yaml#/components/schemas/UserId'
+      responses:
+        '200':
+          description: Public profile
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PublicUserProfile'
+        '404':
+          $ref: './common.v1.yaml#/components/responses/NotFound'
+
+  /users/me/devices:
+    post:
+      operationId: registerDevice
+      tags: [Devices]
+      summary: Register or update device for push notifications
+      security:
+        - bearerAuth: []
+      parameters:
+        - $ref: './common.v1.yaml#/components/parameters/XRequestId'
+        - $ref: './common.v1.yaml#/components/parameters/XAppId'
+        - $ref: './common.v1.yaml#/components/parameters/XDeviceId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DeviceRegistrationRequest'
+      responses:
+        '200':
+          description: Device registered
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeviceRegistrationResponse'
+        '401':
+          $ref: './common.v1.yaml#/components/responses/Unauthorized'
+
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+
+  schemas:
+    UserProfile:
+      allOf:
+        - $ref: './common.v1.yaml#/components/schemas/Timestamps'
+        - type: object
+          required: [userId, displayName, locale, apps]
+          properties:
+            userId:
+              $ref: './common.v1.yaml#/components/schemas/UserId'
+            displayName:
+              type: string
+              minLength: 1
+              maxLength: 64
+            handle:
+              type: [string, 'null']
+              pattern: '^[a-z0-9_]{3,30}$'
+            bio:
+              type: [string, 'null']
+              maxLength: 500
+            avatarUrl:
+              type: [string, 'null']
+              format: uri
+            locale:
+              type: string
+              example: en
+            apps:
+              type: array
+              items:
+                $ref: './common.v1.yaml#/components/schemas/AppId'
+            roles:
+              type: array
+              items:
+                $ref: './common.v1.yaml#/components/schemas/Role'
+
+    PublicUserProfile:
+      type: object
+      required: [userId, displayName]
+      properties:
+        userId:
+          $ref: './common.v1.yaml#/components/schemas/UserId'
+        displayName:
+          type: string
+        handle:
+          type: [string, 'null']
+        avatarUrl:
+          type: [string, 'null']
+          format: uri
+
+    UpdateProfileRequest:
+      type: object
+      properties:
+        displayName:
+          type: string
+          minLength: 1
+          maxLength: 64
+        handle:
+          type: string
+          pattern: '^[a-z0-9_]{3,30}$'
+        bio:
+          type: string
+          maxLength: 500
+        locale:
+          type: string
+        avatarUrl:
+          type: string
+          format: uri
+
+    DeviceRegistrationRequest:
+      type: object
+      required: [platform, pushToken]
+      properties:
+        platform:
+          type: string
+          enum: [ios, android, web]
+        pushToken:
+          type: string
+        appVersion:
+          type: string
+
+    DeviceRegistrationResponse:
+      type: object
+      required: [deviceId, registeredAt]
+      properties:
+        deviceId:
+          type: string
+          format: uuid
+        registeredAt:
+          type: string
+          format: date-time

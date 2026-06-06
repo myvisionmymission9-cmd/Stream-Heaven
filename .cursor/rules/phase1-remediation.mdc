@@ -1,0 +1,23 @@
+---
+description: Route Phase 1 setup, CI, or audit failures to the remediation agent
+globs:
+  - services/auth-service/**
+  - services/user-service/**
+  - services/api-gateway/**
+  - services/realtime-gateway/**
+  - docker-compose.yml
+  - scripts/setup-phase1.ps1
+  - scripts/phase1-remediate.ps1
+  - .github/workflows/phase1-ci.yml
+---
+
+# Phase 1 Remediation Rule
+
+When Phase 1 validation fails (typecheck, build, test, lint, contracts, Docker, smoke tests):
+
+1. Read [`ai-agents/phase-1/phase-1-remediation-agent.md`](ai-agents/phase-1/phase-1-remediation-agent.md)
+2. Use skill [`.cursor/skills/stream-heaven/phase-1/phase-1-remediation-agent/basic/SKILL.md`](.cursor/skills/stream-heaven/phase-1/phase-1-remediation-agent/basic/SKILL.md) for single-service fixes
+3. Use [advanced skill](.cursor/skills/stream-heaven/phase-1/phase-1-remediation-agent/advanced/SKILL.md) for full autonomous loops
+4. Run `pnpm run phase1:remediate` before handoff
+
+Do not regenerate agents with `generate-agents.mjs`. Apply smallest correct diffs only.

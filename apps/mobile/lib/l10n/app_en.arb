@@ -1,0 +1,33 @@
+{
+  "@@locale": "en",
+  "appTitle": "Stream Heaven",
+  "@appTitle": {
+    "description": "Application title"
+  },
+  "splashLoading": "Loading…",
+  "loginTitle": "Welcome to Stream Heaven",
+  "loginSubtitle": "Sign in with your phone number",
+  "phoneLabel": "Phone number",
+  "phoneHint": "9876543210",
+  "sendOtp": "Send OTP",
+  "verifyOtpTitle": "Enter verification code",
+  "verifyOtpSubtitle": "We sent a 6-digit code to {phone}",
+  "@verifyOtpSubtitle": {
+    "placeholders": {
+      "phone": {
+        "type": "String"
+      }
+    }
+  },
+  "otpLabel": "OTP code",
+  "verifyOtp": "Verify & continue",
+  "resendOtp": "Resend code",
+  "homeTitle": "Home",
+  "profileTitle": "Profile",
+  "displayNameLabel": "Display name",
+  "saveProfile": "Save changes",
+  "logout": "Log out",
+  "errorGeneric": "Something went wrong. Please try again.",
+  "errorOffline": "No internet connection.",
+  "profileUpdated": "Profile updated"
+}

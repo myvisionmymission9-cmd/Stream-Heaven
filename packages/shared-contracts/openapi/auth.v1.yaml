@@ -1,0 +1,249 @@
+openapi: 3.1.0
+info:
+  title: Stream Heaven Auth API
+  version: 1.0.0
+  license:
+    name: Proprietary
+    identifier: LicenseRef-StreamHeaven-Proprietary
+  description: Authentication — OTP, Firebase exchange, token refresh, logout.
+
+servers:
+  - url: https://api.streamheaven.app/v1
+    description: Production gateway
+  - url: http://127.0.0.1:3000/v1
+    description: Local api-gateway
+
+tags:
+  - name: Auth
+    description: Phone OTP and token lifecycle
+
+paths:
+  /auth/otp/send:
+    post:
+      operationId: sendOtp
+      tags: [Auth]
+      summary: Send OTP to phone number
+      security: []
+      parameters:
+        - $ref: './common.v1.yaml#/components/parameters/XRequestId'
+        - $ref: './common.v1.yaml#/components/parameters/XAppId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OtpSendRequest'
+      responses:
+        '200':
+          description: OTP dispatched
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OtpSendResponse'
+        '429':
+          $ref: './common.v1.yaml#/components/responses/TooManyRequests'
+
+  /auth/otp/verify:
+    post:
+      operationId: verifyOtp
+      tags: [Auth]
+      summary: Verify OTP and issue tokens
+      security: []
+      parameters:
+        - $ref: './common.v1.yaml#/components/parameters/XRequestId'
+        - $ref: './common.v1.yaml#/components/parameters/XAppId'
+        - $ref: './common.v1.yaml#/components/parameters/XDeviceId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OtpVerifyRequest'
+      responses:
+        '200':
+          description: Authentication successful
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TokenPairResponse'
+        '401':
+          $ref: './common.v1.yaml#/components/responses/Unauthorized'
+
+  /auth/firebase/exchange:
+    post:
+      operationId: exchangeFirebaseToken
+      tags: [Auth]
+      summary: Exchange Firebase ID token for Stream Heaven JWT
+      security: []
+      parameters:
+        - $ref: './common.v1.yaml#/components/parameters/XRequestId'
+        - $ref: './common.v1.yaml#/components/parameters/XAppId'
+        - $ref: './common.v1.yaml#/components/parameters/XDeviceId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/FirebaseExchangeRequest'
+      responses:
+        '200':
+          description: Tokens issued
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TokenPairResponse'
+        '401':
+          $ref: './common.v1.yaml#/components/responses/Unauthorized'
+
+  /auth/token/refresh:
+    post:
+      operationId: refreshToken
+      tags: [Auth]
+      summary: Rotate refresh token and issue new access token
+      security: []
+      parameters:
+        - $ref: './common.v1.yaml#/components/parameters/XRequestId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RefreshTokenRequest'
+      responses:
+        '200':
+          description: New token pair
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TokenPairResponse'
+        '401':
+          $ref: './common.v1.yaml#/components/responses/Unauthorized'
+
+  /auth/logout:
+    post:
+      operationId: logout
+      tags: [Auth]
+      summary: Revoke refresh token and clear session
+      security:
+        - bearerAuth: []
+      parameters:
+        - $ref: './common.v1.yaml#/components/parameters/XRequestId'
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LogoutRequest'
+      responses:
+        '204':
+          description: Logged out
+        '401':
+          $ref: './common.v1.yaml#/components/responses/Unauthorized'
+
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+
+  schemas:
+    OtpSendRequest:
+      type: object
+      required: [phone]
+      properties:
+        phone:
+          type: string
+          description: E.164 phone number (India +91 default).
+          example: "+919876543210"
+        locale:
+          type: string
+          minLength: 2
+          maxLength: 5
+          example: hi
+
+    OtpSendResponse:
+      type: object
+      required: [requestId, expiresInSeconds, maskedPhone]
+      properties:
+        requestId:
+          type: string
+          format: uuid
+        expiresInSeconds:
+          type: integer
+          example: 300
+        maskedPhone:
+          type: string
+          example: "+91******3210"
+
+    OtpVerifyRequest:
+      type: object
+      required: [phone, code, requestId]
+      properties:
+        phone:
+          type: string
+          example: "+919876543210"
+        code:
+          type: string
+          pattern: '^[0-9]{6}$'
+          example: "123456"
+        requestId:
+          type: string
+          format: uuid
+
+    FirebaseExchangeRequest:
+      type: object
+      required: [firebaseIdToken]
+      properties:
+        firebaseIdToken:
+          type: string
+          description: Firebase Auth ID token from client SDK.
+
+    RefreshTokenRequest:
+      type: object
+      required: [refreshToken]
+      properties:
+        refreshToken:
+          type: string
+
+    LogoutRequest:
+      type: object
+      properties:
+        refreshToken:
+          type: string
+          description: Optional — revoke specific refresh token; all if omitted.
+
+    TokenPairResponse:
+      type: object
+      required: [accessToken, refreshToken, expiresIn, tokenType, user]
+      properties:
+        accessToken:
+          type: string
+        refreshToken:
+          type: string
+        expiresIn:
+          type: integer
+          description: Access token TTL in seconds.
+          example: 900
+        tokenType:
+          type: string
+          enum: [Bearer]
+        user:
+          $ref: '#/components/schemas/AuthUserSummary'
+
+    AuthUserSummary:
+      type: object
+      required: [userId, roles, appAccess]
+      properties:
+        userId:
+          $ref: './common.v1.yaml#/components/schemas/UserId'
+        roles:
+          type: array
+          items:
+            $ref: './common.v1.yaml#/components/schemas/Role'
+        appAccess:
+          type: array
+          items:
+            $ref: './common.v1.yaml#/components/schemas/AppId'
+        isNewUser:
+          type: boolean

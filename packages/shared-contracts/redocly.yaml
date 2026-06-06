@@ -1,0 +1,6 @@
+extends:
+  - recommended
+
+rules:
+  no-unused-components: off
+  no-server-example.com: off

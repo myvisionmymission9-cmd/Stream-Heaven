@@ -1,0 +1,332 @@
+openapi: 3.1.0
+info:
+  title: Stream Heaven Social API
+  version: 1.0.0
+  license:
+    name: Proprietary
+    identifier: LicenseRef-StreamHeaven-Proprietary
+  description: Social graph and feed APIs for posts, comments, follows, and moderation stubs.
+
+servers:
+  - url: https://api.streamheaven.app/v1
+  - url: http://127.0.0.1:3000/v1
+
+tags:
+  - name: SocialPosts
+    description: Post creation and retrieval endpoints.
+  - name: SocialFeed
+    description: Personalized feed and cursor pagination endpoints.
+  - name: SocialComments
+    description: Comment creation endpoints for posts.
+  - name: SocialGraph
+    description: Follow graph mutations and related actions.
+  - name: SocialModeration
+    description: Report and block moderation hooks.
+
+paths:
+  /social/posts:
+    post:
+      operationId: createPost
+      tags: [SocialPosts]
+      summary: Create a social post
+      security:
+        - bearerAuth: []
+      parameters:
+        - $ref: './common.v1.yaml#/components/parameters/XRequestId'
+        - $ref: './common.v1.yaml#/components/parameters/XAppId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreatePostRequest'
+      responses:
+        '201':
+          description: Post created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SocialPost'
+        '400':
+          $ref: './common.v1.yaml#/components/responses/BadRequest'
+        '401':
+          $ref: './common.v1.yaml#/components/responses/Unauthorized'
+
+  /social/feed:
+    get:
+      operationId: getFeed
+      tags: [SocialFeed]
+      summary: Get personalized social feed
+      security:
+        - bearerAuth: []
+      parameters:
+        - $ref: './common.v1.yaml#/components/parameters/XRequestId'
+        - $ref: './common.v1.yaml#/components/parameters/XAppId'
+        - name: cursor
+          in: query
+          required: false
+          schema:
+            type: string
+        - name: limit
+          in: query
+          required: false
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 50
+            default: 20
+      responses:
+        '200':
+          description: Feed page
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FeedResponse'
+        '401':
+          $ref: './common.v1.yaml#/components/responses/Unauthorized'
+
+  /social/posts/{postId}/comments:
+    post:
+      operationId: createComment
+      tags: [SocialComments]
+      summary: Add comment to a post
+      security:
+        - bearerAuth: []
+      parameters:
+        - $ref: './common.v1.yaml#/components/parameters/XRequestId'
+        - name: postId
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateCommentRequest'
+      responses:
+        '201':
+          description: Comment created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SocialComment'
+        '400':
+          $ref: './common.v1.yaml#/components/responses/BadRequest'
+        '401':
+          $ref: './common.v1.yaml#/components/responses/Unauthorized'
+
+  /social/users/{targetUserId}/follow:
+    post:
+      operationId: followUser
+      tags: [SocialGraph]
+      summary: Follow a target user
+      security:
+        - bearerAuth: []
+      parameters:
+        - $ref: './common.v1.yaml#/components/parameters/XRequestId'
+        - name: targetUserId
+          in: path
+          required: true
+          schema:
+            $ref: './common.v1.yaml#/components/schemas/UserId'
+      responses:
+        '200':
+          description: Follow state returned
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FollowResponse'
+        '401':
+          $ref: './common.v1.yaml#/components/responses/Unauthorized'
+
+  /social/reports:
+    post:
+      operationId: reportContent
+      tags: [SocialModeration]
+      summary: Report a post or user for moderation review
+      security:
+        - bearerAuth: []
+      parameters:
+        - $ref: './common.v1.yaml#/components/parameters/XRequestId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ReportRequest'
+      responses:
+        '202':
+          description: Report accepted
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ReportResponse'
+        '400':
+          $ref: './common.v1.yaml#/components/responses/BadRequest'
+        '401':
+          $ref: './common.v1.yaml#/components/responses/Unauthorized'
+
+  /social/blocks:
+    post:
+      operationId: blockUser
+      tags: [SocialModeration]
+      summary: Block another user in social surfaces
+      security:
+        - bearerAuth: []
+      parameters:
+        - $ref: './common.v1.yaml#/components/parameters/XRequestId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BlockRequest'
+      responses:
+        '200':
+          description: Block state
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BlockResponse'
+        '400':
+          $ref: './common.v1.yaml#/components/responses/BadRequest'
+        '401':
+          $ref: './common.v1.yaml#/components/responses/Unauthorized'
+
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+
+  schemas:
+    SocialPost:
+      allOf:
+        - $ref: './common.v1.yaml#/components/schemas/Timestamps'
+        - type: object
+          required: [postId, authorId, text, likeCount, commentCount]
+          properties:
+            postId:
+              type: string
+              format: uuid
+            authorId:
+              $ref: './common.v1.yaml#/components/schemas/UserId'
+            text:
+              type: string
+              maxLength: 2200
+            mediaUrl:
+              type: [string, 'null']
+              format: uri
+            likeCount:
+              type: integer
+              minimum: 0
+            commentCount:
+              type: integer
+              minimum: 0
+
+    CreatePostRequest:
+      type: object
+      required: [text]
+      properties:
+        text:
+          type: string
+          minLength: 1
+          maxLength: 2200
+        mediaUrl:
+          type: string
+          format: uri
+
+    SocialComment:
+      allOf:
+        - $ref: './common.v1.yaml#/components/schemas/Timestamps'
+        - type: object
+          required: [commentId, postId, authorId, text]
+          properties:
+            commentId:
+              type: string
+              format: uuid
+            postId:
+              type: string
+              format: uuid
+            authorId:
+              $ref: './common.v1.yaml#/components/schemas/UserId'
+            text:
+              type: string
+              maxLength: 1000
+
+    CreateCommentRequest:
+      type: object
+      required: [text]
+      properties:
+        text:
+          type: string
+          minLength: 1
+          maxLength: 1000
+
+    FeedResponse:
+      type: object
+      required: [items, page]
+      properties:
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/SocialPost'
+        page:
+          $ref: './common.v1.yaml#/components/schemas/CursorPagination'
+
+    FollowResponse:
+      type: object
+      required: [targetUserId, following]
+      properties:
+        targetUserId:
+          $ref: './common.v1.yaml#/components/schemas/UserId'
+        following:
+          type: boolean
+
+    ReportRequest:
+      type: object
+      required: [entityType, entityId, reason]
+      properties:
+        entityType:
+          type: string
+          enum: [post, user]
+        entityId:
+          type: string
+        reason:
+          type: string
+          minLength: 2
+          maxLength: 200
+        details:
+          type: string
+          maxLength: 1000
+
+    ReportResponse:
+      type: object
+      required: [reportId, status]
+      properties:
+        reportId:
+          type: string
+          format: uuid
+        status:
+          type: string
+          enum: [queued]
+
+    BlockRequest:
+      type: object
+      required: [targetUserId]
+      properties:
+        targetUserId:
+          $ref: './common.v1.yaml#/components/schemas/UserId'
+
+    BlockResponse:
+      type: object
+      required: [targetUserId, blocked]
+      properties:
+        targetUserId:
+          $ref: './common.v1.yaml#/components/schemas/UserId'
+        blocked:
+          type: boolean
