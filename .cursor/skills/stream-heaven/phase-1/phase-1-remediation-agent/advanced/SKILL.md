@@ -34,6 +34,13 @@ Apply:
 - Contract mismatches → openapi-contract-validation-agent
 - Repeated failures → cto-agent with incident summary
 
+### Diagnostic Playbook
+Apply:
+- Classify failures: infra (Docker/ports), compile, migration, contract drift, smoke timeout
+- Fix smallest root cause first — avoid unrelated refactors during remediation
+- Re-run setup-phase1.ps1 and integration smoke after each fix batch
+- Document fix summary in PR body for senior-code-review-agent
+
 ## Key paths
 
 | Resource | Path |

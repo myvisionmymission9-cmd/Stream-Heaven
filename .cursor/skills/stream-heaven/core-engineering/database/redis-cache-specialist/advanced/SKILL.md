@@ -33,6 +33,7 @@ Apply:
 - Slowlog monitoring and hot key detection
 - Failover drill with realtime-systems-agent
 - Elasticache/Redis Cluster vs single-node dev parity
+- Document TTL strategy per key prefix in shared-contracts cache notes
 
 ### Festival Scale
 Apply:

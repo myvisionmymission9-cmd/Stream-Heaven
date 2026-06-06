@@ -40,6 +40,7 @@ Apply:
 - Redis cache last N messages per thread for fast open
 - Load test viral creator DM inbox spikes
 - Search integration for message history opt-in
+- Backpressure typing indicators when thread exceeds 10k unread
 
 ## Key paths
 

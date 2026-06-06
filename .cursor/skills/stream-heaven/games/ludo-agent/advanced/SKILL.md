@@ -33,6 +33,7 @@ Apply:
 - Reconnect: resync full board state from server snapshot
 - Anti-cheat: reject client-proposed dice values
 - Spectator mode stub for livestream embed
+- Latency budget: sub-200ms move ack on 4G networks
 
 ### Economy Integration
 Apply:

@@ -34,6 +34,13 @@ Apply:
 - Produce executive summary for cto-agent and platform-orchestrator
 - Handoff checklist for phase-2a-autonomous-bootstrap-agent
 
+### Runtime Orchestration
+Apply:
+- Start Docker Postgres/Redis before NestJS services in dependency order
+- Verify gateway routes auth, profile, and health endpoints before marking complete
+- Capture phase1-runtime-log.txt only locally — never commit runtime logs
+- Escalate to phase-1-remediation-agent when same failure repeats twice
+
 ## Key paths
 
 | Resource | Path |

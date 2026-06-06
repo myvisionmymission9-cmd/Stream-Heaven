@@ -40,6 +40,7 @@ Apply:
 - Low-end Android PK UI: minimal animations, clear score bar
 - Load test finals with livestream-scaling-agent
 - Moderation: report PK harassment in real time
+- PK timer sync via Socket.IO room events with server-authoritative clock
 
 ## Key paths
 
