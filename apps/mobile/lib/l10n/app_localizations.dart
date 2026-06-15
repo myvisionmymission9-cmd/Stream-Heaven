@@ -213,6 +213,120 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Profile updated'**
   String get profileUpdated;
+
+  /// No description provided for @feedTabTrending.
+  ///
+  /// In en, this message translates to:
+  /// **'Trending 🔥'**
+  String get feedTabTrending;
+
+  /// No description provided for @feedTabVideos.
+  ///
+  /// In en, this message translates to:
+  /// **'Videos 🎬'**
+  String get feedTabVideos;
+
+  /// No description provided for @feedTabFollowing.
+  ///
+  /// In en, this message translates to:
+  /// **'Following'**
+  String get feedTabFollowing;
+
+  /// No description provided for @feedTabCelebrity.
+  ///
+  /// In en, this message translates to:
+  /// **'Celebrity ⭐'**
+  String get feedTabCelebrity;
+
+  /// No description provided for @feedTabCreatePost.
+  ///
+  /// In en, this message translates to:
+  /// **'Create Post'**
+  String get feedTabCreatePost;
+
+  /// No description provided for @feedFollow.
+  ///
+  /// In en, this message translates to:
+  /// **'Follow'**
+  String get feedFollow;
+
+  /// No description provided for @feedFollowing.
+  ///
+  /// In en, this message translates to:
+  /// **'Following'**
+  String get feedFollowing;
+
+  /// No description provided for @feedCreatePostComingSoon.
+  ///
+  /// In en, this message translates to:
+  /// **'Create post flow coming soon'**
+  String get feedCreatePostComingSoon;
+
+  /// No description provided for @feedFeatureComingSoon.
+  ///
+  /// In en, this message translates to:
+  /// **'Coming soon'**
+  String get feedFeatureComingSoon;
+
+  /// No description provided for @feedGiftComingSoon.
+  ///
+  /// In en, this message translates to:
+  /// **'Gifts coming soon'**
+  String get feedGiftComingSoon;
+
+  /// No description provided for @feedCommentsComingSoon.
+  ///
+  /// In en, this message translates to:
+  /// **'Comments coming soon'**
+  String get feedCommentsComingSoon;
+
+  /// No description provided for @feedShareComingSoon.
+  ///
+  /// In en, this message translates to:
+  /// **'Share coming soon'**
+  String get feedShareComingSoon;
+
+  /// No description provided for @feedSaveComingSoon.
+  ///
+  /// In en, this message translates to:
+  /// **'Save coming soon'**
+  String get feedSaveComingSoon;
+
+  /// No description provided for @feedCryptoDisclaimer.
+  ///
+  /// In en, this message translates to:
+  /// **'Not financial advice'**
+  String get feedCryptoDisclaimer;
+
+  /// No description provided for @navHome.
+  ///
+  /// In en, this message translates to:
+  /// **'Home'**
+  String get navHome;
+
+  /// No description provided for @navLive.
+  ///
+  /// In en, this message translates to:
+  /// **'Live'**
+  String get navLive;
+
+  /// No description provided for @navAudio.
+  ///
+  /// In en, this message translates to:
+  /// **'Audio'**
+  String get navAudio;
+
+  /// No description provided for @navAstro.
+  ///
+  /// In en, this message translates to:
+  /// **'Astro'**
+  String get navAstro;
+
+  /// No description provided for @navTv.
+  ///
+  /// In en, this message translates to:
+  /// **'TV'**
+  String get navTv;
 }
 
 class _AppLocalizationsDelegate

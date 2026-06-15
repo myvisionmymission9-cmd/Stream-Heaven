@@ -19,6 +19,7 @@
     "dev:realtime": "pnpm --filter @stream-heaven/realtime-gateway dev",
     "dev:flutter": "cd apps/mobile && flutter run",
     "dev:flutter:chrome": "cd apps/mobile && flutter run -d chrome --dart-define=API_BASE_URL=http://127.0.0.1:3000",
+    "dev:flutter:home-feed": "cd apps/mobile && flutter run -d chrome --dart-define=DEV_SKIP_AUTH=true --web-port=8080",
     "setup:flutter": "powershell -ExecutionPolicy Bypass -File scripts/setup-flutter-mobile.ps1",
     "setup:phase2a": "powershell -ExecutionPolicy Bypass -File scripts/setup-phase2a.ps1",
     "smoke:realtime": "node scripts/smoke-test-realtime.mjs",

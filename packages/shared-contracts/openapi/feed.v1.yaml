@@ -1,0 +1,227 @@
+openapi: 3.1.0
+info:
+  title: Stream Heaven Home Feed API
+  version: 1.0.0
+  license:
+    name: Proprietary
+    identifier: LicenseRef-StreamHeaven-Proprietary
+  description: |
+    Home Feed scoped contracts — tabbed vertical feed, extended FeedItem union,
+    and ranking signal hooks. Core engagement paths remain in social.v1.yaml.
+
+servers:
+  - url: https://api.streamheaven.app/v1
+  - url: http://127.0.0.1:3000/v1
+
+tags:
+  - name: HomeFeed
+    description: Tabbed home feed surfaces (Trending, Videos, Following, Celebrity).
+  - name: HomeFeedRanking
+    description: Trending and recommendation debug endpoints.
+
+paths:
+  /feed/home:
+    get:
+      operationId: getHomeFeed
+      tags: [HomeFeed]
+      summary: Get vertical home feed for a tab
+      description: |
+        Cursor-paginated Home Feed. Prefer this path for mobile home shell;
+        `/social/feed` remains supported for legacy clients.
+      security:
+        - bearerAuth: []
+      parameters:
+        - $ref: './common.v1.yaml#/components/parameters/XRequestId'
+        - $ref: './common.v1.yaml#/components/parameters/XAppId'
+        - name: tab
+          in: query
+          schema:
+            $ref: '#/components/schemas/HomeFeedTab'
+        - name: cursor
+          in: query
+          schema:
+            type: string
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 30
+            default: 10
+        - name: locale
+          in: query
+          description: BCP-47 locale for regional discovery boosts.
+          schema:
+            type: string
+            example: te-IN
+        - name: regionCode
+          in: query
+          schema:
+            type: string
+            example: IN-TG
+      responses:
+        '200':
+          description: Home feed page
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HomeFeedResponse'
+        '401':
+          $ref: './common.v1.yaml#/components/responses/Unauthorized'
+
+  /feed/trending/score:
+    get:
+      operationId: getTrendingScoreDebug
+      tags: [HomeFeedRanking]
+      summary: Debug trending score breakdown for a post
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: postId
+          in: query
+          required: true
+          schema:
+            type: string
+            format: uuid
+      responses:
+        '200':
+          description: Trending score components
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TrendingScoreBreakdown'
+
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+
+  schemas:
+    HomeFeedTab:
+      type: string
+      enum: [trending, videos, following, celebrity]
+      default: trending
+
+    HomeFeedItemType:
+      type: string
+      enum:
+        - short_video
+        - image_post
+        - audio_post
+        - live_stream
+        - audio_room
+        - community_post
+        - crypto_post
+
+    SoundAttribution:
+      type: object
+      properties:
+        soundId:
+          type: string
+          format: uuid
+        title:
+          type: string
+          maxLength: 120
+        artistHandle:
+          type: string
+          maxLength: 32
+
+    CryptoPostMeta:
+      type: object
+      required: [symbol, priceUsd, change24hPct, disclaimer]
+      properties:
+        symbol:
+          type: string
+          example: BTC
+        priceUsd:
+          type: number
+        change24hPct:
+          type: number
+        disclaimer:
+          type: string
+          const: Not financial advice.
+
+    HomeFeedItem:
+      type: object
+      required: [itemType, itemId, author]
+      properties:
+        itemType:
+          $ref: '#/components/schemas/HomeFeedItemType'
+        itemId:
+          type: string
+          format: uuid
+        author:
+          $ref: './social.v1.yaml#/components/schemas/PostAuthorSummary'
+        caption:
+          type: string
+          maxLength: 2200
+        mediaUrl:
+          type: [string, 'null']
+          format: uri
+        thumbnailUrl:
+          type: [string, 'null']
+          format: uri
+        durationMs:
+          type: integer
+          minimum: 0
+        likeCount:
+          type: integer
+          minimum: 0
+        commentCount:
+          type: integer
+          minimum: 0
+        shareCount:
+          type: integer
+          minimum: 0
+        giftCount:
+          type: integer
+          minimum: 0
+        viewerState:
+          $ref: './social.v1.yaml#/components/schemas/ViewerEngagementState'
+        sound:
+          $ref: '#/components/schemas/SoundAttribution'
+        crypto:
+          $ref: '#/components/schemas/CryptoPostMeta'
+        liveRoomId:
+          type: [string, 'null']
+          format: uuid
+        rankScore:
+          type: [number, 'null']
+
+    HomeFeedResponse:
+      type: object
+      required: [tab, items, page]
+      properties:
+        tab:
+          $ref: '#/components/schemas/HomeFeedTab'
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/HomeFeedItem'
+        page:
+          $ref: './common.v1.yaml#/components/schemas/CursorPagination'
+        rankingVersion:
+          type: string
+          example: trending-v1
+
+    TrendingScoreBreakdown:
+      type: object
+      required: [postId, trendingScore]
+      properties:
+        postId:
+          type: string
+          format: uuid
+        trendingScore:
+          type: number
+        velocityScore:
+          type: number
+        engagementRate:
+          type: number
+        recencyDecay:
+          type: number
+        shareRate:
+          type: number
+        regionalBoost:
+          type: number

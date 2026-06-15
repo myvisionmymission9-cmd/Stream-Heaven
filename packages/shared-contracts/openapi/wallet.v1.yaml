@@ -1,0 +1,286 @@
+openapi: 3.1.0
+info:
+  title: Stream Heaven Wallet API
+  version: 1.0.0
+  license:
+    name: Proprietary
+    identifier: LicenseRef-StreamHeaven-Proprietary
+  description: |
+    Wallet ledger, coin balance, gift catalog, and gift send APIs.
+    All monetary amounts use integer minor units (paise). Mutations require Idempotency-Key header.
+
+servers:
+  - url: https://api.streamheaven.app/v1
+  - url: http://127.0.0.1:3000/v1
+
+tags:
+  - name: WalletBalance
+    description: Coin and earnings balance read APIs.
+  - name: WalletLedger
+    description: Transaction history and ledger entries.
+  - name: WalletGifts
+    description: Gift catalog and send operations.
+  - name: WalletPurchases
+    description: Coin pack purchase initiation (IAP/UPI stub).
+  - name: WalletWithdrawals
+    description: Creator withdrawal requests (stub).
+
+paths:
+  /wallet/balance:
+    get:
+      operationId: getWalletBalance
+      tags: [WalletBalance]
+      summary: Get current user wallet balances
+      security:
+        - bearerAuth: []
+      parameters:
+        - $ref: './common.v1.yaml#/components/parameters/XRequestId'
+        - $ref: './common.v1.yaml#/components/parameters/XAppId'
+      responses:
+        '200':
+          description: Balances
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WalletBalance'
+        '401':
+          $ref: './common.v1.yaml#/components/responses/Unauthorized'
+
+  /wallet/ledger:
+    get:
+      operationId: listLedgerEntries
+      tags: [WalletLedger]
+      summary: List wallet ledger entries (cursor paginated)
+      security:
+        - bearerAuth: []
+      parameters:
+        - $ref: './common.v1.yaml#/components/parameters/XRequestId'
+        - name: cursor
+          in: query
+          required: false
+          schema:
+            type: string
+        - name: limit
+          in: query
+          required: false
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 50
+            default: 20
+      responses:
+        '200':
+          description: Ledger page
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LedgerPage'
+        '401':
+          $ref: './common.v1.yaml#/components/responses/Unauthorized'
+
+  /wallet/gifts/catalog:
+    get:
+      operationId: listGiftCatalog
+      tags: [WalletGifts]
+      summary: List available virtual gifts
+      security:
+        - bearerAuth: []
+      parameters:
+        - $ref: './common.v1.yaml#/components/parameters/XRequestId'
+      responses:
+        '200':
+          description: Gift catalog
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GiftCatalogResponse'
+        '401':
+          $ref: './common.v1.yaml#/components/responses/Unauthorized'
+
+  /wallet/gifts/send:
+    post:
+      operationId: sendGift
+      tags: [WalletGifts]
+      summary: Send a virtual gift (idempotent debit)
+      security:
+        - bearerAuth: []
+      parameters:
+        - $ref: './common.v1.yaml#/components/parameters/XRequestId'
+        - $ref: './common.v1.yaml#/components/parameters/XAppId'
+        - $ref: '#/components/parameters/IdempotencyKey'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SendGiftRequest'
+      responses:
+        '200':
+          description: Gift sent (or replayed idempotent response)
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GiftReceipt'
+        '400':
+          $ref: './common.v1.yaml#/components/responses/BadRequest'
+        '401':
+          $ref: './common.v1.yaml#/components/responses/Unauthorized'
+        '402':
+          description: Insufficient coin balance
+          content:
+            application/json:
+              schema:
+                $ref: './common.v1.yaml#/components/schemas/ErrorResponse'
+
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+
+  parameters:
+    IdempotencyKey:
+      name: Idempotency-Key
+      in: header
+      required: true
+      schema:
+        type: string
+        maxLength: 128
+      description: Unique key per gift send attempt; replays return the same GiftReceipt.
+
+  schemas:
+    WalletBalance:
+      type: object
+      required: [userId, coinBalanceMinor, earningsBalanceMinor, currency]
+      properties:
+        userId:
+          $ref: './common.v1.yaml#/components/schemas/UserId'
+        coinBalanceMinor:
+          type: integer
+          minimum: 0
+          description: Spendable virtual coins in minor units.
+        earningsBalanceMinor:
+          type: integer
+          minimum: 0
+          description: Creator earnings available for withdrawal (minor units).
+        currency:
+          type: string
+          example: INR
+        updatedAt:
+          type: string
+          format: date-time
+
+    LedgerEntry:
+      type: object
+      required: [entryId, type, amountMinor, direction, createdAt]
+      properties:
+        entryId:
+          type: string
+          format: uuid
+        type:
+          type: string
+          enum: [GIFT_SENT, GIFT_RECEIVED, PURCHASE, WITHDRAWAL, ADJUSTMENT]
+        amountMinor:
+          type: integer
+        direction:
+          type: string
+          enum: [CREDIT, DEBIT]
+        referenceId:
+          type: string
+          description: Related giftId, purchaseId, or withdrawalId.
+        createdAt:
+          type: string
+          format: date-time
+
+    LedgerPage:
+      type: object
+      required: [items]
+      properties:
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/LedgerEntry'
+        pagination:
+          $ref: './common.v1.yaml#/components/schemas/CursorPagination'
+
+    GiftCatalogItem:
+      type: object
+      required: [giftId, slug, displayName, coinCostMinor, animationTier]
+      properties:
+        giftId:
+          type: string
+          format: uuid
+        slug:
+          type: string
+          enum: [rose, fire, diamond, lion, crown, rocket]
+        displayName:
+          type: string
+        coinCostMinor:
+          type: integer
+          minimum: 1
+        animationTier:
+          type: string
+          enum: [basic, premium, legendary]
+
+    GiftCatalogResponse:
+      type: object
+      required: [items]
+      properties:
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/GiftCatalogItem'
+
+    SendGiftRequest:
+      type: object
+      required: [giftId, recipientUserId, context]
+      properties:
+        giftId:
+          type: string
+          format: uuid
+        recipientUserId:
+          $ref: './common.v1.yaml#/components/schemas/UserId'
+        quantity:
+          type: integer
+          minimum: 1
+          default: 1
+        context:
+          type: object
+          required: [surface]
+          properties:
+            surface:
+              type: string
+              enum: [livestream, feed_video, profile]
+            roomId:
+              type: string
+              format: uuid
+            postId:
+              type: string
+              format: uuid
+        message:
+          type: string
+          maxLength: 140
+
+    GiftReceipt:
+      type: object
+      required: [receiptId, giftId, senderUserId, recipientUserId, coinDebitedMinor, createdAt]
+      properties:
+        receiptId:
+          type: string
+          format: uuid
+        giftId:
+          type: string
+          format: uuid
+        senderUserId:
+          $ref: './common.v1.yaml#/components/schemas/UserId'
+        recipientUserId:
+          $ref: './common.v1.yaml#/components/schemas/UserId'
+        coinDebitedMinor:
+          type: integer
+        ledgerEntryId:
+          type: string
+          format: uuid
+        createdAt:
+          type: string
+          format: date-time

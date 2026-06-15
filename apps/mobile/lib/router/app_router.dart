@@ -6,7 +6,7 @@ import '../../features/auth/presentation/providers/auth_providers.dart';
 import '../../features/auth/presentation/login_screen.dart';
 import '../../features/auth/presentation/otp_verify_screen.dart';
 import '../../features/livestream/presentation/live_rooms_screen.dart';
-import '../../features/profile/presentation/home_screen.dart';
+import '../../features/social/presentation/home/social_home_shell.dart';
 import '../../features/profile/presentation/profile_screen.dart';
 import '../../features/social/presentation/feed_screen.dart';
 import '../../features/splash/splash_screen.dart';
@@ -80,7 +80,7 @@ final appRouterProvider = Provider<GoRouter>((ref) {
       GoRoute(
         path: '/home',
         name: 'home',
-        builder: (context, state) => const HomeScreen(),
+        builder: (context, state) => const SocialHomeShell(),
       ),
       GoRoute(
         path: '/profile',

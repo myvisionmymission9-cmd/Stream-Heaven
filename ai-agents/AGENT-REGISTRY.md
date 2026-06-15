@@ -182,6 +182,7 @@
 | Windows Laptop Diagnostics Agent | `ai-agents/meta/windows-laptop-diagnostics-agent.md` | Event 41/6008, powercfg, battery/RAM/disk on admin Windows laptops |
 | D-Drive Toolstack Bootstrap Agent | `ai-agents/meta/d-drive-toolstack-bootstrap-agent.md` | Autonomous D: dev tool stack install (Git, Node, Docker, CLIs), verify, SaaS checklists |
 | Stream Heaven Toolstack Installer Agent | `ai-agents/meta/stream-heaven-toolstack-installer-agent.md` | Same D: toolstack pipeline; canonical alias — `install-stream-heaven-toolstack-d-drive.ps1`, SaaS checklists |
+| Dev Toolstack Orchestrator Agent | `ai-agents/meta/dev-toolstack-orchestrator-agent.md` | 150+ tool catalog across 5 tiers (Local/SaaS/Mac/Infra/Legal); idempotent `bootstrap-dev-toolstack.ps1`; SaaS + Mac checklists; phase-gated handoff |
 | Integration Smoke Test Agent | `ai-agents/testing/integration-smoke-test-agent.md` | OTP → JWT → profile smoke suite |
 
 ## Phase 2a — Flutter Mobile Shell
@@ -398,6 +399,29 @@
 | Social Api Integration | `c:/Users/admin/Desktop/Stream Heaven/apps/social-app/agents/social-api-integration.md` | Social Api Integration specialist for Stream Heaven's social app domain, ensuring alignment with platform governance and the four-app ecosystem |
 | Social Offline Sync Agent | `c:/Users/admin/Desktop/Stream Heaven/apps/social-app/agents/social-offline-sync-agent.md` | Social Offline Sync Agent specialist for Stream Heaven's social app domain, ensuring alignment with platform governance and the four-app ecosystem |
 | Social Accessibility Agent | `c:/Users/admin/Desktop/Stream Heaven/apps/social-app/agents/social-accessibility-agent.md` | Social Accessibility Agent specialist for Stream Heaven's social app domain, ensuring alignment with platform governance and the four-app ecosystem |
+
+#### Home Feed System (Phase 8 scoped)
+
+| Agent | Path | Purpose |
+|-------|------|--------|
+| Home Feed Architect Agent | `apps/social-app/agents/home-feed/home-feed-architect-agent.md` | Overall Home Feed system design — tabs, content union, vertical scroll |
+| Home Feed Tab Orchestrator Agent | `apps/social-app/agents/home-feed/home-feed-tab-orchestrator-agent.md` | Trending / Videos / Following / Celebrity tab routing |
+| Vertical Video Feed Agent | `apps/social-app/agents/home-feed/vertical-video-feed-agent.md` | TikTok-style vertical PageView player shell |
+| Feed Recommendation Engine Agent | `apps/social-app/agents/home-feed/feed-recommendation-engine-agent.md` | Watch-time and engagement scoring spec |
+| Trending Algorithm Agent | `apps/social-app/agents/home-feed/trending-algorithm-agent.md` | Trending score formula and decay |
+| Celebrity Feed Agent | `apps/social-app/agents/home-feed/celebrity-feed-agent.md` | Verified celebrity tab curation |
+| Create Post Entry Agent | `apps/social-app/agents/home-feed/create-post-entry-agent.md` | Create Post FAB / entry flow |
+| Feed Creator Overlay Agent | `apps/social-app/agents/home-feed/feed-creator-overlay-agent.md` | Handle, follow, sound overlay on feed items |
+| Feed Engagement Rail Agent | `apps/social-app/agents/home-feed/feed-engagement-rail-agent.md` | Right-side gift / like / comment / share rail |
+| Feed Preload Buffer Agent | `apps/social-app/agents/home-feed/feed-preload-buffer-agent.md` | Smart preload and adaptive bitrate client |
+| Feed Crypto Content Agent | `apps/social-app/agents/home-feed/feed-crypto-content-agent.md` | Crypto post card type in feed |
+| Feed Regional Discovery Agent | `apps/social-app/agents/home-feed/feed-regional-discovery-agent.md` | Vernacular / regional discovery hooks |
+| Home Feed API Contract Agent | `apps/social-app/agents/home-feed/home-feed-api-contract-agent.md` | OpenAPI for feed endpoints (`feed.v1.yaml`) |
+| Home Feed Flutter UI Agent | `apps/social-app/agents/home-feed/home-feed-flutter-ui-agent.md` | Flutter Home Feed screens and widgets |
+| Home Feed QA Agent | `apps/social-app/agents/home-feed/home-feed-qa-agent.md` | Widget and smoke tests for Home Feed |
+| Home Feed Local Run Agent | `apps/social-app/agents/home-feed/home-feed-local-run-agent.md` | Local Flutter run, API vs UI link troubleshooting, optional Phase 1 backend |
+
+Skills: `.cursor/skills/stream-heaven/apps/social-app/<agent-slug>/basic|advanced/SKILL.md`
 
 ## Phase 9
 

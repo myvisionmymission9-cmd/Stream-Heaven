@@ -9,8 +9,9 @@ openapi/
   common.v1.yaml   # Error, Pagination, UserId, Timestamps
   auth.v1.yaml     # OTP, Firebase exchange, refresh, logout
   user.v1.yaml     # Profile CRUD, devices
-  social.v1.yaml   # Posts, feed, comments, follows, report/block stubs
+  social.v1.yaml   # Posts, tabbed feed, video posts, engagement, watch events (v1.1)
   livestream.v1.yaml # Room lifecycle, viewer count, token stub
+  wallet.v1.yaml     # Balance, ledger, gift catalog, gift send (Phase 11 stub)
 events/
   realtime.v1.json # Presence + social/livestream domain events
 ```

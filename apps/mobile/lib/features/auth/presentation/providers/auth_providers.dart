@@ -1,5 +1,6 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../../../../core/config/env_config.dart';
 import '../../../../core/realtime/socket_service.dart';
 import '../../../profile/data/profile_repository.dart';
 import '../../data/auth_repository.dart';
@@ -42,6 +43,11 @@ class AuthStateNotifier extends StateNotifier<AuthState> {
   final Ref _ref;
 
   Future<void> restoreSession() async {
+    if (EnvConfig.devSkipAuth) {
+      state = const AuthState.authenticated(userId: 'dev-skip-auth');
+      return;
+    }
+
     final hasSession =
         await _ref.read(authRepositoryProvider).hasStoredSession();
     if (!hasSession) {

@@ -1,11 +1,14 @@
 openapi: 3.1.0
 info:
   title: Stream Heaven Social API
-  version: 1.0.0
+  version: 1.1.0
   license:
     name: Proprietary
     identifier: LicenseRef-StreamHeaven-Proprietary
-  description: Social graph and feed APIs for posts, comments, follows, and moderation stubs.
+  description: |
+    Social graph, home feed (tabbed), video posts, engagement actions, and watch-event
+    ingestion for feed ranking. v1.1 adds feed tabs, FeedItem union, and engagement
+    without breaking existing SocialPost fields.
 
 servers:
   - url: https://api.streamheaven.app/v1
@@ -22,6 +25,10 @@ tags:
     description: Follow graph mutations and related actions.
   - name: SocialModeration
     description: Report and block moderation hooks.
+  - name: SocialEngagement
+    description: Like, share, and gift-intent hooks on posts.
+  - name: SocialRanking
+    description: Client watch-event ingestion for feed and trending scores.
 
 paths:
   /social/posts:
@@ -56,12 +63,22 @@ paths:
     get:
       operationId: getFeed
       tags: [SocialFeed]
-      summary: Get personalized social feed
+      summary: Get tabbed home feed with mixed content items
+      description: |
+        Returns a cursor-paginated feed for the requested tab. Default tab is `following`.
+        Items use the FeedItem discriminated union (`feedItemType`). Legacy clients may
+        still read text fields on `text_post` and `video_post` variants.
       security:
         - bearerAuth: []
       parameters:
         - $ref: './common.v1.yaml#/components/parameters/XRequestId'
         - $ref: './common.v1.yaml#/components/parameters/XAppId'
+        - name: tab
+          in: query
+          required: false
+          description: Home feed surface matching product tabs.
+          schema:
+            $ref: '#/components/schemas/FeedTab'
         - name: cursor
           in: query
           required: false
@@ -82,6 +99,144 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/FeedResponse'
+        '401':
+          $ref: './common.v1.yaml#/components/responses/Unauthorized'
+
+  /social/posts/{postId}/like:
+    post:
+      operationId: togglePostLike
+      tags: [SocialEngagement]
+      summary: Like or unlike a post
+      security:
+        - bearerAuth: []
+      parameters:
+        - $ref: './common.v1.yaml#/components/parameters/XRequestId'
+        - $ref: './common.v1.yaml#/components/parameters/XAppId'
+        - name: postId
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ToggleLikeRequest'
+      responses:
+        '200':
+          description: Like state updated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LikeResponse'
+        '401':
+          $ref: './common.v1.yaml#/components/responses/Unauthorized'
+        '404':
+          $ref: './common.v1.yaml#/components/responses/NotFound'
+
+  /social/posts/{postId}/share:
+    post:
+      operationId: sharePost
+      tags: [SocialEngagement]
+      summary: Record a share action and return deeplink payload
+      security:
+        - bearerAuth: []
+      parameters:
+        - $ref: './common.v1.yaml#/components/parameters/XRequestId'
+        - $ref: './common.v1.yaml#/components/parameters/XAppId'
+        - name: postId
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SharePostRequest'
+      responses:
+        '200':
+          description: Share recorded
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SharePostResponse'
+        '401':
+          $ref: './common.v1.yaml#/components/responses/Unauthorized'
+        '404':
+          $ref: './common.v1.yaml#/components/responses/NotFound'
+
+  /social/posts/{postId}/gift-intent:
+    post:
+      operationId: createPostGiftIntent
+      tags: [SocialEngagement]
+      summary: Prepare an idempotent gift send against wallet-service
+      description: |
+        Returns a gift intent id and wallet route. Actual debit occurs via
+        `POST /wallet/gifts/send` with the returned idempotencyKey.
+      security:
+        - bearerAuth: []
+      parameters:
+        - $ref: './common.v1.yaml#/components/parameters/XRequestId'
+        - $ref: './common.v1.yaml#/components/parameters/XAppId'
+        - name: postId
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PostGiftIntentRequest'
+      responses:
+        '200':
+          description: Gift intent prepared
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PostGiftIntentResponse'
+        '400':
+          $ref: './common.v1.yaml#/components/responses/BadRequest'
+        '401':
+          $ref: './common.v1.yaml#/components/responses/Unauthorized'
+        '404':
+          $ref: './common.v1.yaml#/components/responses/NotFound'
+
+  /social/engagement/watch-events:
+    post:
+      operationId: ingestWatchEvents
+      tags: [SocialRanking]
+      summary: Batch ingest watch progress for ranking signals
+      description: |
+        Accepts watch time, completion, rewatch, and skip signals used by feed and
+        trending rankers. Idempotent per (viewerUserId, postId, sessionId).
+      security:
+        - bearerAuth: []
+      parameters:
+        - $ref: './common.v1.yaml#/components/parameters/XRequestId'
+        - $ref: './common.v1.yaml#/components/parameters/XAppId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/WatchEventBatchRequest'
+      responses:
+        '202':
+          description: Events accepted for processing
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WatchEventBatchResponse'
+        '400':
+          $ref: './common.v1.yaml#/components/responses/BadRequest'
         '401':
           $ref: './common.v1.yaml#/components/responses/Unauthorized'
 
@@ -204,11 +359,57 @@ components:
       bearerFormat: JWT
 
   schemas:
+    FeedTab:
+      type: string
+      enum: [trending, videos, following, celebrity]
+      default: following
+      description: Home feed tab matching product navigation.
+
+    FeedItemType:
+      type: string
+      enum: [text_post, video_post, live_card]
+      description: Discriminator for feed row rendering.
+
+    PostAuthorSummary:
+      type: object
+      required: [userId, displayName]
+      properties:
+        userId:
+          $ref: './common.v1.yaml#/components/schemas/UserId'
+        displayName:
+          type: string
+          maxLength: 64
+        handle:
+          type: string
+          maxLength: 32
+        avatarUrl:
+          type: [string, 'null']
+          format: uri
+        isCelebrity:
+          type: boolean
+          default: false
+        isFollowing:
+          type: boolean
+          default: false
+
+    ViewerEngagementState:
+      type: object
+      properties:
+        liked:
+          type: boolean
+          default: false
+        saved:
+          type: boolean
+          default: false
+        shared:
+          type: boolean
+          default: false
+
     SocialPost:
       allOf:
         - $ref: './common.v1.yaml#/components/schemas/Timestamps'
         - type: object
-          required: [postId, authorId, text, likeCount, commentCount]
+          required: [postId, authorId, text, likeCount, commentCount, shareCount]
           properties:
             postId:
               type: string
@@ -227,6 +428,98 @@ components:
             commentCount:
               type: integer
               minimum: 0
+            shareCount:
+              type: integer
+              minimum: 0
+            giftCount:
+              type: integer
+              minimum: 0
+              default: 0
+
+    VideoMedia:
+      type: object
+      required: [playbackUrl, durationMs, aspectRatio]
+      properties:
+        playbackUrl:
+          type: string
+          format: uri
+          description: HLS manifest or progressive MP4 URL from media-service.
+        thumbnailUrl:
+          type: [string, 'null']
+          format: uri
+        durationMs:
+          type: integer
+          minimum: 1
+          maximum: 600000
+        aspectRatio:
+          type: string
+          pattern: '^[0-9]+:[0-9]+$'
+          example: '9:16'
+        width:
+          type: integer
+          minimum: 1
+        height:
+          type: integer
+          minimum: 1
+
+    VideoPost:
+      allOf:
+        - $ref: '#/components/schemas/SocialPost'
+        - type: object
+          required: [postType, video]
+          properties:
+            postType:
+              type: string
+              const: video
+            video:
+              $ref: '#/components/schemas/VideoMedia'
+
+    LiveCardPreview:
+      type: object
+      required: [roomId, hostId, title, viewerCount, status]
+      properties:
+        roomId:
+          type: string
+          format: uuid
+        hostId:
+          $ref: './common.v1.yaml#/components/schemas/UserId'
+        title:
+          type: string
+          maxLength: 120
+        viewerCount:
+          type: integer
+          minimum: 0
+        status:
+          type: string
+          enum: [scheduled, live]
+        coverUrl:
+          type: [string, 'null']
+          format: uri
+
+    FeedItem:
+      type: object
+      required: [feedItemType, itemId]
+      properties:
+        feedItemType:
+          $ref: '#/components/schemas/FeedItemType'
+        itemId:
+          type: string
+          format: uuid
+          description: Stable id for pagination and engagement (usually postId or roomId).
+        author:
+          $ref: '#/components/schemas/PostAuthorSummary'
+        viewerState:
+          $ref: '#/components/schemas/ViewerEngagementState'
+        textPost:
+          $ref: '#/components/schemas/SocialPost'
+        videoPost:
+          $ref: '#/components/schemas/VideoPost'
+        liveCard:
+          $ref: '#/components/schemas/LiveCardPreview'
+        rankScore:
+          type: [number, 'null']
+          description: Debug-only score when X-Rank-Debug header is enabled.
+      description: Exactly one of textPost, videoPost, or liveCard should be populated.
 
     CreatePostRequest:
       type: object
@@ -239,6 +532,14 @@ components:
         mediaUrl:
           type: string
           format: uri
+        postType:
+          type: string
+          enum: [text, image, video]
+          default: text
+        videoAssetId:
+          type: string
+          format: uuid
+          description: Required when postType is video; references media-service asset.
 
     SocialComment:
       allOf:
@@ -269,14 +570,181 @@ components:
 
     FeedResponse:
       type: object
-      required: [items, page]
+      required: [items, page, tab]
       properties:
+        tab:
+          $ref: '#/components/schemas/FeedTab'
         items:
           type: array
           items:
-            $ref: '#/components/schemas/SocialPost'
+            $ref: '#/components/schemas/FeedItem'
         page:
           $ref: './common.v1.yaml#/components/schemas/CursorPagination'
+        rankingVersion:
+          type: string
+          description: Ranker version for A/B tests (e.g. rule-v1, ml-v2).
+          example: rule-v1
+
+    ToggleLikeRequest:
+      type: object
+      properties:
+        liked:
+          type: boolean
+          description: Desired state; omit to toggle current state.
+
+    LikeResponse:
+      type: object
+      required: [postId, liked, likeCount]
+      properties:
+        postId:
+          type: string
+          format: uuid
+        liked:
+          type: boolean
+        likeCount:
+          type: integer
+          minimum: 0
+
+    ShareChannel:
+      type: string
+      enum: [internal, whatsapp, copy_link, other]
+
+    SharePostRequest:
+      type: object
+      properties:
+        channel:
+          $ref: '#/components/schemas/ShareChannel'
+
+    SharePostResponse:
+      type: object
+      required: [postId, shareCount, deeplinkUrl]
+      properties:
+        postId:
+          type: string
+          format: uuid
+        shareCount:
+          type: integer
+          minimum: 0
+        deeplinkUrl:
+          type: string
+          format: uri
+
+    PostGiftIntentRequest:
+      type: object
+      required: [giftSku]
+      properties:
+        giftSku:
+          type: string
+          minLength: 1
+          maxLength: 64
+          example: rose_001
+        quantity:
+          type: integer
+          minimum: 1
+          maximum: 99
+          default: 1
+
+    PostGiftIntentResponse:
+      type: object
+      required: [intentId, postId, giftSku, idempotencyKey, walletSendPath]
+      properties:
+        intentId:
+          type: string
+          format: uuid
+        postId:
+          type: string
+          format: uuid
+        giftSku:
+          type: string
+        idempotencyKey:
+          type: string
+          format: uuid
+        walletSendPath:
+          type: string
+          example: /v1/wallet/gifts/send
+
+    WatchEvent:
+      type: object
+      required: [postId, sessionId, watchTimeMs, durationMs]
+      properties:
+        postId:
+          type: string
+          format: uuid
+        sessionId:
+          type: string
+          format: uuid
+          description: Client-generated playback session for idempotency.
+        watchTimeMs:
+          type: integer
+          minimum: 0
+          description: Accumulated watch time in this session.
+        durationMs:
+          type: integer
+          minimum: 1
+          description: Total video duration for completionRate derivation.
+        completionRate:
+          type: number
+          minimum: 0
+          maximum: 1
+          description: watchTimeMs / durationMs capped at 1; server may recompute.
+        rewatchCount:
+          type: integer
+          minimum: 0
+          default: 0
+        skipped:
+          type: boolean
+          default: false
+          description: True if user swiped away before 25% completion.
+        feedTab:
+          $ref: '#/components/schemas/FeedTab'
+        emittedAt:
+          type: string
+          format: date-time
+
+    WatchEventBatchRequest:
+      type: object
+      required: [events]
+      properties:
+        events:
+          type: array
+          minItems: 1
+          maxItems: 50
+          items:
+            $ref: '#/components/schemas/WatchEvent'
+
+    WatchEventBatchResponse:
+      type: object
+      required: [accepted, rejected]
+      properties:
+        accepted:
+          type: integer
+          minimum: 0
+        rejected:
+          type: integer
+          minimum: 0
+
+    FeedRankingSignals:
+      type: object
+      description: Server-side aggregate signals used by rankers (read model / debug).
+      properties:
+        watchTimeMs:
+          type: integer
+          minimum: 0
+        completionRate:
+          type: number
+          minimum: 0
+          maximum: 1
+        rewatchRate:
+          type: number
+          minimum: 0
+          maximum: 1
+        engagementRate:
+          type: number
+          minimum: 0
+        recencyScore:
+          type: number
+          minimum: 0
+          maximum: 1
 
     FollowResponse:
       type: object

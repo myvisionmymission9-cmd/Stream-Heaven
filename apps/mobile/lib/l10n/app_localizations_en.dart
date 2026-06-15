@@ -69,4 +69,61 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get profileUpdated => 'Profile updated';
+
+  @override
+  String get feedTabTrending => 'Trending 🔥';
+
+  @override
+  String get feedTabVideos => 'Videos 🎬';
+
+  @override
+  String get feedTabFollowing => 'Following';
+
+  @override
+  String get feedTabCelebrity => 'Celebrity ⭐';
+
+  @override
+  String get feedTabCreatePost => 'Create Post';
+
+  @override
+  String get feedFollow => 'Follow';
+
+  @override
+  String get feedFollowing => 'Following';
+
+  @override
+  String get feedCreatePostComingSoon => 'Create post flow coming soon';
+
+  @override
+  String get feedFeatureComingSoon => 'Coming soon';
+
+  @override
+  String get feedGiftComingSoon => 'Gifts coming soon';
+
+  @override
+  String get feedCommentsComingSoon => 'Comments coming soon';
+
+  @override
+  String get feedShareComingSoon => 'Share coming soon';
+
+  @override
+  String get feedSaveComingSoon => 'Save coming soon';
+
+  @override
+  String get feedCryptoDisclaimer => 'Not financial advice';
+
+  @override
+  String get navHome => 'Home';
+
+  @override
+  String get navLive => 'Live';
+
+  @override
+  String get navAudio => 'Audio';
+
+  @override
+  String get navAstro => 'Astro';
+
+  @override
+  String get navTv => 'TV';
 }

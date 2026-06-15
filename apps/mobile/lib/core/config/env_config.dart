@@ -10,6 +10,11 @@ abstract final class EnvConfig {
   /// Override via `--dart-define=APP_ID=social`
   static const String appId = String.fromEnvironment('APP_ID', defaultValue: 'social');
 
+  /// Skip OTP login in debug builds — Home Feed mock data only.
+  /// Run: `flutter run -d chrome --dart-define=DEV_SKIP_AUTH=true`
+  static const bool devSkipAuth =
+      bool.fromEnvironment('DEV_SKIP_AUTH', defaultValue: false);
+
   /// Realtime gateway (stub — optional connect in Phase 2a).
   static const String realtimeBaseUrlOverride =
       String.fromEnvironment('REALTIME_BASE_URL');
