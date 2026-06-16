@@ -15,6 +15,6 @@
     "bundle:wallet": "redocly bundle openapi/wallet.v1.yaml -o dist/wallet.v1.bundled.yaml"
   },
   "devDependencies": {
-    "@redocly/cli": "^1.25.0"
+    "@redocly/cli": "^2.33.0"
   }
 }
