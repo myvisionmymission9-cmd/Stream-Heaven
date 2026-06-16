@@ -1,0 +1,568 @@
+openapi: 3.1.0
+info:
+  title: Stream Heaven Community API
+  version: 1.0.0
+  license:
+    name: Proprietary
+    identifier: LicenseRef-StreamHeaven-Proprietary
+  description: |
+    Community CRUD, membership, fan clubs, polls, and events.
+    Communities are hosted within the social-service under the /community namespace.
+    Phase 20 stub — full implementation deferred; contracts defined contract-first.
+
+servers:
+  - url: https://api.streamheaven.app/v1
+  - url: http://127.0.0.1:3000/v1
+
+tags:
+  - name: Communities
+    description: Community CRUD and discovery.
+  - name: CommunityMembership
+    description: Join, leave, and role management.
+  - name: CommunityPosts
+    description: Community-scoped feed posts.
+  - name: Polls
+    description: Community polls and voting.
+  - name: FanClub
+    description: Creator fan club tiers and perks.
+
+paths:
+  /communities:
+    get:
+      operationId: listCommunities
+      tags: [Communities]
+      summary: Discover communities (search by name or trending)
+      security:
+        - bearerAuth: []
+      parameters:
+        - $ref: './common.v1.yaml#/components/parameters/XRequestId'
+        - name: q
+          in: query
+          required: false
+          schema:
+            type: string
+            maxLength: 100
+          description: Search query on community name or description.
+        - name: cursor
+          in: query
+          required: false
+          schema:
+            type: string
+        - name: limit
+          in: query
+          required: false
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 50
+            default: 20
+      responses:
+        '200':
+          description: Community list page
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CommunityPage'
+        '401':
+          $ref: './common.v1.yaml#/components/responses/Unauthorized'
+
+    post:
+      operationId: createCommunity
+      tags: [Communities]
+      summary: Create a new community
+      security:
+        - bearerAuth: []
+      parameters:
+        - $ref: './common.v1.yaml#/components/parameters/XRequestId'
+        - $ref: './common.v1.yaml#/components/parameters/XAppId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateCommunityRequest'
+      responses:
+        '201':
+          description: Community created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Community'
+        '400':
+          $ref: './common.v1.yaml#/components/responses/BadRequest'
+        '401':
+          $ref: './common.v1.yaml#/components/responses/Unauthorized'
+
+  /communities/{communityId}:
+    get:
+      operationId: getCommunity
+      tags: [Communities]
+      summary: Get community details
+      security:
+        - bearerAuth: []
+      parameters:
+        - $ref: './common.v1.yaml#/components/parameters/XRequestId'
+        - name: communityId
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      responses:
+        '200':
+          description: Community details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Community'
+        '404':
+          $ref: './common.v1.yaml#/components/responses/NotFound'
+
+  /communities/{communityId}/membership:
+    post:
+      operationId: joinCommunity
+      tags: [CommunityMembership]
+      summary: Join a public community (or request to join private)
+      security:
+        - bearerAuth: []
+      parameters:
+        - $ref: './common.v1.yaml#/components/parameters/XRequestId'
+        - name: communityId
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      responses:
+        '200':
+          description: Joined (public) or join request submitted (private)
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MembershipStatus'
+        '401':
+          $ref: './common.v1.yaml#/components/responses/Unauthorized'
+        '404':
+          $ref: './common.v1.yaml#/components/responses/NotFound'
+
+    delete:
+      operationId: leaveCommunity
+      tags: [CommunityMembership]
+      summary: Leave a community
+      security:
+        - bearerAuth: []
+      parameters:
+        - $ref: './common.v1.yaml#/components/parameters/XRequestId'
+        - name: communityId
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      responses:
+        '204':
+          description: Left community
+        '401':
+          $ref: './common.v1.yaml#/components/responses/Unauthorized'
+
+  /communities/{communityId}/posts:
+    get:
+      operationId: listCommunityPosts
+      tags: [CommunityPosts]
+      summary: Get community-scoped feed posts (cursor paginated)
+      security:
+        - bearerAuth: []
+      parameters:
+        - $ref: './common.v1.yaml#/components/parameters/XRequestId'
+        - name: communityId
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+        - name: cursor
+          in: query
+          required: false
+          schema:
+            type: string
+        - name: limit
+          in: query
+          required: false
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 30
+            default: 15
+      responses:
+        '200':
+          description: Community post feed page
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CommunityPostPage'
+        '401':
+          $ref: './common.v1.yaml#/components/responses/Unauthorized'
+        '403':
+          description: Private community — not a member
+          content:
+            application/json:
+              schema:
+                $ref: './common.v1.yaml#/components/schemas/ErrorResponse'
+
+  /communities/{communityId}/polls:
+    post:
+      operationId: createPoll
+      tags: [Polls]
+      summary: Create a poll in a community (OWNER or MOD only)
+      security:
+        - bearerAuth: []
+      parameters:
+        - $ref: './common.v1.yaml#/components/parameters/XRequestId'
+        - name: communityId
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreatePollRequest'
+      responses:
+        '201':
+          description: Poll created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Poll'
+        '403':
+          $ref: './common.v1.yaml#/components/responses/Forbidden'
+
+  /communities/{communityId}/polls/{pollId}/vote:
+    post:
+      operationId: castVote
+      tags: [Polls]
+      summary: Cast a vote on a poll option
+      security:
+        - bearerAuth: []
+      parameters:
+        - $ref: './common.v1.yaml#/components/parameters/XRequestId'
+        - name: communityId
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+        - name: pollId
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CastVoteRequest'
+      responses:
+        '200':
+          description: Vote cast; returns updated poll results
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Poll'
+        '409':
+          description: Already voted
+          content:
+            application/json:
+              schema:
+                $ref: './common.v1.yaml#/components/schemas/ErrorResponse'
+
+  /users/{userId}/fan-club:
+    get:
+      operationId: getCreatorFanClub
+      tags: [FanClub]
+      summary: Get creator's fan club details and current user's tier
+      security:
+        - bearerAuth: []
+      parameters:
+        - $ref: './common.v1.yaml#/components/parameters/XRequestId'
+        - name: userId
+          in: path
+          required: true
+          schema:
+            $ref: './common.v1.yaml#/components/schemas/UserId'
+      responses:
+        '200':
+          description: Fan club details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FanClubDetails'
+        '404':
+          $ref: './common.v1.yaml#/components/responses/NotFound'
+
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+
+  schemas:
+    Community:
+      type: object
+      required: [communityId, name, slug, ownerUserId, isPublic, memberCount, createdAt]
+      properties:
+        communityId:
+          type: string
+          format: uuid
+        name:
+          type: string
+          maxLength: 80
+        slug:
+          type: string
+          maxLength: 40
+          pattern: '^[a-z0-9-]+$'
+        description:
+          type: string
+          maxLength: 500
+        avatarUrl:
+          type: string
+          format: uri
+        bannerUrl:
+          type: string
+          format: uri
+        ownerUserId:
+          $ref: './common.v1.yaml#/components/schemas/UserId'
+        isPublic:
+          type: boolean
+          description: Public = anyone can join. Private = join request required.
+        memberCount:
+          type: integer
+          minimum: 0
+        postCount:
+          type: integer
+          minimum: 0
+        rules:
+          type: array
+          maxItems: 10
+          items:
+            type: string
+            maxLength: 200
+        membershipStatus:
+          $ref: '#/components/schemas/MembershipStatus'
+          description: Current user's membership status (null if not authenticated or not a member)
+        createdAt:
+          type: string
+          format: date-time
+
+    CommunityPage:
+      type: object
+      required: [items]
+      properties:
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/Community'
+        pagination:
+          $ref: './common.v1.yaml#/components/schemas/CursorPagination'
+
+    CreateCommunityRequest:
+      type: object
+      required: [name, slug, isPublic]
+      properties:
+        name:
+          type: string
+          maxLength: 80
+        slug:
+          type: string
+          maxLength: 40
+          pattern: '^[a-z0-9-]+$'
+        description:
+          type: string
+          maxLength: 500
+        isPublic:
+          type: boolean
+        rules:
+          type: array
+          maxItems: 10
+          items:
+            type: string
+            maxLength: 200
+
+    MembershipStatus:
+      type: object
+      required: [status]
+      properties:
+        status:
+          type: string
+          enum: [NONE, PENDING, MEMBER, MOD, OWNER]
+        role:
+          type: string
+          enum: [MEMBER, MOD, OWNER]
+        joinedAt:
+          type: string
+          format: date-time
+
+    CommunityPostPage:
+      type: object
+      required: [items]
+      properties:
+        items:
+          type: array
+          items:
+            type: object
+            description: Subset of social.v1 Post with communityId context.
+            required: [postId, communityId, authorId, content, createdAt]
+            properties:
+              postId:
+                type: string
+                format: uuid
+              communityId:
+                type: string
+                format: uuid
+              authorId:
+                $ref: './common.v1.yaml#/components/schemas/UserId'
+              content:
+                type: object
+                description: Post content — see social.v1.yaml PostContent.
+              likeCount:
+                type: integer
+              commentCount:
+                type: integer
+              isPinned:
+                type: boolean
+              createdAt:
+                type: string
+                format: date-time
+        pagination:
+          $ref: './common.v1.yaml#/components/schemas/CursorPagination'
+
+    CreatePollRequest:
+      type: object
+      required: [question, options, closesAt]
+      properties:
+        question:
+          type: string
+          maxLength: 280
+        options:
+          type: array
+          minItems: 2
+          maxItems: 6
+          items:
+            type: string
+            maxLength: 100
+        closesAt:
+          type: string
+          format: date-time
+          description: Poll voting deadline (UTC).
+        allowMultiple:
+          type: boolean
+          default: false
+
+    Poll:
+      type: object
+      required: [pollId, communityId, question, options, closesAt, createdAt]
+      properties:
+        pollId:
+          type: string
+          format: uuid
+        communityId:
+          type: string
+          format: uuid
+        question:
+          type: string
+        options:
+          type: array
+          items:
+            $ref: '#/components/schemas/PollOption'
+        totalVotes:
+          type: integer
+        closesAt:
+          type: string
+          format: date-time
+        isClosed:
+          type: boolean
+        userVotedOptionIds:
+          type: array
+          items:
+            type: string
+            format: uuid
+          description: Option IDs the current user voted for (empty if not voted).
+        createdAt:
+          type: string
+          format: date-time
+
+    PollOption:
+      type: object
+      required: [optionId, text]
+      properties:
+        optionId:
+          type: string
+          format: uuid
+        text:
+          type: string
+        voteCount:
+          type: integer
+          description: Only returned after user has voted or poll is closed.
+        votePercent:
+          type: number
+          description: 0–100. Only returned after user has voted or poll is closed.
+
+    CastVoteRequest:
+      type: object
+      required: [optionIds]
+      properties:
+        optionIds:
+          type: array
+          minItems: 1
+          maxItems: 6
+          items:
+            type: string
+            format: uuid
+
+    FanClubDetails:
+      type: object
+      required: [creatorUserId, tiers]
+      properties:
+        creatorUserId:
+          $ref: './common.v1.yaml#/components/schemas/UserId'
+        currentUserTier:
+          type: string
+          enum: [NONE, FAN, VIP_FAN, SUPER_FAN]
+          description: Tier of the currently authenticated user.
+        totalFanCount:
+          type: integer
+        tiers:
+          type: array
+          items:
+            $ref: '#/components/schemas/FanClubTier'
+
+    FanClubTier:
+      type: object
+      required: [tier, name, coinCostPerMonth, perks]
+      properties:
+        tier:
+          type: string
+          enum: [FAN, VIP_FAN, SUPER_FAN]
+        name:
+          type: string
+          example: VIP Fan
+        coinCostPerMonth:
+          type: integer
+          minimum: 0
+          description: 0 for free FAN tier.
+        perks:
+          type: array
+          items:
+            type: string
+          example:
+            - Exclusive badge color
+            - Priority gift display
+            - Voice chat access
+        memberCount:
+          type: integer

@@ -53,12 +53,13 @@
 
 | Metric | Count |
 |--------|-------|
-| Total Agents | 908 |
-| Agents validated (script) | 908 |
-| PASS / PARTIAL / FAIL | 213 / 695 / 0 |
-| PASS rate | 23.5% |
-| Agent skill pairs (manifest) | 22 agents × 2 tiers = 44 skills |
+| Total Agents | 924 |
+| Agents validated (script) | 924 |
+| PASS / PARTIAL / FAIL | 229 / 695 / 0 |
+| PASS rate | 24.8% |
+| Agent skill pairs (manifest) | 38 agents × 2 tiers = 76 skills |
 | Spec-named gap-fill (audit target) | 152 |
+| Creator Ecosystem agents added | 16 (2026-06-15) |
 | Phases Covered | 0–1 (impl), 2–20 (+ Games add-on) |
 | Domains | 54+ |
 | Governance docs | 22 |
@@ -422,6 +423,63 @@
 | Home Feed Local Run Agent | `apps/social-app/agents/home-feed/home-feed-local-run-agent.md` | Local Flutter run, API vs UI link troubleshooting, optional Phase 1 backend |
 
 Skills: `.cursor/skills/stream-heaven/apps/social-app/<agent-slug>/basic|advanced/SKILL.md`
+
+#### Creator Profile & Dashboard (Phase 12)
+
+| Agent | Path | Purpose |
+|-------|------|---------|
+| Creator Public Profile Agent | `apps/social-app/agents/creator/creator-public-profile-agent.md` | Public profile screen: avatar, bio, stats, post grid, follow button, celebrity badge |
+| Creator Post Composer Agent | `apps/social-app/agents/creator/creator-post-composer-agent.md` | Post creation flow: type picker, caption, upload stub |
+| Creator Stats Dashboard Agent | `apps/social-app/agents/creator/creator-stats-dashboard-agent.md` | Creator dashboard: views, follower growth, earnings |
+
+Skills: `.cursor/skills/stream-heaven/apps/social-app/creator-<slug>/basic|advanced/SKILL.md`
+
+#### Video Pipeline (Phase 17)
+
+| Agent | Path | Purpose |
+|-------|------|---------|
+| Video Upload Pipeline Agent | `apps/social-app/agents/video-pipeline/video-upload-pipeline-agent.md` | Presigned S3 upload + transcode job polling |
+| HLS Playback Agent | `apps/social-app/agents/video-pipeline/hls-playback-agent.md` | HLS adaptive player, memory-efficient, watch events |
+
+#### Audio Rooms (Phase 9)
+
+| Agent | Path | Purpose |
+|-------|------|---------|
+| Audio Room Seat Agent | `apps/social-app/agents/audio-rooms/audio-room-seat-agent.md` | Seat model (8/16/24), raise-hand, mute, kick UI |
+| Audio Room Gifting Agent | `apps/social-app/agents/audio-rooms/audio-room-gifting-agent.md` | Gift picker + animation in audio room surface |
+
+#### Community (Phase 20)
+
+| Agent | Path | Purpose |
+|-------|------|---------|
+| Community API Agent | `apps/social-app/agents/community/community-api-agent.md` | Community CRUD, membership, polls, events (community.v1.yaml) |
+| Fan Club Agent | `apps/social-app/agents/community/fan-club-agent.md` | Fan club tiers, exclusive content, perks |
+
+#### Creator Analytics (Phase 19)
+
+| Agent | Path | Purpose |
+|-------|------|---------|
+| Creator Analytics Dashboard Agent | `apps/social-app/agents/analytics/creator-analytics-dashboard-agent.md` | Flutter analytics dashboard: views, watch-time, earnings charts |
+
+### Notifications Domain (Phase 18)
+
+| Agent | Path | Purpose |
+|-------|------|---------|
+| Push Notification Agent | `ai-agents/notifications/push-notification-agent.md` | FCM dispatch, templates, device token management |
+| In-App Notification Agent | `ai-agents/notifications/in-app-notification-agent.md` | In-app inbox, unread badge, Socket.IO real-time |
+| Notification Dispatch Agent | `ai-agents/notifications/notification-dispatch-agent.md` | Event-driven fan-out, rate limiting, dead-letter |
+
+Skills: `.cursor/skills/stream-heaven/notifications/<slug>/basic|advanced/SKILL.md`
+
+### Admin Domain (Phase 20)
+
+| Agent | Path | Purpose |
+|-------|------|---------|
+| Admin Panel BFF Agent | `ai-agents/admin/admin-panel-bff-agent.md` | Admin BFF API, RBAC guards, audit log |
+| Celebrity Approval Agent | `ai-agents/admin/celebrity-approval-agent.md` | Celebrity verification review queue, badge grant |
+| Withdrawal Approval Agent | `ai-agents/admin/withdrawal-approval-agent.md` | Creator withdrawal approve/reject, payout rail stub |
+
+Skills: `.cursor/skills/stream-heaven/admin/<slug>/basic|advanced/SKILL.md`
 
 ## Phase 9
 

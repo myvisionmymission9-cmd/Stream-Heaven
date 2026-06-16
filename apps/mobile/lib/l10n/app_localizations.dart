@@ -130,6 +130,66 @@ abstract class AppLocalizations {
   /// **'9876543210'**
   String get phoneHint;
 
+  /// No description provided for @countryCodeLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Country / region'**
+  String get countryCodeLabel;
+
+  /// No description provided for @continueButton.
+  ///
+  /// In en, this message translates to:
+  /// **'Continue'**
+  String get continueButton;
+
+  /// No description provided for @authInvalidPhone.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter a valid phone number for the selected country.'**
+  String get authInvalidPhone;
+
+  /// No description provided for @authInvalidOtp.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter the 6-digit verification code.'**
+  String get authInvalidOtp;
+
+  /// No description provided for @authResendIn.
+  ///
+  /// In en, this message translates to:
+  /// **'Resend in {seconds}s'**
+  String authResendIn(int seconds);
+
+  /// No description provided for @homeWelcomeUser.
+  ///
+  /// In en, this message translates to:
+  /// **'Welcome, {user}'**
+  String homeWelcomeUser(String user);
+
+  /// No description provided for @homeTabDescription.
+  ///
+  /// In en, this message translates to:
+  /// **'Your Stream Heaven hub. Open the social feed or explore more tabs.'**
+  String get homeTabDescription;
+
+  /// No description provided for @openSocialFeed.
+  ///
+  /// In en, this message translates to:
+  /// **'Open social feed'**
+  String get openSocialFeed;
+
+  /// No description provided for @navReels.
+  ///
+  /// In en, this message translates to:
+  /// **'Reels'**
+  String get navReels;
+
+  /// No description provided for @editProfile.
+  ///
+  /// In en, this message translates to:
+  /// **'Edit profile'**
+  String get editProfile;
+
   /// No description provided for @sendOtp.
   ///
   /// In en, this message translates to:
@@ -327,6 +387,150 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'TV'**
   String get navTv;
+
+  /// No description provided for @creatorPosts.
+  ///
+  /// In en, this message translates to:
+  /// **'Posts'**
+  String get creatorPosts;
+
+  /// No description provided for @creatorFollowers.
+  ///
+  /// In en, this message translates to:
+  /// **'Followers'**
+  String get creatorFollowers;
+
+  /// No description provided for @creatorFollowing.
+  ///
+  /// In en, this message translates to:
+  /// **'Following'**
+  String get creatorFollowing;
+
+  /// No description provided for @creatorProfileTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Profile'**
+  String get creatorProfileTitle;
+
+  /// No description provided for @creatorShareProfile.
+  ///
+  /// In en, this message translates to:
+  /// **'Share profile'**
+  String get creatorShareProfile;
+
+  /// No description provided for @creatorBlock.
+  ///
+  /// In en, this message translates to:
+  /// **'Block'**
+  String get creatorBlock;
+
+  /// No description provided for @creatorNoPostsYet.
+  ///
+  /// In en, this message translates to:
+  /// **'No posts yet'**
+  String get creatorNoPostsYet;
+
+  /// No description provided for @creatorPostsComingSoon.
+  ///
+  /// In en, this message translates to:
+  /// **'Post detail coming soon'**
+  String get creatorPostsComingSoon;
+
+  /// No description provided for @creatorDashboardTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Dashboard'**
+  String get creatorDashboardTitle;
+
+  /// No description provided for @creatorTotalViews.
+  ///
+  /// In en, this message translates to:
+  /// **'Total views'**
+  String get creatorTotalViews;
+
+  /// No description provided for @creatorFollowersGained.
+  ///
+  /// In en, this message translates to:
+  /// **'New followers'**
+  String get creatorFollowersGained;
+
+  /// No description provided for @creatorEarnings.
+  ///
+  /// In en, this message translates to:
+  /// **'Earnings'**
+  String get creatorEarnings;
+
+  /// No description provided for @creatorWithdraw.
+  ///
+  /// In en, this message translates to:
+  /// **'Withdraw'**
+  String get creatorWithdraw;
+
+  /// No description provided for @creatorWithdrawComingSoon.
+  ///
+  /// In en, this message translates to:
+  /// **'Withdrawals coming soon'**
+  String get creatorWithdrawComingSoon;
+
+  /// No description provided for @composerTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Create post'**
+  String get composerTitle;
+
+  /// No description provided for @composerVideo.
+  ///
+  /// In en, this message translates to:
+  /// **'Video'**
+  String get composerVideo;
+
+  /// No description provided for @composerImage.
+  ///
+  /// In en, this message translates to:
+  /// **'Image'**
+  String get composerImage;
+
+  /// No description provided for @composerAudio.
+  ///
+  /// In en, this message translates to:
+  /// **'Audio'**
+  String get composerAudio;
+
+  /// No description provided for @composerText.
+  ///
+  /// In en, this message translates to:
+  /// **'Text'**
+  String get composerText;
+
+  /// No description provided for @composerCommunity.
+  ///
+  /// In en, this message translates to:
+  /// **'Community'**
+  String get composerCommunity;
+
+  /// No description provided for @composerCrypto.
+  ///
+  /// In en, this message translates to:
+  /// **'Crypto'**
+  String get composerCrypto;
+
+  /// No description provided for @composerCaptionHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Add a caption…'**
+  String get composerCaptionHint;
+
+  /// No description provided for @composerPost.
+  ///
+  /// In en, this message translates to:
+  /// **'Post'**
+  String get composerPost;
+
+  /// No description provided for @composerDraft.
+  ///
+  /// In en, this message translates to:
+  /// **'Save draft'**
+  String get composerDraft;
 }
 
 class _AppLocalizationsDelegate

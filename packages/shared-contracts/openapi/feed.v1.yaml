@@ -90,6 +90,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/TrendingScoreBreakdown'
+        '401':
+          $ref: './common.v1.yaml#/components/responses/Unauthorized'
 
 components:
   securitySchemes:

@@ -31,8 +31,18 @@
 
   <title>stream_heaven_mobile</title>
   <link rel="manifest" href="manifest.json">
+  <style>
+    /* Required mount point for Firebase Phone Auth reCAPTCHA on web. */
+    #recaptcha-container {
+      display: flex;
+      justify-content: center;
+      margin: 0 auto 1rem;
+      min-height: 78px;
+    }
+  </style>
 </head>
 <body>
+  <div id="recaptcha-container"></div>
   <!--
     You can customize the "flutter_bootstrap.js" script.
     This is useful to provide a custom configuration to the Flutter loader

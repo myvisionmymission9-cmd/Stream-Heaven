@@ -5,10 +5,12 @@ import 'package:go_router/go_router.dart';
 import '../../features/auth/presentation/providers/auth_providers.dart';
 import '../../features/auth/presentation/login_screen.dart';
 import '../../features/auth/presentation/otp_verify_screen.dart';
+import '../../features/home/presentation/home_screen.dart';
 import '../../features/livestream/presentation/live_rooms_screen.dart';
 import '../../features/social/presentation/home/social_home_shell.dart';
 import '../../features/profile/presentation/profile_screen.dart';
 import '../../features/social/presentation/feed_screen.dart';
+import '../../features/social/presentation/creator/creator_profile_screen.dart';
 import '../../features/splash/splash_screen.dart';
 
 final rootNavigatorKey = GlobalKey<NavigatorState>();
@@ -80,6 +82,11 @@ final appRouterProvider = Provider<GoRouter>((ref) {
       GoRoute(
         path: '/home',
         name: 'home',
+        builder: (context, state) => const HomeScreen(),
+      ),
+      GoRoute(
+        path: '/social-feed',
+        name: 'socialFeed',
         builder: (context, state) => const SocialHomeShell(),
       ),
       GoRoute(
@@ -96,6 +103,14 @@ final appRouterProvider = Provider<GoRouter>((ref) {
         path: '/live-rooms',
         name: 'liveRooms',
         builder: (context, state) => const LiveRoomsScreen(),
+      ),
+      GoRoute(
+        path: '/creator/:handle',
+        name: 'creatorProfile',
+        builder: (context, state) {
+          final handle = state.pathParameters['handle'] ?? '';
+          return CreatorProfileScreen(handle: handle);
+        },
       ),
     ],
   );

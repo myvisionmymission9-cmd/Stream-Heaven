@@ -27,6 +27,42 @@ class AppLocalizationsEn extends AppLocalizations {
   String get phoneHint => '9876543210';
 
   @override
+  String get countryCodeLabel => 'Country / region';
+
+  @override
+  String get continueButton => 'Continue';
+
+  @override
+  String get authInvalidPhone =>
+      'Enter a valid phone number for the selected country.';
+
+  @override
+  String get authInvalidOtp => 'Enter the 6-digit verification code.';
+
+  @override
+  String authResendIn(int seconds) {
+    return 'Resend in ${seconds}s';
+  }
+
+  @override
+  String homeWelcomeUser(String user) {
+    return 'Welcome, $user';
+  }
+
+  @override
+  String get homeTabDescription =>
+      'Your Stream Heaven hub. Open the social feed or explore more tabs.';
+
+  @override
+  String get openSocialFeed => 'Open social feed';
+
+  @override
+  String get navReels => 'Reels';
+
+  @override
+  String get editProfile => 'Edit profile';
+
+  @override
   String get sendOtp => 'Send OTP';
 
   @override
@@ -126,4 +162,76 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get navTv => 'TV';
+
+  @override
+  String get creatorPosts => 'Posts';
+
+  @override
+  String get creatorFollowers => 'Followers';
+
+  @override
+  String get creatorFollowing => 'Following';
+
+  @override
+  String get creatorProfileTitle => 'Profile';
+
+  @override
+  String get creatorShareProfile => 'Share profile';
+
+  @override
+  String get creatorBlock => 'Block';
+
+  @override
+  String get creatorNoPostsYet => 'No posts yet';
+
+  @override
+  String get creatorPostsComingSoon => 'Post detail coming soon';
+
+  @override
+  String get creatorDashboardTitle => 'Dashboard';
+
+  @override
+  String get creatorTotalViews => 'Total views';
+
+  @override
+  String get creatorFollowersGained => 'New followers';
+
+  @override
+  String get creatorEarnings => 'Earnings';
+
+  @override
+  String get creatorWithdraw => 'Withdraw';
+
+  @override
+  String get creatorWithdrawComingSoon => 'Withdrawals coming soon';
+
+  @override
+  String get composerTitle => 'Create post';
+
+  @override
+  String get composerVideo => 'Video';
+
+  @override
+  String get composerImage => 'Image';
+
+  @override
+  String get composerAudio => 'Audio';
+
+  @override
+  String get composerText => 'Text';
+
+  @override
+  String get composerCommunity => 'Community';
+
+  @override
+  String get composerCrypto => 'Crypto';
+
+  @override
+  String get composerCaptionHint => 'Add a caption…';
+
+  @override
+  String get composerPost => 'Post';
+
+  @override
+  String get composerDraft => 'Save draft';
 }

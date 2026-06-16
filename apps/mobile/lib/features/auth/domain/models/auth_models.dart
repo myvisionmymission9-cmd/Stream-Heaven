@@ -1,26 +1,19 @@
 class OtpSendResult {
   const OtpSendResult({
-    required this.requestId,
+    required this.verificationId,
     required this.expiresInSeconds,
     required this.maskedPhone,
-    this.mockOtpCode,
+    this.resendToken,
+    this.autoSignedIn = false,
+    this.userId,
   });
 
-  factory OtpSendResult.fromJson(Map<String, dynamic> json) {
-    return OtpSendResult(
-      requestId: json['requestId'] as String,
-      expiresInSeconds: json['expiresInSeconds'] as int,
-      maskedPhone: json['maskedPhone'] as String,
-      mockOtpCode: json['mockOtpCode'] as String?,
-    );
-  }
-
-  final String requestId;
+  final String verificationId;
   final int expiresInSeconds;
   final String maskedPhone;
-
-  /// Present when backend uses SMS_PROVIDER=mock in development.
-  final String? mockOtpCode;
+  final int? resendToken;
+  final bool autoSignedIn;
+  final String? userId;
 }
 
 class AuthSession {

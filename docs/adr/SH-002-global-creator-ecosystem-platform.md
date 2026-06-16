@@ -2,8 +2,9 @@
 
 | Field | Value |
 |-------|-------|
-| **Status** | Proposed |
+| **Status** | Accepted |
 | **Date** | 2026-06-15 |
+| **Accepted** | 2026-06-15 |
 | **Deciders** | platform-orchestrator, chief-architect, feed-ranking-agent, livestream-architect |
 | **Consulted** | SH-001 (auth), platform-governance/platform-roadmap.md, docs/architecture-overview.md |
 
@@ -142,10 +143,23 @@ Detail: [`docs/GLOBAL-CREATOR-ECOSYSTEM-ROADMAP.md`](../GLOBAL-CREATOR-ECOSYSTEM
 
 ### Follow-up Actions
 
-- [ ] Accept ADR and link from `docs/architecture-overview.md`
-- [ ] Extend `packages/shared-contracts/openapi/wallet.v1.yaml` (stub added in SH-002 workstream)
+- [x] Accept ADR — 2026-06-15
+- [x] Add `wallet.v1.yaml` stub — 2026-06-15 (SH-002 workstream)
+- [x] Add `media.v1.yaml` stub — 2026-06-15 (upload intent + asset status)
+- [x] Add `community.v1.yaml` stub — 2026-06-15 (community CRUD, memberships)
+- [x] Add `notification.v1.yaml` stub — 2026-06-15 (in-app inbox contract)
+- [x] `wallet-service` NestJS stub (balance, ledger, gift catalog/send) — port 3005
+- [x] `media-service` NestJS stub (upload intent, asset status) — port 3006
+- [x] `social-service` community module stub — `/v1/communities`
+- [x] `api-gateway` proxy routes — `/v1/wallet`, `/v1/media`, `/v1/communities`
+- [x] Creator public profile Flutter shell — 2026-06-15 (`apps/mobile/lib/features/social/presentation/creator/`)
+- [x] Creator ecosystem agents (15 new agents) — 2026-06-15 (notifications, admin, video-pipeline, audio-rooms, community, analytics)
+- [x] Architecture doc — `docs/GLOBAL-CREATOR-ECOSYSTEM-ARCHITECTURE.md` — 2026-06-15
 - [ ] Phase 2: implement `social-service` feed tabs + post types per `social.v1.yaml`
-- [ ] Phase 2: wire `apps/mobile` feed to live API
+- [ ] Phase 2: wire `apps/mobile` feed to live API (OTP → feed E2E smoke test)
+- [ ] Phase 9: Agora token endpoint in `livestream-service`; wire Flutter live room to real API
+- [ ] Phase 11: implement `wallet-service` gift send; wire gift button in engagement rail
+- [ ] Phase 12: creator dashboard API; celebrity verification candidate endpoint
 - [ ] ADR for `recommendation-service` extraction when ML phase starts (Phase 14)
 - [ ] Notify Chat owners: 2 (Flutter), 3 (Backend), 4 (Realtime), 5 (ML), 7 (Wallet), 8 (Media), 9 (Safety)
 

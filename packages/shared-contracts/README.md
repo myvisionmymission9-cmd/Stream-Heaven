@@ -6,15 +6,27 @@ Contract-first OpenAPI 3.1 specs and JSON event schemas for Stream Heaven.
 
 ```text
 openapi/
-  common.v1.yaml   # Error, Pagination, UserId, Timestamps
-  auth.v1.yaml     # OTP, Firebase exchange, refresh, logout
-  user.v1.yaml     # Profile CRUD, devices
-  social.v1.yaml   # Posts, tabbed feed, video posts, engagement, watch events (v1.1)
-  livestream.v1.yaml # Room lifecycle, viewer count, token stub
-  wallet.v1.yaml     # Balance, ledger, gift catalog, gift send (Phase 11 stub)
+  common.v1.yaml       # Error, Pagination, UserId, Timestamps
+  auth.v1.yaml         # OTP, Firebase exchange, refresh, logout
+  user.v1.yaml         # Profile CRUD, devices
+  social.v1.yaml       # Posts, tabbed feed, video posts, engagement, watch events (v1.1)
+  feed.v1.yaml         # FeedItem union, tabbed feed surface, crypto_post card
+  livestream.v1.yaml   # Room lifecycle, viewer count, token stub
+  wallet.v1.yaml       # Balance, ledger, gift catalog, gift send (Phase 11 stub)
+  media.v1.yaml        # Upload intent, asset status, HLS playback URL (Phase 17 stub)
+  community.v1.yaml    # Community CRUD, membership, polls, fan clubs (Phase 20 stub)
 events/
-  realtime.v1.json # Presence + social/livestream domain events
+  realtime.v1.json     # Presence + social/livestream domain events
 ```
+
+### Planned (stubs to be added per phase)
+
+| File | Phase | Domain |
+|------|-------|--------|
+| `notification.v1.yaml` | 18 | notification-service — push templates, inbox |
+| `recommendation.v1.yaml` | 14 | recommendation-service — rank features, explore |
+| `creator.v1.yaml` | 12 | creator-service — verification, dashboard |
+| `moderation.v1.yaml` | 20 | moderation-service — reports, auto-mod queue |
 
 ## Versioning Rules
 

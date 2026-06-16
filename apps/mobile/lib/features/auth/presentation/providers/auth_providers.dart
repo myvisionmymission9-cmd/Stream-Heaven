@@ -4,33 +4,10 @@ import '../../../../core/config/env_config.dart';
 import '../../../../core/realtime/socket_service.dart';
 import '../../../profile/data/profile_repository.dart';
 import '../../data/auth_repository.dart';
+import '../../domain/auth_state.dart';
 import '../../domain/models/auth_models.dart';
 
-enum AuthStatus {
-  unknown,
-  unauthenticated,
-  authenticated,
-}
-
-class AuthState {
-  const AuthState({
-    required this.status,
-    this.userId,
-  });
-
-  const AuthState.unknown() : this(status: AuthStatus.unknown);
-
-  const AuthState.unauthenticated()
-      : this(status: AuthStatus.unauthenticated);
-
-  const AuthState.authenticated({required String userId})
-      : this(status: AuthStatus.authenticated, userId: userId);
-
-  final AuthStatus status;
-  final String? userId;
-
-  bool get isAuthenticated => status == AuthStatus.authenticated;
-}
+export '../../domain/auth_state.dart';
 
 final authStateProvider =
     StateNotifierProvider<AuthStateNotifier, AuthState>(
@@ -56,31 +33,49 @@ class AuthStateNotifier extends StateNotifier<AuthState> {
     }
 
     try {
+      await _ref.read(authRepositoryProvider).restoreFirebaseSession();
       final profile =
           await _ref.read(profileRepositoryProvider).getMyProfile();
       await _ref.read(socketServiceProvider).connectIfAuthenticated();
-      state = AuthState.authenticated(userId: profile.userId);
+      state = AuthState.authenticated(
+        userId: profile.userId,
+        phoneNumber: _ref.read(authRepositoryProvider).currentPhoneNumber,
+      );
     } catch (_) {
       await _ref.read(authRepositoryProvider).logout();
       state = const AuthState.unauthenticated();
     }
   }
 
-  Future<OtpSendResult> sendOtp(String phone) {
-    return _ref.read(authRepositoryProvider).sendOtp(phone);
+  Future<OtpSendResult> sendOtp(
+    String phone, {
+    int? forceResendingToken,
+  }) async {
+    final result = await _ref.read(authRepositoryProvider).sendOtp(
+          phone,
+          forceResendingToken: forceResendingToken,
+        );
+    if (result.autoSignedIn && result.userId != null) {
+      state = AuthState.authenticated(
+        userId: result.userId!,
+        phoneNumber: _ref.read(authRepositoryProvider).currentPhoneNumber,
+      );
+    }
+    return result;
   }
 
   Future<void> verifyOtp({
-    required String phone,
+    required String verificationId,
     required String code,
-    required String requestId,
   }) async {
     final session = await _ref.read(authRepositoryProvider).verifyOtp(
-          phone: phone,
+          verificationId: verificationId,
           code: code,
-          requestId: requestId,
         );
-    state = AuthState.authenticated(userId: session.userId);
+    state = AuthState.authenticated(
+      userId: session.userId,
+      phoneNumber: _ref.read(authRepositoryProvider).currentPhoneNumber,
+    );
   }
 
   Future<void> logout() async {

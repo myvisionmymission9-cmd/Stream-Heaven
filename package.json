@@ -30,6 +30,8 @@
     "agents:list": "node scripts/list-agents.mjs",
     "agents:validate": "node scripts/validate-agents.mjs",
     "agents:test-golden": "node scripts/test-golden-agents.mjs",
+    "agents:bootstrap:home-feed": "node scripts/bootstrap-home-feed-agents.mjs",
+    "agents:bootstrap:creator-ecosystem": "node scripts/bootstrap-creator-ecosystem-agents.mjs",
     "docker:up": "docker compose up -d postgres redis",
     "docker:down": "docker compose down",
     "docker:services": "docker compose --profile services up --build",

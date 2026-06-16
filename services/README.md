@@ -12,8 +12,8 @@ NestJS microservices deployed independently on AWS (EKS/ECS). Each service owns 
 | realtime-gateway | 3009 | Implemented (Phase 1) |
 | social-service | 3003 | Implemented (Phase 2 foundation) |
 | livestream-service | 3004 | Implemented (Phase 2 foundation) |
-| wallet-service | 3005 | Scaffold |
-| media-service | 3006 | Scaffold |
+| wallet-service | 3005 | Implemented (stub — ledger + gifts) |
+| media-service | 3006 | Implemented (stub — upload intent + asset) |
 | notification-service | 3007 | Scaffold |
 | games-service | 3008 | Scaffold — Teen Patti, Ludo, Rummy, tournaments |
 

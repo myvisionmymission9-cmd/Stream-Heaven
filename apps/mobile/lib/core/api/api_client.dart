@@ -53,9 +53,10 @@ AppException mapDioError(DioException error) {
   final response = error.response;
   if (response?.data is Map<String, dynamic>) {
     final data = response!.data as Map<String, dynamic>;
+    final message = _extractApiMessage(data);
     return AppException(
-      data['message'] as String? ?? 'Request failed',
-      code: data['code'] as String?,
+      message ?? 'Request failed',
+      code: _extractApiCode(data),
       statusCode: response.statusCode,
     );
   }
@@ -65,13 +66,44 @@ AppException mapDioError(DioException error) {
     case DioExceptionType.receiveTimeout:
     case DioExceptionType.sendTimeout:
     case DioExceptionType.connectionError:
-      return const NetworkException('Unable to reach the server.');
+      return const NetworkException(
+        'Unable to reach the server. Start the Phase 1 backend on port 3000.',
+      );
     default:
       return AppException(
         error.message ?? 'Request failed',
         statusCode: response?.statusCode,
       );
   }
+}
+
+String? _extractApiMessage(Map<String, dynamic> data) {
+  final message = data['message'];
+  if (message is String && message.isNotEmpty) {
+    return message;
+  }
+  if (message is Map<String, dynamic>) {
+    final nested = message['message'];
+    if (nested is String && nested.isNotEmpty) {
+      return nested;
+    }
+  }
+  return null;
+}
+
+String? _extractApiCode(Map<String, dynamic> data) {
+  final code = data['code'];
+  if (code is String) {
+    return code;
+  }
+  final message = data['message'];
+  if (message is Map<String, dynamic>) {
+    final nested = message['code'];
+    if (nested is String) {
+      return nested;
+    }
+  }
+  return null;
 }
 
 Future<T> guardApi<T>(Future<T> Function() call) async {

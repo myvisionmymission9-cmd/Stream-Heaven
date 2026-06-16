@@ -1,4 +1,4 @@
-import { Injectable, NestMiddleware, HttpException, HttpStatus } from '@nestjs/common';
+﻿import { Injectable, NestMiddleware, HttpException, HttpStatus } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { Request, Response, NextFunction } from 'express';
 import { RateLimitService } from '../../modules/rate-limit/rate-limit.service';
@@ -11,7 +11,8 @@ export class RateLimitMiddleware implements NestMiddleware {
   ) {}
 
   async use(req: Request, res: Response, next: NextFunction) {
-    if (req.path.startsWith('/health')) {
+    const requestPath = (req.originalUrl ?? req.url ?? req.path ?? '').split('?')[0];
+    if (requestPath.startsWith('/health')) {
       return next();
     }
 

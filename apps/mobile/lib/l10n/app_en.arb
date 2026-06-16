@@ -9,6 +9,30 @@
   "loginSubtitle": "Sign in with your phone number",
   "phoneLabel": "Phone number",
   "phoneHint": "9876543210",
+  "countryCodeLabel": "Country / region",
+  "continueButton": "Continue",
+  "authInvalidPhone": "Enter a valid phone number for the selected country.",
+  "authInvalidOtp": "Enter the 6-digit verification code.",
+  "authResendIn": "Resend in {seconds}s",
+  "@authResendIn": {
+    "placeholders": {
+      "seconds": {
+        "type": "int"
+      }
+    }
+  },
+  "homeWelcomeUser": "Welcome, {user}",
+  "@homeWelcomeUser": {
+    "placeholders": {
+      "user": {
+        "type": "String"
+      }
+    }
+  },
+  "homeTabDescription": "Your Stream Heaven hub. Open the social feed or explore more tabs.",
+  "openSocialFeed": "Open social feed",
+  "navReels": "Reels",
+  "editProfile": "Edit profile",
   "sendOtp": "Send OTP",
   "verifyOtpTitle": "Enter verification code",
   "verifyOtpSubtitle": "We sent a 6-digit code to {phone}",
@@ -48,5 +72,29 @@
   "navLive": "Live",
   "navAudio": "Audio",
   "navAstro": "Astro",
-  "navTv": "TV"
+  "navTv": "TV",
+  "creatorPosts": "Posts",
+  "creatorFollowers": "Followers",
+  "creatorFollowing": "Following",
+  "creatorProfileTitle": "Profile",
+  "creatorShareProfile": "Share profile",
+  "creatorBlock": "Block",
+  "creatorNoPostsYet": "No posts yet",
+  "creatorPostsComingSoon": "Post detail coming soon",
+  "creatorDashboardTitle": "Dashboard",
+  "creatorTotalViews": "Total views",
+  "creatorFollowersGained": "New followers",
+  "creatorEarnings": "Earnings",
+  "creatorWithdraw": "Withdraw",
+  "creatorWithdrawComingSoon": "Withdrawals coming soon",
+  "composerTitle": "Create post",
+  "composerVideo": "Video",
+  "composerImage": "Image",
+  "composerAudio": "Audio",
+  "composerText": "Text",
+  "composerCommunity": "Community",
+  "composerCrypto": "Crypto",
+  "composerCaptionHint": "Add a caption…",
+  "composerPost": "Post",
+  "composerDraft": "Save draft"
 }

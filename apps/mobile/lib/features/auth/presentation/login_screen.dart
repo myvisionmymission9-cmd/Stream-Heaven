@@ -6,8 +6,10 @@ import 'package:go_router/go_router.dart';
 
 import '../../../core/errors/app_exception.dart';
 import '../../../l10n/l10n_context.dart';
+import 'otp_screen.dart';
 import 'providers/auth_providers.dart';
-import 'otp_verify_screen.dart';
+import 'widgets/country_code_picker.dart';
+import 'widgets/country_codes.dart';
 
 class LoginScreen extends ConsumerStatefulWidget {
   const LoginScreen({super.key});
@@ -20,8 +22,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
   final _phoneController = TextEditingController();
   bool _isLoading = false;
   String? _error;
-
-  static const _defaultCountryCode = '+91';
+  CountryDialCode _country = kDefaultCountryDialCode;
 
   @override
   void dispose() {
@@ -29,26 +30,14 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
     super.dispose();
   }
 
-  String _normalizePhone(String input) {
-    final digits = input.replaceAll(RegExp(r'\D'), '');
-    if (digits.startsWith('91') && digits.length == 12) {
-      return '+$digits';
-    }
-    if (digits.length == 10) {
-      return '$_defaultCountryCode$digits';
-    }
-    if (input.startsWith('+')) {
-      return input;
-    }
-    return '$_defaultCountryCode$digits';
-  }
-
   Future<void> _sendOtp() async {
-    final phone = _normalizePhone(_phoneController.text.trim());
-    if (phone.length < 12) {
-      setState(() => _error = 'Enter a valid 10-digit phone number.');
+    final localDigits = _phoneController.text.trim();
+    if (!isValidLocalPhone(_country, localDigits)) {
+      setState(() => _error = context.l10n.authInvalidPhone);
       return;
     }
+
+    final phone = buildE164Phone(_country, localDigits);
 
     setState(() {
       _isLoading = true;
@@ -59,19 +48,28 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
       final result =
           await ref.read(authStateProvider.notifier).sendOtp(phone);
       if (!mounted) return;
+      if (result.autoSignedIn) {
+        return;
+      }
       context.pushNamed(
         'loginVerify',
         extra: OtpVerifyArgs(
           phone: phone,
-          requestId: result.requestId,
+          verificationId: result.verificationId,
           maskedPhone: result.maskedPhone,
-          mockOtpCode: result.mockOtpCode,
+          resendToken: result.resendToken,
+          expiresInSeconds: result.expiresInSeconds,
         ),
       );
     } on AppException catch (error) {
       setState(() => _error = error.message);
-    } catch (_) {
-      setState(() => _error = context.l10n.errorGeneric);
+    } catch (error) {
+      setState(
+        () => _error = userFacingMessage(
+          error,
+          fallback: context.l10n.errorGeneric,
+        ),
+      );
     } finally {
       if (mounted) {
         setState(() => _isLoading = false);
@@ -93,23 +91,44 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
             const SizedBox(height: ShSpacing.xs),
             Text(l10n.loginSubtitle, style: Theme.of(context).textTheme.bodyMedium),
             const SizedBox(height: ShSpacing.xl),
-            ShTextField(
-              controller: _phoneController,
-              label: l10n.phoneLabel,
-              hint: l10n.phoneHint,
-              keyboardType: TextInputType.phone,
-              textInputAction: TextInputAction.done,
-              prefixText: '$_defaultCountryCode ',
-              inputFormatters: [
-                FilteringTextInputFormatter.digitsOnly,
-                LengthLimitingTextInputFormatter(10),
+            Text(l10n.countryCodeLabel, style: Theme.of(context).textTheme.labelLarge),
+            const SizedBox(height: ShSpacing.xs),
+            CountryCodePicker(
+              selected: _country,
+              onChanged: (country) => setState(() => _country = country),
+            ),
+            const SizedBox(height: ShSpacing.md),
+            Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Padding(
+                  padding: const EdgeInsets.only(top: 28),
+                  child: Text(
+                    _country.dialCode,
+                    style: Theme.of(context).textTheme.bodyLarge,
+                  ),
+                ),
+                const SizedBox(width: ShSpacing.sm),
+                Expanded(
+                  child: ShTextField(
+                    controller: _phoneController,
+                    label: l10n.phoneLabel,
+                    hint: l10n.phoneHint,
+                    keyboardType: TextInputType.phone,
+                    textInputAction: TextInputAction.done,
+                    inputFormatters: [
+                      FilteringTextInputFormatter.digitsOnly,
+                      LengthLimitingTextInputFormatter(_country.maxDigits),
+                    ],
+                    errorText: _error,
+                    onSubmitted: (_) => _sendOtp(),
+                  ),
+                ),
               ],
-              errorText: _error,
-              onSubmitted: (_) => _sendOtp(),
             ),
             const SizedBox(height: ShSpacing.lg),
             ShButton(
-              label: l10n.sendOtp,
+              label: l10n.continueButton,
               isLoading: _isLoading,
               onPressed: _isLoading ? null : _sendOtp,
             ),

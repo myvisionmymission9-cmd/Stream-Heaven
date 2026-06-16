@@ -1,0 +1,144 @@
+openapi: 3.1.0
+info:
+  title: Stream Heaven Notification API
+  version: 1.0.0
+  license:
+    name: Proprietary
+    identifier: LicenseRef-StreamHeaven-Proprietary
+  description: |
+    In-app notification inbox and read-state APIs.
+    Push dispatch is internal (notification-dispatch-agent); this contract covers client-facing inbox.
+    Phase 18 stub — implementation in notification-service (port 3007) deferred.
+
+servers:
+  - url: https://api.streamheaven.app/v1
+  - url: http://127.0.0.1:3000/v1
+
+tags:
+  - name: InAppNotifications
+    description: User notification inbox and read markers.
+
+paths:
+  /notifications/inbox:
+    get:
+      operationId: listInAppNotifications
+      tags: [InAppNotifications]
+      summary: List in-app notifications for the current user
+      security:
+        - bearerAuth: []
+      parameters:
+        - $ref: './common.v1.yaml#/components/parameters/XRequestId'
+        - $ref: './common.v1.yaml#/components/parameters/XAppId'
+        - name: cursor
+          in: query
+          required: false
+          schema:
+            type: string
+        - name: limit
+          in: query
+          required: false
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 50
+            default: 20
+        - name: unreadOnly
+          in: query
+          required: false
+          schema:
+            type: boolean
+            default: false
+      responses:
+        '200':
+          description: Notification page
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotificationPage'
+        '401':
+          $ref: './common.v1.yaml#/components/responses/Unauthorized'
+
+  /notifications/{notificationId}/read:
+    post:
+      operationId: markNotificationRead
+      tags: [InAppNotifications]
+      summary: Mark a single notification as read
+      security:
+        - bearerAuth: []
+      parameters:
+        - $ref: './common.v1.yaml#/components/parameters/XRequestId'
+        - name: notificationId
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      responses:
+        '204':
+          description: Marked read
+        '401':
+          $ref: './common.v1.yaml#/components/responses/Unauthorized'
+        '404':
+          $ref: './common.v1.yaml#/components/responses/NotFound'
+
+  /notifications/read-all:
+    post:
+      operationId: markAllNotificationsRead
+      tags: [InAppNotifications]
+      summary: Mark all notifications as read for the current user
+      security:
+        - bearerAuth: []
+      parameters:
+        - $ref: './common.v1.yaml#/components/parameters/XRequestId'
+      responses:
+        '204':
+          description: All marked read
+        '401':
+          $ref: './common.v1.yaml#/components/responses/Unauthorized'
+
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+
+  schemas:
+    NotificationPage:
+      type: object
+      required: [items, pagination]
+      properties:
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/InAppNotification'
+        pagination:
+          $ref: './common.v1.yaml#/components/schemas/CursorPagination'
+
+    InAppNotification:
+      type: object
+      required: [notificationId, type, title, body, createdAt, isRead]
+      properties:
+        notificationId:
+          type: string
+          format: uuid
+        type:
+          type: string
+          enum: [FOLLOW, LIKE, COMMENT, GIFT, LIVE_START, WITHDRAWAL, SYSTEM]
+        title:
+          type: string
+        body:
+          type: string
+        deepLink:
+          type: string
+          format: uri
+        actorUserId:
+          type: string
+          format: uuid
+        referenceId:
+          type: string
+        isRead:
+          type: boolean
+        createdAt:
+          type: string
+          format: date-time

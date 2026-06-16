@@ -1,4 +1,4 @@
-# Start Phase 1 NestJS dev services (Windows) — zero user involvement
+# Start Phase 1 NestJS dev services (Windows) ÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬Â zero user involvement
 # Usage: powershell -ExecutionPolicy Bypass -File scripts/phase1-start-services.ps1
 #        pnpm run phase1:start
 #        pnpm run phase1:start -- -RunSmokeTest
@@ -19,6 +19,16 @@ function Write-Step([string]$Message) {
   Write-Host ("==> " + $Message) -ForegroundColor Cyan
 }
 
+
+function Stop-StreamHeavenNodeWorkers {
+  Get-CimInstance Win32_Process -Filter "Name = 'node.exe'" -ErrorAction SilentlyContinue |
+    Where-Object { $_.CommandLine -match 'Stream Heaven' } |
+    ForEach-Object {
+      Write-Host ("Stopping stale node PID " + $_.ProcessId) -ForegroundColor DarkYellow
+      Stop-Process -Id $_.ProcessId -Force -ErrorAction SilentlyContinue
+    }
+  Start-Sleep -Seconds 2
+}
 function Stop-DevServicePorts {
   foreach ($port in @(3000, 3001, 3002, 3009)) {
     Get-NetTCPConnection -LocalPort $port -ErrorAction SilentlyContinue |
@@ -48,11 +58,12 @@ function Wait-HttpOk([string]$Uri, [int]$TimeoutSec) {
   $deadline = (Get-Date).AddSeconds($TimeoutSec)
   while ((Get-Date) -lt $deadline) {
     try {
-      Invoke-RestMethod -Uri $Uri -Method GET -TimeoutSec 5 | Out-Null
-      return $true
+      $resp = Invoke-WebRequest -Uri $Uri -Method GET -TimeoutSec 15 -UseBasicParsing
+      if ($resp.StatusCode -ge 200 -and $resp.StatusCode -lt 300) { return $true }
     } catch {
-      Start-Sleep -Seconds 3
+      # retry
     }
+    Start-Sleep -Seconds 3
   }
   return $false
 }
@@ -80,6 +91,7 @@ Write-Host ("Repo: " + $RepoRoot)
 
 Write-Step "Stopping existing dev processes on ports 3000-3002, 3009"
 Stop-DevServicePorts
+Stop-StreamHeavenNodeWorkers
 
 if ($StopOnly) {
   Write-Host "Stop-only mode complete." -ForegroundColor Green
@@ -90,12 +102,16 @@ if (-not $SkipDocker) {
   Write-Step "Ensuring Docker postgres + redis"
   $dockerOk = [bool](Get-Command docker -ErrorAction SilentlyContinue)
   if ($dockerOk) {
-    $composeUp = & docker compose up -d postgres redis 2>&1
+    # Docker writes status lines to stderr; with $ErrorActionPreference Stop that aborts before $LASTEXITCODE is checked.
+    $prevEap = $ErrorActionPreference
+    $ErrorActionPreference = "Continue"
+    & docker compose up -d postgres redis 2>&1 | Out-Null
     if ($LASTEXITCODE -ne 0) {
       & docker start streamheaven-postgres-1 streamheaven-redis-1 2>&1 | Out-Null
     }
     Start-Sleep -Seconds 5
     & docker compose ps
+    $ErrorActionPreference = $prevEap
   } else {
     Write-Warning "Docker CLI not found. Ensure localhost:5432 and :6379 are available."
   }
@@ -104,22 +120,37 @@ if (-not $SkipDocker) {
 Write-Step "Copy .env.example to .env (if missing)"
 Copy-EnvFilesIfMissing
 
-Write-Step "Starting NestJS services in background"
-Start-DevService "dev:auth" "logs/dev-auth.log"
-Start-DevService "dev:user" "logs/dev-user.log"
-Start-Sleep -Seconds 5
-Start-DevService "dev:gateway" "logs/dev-gateway.log"
-Start-DevService "dev:realtime" "logs/dev-realtime.log"
+function Start-AndWait-DevService([string]$ScriptName, [string]$LogFile, [string]$HealthUri, [string]$DisplayName) {
+  Start-DevService $ScriptName $LogFile
+  Write-Host ("Allowing compile/boot for " + $DisplayName + " (30s)...") -ForegroundColor DarkGray
+  Start-Sleep -Seconds 30
+  Write-Host ("Waiting for " + $HealthUri + " ...")
+  if (Wait-HttpOk $HealthUri $HealthTimeoutSec) {
+    Write-Host ($DisplayName + " healthy") -ForegroundColor Green
+    return $true
+  }
+  Write-Warning ($DisplayName + " not ready. See " + $LogFile)
+  return $false
+}
 
-Write-Step "Waiting for health endpoints"
-$checks = @(
-  @{ Name = "auth"; Uri = "http://127.0.0.1:3001/v1/health" },
-  @{ Name = "user"; Uri = "http://127.0.0.1:3002/v1/health" },
-  @{ Name = "gateway"; Uri = "http://127.0.0.1:3000/health/aggregate" }
-)
-
+Write-Step "Starting NestJS services (sequential)"
 $allOk = $true
-foreach ($c in $checks) {
+if (-not (Start-AndWait-DevService "dev:auth" "logs/dev-auth.log" "http://127.0.0.1:3001/v1/health" "auth")) { $allOk = $false }
+if (-not (Start-AndWait-DevService "dev:user" "logs/dev-user.log" "http://127.0.0.1:3002/v1/health" "user")) { $allOk = $false }
+if (-not (Start-AndWait-DevService "dev:gateway" "logs/dev-gateway.log" "http://127.0.0.1:3000/health" "gateway")) { $allOk = $false }
+
+Write-Step "Starting realtime + extra health checks"
+if ($allOk) {
+  Start-DevService "dev:realtime" "logs/dev-realtime.log"
+  Write-Host "Allowing compile/boot for realtime (30s)..." -ForegroundColor DarkGray
+  Start-Sleep -Seconds 30
+}
+$extraChecks = @(
+  @{ Name = "gateway-aggregate"; Uri = "http://127.0.0.1:3000/health/aggregate" },
+  @{ Name = "realtime"; Uri = "http://127.0.0.1:3009/health" }
+)
+foreach ($c in $extraChecks) {
+  if (-not $allOk) { break }
   Write-Host ("Waiting for " + $c.Uri + " ...")
   if (Wait-HttpOk $c.Uri $HealthTimeoutSec) {
     Write-Host ($c.Name + " healthy") -ForegroundColor Green

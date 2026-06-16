@@ -50,6 +50,8 @@ export class ProxyModule implements NestModule {
     const userUrl = this.config.get<string>('app.userServiceUrl')!;
     const socialUrl = this.config.get<string>('app.socialServiceUrl')!;
     const livestreamUrl = this.config.get<string>('app.livestreamServiceUrl')!;
+    const walletUrl = this.config.get<string>('app.walletServiceUrl')!;
+    const mediaUrl = this.config.get<string>('app.mediaServiceUrl')!;
     const attach = this.attachUserHeaders.bind(this);
 
     consumer
@@ -146,5 +148,83 @@ export class ProxyModule implements NestModule {
         }),
       )
       .forRoutes({ path: 'v1/livestream/*', method: RequestMethod.ALL });
+
+    consumer
+      .apply(
+        (req: Request, res: Response, next: NextFunction) => {
+          attach(req);
+          if (!req.headers['x-user-id']) {
+            res.status(401).json({
+              statusCode: 401,
+              code: 'AUTH_MISSING_TOKEN',
+              message: 'Bearer token required',
+              timestamp: new Date().toISOString(),
+              path: req.path,
+              requestId: req.headers['x-request-id'],
+            });
+            return;
+          }
+          next();
+        },
+        createProxyMiddleware({
+          target: walletUrl,
+          changeOrigin: true,
+          pathFilter: '/v1/wallet/**',
+          on: { proxyReq: fixRequestBody },
+        }),
+      )
+      .forRoutes({ path: 'v1/wallet/*', method: RequestMethod.ALL });
+
+    consumer
+      .apply(
+        (req: Request, res: Response, next: NextFunction) => {
+          attach(req);
+          if (!req.headers['x-user-id']) {
+            res.status(401).json({
+              statusCode: 401,
+              code: 'AUTH_MISSING_TOKEN',
+              message: 'Bearer token required',
+              timestamp: new Date().toISOString(),
+              path: req.path,
+              requestId: req.headers['x-request-id'],
+            });
+            return;
+          }
+          next();
+        },
+        createProxyMiddleware({
+          target: mediaUrl,
+          changeOrigin: true,
+          pathFilter: '/v1/media/**',
+          on: { proxyReq: fixRequestBody },
+        }),
+      )
+      .forRoutes({ path: 'v1/media/*', method: RequestMethod.ALL });
+
+    consumer
+      .apply(
+        (req: Request, res: Response, next: NextFunction) => {
+          attach(req);
+          if (!req.headers['x-user-id']) {
+            res.status(401).json({
+              statusCode: 401,
+              code: 'AUTH_MISSING_TOKEN',
+              message: 'Bearer token required',
+              timestamp: new Date().toISOString(),
+              path: req.path,
+              requestId: req.headers['x-request-id'],
+            });
+            return;
+          }
+          next();
+        },
+        createProxyMiddleware({
+          target: socialUrl,
+          changeOrigin: true,
+          pathFilter: '/v1/communities/**',
+          on: { proxyReq: fixRequestBody },
+        }),
+      )
+      .forRoutes({ path: 'v1/communities/*', method: RequestMethod.ALL });
   }
 }

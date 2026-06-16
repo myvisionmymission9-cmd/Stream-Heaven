@@ -1,0 +1,255 @@
+openapi: 3.1.0
+info:
+  title: Stream Heaven Media API
+  version: 1.0.0
+  license:
+    name: Proprietary
+    identifier: LicenseRef-StreamHeaven-Proprietary
+  description: |
+    Media upload, asset management, and playback URL APIs.
+    Supports presigned S3 upload, async transcode jobs, and CDN-ready playback URLs.
+    Phase 17 stub — FFmpeg worker pipeline not yet implemented; uploadUrl and assetId stubs only.
+
+servers:
+  - url: https://api.streamheaven.app/v1
+  - url: http://127.0.0.1:3000/v1
+
+tags:
+  - name: MediaUpload
+    description: Presigned upload intent and asset registration.
+  - name: MediaAsset
+    description: Asset status, playback URL, and metadata.
+  - name: MediaThumbnail
+    description: Thumbnail retrieval for videos and images.
+
+paths:
+  /media/upload-intent:
+    post:
+      operationId: createUploadIntent
+      tags: [MediaUpload]
+      summary: Request a presigned S3 URL for direct upload
+      description: |
+        Returns a short-lived presigned PUT URL and an assetId.
+        Client uploads directly to S3; media-service tracks upload via S3 event webhook.
+        After upload, poll GET /media/{assetId} for PROCESSING → READY status.
+      security:
+        - bearerAuth: []
+      parameters:
+        - $ref: './common.v1.yaml#/components/parameters/XRequestId'
+        - $ref: './common.v1.yaml#/components/parameters/XAppId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UploadIntentRequest'
+      responses:
+        '201':
+          description: Upload intent created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UploadIntentResponse'
+        '400':
+          $ref: './common.v1.yaml#/components/responses/BadRequest'
+        '401':
+          $ref: './common.v1.yaml#/components/responses/Unauthorized'
+
+  /media/{assetId}:
+    get:
+      operationId: getMediaAsset
+      tags: [MediaAsset]
+      summary: Get asset status and playback URL
+      description: |
+        Poll this endpoint after upload to check transcode status.
+        Status transitions: UPLOADING → PROCESSING → READY (or FAILED).
+      security:
+        - bearerAuth: []
+      parameters:
+        - $ref: './common.v1.yaml#/components/parameters/XRequestId'
+        - name: assetId
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      responses:
+        '200':
+          description: Asset metadata
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MediaAsset'
+        '401':
+          $ref: './common.v1.yaml#/components/responses/Unauthorized'
+        '404':
+          $ref: './common.v1.yaml#/components/responses/NotFound'
+
+  /media/{assetId}/thumbnail:
+    get:
+      operationId: getAssetThumbnail
+      tags: [MediaThumbnail]
+      summary: Get thumbnail URL for a media asset
+      security:
+        - bearerAuth: []
+      parameters:
+        - $ref: './common.v1.yaml#/components/parameters/XRequestId'
+        - name: assetId
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+        - name: size
+          in: query
+          required: false
+          schema:
+            type: string
+            enum: [sm, md, lg]
+            default: md
+          description: Thumbnail size (sm=120px, md=480px, lg=720px)
+      responses:
+        '200':
+          description: Thumbnail URL
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThumbnailResponse'
+        '404':
+          $ref: './common.v1.yaml#/components/responses/NotFound'
+
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+
+  schemas:
+    UploadIntentRequest:
+      type: object
+      required: [mimeType, fileSizeBytes, context]
+      properties:
+        mimeType:
+          type: string
+          enum:
+            - video/mp4
+            - video/quicktime
+            - video/webm
+            - image/jpeg
+            - image/png
+            - image/webp
+            - audio/mpeg
+            - audio/aac
+        fileSizeBytes:
+          type: integer
+          minimum: 1
+          maximum: 5368709120
+          description: File size in bytes. Maximum 5 GB.
+        context:
+          type: object
+          required: [surface]
+          properties:
+            surface:
+              type: string
+              enum: [social_post, reel, live_thumbnail, profile_avatar, audio_room_cover]
+            postId:
+              type: string
+              format: uuid
+              description: Existing draft post to attach asset to (optional).
+        durationSeconds:
+          type: number
+          description: Video duration hint (optional; used for transcode priority).
+
+    UploadIntentResponse:
+      type: object
+      required: [assetId, uploadUrl, uploadMethod, expiresAt]
+      properties:
+        assetId:
+          type: string
+          format: uuid
+          description: Track asset status via GET /media/{assetId}
+        uploadUrl:
+          type: string
+          format: uri
+          description: Presigned S3 PUT URL (valid for expiresAt)
+        uploadMethod:
+          type: string
+          enum: [PUT]
+        expiresAt:
+          type: string
+          format: date-time
+        maxFileSizeBytes:
+          type: integer
+
+    MediaAsset:
+      type: object
+      required: [assetId, status, mimeType, createdAt]
+      properties:
+        assetId:
+          type: string
+          format: uuid
+        status:
+          type: string
+          enum: [UPLOADING, PROCESSING, READY, FAILED]
+          description: |
+            UPLOADING = presigned URL not yet used or upload in progress.
+            PROCESSING = FFmpeg transcode job running.
+            READY = CDN-ready; playbackUrl populated.
+            FAILED = transcode or scan error; see failureReason.
+        mimeType:
+          type: string
+        playbackUrl:
+          type: string
+          format: uri
+          description: HLS (.m3u8) URL via CloudFront CDN. Only present when status=READY.
+        hlsVariants:
+          type: array
+          description: Available quality variants. Only present when status=READY.
+          items:
+            $ref: '#/components/schemas/HlsVariant'
+        thumbnailUrl:
+          type: string
+          format: uri
+          description: Auto-generated thumbnail. Only present when status=READY.
+        durationSeconds:
+          type: number
+        fileSizeBytes:
+          type: integer
+        failureReason:
+          type: string
+          description: Human-readable error. Only present when status=FAILED.
+        createdAt:
+          type: string
+          format: date-time
+        readyAt:
+          type: string
+          format: date-time
+
+    HlsVariant:
+      type: object
+      required: [resolution, bandwidth, url]
+      properties:
+        resolution:
+          type: string
+          enum: [240p, 480p, 720p, 1080p, 4K]
+        bandwidth:
+          type: integer
+          description: Bitrate in bits per second.
+        url:
+          type: string
+          format: uri
+
+    ThumbnailResponse:
+      type: object
+      required: [assetId, thumbnailUrl, size]
+      properties:
+        assetId:
+          type: string
+          format: uuid
+        thumbnailUrl:
+          type: string
+          format: uri
+        size:
+          type: string
+          enum: [sm, md, lg]
